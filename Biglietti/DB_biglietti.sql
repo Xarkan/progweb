@@ -42,13 +42,13 @@ CREATE TABLE ordine_biglietto (
 CREATE TABLE biglietti (
   codice        varchar(10)     NOT NULL,
   cod_evento    varchar(10)     NOT NULL,
-  utente        varchar(40)     NOT NULL,
+  utente        varchar(40)     NULL,
   zona          varchar(20)     NOT NULL,
   posto         int             NOT NULL,
   PRIMARY KEY(codice,cod_evento),
   FOREIGN KEY(cod_evento) REFERENCES evento(cod_evento)
 );
-
+INSERT INTO biglietti VALUES("1", "E0", "EDGARDO VITTORIA", "PALCO", 2);
 CREATE TABLE luogo (
   citta         varchar(20)     NOT NULL,
   via           varchar(20)     NOT NULL,
