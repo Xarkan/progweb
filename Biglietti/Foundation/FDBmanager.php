@@ -10,7 +10,7 @@ class FDBmanager {
     public function __construct() {
         $dsn = 'mysql:dbname=DB_biglietti;host=localhost';
         $user = 'root';
-        $password = 'hammond';
+        $password = '';
 
     try {
         $this->connection = new PDO($dsn, $user, $password);
