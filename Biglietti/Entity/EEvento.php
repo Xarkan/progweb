@@ -4,6 +4,7 @@
 abstract class EEvento {
     
     //attributi
+    private $codev;
     private $nome;
     private $luogo; //luogo
     private $data;  //DateTime
@@ -15,6 +16,10 @@ abstract class EEvento {
         $this->luogo = $luogo;
         $this->data = $data;
         $this->descrizione = $descrizione;
+    }
+    
+    public function getCodev() {
+        return $this->codev;
     }
 
     public function getNome() {
