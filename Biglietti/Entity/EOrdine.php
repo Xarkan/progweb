@@ -28,10 +28,17 @@ class EOrdine {
         array_splice($this->lista_bigl, $key, 1);
     }
     
-    public function paga() {
-        
+    public function calcolaPrezzo($lista) {
+        for($i=0; $i<count($lista); $i++) {
+            $tot = $tot + $lista[i]->getPrezzo();
+        }
+        return $tot;
     }
     
+    public function scegliZona(EEvento $evento) {
+        
+    }
+            
     public function creaBiglietto() {   //$user ?? 
         
     }
