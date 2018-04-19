@@ -28,9 +28,10 @@ class EOrdine {
         array_splice($this->lista_bigl, $key, 1);
     }
     
-    public function calcolaPrezzo($lista) {
-        for($i=0; $i<count($lista); $i++) {
-            $tot = $tot + $lista[i]->getPrezzo();
+    public function calcolaPrezzo() {
+        $tot = 0;
+        for($i=0; $i<count($this->lista_bigl); $i++) {
+            $tot = $tot + $this->lista_bigl[$i]->getPrezzo();
         }
         return $tot;
     }
