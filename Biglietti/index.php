@@ -19,7 +19,7 @@
         echo " ".$teatro->getNome();
         
         $dbm = new FDBmanager();
-        echo $dbm->exist();
+        echo var_dump($dbm->exist($sport));
         //echo $dbm->getError();
         /*
         $e1 = new EBiglietti_Zona("Live", "Platea", 13);      //test add/remove
@@ -39,7 +39,6 @@
         //$test = new FEvento();
         //echo $test->getError();
         //$boh = $test->exist($sport);
-       
         
         ?>
         <h1>PROVA</h1>
