@@ -2,41 +2,35 @@
 
 class FDBmanager {
     
-    //attributes          
-    private $_connection;
-    private $_connected;
+    //attributi
+    private $connection;
+    private $connected;
     
-    //methods
+    //metodi
     public function __construct() {
-        
-        global $config;
-        $this->connect( $config['mysql']['host'],
-                        $config['mysql']['user'],
-                        $config['mysql']['password'],        
-                        $config['mysql']['database']);
+        $dsn = 'mysql:dbname=DB_biglietti;host=localhost';
+        $user = 'root';
+        $password = 'hammond';
+
+    try {
+        $this->connection = new PDO($dsn, $user, $password);
+        $this->connected = true;        
     }
-    
-    public function connect($host, $user, $password, $database) {
-        $this->_connection = new mysqli($host,$user,$password,$database);
-        if ($this->_connection->connect_errno) {
-            $this->_connected = false;
-        }
-        else {
-            $this->_connected = true;            
-        }
+    catch (PDOException $e) {
+        $this->connected = false;
+        echo 'Connection failed: ' . $e->getMessage();
     }
+}
     
-    public function getError() {
-        return $this->_connected;
+    public function exist() {
+        $sql = "SELECT * FROM evento";
+        foreach ($this->connection->query($sql) as $row) {
+        print $row['cod_evento'] . "\t";
+        print $row['nome'] . "\t";
+        print $row['luogo'] . "\t";
+        print $row['data_evento'] . "\t";
+        print $row['descrizione'] . "\n";
     }
-    
-    public function exist($object) {
-        switch (get_class($object)) {
-            case 'EEvento':
-                
-                
-                
-        }
     }
     
     public function load() {

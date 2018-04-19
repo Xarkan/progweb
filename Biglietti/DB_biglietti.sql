@@ -12,7 +12,7 @@ CREATE TABLE evento (
   PRIMARY KEY(cod_evento)
   
 );
-INSERT INTO evento VALUES("0", "derby", "milano", 15/2/1994, "vafvsebgksbiugbseiu");
+INSERT INTO evento VALUES("0", "derby", "milano", '1993-10-2', "vafvsebgksbiugbseiu");
 CREATE TABLE utente_r (
   mail          varchar(20)     NOT NULL,
   psw           varchar(16)     NOT NULL,

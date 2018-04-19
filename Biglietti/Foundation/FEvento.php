@@ -31,13 +31,9 @@ class FEvento {
     }
     
     public function exist(EEvento $evento) {
-        if ($this->_connection->connect_errno) {
-            $this->_connected = false;
-        }
-        else {
-            $result = $this->_connection->query("SELECT * FROM evento WHERE codev=".$evento->getCodev());
-            return $result;
-        }
+            $result = $this->_connection->multi_query("SELECT * FROM evento WHERE codev=".$evento->getCodev());
+            return var_dump($result);
+        
     }    
     
     public function load() {
