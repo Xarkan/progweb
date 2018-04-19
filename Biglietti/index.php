@@ -12,15 +12,15 @@
         
         $posto = new ELuogo("Milano", "San Siro", "boh");
         $data = date("r");
-        $sport = new EPartita("Napoli","Torino","Derby",$posto,$data,"abc","def");
-        $teatro = new ESpettacolo("Dream Theater", "DT in concert", $posto, $data, "abc","def");
+        $sport = new EPartita("0","Derby",$posto,$data,"abc","def","Napoli","Torino");
+        $teatro = new ESpettacolo("1","DT in concert", $posto, $data, "abc","def", "Dream Theater");
         
         echo $sport->getData();
         echo " ".$teatro->getNome();
         
         //$dbm = new FDBmanager();
         //echo $dbm->getError();
-        
+        /*
         $e1 = new EBiglietti_Zona("Live", "Platea", 13);      //test add/remove
         $e2 = new EBiglietti_Zona("Partita", "Prato", 50);
         $e3 = new EBiglietti_Zona("Opera","Galleria", 15);
@@ -30,10 +30,13 @@
         $utente = new EUtente_Reg("federico", "raparelli", "jebfbihb", "abc");
         $utente->paga($ord);
         echo var_dump($ord->getPagato());
-        echo $ord->calcolaPrezzo();
+        echo $ord->calcolaPrezzo();*/
         
         //$ord->removeBigl($e2);
         //var_dump($ord->getLista_bigl()); 
+        
+        $test = new FEvento();
+        $test->exist($sport);
         
         ?>
         <h1>PROVA</h1>

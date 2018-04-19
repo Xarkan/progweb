@@ -11,7 +11,8 @@ abstract class EEvento {
     private $descrizione; //string per html??
     
     //metodi
-    function __construct($nome, $luogo, $data, $descrizione) {
+    function __construct($cod, $nome, $luogo, $data, $descrizione) {
+        $this->codev = $cod;
         $this->nome = $nome;
         $this->luogo = $luogo;
         $this->data = $data;
