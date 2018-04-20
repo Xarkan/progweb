@@ -27,17 +27,14 @@ class FDBmanager {
         $tab = substr_replace($class, "", 0, 1);
         return $tab;
     }
+    
+    //-------------------------exist methods------------------------------------
+    
     public function existevento($object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        if(count($rows) > 0) {
-            $found = true;
-            return $found;
-            }
-        else{
-            //...
-        }
+        return count($rows) > 0;
     }
     public function existbiglietto($object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
@@ -45,52 +42,38 @@ class FDBmanager {
                ." AND ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        if(count($rows) > 0) {
-            $found = true;
-            return $found;
-        }
-        else {
-                    //...
-        }
+        return count($rows) > 0;
     }
     public function existutente($object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        if(count($rows) > 0) {
-            $found = true;
-            return $found;
-        }
-        else{
-            //...
-        }
+        return count($rows) > 0;
         
     }
     public function exist($object) {    
         $this->table = $this->db_table($object);
         switch ($this->table) {
             case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $this->existevento($object);
+                $found = $this->existevento($object);
                 break;
             case "Biglietto":
-                $this->existbiglietto($object);
+                $found = $this->existbiglietto($object);
                 break;
             case "Utente_Reg":
-                $this->existutente($object);
+                $found = $this->existutente($object);
                 break;                            
         }
         return $found;
     }
+    
+    //---------------------------load methods----------------------------------
+    
     public function loadevento($object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        for($i=0;$i<count($rows);$i++){
-            echo $rows[$i];
-        }
-        if(count($rows) == 0){
-            //...                  da gestire con try cath
-        }
+        return $rows;
     }
     public function loadbiglietto($object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
@@ -98,38 +81,32 @@ class FDBmanager {
                ." AND ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        for($i=0;$i<count($rows);$i++){
-            echo $rows[$i];
-        }
-        if(count($rows) == 0){
-            //...                  da gestire con try cath
-        }
+        return $rows;
     }
     public function loadutente($object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        for($i=0;$i<count($rows);$i++){
-            echo $rows[$i];
-        }
-        if(count($rows) == 0){
-            //...                  da gestire con try cath
-        }
+        return $rows;
     }
     public function load($object) {
         $this->table = $this->db_table($object);
         switch ($this->table) {
             case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $this->loadevento($object);
+                $result = $this->loadevento($object);
                 break;
             case "Biglietto":
-                $this->loadbiglietto($object);
+                $result = $this->loadbiglietto($object);
                 break;
             case "Utente_Reg":
-                $this->loadutente($object);
+                $result = $this->loadutente($object);
                 break;                            
         }
+        return $result;
     }
+    
+    //----------------------------store methods---------------------------------
+    
     public function storeevento($object) {
         
         $sql = "INSERT INTO evento "
@@ -152,37 +129,17 @@ class FDBmanager {
         }
     }
 
-    /*public function loadbiglietto($object) {
-        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
-               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
-               ." AND ".$this->connection->quote($object->getZona());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        for($i=0;$i<count($rows);$i++){
-            echo $rows[$i];
-        }
-        if(count($rows) == 0){
-            //...                  da gestire con try cath
-        }
-    }
-    public function loadutente($object) {
-        $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        for($i=0;$i<count($rows);$i++){
-            echo $rows[$i];
-        }
-        if(count($rows) == 0){
-            //...                  da gestire con try cath
-        }
-    }*/
     public function store() {
         
     }
     
+    //-----------------------------update methods-------------------------------
+    
     public function update() {
         
     }
+    
+    //------------------------------delete methods-----------------------------
     
     public function delete() {
         
