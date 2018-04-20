@@ -6,7 +6,9 @@ USE DB_biglietti;
 CREATE TABLE evento (
   cod_evento    varchar(10)     NOT NULL,
   nome          varchar(20)     NOT NULL,
-  luogo         varchar(40)     NOT NULL,
+  citta         varchar(40)     NOT NULL,
+  struttura     varchar(40)     NOT NULL,
+  via           varchar(40)     NOT NULL,
   data_evento   varchar(40)     NOT NULL,
   descrizione   varchar(500)    NOT NULL,
   PRIMARY KEY(cod_evento)
@@ -49,15 +51,6 @@ CREATE TABLE biglietti (
   FOREIGN KEY(cod_evento) REFERENCES evento(cod_evento)
 );
 
-CREATE TABLE luogo (
-  citta         varchar(20)     NOT NULL,
-  via           varchar(20)     NOT NULL,
-  cod_evento    varchar(10)     NOT NULL,
-  struttura     varchar(20)     NOT NULL,
-  PRIMARY KEY(citta,via,cod_evento),
-  FOREIGN KEY(cod_evento) REFERENCES evento(cod_evento)
-);
-
 CREATE TABLE biglietti_zona (
   zona          varchar(20)     NOT NULL,
   cod_evento    varchar(10)     NOT NULL,
@@ -78,9 +71,9 @@ CREATE TABLE dettaglio_evento (
 );
 
 --insert evento
-INSERT INTO evento VALUES("0", "derby", "Milano;San Siro;via abc", "19/4/2018-22:53", "descrizion0");
-INSERT INTO evento VALUES("1", "Ridotto", "L'Aquila; Ridotto;via def", "22/5/2018-21:00", "descrizione1");
-INSERT INTO evento VALUES("2", "Live concert", "Roma;Parco;via boh", "8/7/2018-23:00", "descrizione2");
+INSERT INTO evento VALUES("0", "derby", "Milano","San Siro","via abc", "19/4/2018-22:53", "descrizion0");
+INSERT INTO evento VALUES("1", "Ridotto", "L'Aquila"," Ridotto","via def", "22/5/2018-21:00", "descrizione1");
+INSERT INTO evento VALUES("2", "Live concert", "Roma","Parco","via boh", "8/7/2018-23:00", "descrizione2");
 
 --insert biglietti_zona
 INSERT INTO biglietti_zona VALUES("platea","1",13);
