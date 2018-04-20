@@ -110,13 +110,13 @@ class FDBmanager {
         $this->table = $this->db_table($object);
         switch ($this->table) {
             case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $this->existevento($object);
+                $this->loadevento($object);
                 break;
             case "Biglietto":
-                $this->existbiglietto($object);
+                $this->loadbiglietto($object);
                 break;
             case "Utente_Reg":
-                $this->existutente($object);
+                $this->loadutente($object);
                 break;                            
         }
     }
