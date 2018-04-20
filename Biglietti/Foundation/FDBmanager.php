@@ -33,7 +33,11 @@ class FDBmanager {
         $rows = $result->fetchAll();
         if(count($rows) > 0) {
             $found = true;
+            return $found;
             }
+        else{
+            //...
+        }
     }
     public function existbiglietto($object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
@@ -43,6 +47,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         if(count($rows) > 0) {
             $found = true;
+            return $found;
         }
         else {
                     //...
@@ -54,19 +59,24 @@ class FDBmanager {
         $rows = $result->fetchAll();
         if(count($rows) > 0) {
             $found = true;
+            return $found;
         }
+        else{
+            //...
+        }
+        
     }
     public function exist($object) {    
         $this->table = $this->db_table($object);
         switch ($this->table) {
             case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $found = $this->existevento($object);
+                $this->existevento($object);
                 break;
             case "Biglietto":
-                $found = $this->existbiglietto($object);
+                $this->existbiglietto($object);
                 break;
             case "Utente_Reg":
-                $found = $this->existutente($object);
+                $this->existutente($object);
                 break;                            
         }
         return $found;
@@ -120,7 +130,52 @@ class FDBmanager {
                 break;                            
         }
     }
-    
+    public function storeevento($object) {
+        
+        $sql = "INSERT INTO evento "
+             . "VALUES ( ".$this->connection->quote($object->getCodev()).","
+             .$this->connection->quote($object->getNome()).","
+             .$this->connection->quote($object->getCitta()).","
+             .$this->connection->quote($object->getStruttura()).","
+             .$this->connection->quote($object->getVia()).","
+             .$this->connection->quote($object->getData()).","
+             .$this->connection->quote($object->getDescrizione()).")";
+        
+        try
+        {
+            $this->connection->exec($sql);
+            echo "New record created successfully";
+        }
+        catch(PDOException $e)
+        {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+    }
+
+    /*public function loadbiglietto($object) {
+        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
+               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
+               ." AND ".$this->connection->quote($object->getZona());
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll();
+        for($i=0;$i<count($rows);$i++){
+            echo $rows[$i];
+        }
+        if(count($rows) == 0){
+            //...                  da gestire con try cath
+        }
+    }
+    public function loadutente($object) {
+        $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll();
+        for($i=0;$i<count($rows);$i++){
+            echo $rows[$i];
+        }
+        if(count($rows) == 0){
+            //...                  da gestire con try cath
+        }
+    }*/
     public function store() {
         
     }
