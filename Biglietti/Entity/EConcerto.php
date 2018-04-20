@@ -7,9 +7,9 @@ class EConcerto extends EEvento{
     private $artista;
     
     //metodi
-    function __construct($artista,$nome, $luogo, $data, $descrizione) {
+    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione, $artista) {
+        parent::__construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione);
         $this->artista = $artista;
-        parent::__construct($nome, $luogo, $data, $descrizione);
     }
 
     public function getArtista() {

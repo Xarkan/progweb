@@ -10,10 +10,9 @@
         
         include 'Autoload.php';
         
-        $posto = new ELuogo("Milano", "San Siro", "boh");
         $data = date("r");
-        $sport = new EPartita("0","Derby",$posto,$data,"abc","def","Napoli","Torino");
-        $teatro = new ESpettacolo("1","DT in concert", $posto, $data, "abc","def", "Dream Theater");
+        $sport = new EPartita("0","Derby","Milano", "San Siro", "boh",$data,"abc","def","Napoli","Torino");
+        $teatro = new ESpettacolo("1","DT in concert", "Milano", "San Siro", "boh", $data, "abc","def", "Dream Theater");
         
         echo $sport->getData();
         echo " ".$teatro->getNome();
