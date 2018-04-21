@@ -30,13 +30,13 @@ class FDBmanager {
     
     //-------------------------exist methods------------------------------------
     
-    public function existevento($object) {
+    private function existevento($object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return count($rows) > 0;
     }
-    public function existbiglietto($object) {
+    private function existbiglietto($object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento())
                ." AND ".$this->connection->quote($object->getZona());
@@ -44,7 +44,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return count($rows) > 0;
     }
-    public function existutente($object) {
+    private function existutente($object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -69,13 +69,13 @@ class FDBmanager {
     
     //---------------------------load methods----------------------------------
     
-    public function loadevento($object) {
+    private function loadevento($object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return $rows;
     }
-    public function loadbiglietto($object) {
+    private function loadbiglietto($object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento())
                ." AND ".$this->connection->quote($object->getZona());
@@ -83,7 +83,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return $rows;
     }
-    public function loadutente($object) {
+    private function loadutente($object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -107,7 +107,7 @@ class FDBmanager {
     
     //----------------------------store methods---------------------------------
     
-    public function storeevento($object) {
+    private function storeevento($object) {
         
         $sql = "INSERT INTO evento "
              . "VALUES ( ".$this->connection->quote($object->getCodev()).","
@@ -116,9 +116,8 @@ class FDBmanager {
              .$this->connection->quote($object->getStruttura()).","
              .$this->connection->quote($object->getVia()).","
              .$this->connection->quote($object->getData()).","
-             .$this->connection->quote($object->getDescrizione()).")";
-        
-        try
+             .$this->connection->quote($object->getDescrizione()).")";        
+        /*try
         {
             $this->connection->exec($sql);
             echo "New record created successfully";
@@ -126,23 +125,84 @@ class FDBmanager {
         catch(PDOException $e)
         {
             echo $sql . "<br>" . $e->getMessage();
-        }
+        }*/
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0 ;
+    }
+    
+    private function storeutente($object) {
+        $sql = "INSERT INTO utente_r VALUES ("
+                .$this->connection->quote($object->getMail()).","
+                .$this->connection->quote($object->getPassword()).","
+                .$this->connection->quote($object->getNome()).","
+                .$this->connection->quote($object->getCognome()).")";
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0 ;
     }
 
-    public function store() {
-        
+    public function store($object) {
+        $this->table = $this->db_table($object);
+        switch ($this->table) {
+            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+                $stored = $this->storeevento($object);
+                break;
+            case "Utente_Reg":
+                $stored = $this->storeutente($object);
+                break;
+        }
+        return $stored;
     }
     
     //-----------------------------update methods-------------------------------
     
-    public function update() {
+    private function updateevento($object) {
+        $sql = "UPDATE evento SET ";
+    }
+    
+    private function updateutente($object) {
         
+    }
+    
+    public function update($object) {
+        $this->table = $this->db_table($object);
+        switch ($this->table) {
+            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+                $updated = $this->updateevento($object);
+                break;
+            case "Utente_Reg":
+                $updated = $this->updateutente($object);
+                break;
+        }
+        return $updated;
     }
     
     //------------------------------delete methods-----------------------------
     
-    public function delete() {
-        
+    private function deleteutente($object) {
+        $sql = "DELETE FROM utente_r WHERE mail = "
+                .$this->connection->quote($object->getMail());
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0 ;
+    }
+    
+    private function deleteevento($object) {
+        $sql = "DELETE FROM evento WHERE cod_evento = "
+                .$this->connection->quote($object->getCodev());
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0 ;
+    }
+    
+    public function delete($object) {
+        $this->table = $this->db_table($object);
+        switch ($this->table) {
+            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+                $deleted = $this->deleteevento($object);
+                break;
+            case "Utente_Reg":
+                $deleted = $this->deleteutente($object);
+                break;
+        }
+        return $deleted;
     }
 }
 
