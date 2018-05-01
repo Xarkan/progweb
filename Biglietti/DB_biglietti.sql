@@ -42,8 +42,8 @@ CREATE TABLE ordine_biglietto (
 );
 
 CREATE TABLE biglietti (
-  codice        varchar(10)     NOT NULL,
   cod_evento    varchar(10)     NOT NULL,
+  codice        varchar(10)     NOT NULL,
   utente        varchar(40)     NULL,
   zona          varchar(20)     NOT NULL,
   posto         int             NOT NULL,
