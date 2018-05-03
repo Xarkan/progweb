@@ -52,10 +52,10 @@ CREATE TABLE biglietti (
 );
 
 CREATE TABLE biglietti_zona (
-  zona          varchar(20)     NOT NULL,
   cod_evento    varchar(10)     NOT NULL,
+  zona          varchar(20)     NOT NULL,
   prezzo        float           NOT NULL,
-  PRIMARY KEY(zona,cod_evento),
+  PRIMARY KEY(cod_evento,zona),
   FOREIGN KEY(cod_evento) REFERENCES evento(cod_evento)
 );
 

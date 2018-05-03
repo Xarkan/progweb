@@ -57,13 +57,11 @@ class EBiglietto {
     public function setPosto($posto) {
         $this->posto = $posto;
     }
-    public function generacodice(FDBmanager $connection){
-
-        $pdo = $connection->getConnection();
-        $sql = "SELECT MAX(cod_evento) FROM biglietti";
-        $result = $pdo->query($sql);
-        return $result+1;
-    }
+    /*public function generaCodice($n, EEvento $evento){
+        $string = $evento->getNome();
+        
+        
+    }*/
     public function CreaBiglietto(FDBmanager $mng, EOrdine $ord){
         $sql = "SELECT * FROM biglietti WHERE utente = ".$ord->getUtente();
         $result = $mng->getConnection()->query($sql);
