@@ -35,9 +35,15 @@ abstract class EUtente {
             $disp = $dbm->exist($ordine);
             if($disp) {
                 $ordine->setPagato(true);
-            }            
+            }
+            $dbm->confermaordine($ordine);
         }
     }
-
+    public function mostraZona(EEvento $evento, FDBmanager $mng) {
+        $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = " . $evento->getCodev();
+        $result = $mng->getConnection()->query($sql);
+        $rows = $result->fetchAll();
+        return $rows;
+    }
 
 }

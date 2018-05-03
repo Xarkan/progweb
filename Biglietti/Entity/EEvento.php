@@ -62,5 +62,12 @@ abstract class EEvento {
     public function setDescrizione($param) {
         $this->descrizione = $param;
     }
+    public function generacodev(FDBmanager $connection){
+        
+        $pdo = $connection->getConnection();
+        $sql = "SELECT MAX(cod_evento) FROM evento";
+        $result = $pdo->query($sql);
+        return $result+1;
+    }
 }
 
