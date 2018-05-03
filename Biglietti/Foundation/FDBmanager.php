@@ -40,13 +40,13 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return count($rows) > 0;
     }
-    private function existbiglietto($object) {
+    private function existbiglietto(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
-               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
+               . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
                ." AND ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        return count($rows) > 0;
+        return count($rows);
     }
     private function existutente($object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
@@ -61,8 +61,10 @@ class FDBmanager {
             case "Evento" || "Partita" || "Spettacolo" || "Concerto":
                 $found = $this->existevento($object);
                 break;
-            case "Biglietto":
-                $found = $this->existbiglietto($object);
+            case "Ordine":
+                $list_zone = $object->getLista_bigl();
+                $bigl_disp = $this->existbiglietto($list_zone[0]);
+                $found = $bigl_disp >= count($list_zone);
                 break;
             case "Utente_Reg":
                 $found = $this->existutente($object);
@@ -81,7 +83,7 @@ class FDBmanager {
     }
     private function loadbiglietto(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
-               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
+               . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
                ." AND ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -100,7 +102,7 @@ class FDBmanager {
                 $result = $this->loadevento($object);
                 break;
             case "Biglietto":
-                $result = $this->loadbiglietto($object);
+                $result = $this->loadbiglietto();
                 break;
             case "Utente_Reg":
                 $result = $this->loadutente($object);
@@ -229,7 +231,7 @@ class FDBmanager {
             $list_zone = $ordine->getLista_bigl();
             $this->storeordine($ordine);
             for($i = 0; $i < count($list_zone); $i++) {
-                $list_bigl = $this->loadbiglietto($list_zone[$i]);
+                $list_bigl[$i] = $this->loadbiglietto($list_zone[$i]);
                 $this->updatebiglietto($list_bigl[0],$ordine->getUtente());
 
                 $sql = "INSERT INTO ordine_biglietti VALUES ("
