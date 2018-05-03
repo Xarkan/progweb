@@ -58,19 +58,19 @@ class EBiglietto {
         $this->posto = $posto;
     }
     public function generacodice(FDBmanager $connection){
-        
-        
+
         $pdo = $connection->getConnection();
         $sql = "SELECT MAX(cod_evento) FROM biglietti";
         $result = $pdo->query($sql);
         return $result+1;
     }
     public function CreaBiglietto(FDBmanager $mng, EOrdine $ord){
-        for($i = 0;$i < count($ord->getLista_bigl());$i++){
-            $sql = "SELECT * FROM biglietti WHERE utente = ".$ord->getUtente();
-            $result = $mng->getConnection()->query($sql);
-            $rows = $result->fetchAll();
-            $biglietto = new EBiglietto($rows[0],$rows[1],$rows[2],$rows[3],$rows[4]);
+        $sql = "SELECT * FROM biglietti WHERE utente = ".$ord->getUtente();
+        $result = $mng->getConnection()->query($sql);
+        $rows = $result->fetchAll();
+        for($i = 0;$i < count($rows);$i++){
+            list($codice, $evento, $utente, $zona, $posto) = $rows[$i];
+            $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
             $array_bigl[$i] = $biglietto;
         }
         return $array_bigl;
