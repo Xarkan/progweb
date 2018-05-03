@@ -65,5 +65,15 @@ class EBiglietto {
         $result = $pdo->query($sql);
         return $result+1;
     }
+    public function CreaBiglietto(FDBmanager $mng, EOrdine $ord){
+        for($i = 0;$i < count($ord->getLista_bigl());$i++){
+            $sql = "SELECT * FROM biglietti WHERE utente = ".$ord->getUtente();
+            $result = $mng->getConnection()->query($sql);
+            $rows = $result->fetchAll();
+            $biglietto = new EBiglietto($rows[0],$rows[1],$rows[2],$rows[3],$rows[4]);
+            $array_bigl[$i] = $biglietto;
+        }
+        return $array_bigl;
+    }
 
 }
