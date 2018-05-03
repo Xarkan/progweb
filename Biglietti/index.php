@@ -6,40 +6,29 @@
         <title>Biglietti</title>
     </head>
     <body> 
-        <?php 
-        
-        include 'Autoload.php';
-        
-        $data = date("r");
-        $sport = new EPartita("0","Derby","Milano", "San Siro", "boh",$data,"abc","def","Napoli","Torino");
-        $teatro = new ESpettacolo("1","DT in concert", "Milano", "San Siro", "boh", $data, "abc","def", "Dream Theater");
-        
-        echo $sport->getData();
-        echo " ".$teatro->getNome();
-        
-        $dbm = new FDBmanager();
-        echo var_dump($dbm->exist($sport));
-        //echo $dbm->getError();
-        /*
-        $e1 = new EBiglietti_Zona("Live", "Platea", 13);      //test add/remove
-        $e2 = new EBiglietti_Zona("Partita", "Prato", 50);
-        $e3 = new EBiglietti_Zona("Opera","Galleria", 15);
-        
-        $array = array($e1,$e2,$e2,$e3);
-        $ord = new EOrdine(1, "Pippo", $array, $data, false);
-        $utente = new EUtente_Reg("federico", "raparelli", "jebfbihb", "abc");
-        $utente->paga($ord);
-        echo var_dump($ord->getPagato());
-        echo $ord->calcolaPrezzo();*/
-        
-        //$ord->removeBigl($e2);
-        //var_dump($ord->getLista_bigl()); 
-        
-        //$test = new FEvento();
-        //echo $test->getError();
-        //$boh = $test->exist($sport);
-        
-        ?>
-        <h1>PROVA</h1>
+	<?php
+		include 'Autoload.php';
+
+		$user = new EUtente_Reg("ciccio","pasticcio","cp@boh.org","marooon");
+		$fdbm = new FDBmanager();
+
+		//l'utente ha trovato l'evento desiderato e ci ha cliccato
+		$sport = new EPartita("0","Derby","Milano", "San Siro", "boh","21/7/1983","abc","def","Napoli","Torino");
+
+		$lista_zone = $user->mostraZona($sport, $fdbm);
+
+		//l'utente vuole 2 biglietti tribuna
+		$ordine = new EOrdine();
+                
+
+		$ordine->addZone($lista_zone[0], 2);
+
+		//viene visualizzata la schermata di pagamento
+		$user->paga($ordine, $fdbm);
+
+
+
+
+	?>
     </body>
 </html>

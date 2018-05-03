@@ -11,19 +11,33 @@ class EOrdine {
     private $pagato; //bool
     
     //metodi
-    public function __construct($id, $utente, $lista_bigl, $data, $pagato) {
+    /*public function __construct($id, $utente, $lista_bigl, $data, $pagato) {
         $this->id = $id;
         $this->utente = $utente;
         $this->lista_bigl = $lista_bigl;
         $this->data = $data;
         $this->pagato = $pagato;
+    }*/
+    
+    public function __construct() {
+        $this->id = null;
+        $this->utente = null;
+        $this->lista_bigl = null;
+        $this->data = null;
+        $this->pagato = null;
     }
     
-    public function addBigl(EBiglietti_Zona $ebz) {
+    public function addZone(EBiglietti_Zona $zona, $num) {
+	for($i = 1; $i <= $num; $i++) {
+            $this->addBigl($zona);
+	}
+}
+    
+    private function addBigl(EBiglietti_Zona $ebz) {
         $this->lista_bigl[] = $ebz;
     }
     
-    public function removeBigl(EBiglietti_Zona $ebz) {
+    private function removeBigl(EBiglietti_Zona $ebz) {
         $key = array_search($ebz, $this->lista_bigl);
         array_splice($this->lista_bigl, $key, 1);
     }
@@ -34,14 +48,6 @@ class EOrdine {
             $tot = $tot + $this->lista_bigl[$i]->getPrezzo();
         }
         return $tot;
-    }
-    
-    public function scegliZona(EEvento $evento) {
-        
-    }
-            
-    public function creaBiglietto() {   //$user ?? 
-        
     }
     
     public function getId() {

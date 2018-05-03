@@ -34,7 +34,7 @@ class FDBmanager {
 
     //-------------------------exist methods------------------------------------
 
-    private function existevento($object) {
+    private function existevento(EEvento $object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
