@@ -22,6 +22,10 @@ class FDBmanager {
         echo 'Connection failed: ' . $e->getMessage();
     }
 }
+
+    public function getConnection() {
+        return $this->connection;
+    }
     public function db_table($object) {
         $class = get_class($object);
         $tab = substr_replace($class, "", 0, 1);
@@ -69,13 +73,13 @@ class FDBmanager {
     
     //---------------------------load methods----------------------------------
     
-    private function loadevento($object) {
+    private function loadevento(EEvento $object) {
         $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return $rows;
     }
-    private function loadbiglietto($object) {
+    private function loadbiglietto(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento())
                ." AND ".$this->connection->quote($object->getZona());
@@ -83,7 +87,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return $rows;
     }
-    private function loadutente($object) {
+    private function loadutente(EUtente $object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -107,7 +111,7 @@ class FDBmanager {
     
     //----------------------------store methods---------------------------------
     
-    private function storeevento($object) {
+    private function storeevento(EEvento $object) {
         
         $sql = "INSERT INTO evento "
              . "VALUES ( ".$this->connection->quote($object->getCodev()).","
@@ -130,7 +134,7 @@ class FDBmanager {
         return $affected_rows > 0 ;
     }
     
-    private function storeutente($object) {
+    private function storeutente(EUtente $object) {
         $sql = "INSERT INTO utente_r VALUES ("
                 .$this->connection->quote($object->getMail()).","
                 .$this->connection->quote($object->getPassword()).","
@@ -138,6 +142,16 @@ class FDBmanager {
                 .$this->connection->quote($object->getCognome()).")";
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
+    }
+    
+    private function storeordine(EOrdine $object) {
+        $sql = "INSERT INTO ordine VALUES ("
+                .$this->connection->quote($object->getId()).","
+                .$this->connection->quote($object->getUtente()->getMail()).","
+                .$this->connection->quote($object->getData()).","
+                .$this->connection->quote($object->calcolaPrezzo()).")";
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0 ;        
     }
 
     public function store($object) {
@@ -178,14 +192,14 @@ class FDBmanager {
     
     //------------------------------delete methods-----------------------------
     
-    private function deleteutente($object) {
+    private function deleteutente(EUtente_Reg $object) {
         $sql = "DELETE FROM utente_r WHERE mail = "
                 .$this->connection->quote($object->getMail());
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
     
-    private function deleteevento($object) {
+    private function deleteevento(EEvento $object) {
         $sql = "DELETE FROM evento WHERE cod_evento = "
                 .$this->connection->quote($object->getCodev());
         $affected_rows = $this->connection->exec($sql);
@@ -203,6 +217,26 @@ class FDBmanager {
                 break;
         }
         return $deleted;
+    }
+    
+    public function confermaordine(EOrdine $ordine) {
+        if($ordine->getPagato()) {
+            
+            $list_zone = $ordine->getLista_bigl();
+            $this->storeordine($ordine);
+            for($i = 0; $i < count($list_zone); $i++) {
+                $list_bigl = $this->loadbiglietto($list_zone[$i]);
+                $this->updatebiglietto($list_bigl[0],$ordine->getUtente());
+            
+                $sql = "INSERT INTO ordine_biglietti VALUES ("
+                .$this->connection->quote($ordine->getId()).","
+                .$this->connection->quote($list_bigl[$i]).","
+                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).")";
+                
+                $affected_rows = $this->connection->exec($sql); 
+            }
+        }
+        return $affected_rows > 0; 
     }
 }
 
