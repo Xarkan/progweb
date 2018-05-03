@@ -43,7 +43,13 @@ abstract class EUtente {
         $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = " . $evento->getCodev();
         $result = $mng->getConnection()->query($sql);
         $rows = $result->fetchAll();
-        return $rows;
+        for($i = 0;$i < count($rows);$i++){
+            list($evento, $zona, $prezzo) = $rows[$i];
+            $zone = new EBiglietti_Zona($evento, $zona, $prezzo);
+            $array_zone[$i] = $zone;
+        }
+        return $array_zone;
+        
     }
 
 }
