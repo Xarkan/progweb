@@ -76,12 +76,12 @@ INSERT INTO evento VALUES("1", "Ridotto", "L'Aquila"," Ridotto","via def", "22/5
 INSERT INTO evento VALUES("2", "Live concert", "Roma","Parco","via boh", "8/7/2018-23:00", "descrizione2");
 
 --insert biglietti_zona
-INSERT INTO biglietti_zona VALUES("platea","1",13);
-INSERT INTO biglietti_zona VALUES("galleria","1",11);
-INSERT INTO biglietti_zona VALUES("curva","0",40);
-INSERT INTO biglietti_zona VALUES("tribuna","0",45);
-INSERT INTO biglietti_zona VALUES("prato","2",21);
-INSERT INTO biglietti_zona VALUES("spalti","2",18);
+INSERT INTO biglietti_zona VALUES("1","platea",13);
+INSERT INTO biglietti_zona VALUES("1","galleria",11);
+INSERT INTO biglietti_zona VALUES("0","curva",40);
+INSERT INTO biglietti_zona VALUES("0","tribuna",45);
+INSERT INTO biglietti_zona VALUES("2","prato",21);
+INSERT INTO biglietti_zona VALUES("2","spalti",18);
 
 --insert utente_r
 INSERT INTO utente_r VALUES("tizio@gmail.com","pippo","Tizio","Caio");

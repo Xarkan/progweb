@@ -63,7 +63,12 @@ class EBiglietto {
         
     }*/
     public function CreaBiglietto(FDBmanager $mng, EOrdine $ord){
-        $sql = "SELECT * FROM biglietti WHERE utente = ".$ord->getUtente();
+        $utente = $ord->getUtente();
+        $nome = $utente->getNome();
+        $cognome = $utente->getCognome();
+        $string = $nome." ".$cognome;
+        $sql = "SELECT biglietti.* FROM biglietti, ordine WHERE biglietti.utente = "
+            .$string." AND biglietti.utente = ordine.utente AND ordine.id = ".$ord->getId();
         $result = $mng->getConnection()->query($sql);
         $rows = $result->fetchAll();
         for($i = 0;$i < count($rows);$i++){

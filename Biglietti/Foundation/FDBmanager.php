@@ -26,11 +26,11 @@ class FDBmanager {
     public function getConnection() {
         return $this->connection;
     }
-    public function db_table($object) {
+    /*public function db_table($object) {
         $class = get_class($object);
         $tab = substr_replace($class, "", 0, 1);
         return $tab;
-    }
+    } */
 
     //-------------------------exist methods------------------------------------
 
@@ -48,7 +48,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return count($rows);
     }
-    private function existutente($object) {
+    private function existutente(EUtente_Reg $object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -56,20 +56,19 @@ class FDBmanager {
 
     }
     public function exist($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $found = $this->existevento($object);
-                break;
-            case "Ordine":
+
+            if($object instanceof EEvento) {
+                $found = $this->existevento($object);                
+            } 
+            if($object instanceof EOrdine) {
                 $list_zone = $object->getLista_bigl();
                 $bigl_disp = $this->existbiglietto($list_zone[0]);
                 $found = $bigl_disp >= count($list_zone);
-                break;
-            case "Utente_Reg":
+                var_dump($list_zone[0]->getZona());
+            }
+            if($object instanceof EUtente_Reg) {
                 $found = $this->existutente($object);
-                break;
-        }
+            }
         return $found;
     }
 
@@ -81,7 +80,7 @@ class FDBmanager {
         $rows = $result->fetchAll();
         return $rows;
     }
-    private function loadbiglietto(EBiglietti_Zona $object) {
+    private function loadbigliettidisp(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
                ." AND ".$this->connection->quote($object->getZona());
@@ -96,18 +95,16 @@ class FDBmanager {
         return $rows;
     }
     public function load($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+        
+            if($object instanceof Evento) {
                 $result = $this->loadevento($object);
-                break;
-            case "Biglietto":
-                $result = $this->loadbiglietto();
-                break;
-            case "Utente_Reg":
+            }    
+            if($object instanceof EBiglietti_Zona) {
+                $result = $this->loadbigliettidisp($object);
+            }
+            if($object instanceof EUtente_Reg) {
                 $result = $this->loadutente($object);
-                break;
-        }
+            }
         return $result;
     }
 
@@ -153,19 +150,35 @@ class FDBmanager {
                 .$this->connection->quote($object->getData()).","
                 .$this->connection->quote($object->calcolaPrezzo()).")";
         $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
+        
+        return $affected_rows > 0;
+    }
+    private function storeordine_bigl($object) {    
+        $list_zone = $object->getLista_bigl();
+        $list_bigl = $this->load($list_zone[0]);
+        $sql_full = "";
+        for($i = 0; $i < count($list_zone); $i++) {
+            $sql = "INSERT INTO ordine_biglietti VALUES ("
+                .$this->connection->quote($object->getId()).","
+                .$this->connection->quote($list_bigl[$i]).","
+                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).");\n";
+                $sql_full = $sql_full.$sql;           
+        }       
+        $this->connection->exec($sql_full);
     }
 
     public function store($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+
+            if($object instanceof EEvento) {
                 $stored = $this->storeevento($object);
-                break;
-            case "Utente_Reg":
+            }
+            if($object instanceof EUtente_Reg) {
                 $stored = $this->storeutente($object);
-                break;
-        }
+            }
+            if($object instanceof EOrdine) {
+                $stored = $this->storeordine($object);
+                $this->storeordine_bigl($object);
+            }
         return $stored;
     }
 
@@ -178,21 +191,28 @@ class FDBmanager {
     private function updateutente($object) {
 
     }
-    public function updatebiglietto($id, $utente){
+    private function updatebiglietto($id, $utente){
         $sql = "UPDATE biglietti SET utente = " . $utente . "WHERE codice = " . $id;
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
     public function update($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+
+            if($object instanceof EEvento) {
                 $updated = $this->updateevento($object);
-                break;
-            case "Utente_Reg":
+            }
+            if($object instanceof EUtente_Reg) {
                 $updated = $this->updateutente($object);
-                break;
-        }
+            }
+            if($object instanceof EOrdine) {
+                $list_zone = $object->getLista_bigl();
+                $list_bigl = $this->load($list_zone[0]);
+                $utente = $object->getUtente();
+                $nome = $utente->getNome();
+                $cognome = $utente->getCognome();
+                $string = $nome." ".$cognome;
+                $this->updatebiglietto($list_bigl[0], $string);
+            }   
         return $updated;
     }
 
@@ -213,35 +233,23 @@ class FDBmanager {
     }
 
     public function delete($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
+
+            if($object instanceof EEvento) {
                 $deleted = $this->deleteevento($object);
-                break;
-            case "Utente_Reg":
+            }
+            if($object instanceof Utente_Reg) {
                 $deleted = $this->deleteutente($object);
-                break;
-        }
+            }
         return $deleted;
     }
 
     public function confermaordine(EOrdine $ordine) {
         if($ordine->getPagato()) {
+          
+            $updated = $this->update($ordine);
+            $stored = $this->store($ordine);
 
-            $list_zone = $ordine->getLista_bigl();
-            $this->storeordine($ordine);
-            for($i = 0; $i < count($list_zone); $i++) {
-                $list_bigl[$i] = $this->loadbiglietto($list_zone[$i]);
-                $this->updatebiglietto($list_bigl[0],$ordine->getUtente());
-
-                $sql = "INSERT INTO ordine_biglietti VALUES ("
-                .$this->connection->quote($ordine->getId()).","
-                .$this->connection->quote($list_bigl[$i]).","
-                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).")";
-
-                $affected_rows = $this->connection->exec($sql);
             }
-        }
-        return $affected_rows > 0;
+        return $stored && $updated;
     }
 }

@@ -27,13 +27,14 @@ abstract class EUtente {
     public function setCognome($cognome) {
         $this->cognome = $cognome;
     }
-    public function paga(Eordine $ordine, FDBmanager $dbm){
+    public function paga(EOrdine $ordine, FDBmanager $dbm){
         if($ordine->getPagato() == false)
         {
             $prezzo = $ordine->calcolaPrezzo($ordine->getLista_bigl());
             //contatta paypal
             $disp = $dbm->exist($ordine);
             if($disp) {
+                echo "ciao";
                 $ordine->setPagato(true);
             }
             $dbm->confermaordine($ordine);
