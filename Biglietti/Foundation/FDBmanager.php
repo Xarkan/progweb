@@ -5,7 +5,6 @@ class FDBmanager {
     //attributi
     private $connection;
     private $connected;
-    private $table;
 
     //metodi
     public function __construct() {
@@ -26,11 +25,6 @@ class FDBmanager {
     public function getConnection() {
         return $this->connection;
     }
-    /*public function db_table($object) {
-        $class = get_class($object);
-        $tab = substr_replace($class, "", 0, 1);
-        return $tab;
-    } */
 
     //-------------------------exist methods------------------------------------
 
@@ -41,12 +35,12 @@ class FDBmanager {
         return count($rows) > 0;
     }
     private function existbiglietto(EBiglietti_Zona $object) {
-        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
+        $sql = "SELECT codice FROM biglietti WHERE utente IS NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
-               ." AND ".$this->connection->quote($object->getZona());
+               ." AND zona = ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return count($rows);
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
+        return count($rows);             
     }
     private function existutente(EUtente_Reg $object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
@@ -64,7 +58,6 @@ class FDBmanager {
                 $list_zone = $object->getLista_bigl();
                 $bigl_disp = $this->existbiglietto($list_zone[0]);
                 $found = $bigl_disp >= count($list_zone);
-                var_dump($list_zone[0]->getZona());
             }
             if($object instanceof EUtente_Reg) {
                 $found = $this->existutente($object);
@@ -81,17 +74,17 @@ class FDBmanager {
         return $rows;
     }
     private function loadbigliettidisp(EBiglietti_Zona $object) {
-        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
+        $sql = "SELECT codice FROM biglietti WHERE utente IS NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
-               ." AND ".$this->connection->quote($object->getZona());
+               ." AND zona = ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
         return $rows;
     }
     private function loadutente(EUtente $object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
         return $rows;
     }
     public function load($object) {
@@ -120,15 +113,7 @@ class FDBmanager {
              .$this->connection->quote($object->getVia()).","
              .$this->connection->quote($object->getData()).","
              .$this->connection->quote($object->getDescrizione()).")";
-        /*try
-        {
-            $this->connection->exec($sql);
-            echo "New record created successfully";
-        }
-        catch(PDOException $e)
-        {
-            echo $sql . "<br>" . $e->getMessage();
-        }*/
+
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
@@ -156,15 +141,14 @@ class FDBmanager {
     private function storeordine_bigl($object) {    
         $list_zone = $object->getLista_bigl();
         $list_bigl = $this->load($list_zone[0]);
-        $sql_full = "";
+        echo "storeordine_bigl";
         for($i = 0; $i < count($list_zone); $i++) {
-            $sql = "INSERT INTO ordine_biglietti VALUES ("
+            $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento ) VALUES ("   //?????
                 .$this->connection->quote($object->getId()).","
                 .$this->connection->quote($list_bigl[$i]).","
-                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).");\n";
-                $sql_full = $sql_full.$sql;           
-        }       
-        $this->connection->exec($sql_full);
+                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).")";
+            $this->connection->exec($sql);
+        }
     }
 
     public function store($object) {
@@ -191,9 +175,12 @@ class FDBmanager {
     private function updateutente($object) {
 
     }
-    private function updatebiglietto($id, $utente){
-        $sql = "UPDATE biglietti SET utente = " . $utente . "WHERE codice = " . $id;
+    private function updatebiglietto($codice, $utente){
+        $sql = "UPDATE biglietti SET utente = "
+                .$this->connection->quote($utente). "WHERE codice = "
+                . $this->connection->quote($codice);
         $affected_rows = $this->connection->exec($sql);
+        echo "updatebiglietto";
         return $affected_rows > 0 ;
     }
     public function update($object) {
@@ -210,8 +197,8 @@ class FDBmanager {
                 $utente = $object->getUtente();
                 $nome = $utente->getNome();
                 $cognome = $utente->getCognome();
-                $string = $nome." ".$cognome;
-                $this->updatebiglietto($list_bigl[0], $string);
+                $full_name = $nome." ".$cognome;
+                $updated = $this->updatebiglietto($list_bigl[0], $full_name);
             }   
         return $updated;
     }
@@ -245,8 +232,8 @@ class FDBmanager {
 
     public function confermaordine(EOrdine $ordine) {
         if($ordine->getPagato()) {
-          
-            $updated = $this->update($ordine);
+            echo "confermaordine";
+            //$updated = $this->update($ordine);
             $stored = $this->store($ordine);
 
             }

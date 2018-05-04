@@ -11,13 +11,6 @@ class EOrdine {
     private $pagato; //bool
     
     //metodi
-    /*public function __construct($id, $utente, $lista_bigl, $data, $pagato) {
-        $this->id = $id;
-        $this->utente = $utente;
-        $this->lista_bigl = $lista_bigl;
-        $this->data = $data;
-        $this->pagato = $pagato;
-    }*/
     
     public function __construct() {
         $this->id = null;

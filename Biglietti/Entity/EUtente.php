@@ -34,7 +34,6 @@ abstract class EUtente {
             //contatta paypal
             $disp = $dbm->exist($ordine);
             if($disp) {
-                echo "ciao";
                 $ordine->setPagato(true);
             }
             $dbm->confermaordine($ordine);
