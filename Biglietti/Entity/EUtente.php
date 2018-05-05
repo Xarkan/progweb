@@ -41,8 +41,10 @@ abstract class EUtente {
         }
     }
     public function mostraZona(EEvento $evento, FDBmanager $mng) {
-        $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = " . $evento->getCodev()
-              ." AND data_evento = ".$evento->getData();
+        echo "mostraZona->";
+        $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = "
+                .$mng->getConnection()->quote($evento->getCodev())." AND data_evento = "
+                .$mng->getConnection()->quote($evento->getData());
         $result = $mng->getConnection()->query($sql);
         $rows = $result->fetchAll();
         for($i = 0;$i < count($rows);$i++){

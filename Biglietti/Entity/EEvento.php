@@ -13,7 +13,7 @@ abstract class EEvento {
     private $descrizione; 
     
     //metodi
-    function __construct($cod,$data, $nome, $citta, $struttura, $via, $descrizione) {
+    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione) {
         $this->codev = $cod;
         $this->data = $data;
         $this->nome = $nome;

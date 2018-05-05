@@ -18,15 +18,14 @@ CREATE TABLE evento (
 CREATE TABLE utente_r (
   mail          varchar(20)     NOT NULL,
   psw           varchar(16)     NOT NULL,
-  nome          varchar(20)     NOT NULL,
-  cognome       varchar(20)     NOT NULL,
+  nome          varchar(40)     NOT NULL,
   PRIMARY KEY(mail)
 );
 
 CREATE TABLE ordine (
   id            varchar(10)     NOT NULL,
   mail          varchar(40)     NOT NULL,
-  data_ordine   date            NOT NULL,
+  data_ordine   varchar(40)     NOT NULL,
   prezzo        float           NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (mail) REFERENCES utente_r(mail)
@@ -90,8 +89,8 @@ INSERT INTO biglietti_zona VALUES("2","8/7/2018-23:00","prato",21);
 INSERT INTO biglietti_zona VALUES("2","8/7/2018-23:00","spalti",18);
 
 --insert utente_r
-INSERT INTO utente_r VALUES("tizio@gmail.com","pippo","Tizio","Caio");
-INSERT INTO utente_r VALUES("pinco@hotmail.it","papero","Pinco","Pallino");
+INSERT INTO utente_r VALUES("tizio@gmail.com","pippo","Tizio Caio");
+INSERT INTO utente_r VALUES("pinco@hotmail.it","papero","Pinco Pallino");
 
 --insert biglietti
 INSERT INTO biglietti VALUES("1","22/5/2018-21:00", "B0", NULL, "galleria", 3);

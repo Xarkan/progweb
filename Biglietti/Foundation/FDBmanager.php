@@ -123,11 +123,13 @@ class FDBmanager {
     }
 
     private function storeutente(EUtente $object) {
+        $nome = $object->getNome();
+        $cognome = $object->getCognome();
+        $string = $nome." ".$cognome;
         $sql = "INSERT INTO utente_r VALUES ("
                 .$this->connection->quote($object->getMail()).","
                 .$this->connection->quote($object->getPassword()).","
-                .$this->connection->quote($object->getNome()).","
-                .$this->connection->quote($object->getCognome()).")";
+                .$this->connection->quote($string).")";
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
@@ -152,10 +154,10 @@ class FDBmanager {
         $list_bigl = $this->load($list_zone[0]);
         echo "storeordine_bigl->";
         for($i = 0; $i < count($list_zone); $i++) {
-            $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento, data_evento ) VALUES ("   //?????
+            $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento, data_evento) VALUES (" 
                 .$this->connection->quote($object->getId()).","
                 .$this->connection->quote($list_bigl[$i]).","
-                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev())
+                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).","
                 .$this->connection->quote($list_zone[$i]->getEvento()->getData()).")";
             $affected_rows = $this->connection->exec($sql);
         }
@@ -259,12 +261,15 @@ class FDBmanager {
         $nome = $utente->getNome();
         $cognome = $utente->getCognome();
         $string = $nome." ".$cognome;
-        $sql = "SELECT biglietti.* FROM biglietti, ordine WHERE biglietti.utente = "
-            .$string." AND biglietti.utente = ordine.utente AND ordine.id = ".$ord->getId();
+        $sql = "SELECT biglietti.* FROM biglietti,ordine, ordine_biglietto WHERE biglietti.utente = "
+            .$this->connection->quote($string)." AND biglietti.codice = ordine_biglietto.cod_bigl AND "
+            ."ordine.id = ".$this->connection->quote($ord->getId());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         for($i = 0;$i < count($rows);$i++){
-            list($codice, $evento, $utente, $zona, $posto) = $rows[$i];
+            list($cod_evento, $data, $codice, $utente, $zona, $posto) = $rows[$i];
+            $lista_zone = $ord->getLista_bigl();
+            $evento = $lista_zone[$i]->getEvento();
             $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
             $array_bigl[$i] = $biglietto;
         }
