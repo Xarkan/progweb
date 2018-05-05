@@ -133,22 +133,28 @@ class FDBmanager {
                 .$this->connection->quote($object->getId()).","
                 .$this->connection->quote($object->getUtente()->getMail()).","
                 .$this->connection->quote($object->getData()).","
-                .$this->connection->quote($object->calcolaPrezzo()).")";
+                .$object->calcolaPrezzo().")";
+        try {
         $affected_rows = $this->connection->exec($sql);
-        
+        echo "storeordine->";
+        }
+        catch (Exception $e) {
+            echo "error".$e->getMessage();
+        }
         return $affected_rows > 0;
     }
-    private function storeordine_bigl($object) {    
+    private function storeordine_bigl(EOrdine $object) {    
         $list_zone = $object->getLista_bigl();
         $list_bigl = $this->load($list_zone[0]);
-        echo "storeordine_bigl";
+        echo "storeordine_bigl->";
         for($i = 0; $i < count($list_zone); $i++) {
             $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento ) VALUES ("   //?????
                 .$this->connection->quote($object->getId()).","
                 .$this->connection->quote($list_bigl[$i]).","
                 .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).")";
-            $this->connection->exec($sql);
+            $affected_rows = $this->connection->exec($sql);
         }
+        return $affected_rows > 0;
     }
 
     public function store($object) {
@@ -177,10 +183,10 @@ class FDBmanager {
     }
     private function updatebiglietto($codice, $utente){
         $sql = "UPDATE biglietti SET utente = "
-                .$this->connection->quote($utente). "WHERE codice = "
+                .$this->connection->quote($utente)." WHERE codice = "
                 . $this->connection->quote($codice);
         $affected_rows = $this->connection->exec($sql);
-        echo "updatebiglietto";
+        echo "updatebiglietto->";
         return $affected_rows > 0 ;
     }
     public function update($object) {
@@ -198,7 +204,9 @@ class FDBmanager {
                 $nome = $utente->getNome();
                 $cognome = $utente->getCognome();
                 $full_name = $nome." ".$cognome;
-                $updated = $this->updatebiglietto($list_bigl[0], $full_name);
+                for($i = 0; $i < count($list_zone); $i++) {
+                    $updated = $this->updatebiglietto($list_bigl[$i], $full_name);
+                }
             }   
         return $updated;
     }
@@ -232,11 +240,29 @@ class FDBmanager {
 
     public function confermaordine(EOrdine $ordine) {
         if($ordine->getPagato()) {
-            echo "confermaordine";
-            //$updated = $this->update($ordine);
+            echo "confermaordine->";
             $stored = $this->store($ordine);
+            $updated = $this->update($ordine);
 
             }
         return $stored && $updated;
+    }
+    
+    public function CreaBiglietto(EOrdine $ord){
+        $utente = $ord->getUtente();
+        $nome = $utente->getNome();
+        $cognome = $utente->getCognome();
+        $string = $nome." ".$cognome;
+        $sql = "SELECT biglietti.* FROM biglietti, ordine WHERE biglietti.utente = "
+            .$string." AND biglietti.utente = ordine.utente AND ordine.id = ".$ord->getId();
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll();
+        for($i = 0;$i < count($rows);$i++){
+            list($codice, $evento, $utente, $zona, $posto) = $rows[$i];
+            $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
+            $array_bigl[$i] = $biglietto;
+        }
+        echo "creabiglietto->";
+        return $array_bigl;
     }
 }

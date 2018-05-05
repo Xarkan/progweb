@@ -8,12 +8,17 @@
     <body> 
 	<?php
 		include 'Autoload.php';
-
-		$user = new EUtente_Reg("ciccio","pasticcio","cp@boh.org","marooon");
+ 
 		$fdbm = new FDBmanager();
-                /*$sql = "DELETE FROM biglietti WHERE utente = 'ciccio pasticcio';\n INSERT INTO biglietti VALUES('0', 'A1', NULL, 'tribuna', 24);";
+                $user = new EUtente_Reg("Pinco","Pallino","pinco@hotmail.it","papero");
+                //$fdbm->store($user);
+                /*$sql1 = "DELETE FROM biglietti WHERE utente = 'ciccio pasticcio';\n INSERT INTO biglietti VALUES('0', 'A1', NULL, 'tribuna', 24);";
+                $sql2 = "DELETE FROM ordine WHERE id = 'prova123'";
+                $sql3 = "DELETE FROM ordine_biglietto WHERE id_ord = 'prova123'";
                 $reset = $fdbm->getConnection();
-                $reset->exec($sql);*/
+                $reset->exec($sql1);
+                $reset->exec($sql2);
+                $reset->exec($sql3);*/
 		//l'utente ha trovato l'evento desiderato e ci ha cliccato
 		$sport = new EPartita("0","Derby","Milano", "San Siro", "boh","21/7/1983","abc","def","Napoli","Torino");
 
@@ -28,10 +33,12 @@
                 //l'utente imposta nome e cognome ??
                 $ordine->setUtente($user);
                 $ordine->setId("prova123");
-                $data = "21/7/15";
+                $data = "21/7/1915";
                 $ordine->setData($data);
-		$user->paga($ordine, $fdbm);
-
+		$pagato = $user->paga($ordine, $fdbm);
+                if($pagato) {
+                    $array_biglietti = $fdbm->CreaBiglietto($ordine);
+                }
 
 
 

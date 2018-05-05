@@ -36,7 +36,8 @@ abstract class EUtente {
             if($disp) {
                 $ordine->setPagato(true);
             }
-            $dbm->confermaordine($ordine);
+            $conferma = $dbm->confermaordine($ordine);
+            return $conferma;
         }
     }
     public function mostraZona(EEvento $evento, FDBmanager $mng) {
