@@ -46,7 +46,7 @@ abstract class EUtente {
         $result = $mng->getConnection()->query($sql);
         $rows = $result->fetchAll();
         for($i = 0;$i < count($rows);$i++){
-            list($codev, $zona, $prezzo) = $rows[$i];
+            list($codev, $data, $zona, $prezzo) = $rows[$i];
             $zone = new EBiglietti_Zona($evento, $zona, $prezzo);
             $array_zone[$i] = $zone;
         }
