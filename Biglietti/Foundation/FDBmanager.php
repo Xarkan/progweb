@@ -29,7 +29,8 @@ class FDBmanager {
     //-------------------------exist methods------------------------------------
 
     private function existevento(EEvento $object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
+        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev())
+                ." AND data_evento = ".$this->connection->quote($object->getData());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return count($rows) > 0;
@@ -37,6 +38,7 @@ class FDBmanager {
     private function existbiglietto(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente IS NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
+               . "AND data_evento = ".$this->connection->quote($object->getEvento()->getData())
                ." AND zona = ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -68,7 +70,8 @@ class FDBmanager {
     //---------------------------load methods----------------------------------
 
     private function loadevento(EEvento $object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
+        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev())
+              ." AND data_evento = ".$this->connection->quote($object->getData());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return $rows;
@@ -76,6 +79,7 @@ class FDBmanager {
     private function loadbigliettidisp(EBiglietti_Zona $object) {
         $sql = "SELECT codice FROM biglietti WHERE utente IS NULL "
                . "AND cod_evento = ".$this->connection->quote($object->getEvento()->getCodev())
+               . "AND data_evento = ".$this->connection->quote($object->getEvento()->getData())
                ." AND zona = ".$this->connection->quote($object->getZona());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -148,10 +152,11 @@ class FDBmanager {
         $list_bigl = $this->load($list_zone[0]);
         echo "storeordine_bigl->";
         for($i = 0; $i < count($list_zone); $i++) {
-            $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento ) VALUES ("   //?????
+            $sql = "INSERT INTO ordine_biglietto (id_ord, cod_bigl, cod_evento, data_evento ) VALUES ("   //?????
                 .$this->connection->quote($object->getId()).","
                 .$this->connection->quote($list_bigl[$i]).","
-                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev()).")";
+                .$this->connection->quote($list_zone[$i]->getEvento()->getCodev())
+                .$this->connection->quote($list_zone[$i]->getEvento()->getData()).")";
             $affected_rows = $this->connection->exec($sql);
         }
         return $affected_rows > 0;
@@ -222,7 +227,8 @@ class FDBmanager {
 
     private function deleteevento(EEvento $object) {
         $sql = "DELETE FROM evento WHERE cod_evento = "
-                .$this->connection->quote($object->getCodev());
+                .$this->connection->quote($object->getCodev())
+                ." AND data_evento = ".$this->connection->quote($object->getData());
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
