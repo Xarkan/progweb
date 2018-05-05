@@ -5,11 +5,11 @@ USE DB_biglietti;
 
 CREATE TABLE evento (
   cod_evento    varchar(10)     NOT NULL,
+  data_evento   varchar(40)     NOT NULL,
   nome          varchar(20)     NOT NULL,
   citta         varchar(40)     NOT NULL,
   struttura     varchar(40)     NOT NULL,
   via           varchar(40)     NOT NULL,
-  data_evento   varchar(40)     NOT NULL,
   descrizione   varchar(500)    NOT NULL,
   PRIMARY KEY(cod_evento,data_evento)
   
@@ -36,7 +36,7 @@ CREATE TABLE ordine_biglietto (
   id_ord        varchar(10)     NOT NULL,
   cod_bigl      varchar(10)     NOT NULL,
   cod_evento    varchar(10)     NOT NULL,
-  data_evento   varchar(10)     NOT NULL,
+  data_evento   varchar(40)     NOT NULL,
   PRIMARY KEY (id_ord,cod_bigl,cod_evento,data_evento),
   FOREIGN KEY (id_ord) REFERENCES ordine(id),
   FOREIGN KEY(cod_evento,data_evento) REFERENCES evento(cod_evento,data_evento) 
@@ -44,7 +44,7 @@ CREATE TABLE ordine_biglietto (
 
 CREATE TABLE biglietti (
   cod_evento    varchar(10)     NOT NULL,
-  data_evento   varchar(10)     NOT NULL,
+  data_evento   varchar(40)     NOT NULL,
   codice        varchar(10)     NOT NULL,
   utente        varchar(40)     NULL,
   zona          varchar(20)     NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE biglietti (
 
 CREATE TABLE biglietti_zona (
   cod_evento    varchar(10)     NOT NULL,
-  data_evento   varchar(10)     NOT NULL,
+  data_evento   varchar(40)     NOT NULL,
   zona          varchar(20)     NOT NULL,
   prezzo        float           NOT NULL,
   PRIMARY KEY(cod_evento,data_evento,zona),
@@ -64,7 +64,7 @@ CREATE TABLE biglietti_zona (
 
 CREATE TABLE dettaglio_evento (
   cod_evento    varchar(10)     NOT NULL,
-  data_evento   varchar(10)     NOT NULL,
+  data_evento   varchar(40)     NOT NULL,
   tipo          varchar(10)     NOT NULL,
   artista       varchar(20)     NULL,
   compagnia     varchar(20)     NULL,
@@ -75,9 +75,11 @@ CREATE TABLE dettaglio_evento (
 );
 
 --insert evento
-INSERT INTO evento VALUES("0", "derby", "Milano","San Siro","via abc", "19/4/2018-22:53", "descrizion0");
-INSERT INTO evento VALUES("1", "Ridotto", "L'Aquila"," Ridotto","via def", "22/5/2018-21:00", "descrizione1");
-INSERT INTO evento VALUES("2", "Live concert", "Roma","Parco","via boh", "8/7/2018-23:00", "descrizione2");
+INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
+INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
+
+INSERT INTO evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
 --insert biglietti_zona
 INSERT INTO biglietti_zona VALUES("1","22/5/2018-21:00","platea",13);
