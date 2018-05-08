@@ -21,7 +21,8 @@
                 $reset->exec($sql3);*/
 		//l'utente ha trovato l'evento desiderato e ci ha cliccato  //$cod, $nome, $citta, $struttura, $via, $data, $descrizione, $casa, $ospite
 		$sport = new EPartita("0","Derby","Milano", "San Siro", "via abc","30/4/2018-22:53","descrizione0","Napoli","Torino");
-		$lista_zone = $user->mostraZona($sport, $fdbm);
+		$fdbm->DataLuogoPrezzo($sport);
+                $lista_zone = $user->mostraZona($sport, $fdbm);
 		//l'utente vuole 2 biglietti tribuna
 		$ordine = new EOrdine();
                 

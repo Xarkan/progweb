@@ -276,4 +276,14 @@ class FDBmanager {
         echo "creabiglietto->";
         return $array_bigl;
     }
+    public function DataLuogoPrezzo(EEvento $evento){
+        $sql = "SELECT DISTINCT bz.data_evento,citta,struttura,via,MIN(bz.prezzo)"
+              ." FROM evento as e, biglietti_zona as bz"
+              ." WHERE e.cod_evento = ".$evento->getCodev()
+              ." AND e.cod_evento = bz.cod_evento GROUP BY bz.data_evento";
+        $reuslt = $this->connection->query($sql);
+        $rows = $reuslt->fetchAll();
+        echo "DataLuogoPrezzo->";
+        return $rows;
+    }
 }
