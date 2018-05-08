@@ -69,8 +69,8 @@ class FDBmanager {
 
     //---------------------------load methods----------------------------------
 
-    private function loadevento(EEvento $object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev())
+    private function loadzona(EEvento $object) {
+        $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = ".$this->connection->quote($object->getCodev())
               ." AND data_evento = ".$this->connection->quote($object->getData());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -85,6 +85,19 @@ class FDBmanager {
         $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
         return $rows;
     }
+    private function loadbiglietticomprati($object) {
+        $utente = $object->getUtente();
+        $nome = $utente->getNome();
+        $cognome = $utente->getCognome();
+        $string = $nome." ".$cognome;
+        $sql = "SELECT biglietti.* FROM biglietti,ordine, ordine_biglietto WHERE biglietti.utente = "
+            .$this->connection->quote($string)." AND biglietti.codice = ordine_biglietto.cod_bigl AND "
+            ."ordine.id = ".$this->connection->quote($object->getId());
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll();
+        return $rows;
+    }
+
     private function loadutente(EUtente $object) {
         $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
@@ -94,13 +107,16 @@ class FDBmanager {
     public function load($object) {
         
             if($object instanceof Evento) {
-                $result = $this->loadevento($object);
+                $result = $this->loadzona($object);
             }    
             if($object instanceof EBiglietti_Zona) {
                 $result = $this->loadbigliettidisp($object);
             }
             if($object instanceof EUtente_Reg) {
                 $result = $this->loadutente($object);
+            }
+            if($object instanceof EBiglietto) {
+                $result = $this->loadbiglietticomprati($object);
             }
         return $result;
     }
@@ -256,26 +272,7 @@ class FDBmanager {
         return $stored && $updated;
     }
     
-    public function CreaBiglietto(EOrdine $ord){
-        $utente = $ord->getUtente();
-        $nome = $utente->getNome();
-        $cognome = $utente->getCognome();
-        $string = $nome." ".$cognome;
-        $sql = "SELECT biglietti.* FROM biglietti,ordine, ordine_biglietto WHERE biglietti.utente = "
-            .$this->connection->quote($string)." AND biglietti.codice = ordine_biglietto.cod_bigl AND "
-            ."ordine.id = ".$this->connection->quote($ord->getId());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        for($i = 0;$i < count($rows);$i++){
-            list($cod_evento, $data, $codice, $utente, $zona, $posto) = $rows[$i];
-            $lista_zone = $ord->getLista_bigl();
-            $evento = $lista_zone[$i]->getEvento();
-            $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
-            $array_bigl[$i] = $biglietto;
-        }
-        echo "creabiglietto->";
-        return $array_bigl;
-    }
+
     public function DataLuogoPrezzo(EEvento $evento){
         $sql = "SELECT DISTINCT bz.data_evento,citta,struttura,via,MIN(bz.prezzo)"
               ." FROM evento as e, biglietti_zona as bz"
