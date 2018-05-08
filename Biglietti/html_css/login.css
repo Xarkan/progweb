@@ -3,22 +3,12 @@ html,
 body {
   height: 100%;
 }
-
-body {
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #EFF5FB;
-}
-
+/*
 .banner {
     background-color: #08298A;
     display: block;
     text-align: left;
+    margin-top: auto;
     padding: 10px 40px;
     font-size: 25px;
     width: 85%;
@@ -26,7 +16,25 @@ body {
 
 .banner a {
     color: white;
+} */
+
+#header {
+	background-color: #0033cc;
+	color: #FFFFFF;
+	width: 90%;
+	padding: 20px;
 }
+
+body {
+  display: -ms-flex-align;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: center;
+  padding-bottom: 40px;
+  background-color: #EFF5FB;
+}
+
 
 .navbar-brand {
     color: white;
@@ -39,6 +47,8 @@ body {
   padding: 15px;
   margin: auto;
 }
+
+/*login box*/
 .form-signin .checkbox {
   font-weight: 400;
 }

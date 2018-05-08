@@ -32,12 +32,20 @@ abstract class EUtente {
         {
             $prezzo = $ordine->calcolaPrezzo($ordine->getLista_bigl());
             //contatta paypal
-            $disp = $dbm->exist($ordine);
-            if($disp) {
+            try {
+                $dbm->getConnection()->beginTransaction();
+                $disp = $dbm->exist($ordine);
+                if($disp) {
                 $ordine->setPagato(true);
+                }
+                $conferma = $dbm->confermaordine($ordine);
+                $dbm->getConnection()->commit();
+                return $conferma;
             }
-            $conferma = $dbm->confermaordine($ordine);
-            return $conferma;
+            catch (Exception $e) {
+                $dbm->getConnection()->rollBack();
+                echo $e->getMessage();
+            }
         }
     }
     public function mostraZona(EEvento $evento, FDBmanager $mng) {
