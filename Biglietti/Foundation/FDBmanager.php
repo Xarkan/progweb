@@ -56,10 +56,9 @@ class FDBmanager {
             if($object instanceof EEvento) {
                 $found = $this->existevento($object);                
             } 
-            if($object instanceof EOrdine) {
-                $list_zone = $object->getLista_bigl();
-                $bigl_disp = $this->existbiglietto($list_zone[0]);
-                $found = $bigl_disp >= count($list_zone);
+            if($object instanceof EBiglietti_Zona) {
+                $bigl_disp = $this->existbiglietto($object);
+                $found = $bigl_disp > 0;
             }
             if($object instanceof EUtente_Reg) {
                 $found = $this->existutente($object);
@@ -106,7 +105,7 @@ class FDBmanager {
     }
     public function load($object) {
         
-            if($object instanceof Evento) {
+            if($object instanceof EEvento) {
                 $result = $this->loadzona($object);
             }    
             if($object instanceof EBiglietti_Zona) {
@@ -115,7 +114,7 @@ class FDBmanager {
             if($object instanceof EUtente_Reg) {
                 $result = $this->loadutente($object);
             }
-            if($object instanceof EBiglietto) {
+            if($object instanceof EOrdine) {
                 $result = $this->loadbiglietticomprati($object);
             }
         return $result;

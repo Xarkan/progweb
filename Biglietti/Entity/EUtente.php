@@ -34,7 +34,8 @@ abstract class EUtente {
             //contatta paypal
             try {
                 $dbm->getConnection()->beginTransaction();
-                $disp = $dbm->exist($ordine);
+                $list_zone = $ordine->getLista_bigl();
+                $disp = $dbm->exist($list_zone[0]);
                 if($disp) {
                 $ordine->setPagato(true);
                 }
@@ -50,7 +51,7 @@ abstract class EUtente {
     }
     public function mostraZona(EEvento $evento, FDBmanager $mng) {
         echo "mostraZona->";
-        $rows = $mng->getConnection()->load($evento);
+        $rows = $mng->load($evento);
         for($i = 0;$i < count($rows);$i++) {
             list($codev, $data, $zona, $prezzo) = $rows[$i];
             $zone = new EBiglietti_Zona($evento, $zona, $prezzo);

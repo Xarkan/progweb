@@ -82,6 +82,19 @@ class EOrdine {
     public function setPagato($pagato) {
         $this->pagato = $pagato;
     }
-
+    
+    public function CreaBiglietto(EOrdine $ord, FDBmanager $dbm){
+        
+        $rows = $dbm->load($ord);
+        for($i = 0;$i < count($rows);$i++) {
+            list($cod_evento, $data, $codice, $utente, $zona, $posto) = $rows[$i];
+            $lista_zone = $ord->getLista_bigl();
+            $evento = $lista_zone[$i]->getEvento();
+            $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
+            $array_bigl[$i] = $biglietto;
+        }
+        echo "creabiglietto->";
+        return $array_bigl;
+    } 
 
 }
