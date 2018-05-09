@@ -4,15 +4,34 @@
 class EUtente_Reg extends EUtente{
     
     //attributi
+    private $nome;
+    private $cognome;
     private $mail;
     private $password;
     
     //metodi
     public function __construct($nome, $cognome, $mail, $password) {
-        parent::__construct($nome, $cognome);
+        $this->nome = $nome;
+        $this->cognome = $cognome;
         $this->mail = $mail;
         $this->password = $password;
-        }
+    }
+        
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function getCognome() {
+        return $this->cognome;
+    }
+
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    public function setCognome($cognome) {
+        $this->cognome = $cognome;
+    }        
     
     public function getMail() {
         return $this->mail;
