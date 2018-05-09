@@ -1,0 +1,95 @@
+
+/*body {
+	background: url(Deep-Purple.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	
+  }*/
+
+  body::after {
+	content: "";
+	background: url(Deep.jpg) no-repeat center center fixed;
+	background-size: cover;
+	opacity: 0.7;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: -1;   
+  }
+
+.body-box {
+	margin-top: 2%;
+}
+
+
+.aside {
+	margin-left: 1%;
+	width: 30%;
+	margin-right: 3%;
+	float: left;
+}
+
+#side-img {
+	border-radius: 2%;
+}
+
+#nomeEvento {
+	margin-top: 2%;
+	border-radius: 2%;
+	padding: 10px;
+	/*background: transparent;*/
+	font-style: italic;
+	opacity: 0.8;
+}
+
+.zone-disp {
+	float: left;
+	width: 60%;
+	margin-left: 3%;
+
+}
+.zone-disp .alert-secondary {
+	width: 22%;
+	margin-top: 10px;
+	margin-right: 5%;
+	float: left;
+}
+
+.header-zone {
+	display: block;
+	box-sizing: border-box;
+	background-color: rgba(255, 255, 255, 0.849);
+	font-size: 20px;
+	border-radius: 3%;
+}
+.header-zone li {
+	display: inline;
+	margin-right: 18%;
+	padding-left: 3%;
+
+}
+#num-bigl {
+	float: right;
+	max-width: 25%;
+	margin-top: 2%;
+	margin-right: 15%;
+	margin-left: auto;
+}
+
+#header {
+	background-color: rgb(40, 29, 22);
+	color: rgb(240, 237, 237);
+	padding: 8px;
+	margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .aside, .zone-disp {
+		width: 97%;
+		float: none;
+    }
+}
