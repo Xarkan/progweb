@@ -2,30 +2,22 @@
 html,
 body {
   height: 100%;
+  background-color: rgba(254, 230, 171, 0.911);
 }
 
 
 #header {
-	background-color: #0033cc;
-	color: #FFFFFF;
-	width: 90%;
-	padding: 20px;
+	background-color: rgb(40, 29, 22);
+	color: rgb(240, 237, 237);
+	padding: 8px;
+	margin-bottom: 0px;
 }
 
-body {
-  display: -ms-flex-align;
-  display: flex;
-  flex-direction: column;
-  -ms-flex-align: start;
-  align-items: center;
-  padding-bottom: 40px;
-  background-color: #EFF5FB;
+#home-link {
+  color: rgb(240, 237, 237);
 }
-
-
-.navbar-brand {
-    color: white;
-    background-color: midnightblue;
+#home-link:hover {
+  text-decoration: none;
 }
 
 .form-signin {
@@ -33,6 +25,7 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+  margin-top: 5%;
 }
 
 /*login box*/
