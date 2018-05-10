@@ -99,18 +99,14 @@ main ul {
 
 #acquisto {
     height: 60px;
-    margin-left: 15%;
-    margin-top: 4%;
+    margin: 1%;
+    float: right;
+    margin-right: 10%;
 }
 
 @media only screen and (max-width: 768px) {
     .biglietti li {
         margin-left: 10%;
-    }
-}
-@media only screen and (max-width: 768px) {
-    #box-img {
-        display: none;
     }
 }
 
