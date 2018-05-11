@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="DataLuogoPrezzo.css">
+    <link rel="stylesheet" href="MostraCarrello.css">
     <title>Ticket Store</title>
   </head>
   
@@ -18,10 +18,11 @@
 
     <div class="jumbotron jumbotron-fluid" id="header">
         <div class="container">
-          <h1 class="display-4">TicketStore</h1>
+          <h1 class="display-4">TicketStore:Carrello</h1>
           <!--<p class="lead">By people, for people</p>-->
         </div>
       </div>
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,88 +56,99 @@
           </form>
         </div>
       </nav>
-      <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">DEEP PURPLE</h4>        
-      </div>
-
-      <img src="Deep.jpg" class="img-fluid" alt="Responsive image">
-
-      <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading" id="descrizione">DESCRIZIONE<pre><br>inserire tutta la descrizione relativa al concerto.
-I deep purple...</pre>
-        </p></h4>        
-      </div>
       
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">DATA</th>
-            <th scope="col">CITTA</th>
-            <th scope="col">STRUTTURA</th>
-            <th scope="col">PREZZO</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">18/02/2012</th>
-            <td>Milano</td>
-            <td>San Sisro</td>
-            <td>90€</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-            <th scope="row">18/03/20122</th>
-            <td>Roma</td>
-            <td>Olimpico</td>
-            <td>70€</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-            <th scope="row">18/06/2012</th>
-            <td>londra</td>
-            <td>struttura</td>
-            <td>100€</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-            <th scope="row">18/06/2012</th>
-            <td>londra</td>
-            <td>struttura</td>
-            <td>100€</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-            <th scope="row">18/06/2012</th>
-             <td>londra</td>
-             <td>struttura</td>
-             <td>100€</td>
-             <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-             <th scope="row">18/06/2012</th>
-             <td>londra</td>
-             <td>struttura</td>
-             <td>100€</td>
-             <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-             </tr>
-          <tr>
-             <th scope="row">18/06/2012</th>
-             <td>londra</td>
-             <td>struttura</td>
-             <td>100€</td>
-             <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-          <tr>
-            <th scope="row">18/06/2012</th>
-            <td>londra</td>
-            <td>struttura</td>
-            <td>100€</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <!--Table-->
+<table class="table table-bordered">
+
+  <!--Table head-->
+  <thead>
+      <tr class="first-row">
+          <th></th>
+          <th>Prodotto</th>
+          <th>Prezzo</th>
+          <th>Qtà</th>
+          <th>Totale</th>
+      </tr>
+  </thead>
+  <!--Table head-->
+
+  <!--Table body-->
+  <tbody>
+      <tr>
+          <th scope="row"></th>
+          <td><b>DEEP PURPLE</b><br>San Siro - Milano<br>22/09/2018 - 21:30</td>
+          <td>90€</td>
+          <td>2</td>
+          <td>180€</td>
+      </tr>
+      <tr>
+          <th scope="row">2</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@TwBootstrap</td>
+      </tr>
+      <tr>
+          <th scope="row">3</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+      </tr>
+      <tr>
+          <th scope="row">4</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+      </tr>
+  </tbody>
+  <!--Table body-->
+
+</table>
+<!--Table-->
+
+<!--Table-->
+<table class="table table-bordered" id="table2">
+
+  <!--Table head-->
+  <thead>
+      <tr class="first-row">
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+      </tr>
+  </thead>
+  <!--Table head-->
+
+  <!--Table body-->
+  <tbody>
+      <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+      </tr>
+      <tr>
+          <th scope="row">2</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@TwBootstrap</td>
+      </tr>
+      <tr>
+          <th scope="row">3</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+      </tr>
+      <tr>
+          <th scope="row">4</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+      </tr>
+  </tbody>
+  <!--Table body-->
+
+</table>
+<!--Table-->
       
 
     <!-- Optional JavaScript -->
