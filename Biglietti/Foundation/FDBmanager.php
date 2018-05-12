@@ -197,11 +197,15 @@ class FDBmanager {
     //-----------------------------update methods-------------------------------
 
     private function updateevento($object) {
-        $sql = "UPDATE evento SET ";
+        
     }
 
     private function updateutente($object) {
-
+        $sql = "UPDATE utente_r SET psw = "
+                .$this->connection->quote($object->getPassword())." WHERE mail = "
+                .$this->connection->quote($object->getMail());
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0;
     }
     private function updatebiglietto($codice, $utente){
         $sql = "UPDATE biglietti SET utente = "
@@ -226,7 +230,7 @@ class FDBmanager {
                 $nome = $utente->getNome();
                 $cognome = $utente->getCognome();
                 $full_name = $nome." ".$cognome;
-                for($i = 0; $i < count($list_zone); $i++) {
+                for($i = 0; $i < count($list_zone); $i++) { //da rivedere 
                     $updated = $this->updatebiglietto($list_bigl[$i], $full_name);
                 }
             }   
@@ -272,10 +276,10 @@ class FDBmanager {
     }
     
 
-    public function DataLuogoPrezzo(EEvento $evento){
+    public function loadDataLuogoPrezzo(EEvento $evento){
         $sql = "SELECT DISTINCT bz.data_evento,citta,struttura,via,MIN(bz.prezzo)"
               ." FROM evento as e, biglietti_zona as bz"
-              ." WHERE e.cod_evento = ".$evento->getCodev()
+              ." WHERE e.cod_evento = ". $this->connection->quote($evento->getCodev())
               ." AND e.cod_evento = bz.cod_evento GROUP BY bz.data_evento";
         $reuslt = $this->connection->query($sql);
         $rows = $reuslt->fetchAll();

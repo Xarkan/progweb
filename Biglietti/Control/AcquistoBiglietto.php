@@ -5,8 +5,8 @@ class AcquistoBiglietto {
     //attributi
     
     //metodi
-    public function DataLuogoPrezzo() {
-        
+    public function DataLuogoPrezzo() { 
+ 
     }
     
     public function mostraZona() {

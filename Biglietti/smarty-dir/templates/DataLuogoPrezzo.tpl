@@ -85,9 +85,9 @@ I deep purple...</pre>
           <tr>
             <th scope="row">{$rows[nr].data_evento}</th>
             <td>{$rows[nr].citta}</td>
-            <td>{$rows[nr].struttura</td>
-            <td>{$rows[nr].via</td>
-            <td>{$rows[nr].prezzo</td>
+            <td>{$rows[nr].struttura}</td>
+            <td>{$rows[nr].via}</td>
+            <td>{$rows[nr].prezzo}</td>
             <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
           </tr>
         {sectionelse} 
