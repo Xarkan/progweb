@@ -67,6 +67,12 @@ class FDBmanager {
     }
 
     //---------------------------load methods----------------------------------
+    private function loadeventi() {
+        $sql = "SELECT * FROM evento LIMIT 6";
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll();
+        return $rows;
+    }
 
     private function loadzona(EEvento $object) {
         $sql = "SELECT * FROM biglietti_zona WHERE cod_evento = ".$this->connection->quote($object->getCodev())
@@ -116,6 +122,9 @@ class FDBmanager {
             }
             if($object instanceof EOrdine) {
                 $result = $this->loadbiglietticomprati($object);
+            }
+            if($object == "events") {
+                $result = $this->loadeventi();
             }
         return $result;
     }
