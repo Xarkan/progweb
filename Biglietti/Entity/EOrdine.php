@@ -83,12 +83,12 @@ class EOrdine {
         $this->pagato = $pagato;
     }
     
-    public function CreaBiglietto(EOrdine $ord, FDBmanager $dbm){
-        
-        $rows = $dbm->load($ord);
+    public function CreaBiglietto(){
+        $dbm = new FDBmanager();
+        $rows = $dbm->load($this);
         for($i = 0;$i < count($rows);$i++) {
             list($cod_evento, $data, $codice, $utente, $zona, $posto) = $rows[$i];
-            $lista_zone = $ord->getLista_bigl();
+            $lista_zone = $this->getLista_bigl();
             $evento = $lista_zone[$i]->getEvento();
             $biglietto = new EBiglietto($codice, $evento, $utente, $zona, $posto);
             $array_bigl[$i] = $biglietto;

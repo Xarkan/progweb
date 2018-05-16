@@ -62,12 +62,18 @@ abstract class EEvento {
     public function setDescrizione($param) {
         $this->descrizione = $param;
     }
-    public function generacodev(FDBmanager $connection){//DA RIVEDEREgit 
+    
+    public function mostraZona() {
+        echo "mostraZona->";
+        $mng = new FDBmanager();
+        $rows = $mng->load($this);          
+        for($i = 0;$i < count($rows);$i++) {
+            list($codev, $data, $zona, $prezzo) = $rows[$i];
+            $zone = new EBiglietti_Zona($evento, $zona, $prezzo);
+            $array_zone[$i] = $zone;
+        }
+        return $array_zone;
         
-        $pdo = $connection->getConnection();
-        $sql = "SELECT MAX(cod_evento) FROM evento";
-        $result = $pdo->query($sql);
-        return $result+1;
-    }
+    }    
 }
 

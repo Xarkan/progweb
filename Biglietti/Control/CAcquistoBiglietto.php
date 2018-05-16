@@ -16,15 +16,27 @@ class CAcquistoBiglietto {
         
     }
     
-    public function mostraZona() {
-        
+    public function mostraZona(EEvento $evento) {
+        $lista_zone = $evento->mostraZona();
+        $zona = new VZona();
+        $zona->setDataIntoTemplate('results',$lista_zone);
+        $zona->setTemplate('zoneEvento.tpl');
     }
     
-    public function aggiungiAlCarrello() {
-        
+    public function aggiungiAlCarrello(EBiglietti_Zona $zona_selezionata) {
+        $ordine = new EOrdine();
+        $ordine->addBigl($zona_selezionata);
+
+    }
+
+    public function rimuoviDalCarrello() {
+
     }
     
     public function confermaPagamento() {
         
     }
 }
+
+
+
