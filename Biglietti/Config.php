@@ -8,10 +8,10 @@ $config['mysql']['database'] = "DB_biglietti";
 
 //configurazione smarty
 $config['smarty']['template_dir'] =
-'/Biglietti/smarty-dir/templates/';
+'./smarty-dir/templates/';
 $config['smarty']['compile_dir'] =
-'/Biglietti/smarty-dir/templates_c/';
+'./smarty-dir/templates_c/';
 $config['smarty']['config_dir'] =
-'/Biglietti/smarty-dir/configs/';
+'./smarty-dir/configs/';
 $config['smarty']['cache_dir'] =
-'/Biglietti/smarty-dir/cache/';
+'./smarty-dir/cache/';

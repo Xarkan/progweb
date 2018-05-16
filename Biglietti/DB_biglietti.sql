@@ -76,7 +76,6 @@ CREATE TABLE dettaglio_evento (
 --insert evento
 INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
 INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
-
 INSERT INTO evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
 INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
