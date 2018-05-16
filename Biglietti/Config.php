@@ -1,6 +1,5 @@
 <?php
 
-global $config;
 
 $config['mysql']['host'] = "localhost";
 $config['mysql']['user'] = "root";

@@ -6,11 +6,12 @@ class View extends Smarty {
     
     public function __construct() {
         parent::__construct();
-        global $config;
+        include 'Config.php';
         $this->setTemplateDir($config['smarty']['template_dir']);
         $this->setCompileDir($config['smarty']['compile_dir']);
         $this->setCacheDir($config['smarty']['cache_dir']);
         $this->setConfigDir($config['smarty']['config_dir']);
+        var_dump($config);
     }
     
     public function setTemplate( $template ) {
