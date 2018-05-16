@@ -12,7 +12,6 @@ class CAcquistoBiglietto {
         $DataLuogoPrezzo = new VDataLuogoPrezzo();
         $DataLuogoPrezzo->setDataIntoTemplate('rows', $results);
         $DataLuogoPrezzo->setTemplate('DataLuogoPrezzo.tpl');
-        //$fdbm->getConnection()->close();
         
     }
     

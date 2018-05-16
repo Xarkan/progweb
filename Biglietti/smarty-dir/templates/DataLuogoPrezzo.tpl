@@ -8,7 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/DataLuogoPrezzo.css">
+    
+    <link href="smarty-dir/templates/css/DataLuogoPrezzo.css" rel="stylesheet" type="text/css"/>
     <title>Ticket Store</title>
   </head>
   
@@ -56,15 +57,17 @@
         </div>
       </nav>
       <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">DEEP PURPLE</h4>        
+        <h4 class="alert-heading">{$rows[0].nome}</h4> 
       </div>
 
-      <img src="img/Deep.jpg" class="img-fluid" alt="Responsive image">
+      <img src="" class="img-fluid" alt="Responsive image">
 
       <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading" id="descrizione">DESCRIZIONE<pre><br>inserire tutta la descrizione relativa al concerto.
-I deep purple...</pre>
-        </p></h4>        
+        <h4 class="alert-heading">DESCRIZIONE</h4>
+        
+        <p id="descrizione">
+            {$rows[0].descrizione}
+        </p>        
       </div>
       
      
