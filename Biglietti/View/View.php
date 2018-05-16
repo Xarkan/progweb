@@ -11,7 +11,7 @@ class View extends Smarty {
         $this->setCompileDir($config['smarty']['compile_dir']);
         $this->setCacheDir($config['smarty']['cache_dir']);
         $this->setConfigDir($config['smarty']['config_dir']);
-        var_dump($config);
+        
     }
     
     public function setTemplate( $template ) {

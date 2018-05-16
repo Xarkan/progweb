@@ -15,6 +15,18 @@ CREATE TABLE evento (
   
 );
 
+CREATE TABLE immagini (
+    id          int(11)         NOT NULL    auto_increment,
+    cod_evento  varchar(10)     NOT NULL,
+    data_evento varchar(40)     NOT NULL,
+    nome        varchar(50)     NOT NULL    default "",
+    size        varchar(25)     NOT NULL    default "",
+    type        varchar(25)     NOT NULL    default "",
+    immagine    blob            NOT NULL,
+    PRIMARY KEY (id,cod_evento,data_evento)    
+    FOREIGN KEY(cod_evento,data_evento) REFERENCES evento(cod_evento,data_evento)
+);
+
 CREATE TABLE utente_r (
   mail          varchar(20)     NOT NULL,
   psw           varchar(16)     NOT NULL,
@@ -74,7 +86,7 @@ CREATE TABLE dettaglio_evento (
 );
 
 --insert evento
-INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
+INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "Nel corrente utilizzo giornalistico e popolare, si definisce derby una partita di calcio giocata tra due squadre della stessa città. Per estensione, il termine derby può poi venire utilizzato per riferirsi ad un incontro molto sentito fra squadre con accese rivalità agonistiche o che appartengono a una comune entità geografica.Di seguito un elenco di derby disputati nelle massime divisioni dei principali campionati mondiali. ");
 INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
 INSERT INTO evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
 INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
