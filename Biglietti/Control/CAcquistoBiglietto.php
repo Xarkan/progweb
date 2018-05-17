@@ -16,20 +16,24 @@ class CAcquistoBiglietto {
     }
     
     public function mostraZona(EEvento $evento) {
-        $lista_zone = $evento->mostraZona();//abbiamo un array di oggetti e questo da fastidio a smarty
+        $lista_zone = $evento->mostraZona();
         for($i = 0;$i<count($lista_zone);$i++){
             $array[$i]['zona'] = $lista_zone[$i]->getZona();
             $array[$i]['prezzo'] = $lista_zone[$i]->getPrezzo();
         }
-        var_dump($array);
         $zona = new VZona();
         $zona->setDataIntoTemplate('results',$array);
         $zona->setTemplate('zoneEvento.tpl');
     }
     
-    public function aggiungiAlCarrello(EBiglietti_Zona $zona_selezionata) {
+    public function aggiungiAlCarrello(EBiglietti_Zona $zona_selezionata, $num_biglietti) {
         $ordine = new EOrdine();
-        $ordine->addBigl($zona_selezionata);
+        $ordine->addZone($zona_selezionata, $num_biglietti);
+        for($i = 0;$i<$num_biglietti;$i++){
+            $array[$i]['zona'] = $zona_selezionata->getZona();
+            $array[$i]['prezzo'] = $zona_selezionata->getPrezzo();
+            //...
+        }
 
     }
 
