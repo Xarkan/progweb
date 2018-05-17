@@ -11,9 +11,10 @@
             include 'Config.php';
             //$chome = new CHome();
             //$chome->impostaHome();
-            $evento = new EPartita("0", "Derby", "Milano", "San Siro", "Giuseppe Meazza", "27/03/1994", "forz inter", "Inter", "Milan");
+            $evento = new EPartita("0", "Derby", "Milano", "San Siro", "Giuseppe Meazza", "19/4/2018-22:53", "forz inter", "Inter", "Milan");
             $cacquisto = new CAcquistoBiglietto();
             $cacquisto->DataLuogoPrezzo($evento);
+            //$cacquisto->mostraZona($evento);
             
             
 	?>

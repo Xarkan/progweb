@@ -16,9 +16,14 @@ class CAcquistoBiglietto {
     }
     
     public function mostraZona(EEvento $evento) {
-        $lista_zone = $evento->mostraZona();
+        $lista_zone = $evento->mostraZona();//abbiamo un array di oggetti e questo da fastidio a smarty
+        for($i = 0;$i<count($lista_zone);$i++){
+            $array[$i]['zona'] = $lista_zone[$i]->getZona();
+            $array[$i]['prezzo'] = $lista_zone[$i]->getPrezzo();
+        }
+        var_dump($array);
         $zona = new VZona();
-        $zona->setDataIntoTemplate('results',$lista_zone);
+        $zona->setDataIntoTemplate('results',$array);
         $zona->setTemplate('zoneEvento.tpl');
     }
     

@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     
-    <link href="smarty-dir/templates/css/DataLuogoPrezzo.css" rel="stylesheet" type="text/css"/>
+    <link href="smarty-dir/templates/css/DataLuogoPrezzo.css" rel="stylesheet" type="text/css">
     <title>Ticket Store</title>
   </head>
   
@@ -91,7 +91,7 @@
             <td>{$rows[nr].struttura}</td>
             <td>{$rows[nr].via}</td>
             <td>{$rows[nr].prezzo}</td>
-            <td><button type="button" class="btn btn-warning">Procedi all'acquisto</button></td>
+            <td><button type="button" class="btn btn-warning" onclick="href = 'CAcquistoBiglietto.php?task=mostraZona'">Procedi all'acquisto</button></td>
           </tr>
         {sectionelse} 
           <tr>

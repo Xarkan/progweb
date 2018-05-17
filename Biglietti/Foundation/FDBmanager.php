@@ -79,6 +79,7 @@ class FDBmanager {
               ." AND data_evento = ".$this->connection->quote($object->getData());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
+        
         return $rows;
     }
     private function loadbigliettidisp(EBiglietti_Zona $object) {

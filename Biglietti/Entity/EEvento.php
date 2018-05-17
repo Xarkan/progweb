@@ -64,14 +64,14 @@ abstract class EEvento {
     }
     
     public function mostraZona() {
-        echo "mostraZona->";
         $mng = new FDBmanager();
-        $rows = $mng->load($this);          
+        $rows = $mng->load($this);
         for($i = 0;$i < count($rows);$i++) {
             list($codev, $data, $zona, $prezzo) = $rows[$i];
-            $zone = new EBiglietti_Zona($evento, $zona, $prezzo);
+            $zone = new EBiglietti_Zona($this, $zona, $prezzo);
             $array_zone[$i] = $zone;
         }
+        
         return $array_zone;
         
     }    
