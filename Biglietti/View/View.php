@@ -20,5 +20,19 @@ class View extends Smarty {
 
     public function setDataIntoTemplate( $reference, $data  ) {
         $this->assign( $reference, $data );
-    }  
+    }
+
+    public function getController()
+    {
+        if ( isset($_REQUEST['controller']))
+            return $_REQUEST['controller'];
+        else return false;
+    }
+    
+    public function getTask(){
+        if (isset($_REQUEST["task"]))
+            return $_REQUEST["task"];
+        else return false;        
+    }
+      
 }
