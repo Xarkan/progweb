@@ -19,7 +19,7 @@ class CHome {
         }
         $num_eventi = count($array_eventi);
         for ($i = 0; $i < $num_eventi; $i++) {
-            $session->imposta_valore($array_eventi[$i]->getCodev(),$array_eventi[$i]);
+            $session->imposta_valore("evento".$array_eventi[$i]->getCodev(),$array_eventi[$i]);
         }
         
         $home = new VHome();

@@ -120,7 +120,7 @@
     <div class="row">
     <div class="col">  
   <div class="card" style="width: 18rem;">
-        <a href="Index.php?controller=CAcquistoBiglietto&task=DataLuogoPrezzo&id={$results[nr].cod_evento}">
+        <a href="Index.php?controller=CAcquistoBiglietto&task=DataLuogoPrezzo&id=evento{$results[nr].cod_evento}">
         <img class="card-img-top" src="{$results[nr].foto}" alt="Card image cap">
           </a>
           <div class="card-body">

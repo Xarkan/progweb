@@ -7,9 +7,8 @@ class CAcquistoBiglietto {
     //metodi
     public function DataLuogoPrezzo($id) { 
         //apro la connessione con il db
-        session_start();
-        var_dump($_SESSION);
-        //$evento = $_SESSION[$id];
+        USingleton::getInstance('USession');
+        $evento = $_SESSION[$id];
         $fdbm = new FDBmanager();
         $results = $fdbm->loadDataLuogoPrezzo($evento);
         $DataLuogoPrezzo = new VDataLuogoPrezzo();
