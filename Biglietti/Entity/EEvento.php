@@ -10,17 +10,16 @@ abstract class EEvento {
     private $struttura;
     private $via;
     private $data;  //DateTime
-    private $descrizione; 
+    private $descrizione = ""; 
     
     //metodi
-    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione) {
+    function __construct($cod, $data, $nome, $citta, $struttura, $via) {
         $this->codev = $cod;
         $this->data = $data;
         $this->nome = $nome;
         $this->citta = $citta;
         $this->struttura = $struttura;
         $this->via = $via;
-        $this->descrizione = $descrizione;
     }
     
     public function getCodev() {

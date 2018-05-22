@@ -4,14 +4,13 @@
 class EPartita extends EEvento{
     
     //attributi
-    private $casa;
-    private $ospite;
+    private $casa = "";
+    private $ospite = "";
     
     //metodi
-    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione, $casa, $ospite) {
-        parent::__construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione);
-        $this->casa = $casa;
-        $this->ospite = $ospite;
+    function __construct($cod, $data, $nome, $citta, $struttura, $via) {
+        parent::__construct($cod, $data, $nome, $citta, $struttura, $via);
+
         }
 
     public function getCasa() {

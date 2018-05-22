@@ -4,11 +4,11 @@
 class EConcerto extends EEvento{
     
     //attributi
-    private $artista;
+    private $artista ="";
     
     //metodi
-    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione, $artista) {
-        parent::__construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione);
+    function __construct($cod, $data, $nome, $citta, $struttura, $via) {
+        parent::__construct($cod, $data, $nome, $citta, $struttura, $via);
         $this->artista = $artista;
     }
 

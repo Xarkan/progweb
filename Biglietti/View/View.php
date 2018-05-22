@@ -30,9 +30,18 @@ class View extends Smarty {
     }
     
     public function getTask(){
-        if (isset($_REQUEST["task"]))
+        if (isset($_REQUEST["task"])) {
             return $_REQUEST["task"];
+        }    
         else return false;        
+    }
+    
+    public function getElement() {
+        if (isset($_REQUEST["id"])) {
+            return $_REQUEST["id"];
+        }    
+        else return false; 
+        
     }
       
 }
