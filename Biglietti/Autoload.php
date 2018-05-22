@@ -14,6 +14,9 @@ function my_autoloader($className) {
         case 'C':
             require_once (__DIR__ . '/Control/'.$className.'.php');
             break;
+        case 'U':
+            require_once (__DIR__ . '/Utility/'.$className.'.php');
+            break;
     }
 
 }

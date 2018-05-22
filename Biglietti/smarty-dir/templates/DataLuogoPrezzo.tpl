@@ -91,7 +91,7 @@
             <td>{$rows[nr].struttura}</td>
             <td>{$rows[nr].via}</td>
             <td>{$rows[nr].prezzo}</td>
-            <td><button type="button" class="btn btn-warning" onclick="href = 'CAcquistoBiglietto.php?task=mostraZona'">Procedi all'acquisto</button></td>
+            <td><a type="button" class="btn btn-warning" href="CAcquistoBiglietto.php?task=mostraZona">Procedi all'acquisto</a></td>
           </tr>
         {sectionelse} 
           <tr>

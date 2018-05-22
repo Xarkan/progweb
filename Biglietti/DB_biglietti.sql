@@ -15,7 +15,7 @@ CREATE TABLE evento (
   
 );
 
-CREATE TABLE immagini (
+/*CREATE TABLE immagini (
     id          int(11)         NOT NULL    auto_increment,
     cod_evento  varchar(10)     NOT NULL,
     data_evento varchar(40)     NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE immagini (
     immagine    blob            NOT NULL,
     PRIMARY KEY (id,cod_evento,data_evento)    
     FOREIGN KEY(cod_evento,data_evento) REFERENCES evento(cod_evento,data_evento)
-);
+);*/
 
 CREATE TABLE utente_r (
   mail          varchar(20)     NOT NULL,

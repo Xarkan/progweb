@@ -71,7 +71,7 @@ abstract class EEvento {
             $zone = new EBiglietti_Zona($this, $zona, $prezzo);
             $array_zone[$i] = $zone;
         }
-        
+        echo'mostrazona->';
         return $array_zone;
         
     }    
