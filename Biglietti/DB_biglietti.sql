@@ -86,7 +86,7 @@ CREATE TABLE dettaglio_evento (
 );
 
 --insert evento
-INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "Nel corrente utilizzo giornalistico e popolare, si definisce derby una partita di calcio giocata tra due squadre della stessa città. Per estensione, il termine derby può poi venire utilizzato per riferirsi ad un incontro molto sentito fra squadre con accese rivalità agonistiche o che appartengono a una comune entità geografica.Di seguito un elenco di derby disputati nelle massime divisioni dei principali campionati mondiali. ");
+INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "abc");
 INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
 INSERT INTO evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
 INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
@@ -112,5 +112,10 @@ INSERT INTO biglietti VALUES("0","30/4/2018-22:53", "A1", NULL, "tribuna", 24);
 INSERT INTO biglietti VALUES("0","30/4/2018-22:53", "A2", NULL, "tribuna", 15);
 INSERT INTO biglietti VALUES("2","8/7/2018-23:00", "C0", "federico raparelli", "prato", 43);
 INSERT INTO biglietti VALUES("2","8/7/2018-23:00", "C1", NULL, "prato", 52);
+
+INSERT INTO dettaglio_evento VALUES("0","19/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
+INSERT INTO dettaglio_evento VALUES("0","30/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
+--INSERT INTO dettagli_evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
+--INSERT INTO dettagli_evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
  
