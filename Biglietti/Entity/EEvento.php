@@ -6,17 +6,15 @@ abstract class EEvento {
     //attributi
     private $codev;
     private $nome;
-    private $data;
-    private $citta;
-    private $struttura;
-    private $via;
+    private $tipo; 
     
     //metodi
-    function __construct($codev, $nome, $data) {
-        $this->codev = $codev;
+    function __construct($cod, $nome, $tipo) {
+        $this->codev = $cod;
         $this->nome = $nome;
-        $this->data = $data;
+        $this->tipo = $tipo;
     }
+    
     function getCodev() {
         return $this->codev;
     }
@@ -25,20 +23,8 @@ abstract class EEvento {
         return $this->nome;
     }
 
-    function getData() {
-        return $this->data;
-    }
-
-    function getCitta() {
-        return $this->citta;
-    }
-
-    function getStruttura() {
-        return $this->struttura;
-    }
-
-    function getVia() {
-        return $this->via;
+    function getTipo() {
+        return $this->tipo;
     }
 
     function setCodev($codev) {
@@ -49,24 +35,11 @@ abstract class EEvento {
         $this->nome = $nome;
     }
 
-    function setData($data) {
-        $this->data = $data;
+    function setTipo($tipo) {
+        $this->tipo = $tipo;
     }
 
-    function setCitta($citta) {
-        $this->citta = $citta;
-    }
-
-    function setStruttura($struttura) {
-        $this->struttura = $struttura;
-    }
-
-    function setVia($via) {
-        $this->via = $via;
-    }
-
-    
-            
+        
     public function mostraZona() {
         $mng = new FDBmanager();
         $rows = $mng->load($this);
