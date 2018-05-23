@@ -12,9 +12,9 @@ class CHome {
         $results = $fdbm->load("events");
         $num_rows = count($results);
         for($i = 0; $i < $num_rows; $i++) {
-        	list($cod_evento, $data, $nome, $citta, $struttura, $via, $descrizione, $tipo) = $results[$i];
+        	list($cod_evento, $nome, $tipo) = $results[$i];
         	$classe = "E$tipo";
-        	$evento = new $classe($cod_evento, $data, $nome, $citta, $struttura, $via);
+        	$evento = new $classe($cod_evento, $nome, $tipo);
         	$array_eventi[$i] = $evento;
         }
         $num_eventi = count($array_eventi);

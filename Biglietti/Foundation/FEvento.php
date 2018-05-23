@@ -10,7 +10,7 @@ class FEvento extends FDBmanager {
 
     
     public function existevento(EEvento $object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev())
+        $sql = "SELECT * FROM dettaglio_evento WHERE cod_evento = ".$this->connection->quote($object->getCodev())
                 ." AND data_evento = ".$this->connection->quote($object->getData());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
@@ -18,9 +18,7 @@ class FEvento extends FDBmanager {
     }
     
     public function loadeventi() {
-        $sql = "SELECT evento.*, tipo FROM evento, dettaglio_evento "
-                . "WHERE evento.cod_evento=dettaglio_evento.cod_evento "
-                . "AND evento.data_evento<>dettaglio_evento.data_evento LIMIT 6";
+        $sql = "SELECT  evento.* FROM evento LIMIT 6";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return $rows;      
@@ -40,11 +38,11 @@ class FEvento extends FDBmanager {
         $sql = "INSERT INTO evento "
              . "VALUES ( ".$this->connection->quote($object->getCodev()).","
              .$this->connection->quote($object->getNome()).","
-             .$this->connection->quote($object->getCitta()).","
-             .$this->connection->quote($object->getStruttura()).","
+             .$this->connection->quote($object->getTipo()).")";
+             /*.$this->connection->quote($object->getStruttura()).","
              .$this->connection->quote($object->getVia()).","
              .$this->connection->quote($object->getData()).","
-             .$this->connection->quote($object->getDescrizione()).")";
+             .$this->connection->quote($object->getDescrizione()).")"*/
 
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
@@ -56,8 +54,8 @@ class FEvento extends FDBmanager {
     
     private function deleteevento(EEvento $object) {
         $sql = "DELETE FROM evento WHERE cod_evento = "
-                .$this->connection->quote($object->getCodev())
-                ." AND data_evento = ".$this->connection->quote($object->getData());
+                .$this->connection->quote($object->getCodev());
+                //." AND data_evento = ".$this->connection->quote($object->getData());
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
