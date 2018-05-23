@@ -1,16 +1,18 @@
 <!DOCKTYPE html>
 <html lang = "en">
 <head>
-	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ticket</title>
 	<link rel="stylesheet" type="text/css" href="zone.css">
 </head>
 <body>
+	
 	<header class="banner"> <!-- qui va il nome  -->
 		<h1>TicketStore</h1>
 	</header>
 
-	<nav> <!-- qui vanno i link  -->
+	<nav class="main_links"> <!-- qui vanno i link  -->
 		<ul>
 			<li><a href="index.html">home</a></li>
 			<li><a href="profile.html">profilo</a></li>
@@ -18,7 +20,14 @@
 		</ul>	
 	</nav>
 
-	<main> <!-- qui vanno le zone  -->
+	<aside class="evento"> <!-- qui va la roba di lato  -->
+		<section>
+			<h2>Nome Evento</h2>
+			<p>foto, descrizione ecc blabla bla blablabla bla blabla b bla</p>
+		</section>
+	</aside>
+
+	<main class="zone"> <!-- qui vanno le zone  -->
 		<h2>Dettagli zone</h2>
 		<article>
 			<header>
@@ -49,14 +58,7 @@
 		</article>
 	</main>
 
-	<aside> <!-- qui va la roba di lato  -->
-		<section>
-			<h2>Nome Evento</h2>
-			<p>foto, descrizione ecc</p>
-		</section>
-	</aside>
-
-	<footer> <!-- qui vanno i contatti ecc  -->
+	<footer class="footer_links"> <!-- qui vanno i contatti ecc  -->
 		<ul>
 			<li><a href="contatti.html">contatti</a></li>
 			<li><a href="link_utili.html">link utili</a></li>

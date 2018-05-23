@@ -9,14 +9,19 @@ html, body, h1, h2, h3, ul, li, a, p, section, article, aside, footer, header, m
 	margin: 0;
 }
 
+
 .banner {
 	background-color: #08298A;
 	color: white;
 	padding: 10px 20px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
-	width: 1080px;
+	width: 85%;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #EFF5FB;
@@ -25,7 +30,7 @@ body {
 	margin-bottom: 10px;
 }
 
-nav {
+.main_links {
 	background-color: #A9BCF5;
 	padding: 5px;
 	margin-top: 1px;
@@ -35,7 +40,7 @@ li a {
 	color: white;
 }
 
-nav li {
+.main_links li {
 	display: inline;
 	margin-left: 10px;
 	margin-right: 20px;
@@ -44,17 +49,28 @@ nav li {
 	font-weight: bold;
 }
 
-main {
+a:hover {
+	color: black;
+}
+
+.evento {
+	background-color: #F7F8E0;
+	margin-top: 10px;
+	padding: 5px;
+	float: left;
+	border-style: groove;	
+}
+
+.zone {
 	background-color: #E6E6E6;
 	margin-top: 10px;
 	margin-left: auto;
 	padding: 5px;
-	width: 800px;
 	float: right;
-	margin-bottom: 200px;
+	margin-bottom: 5%;
 }
 
-main h2 {
+.zone h2 {
 	padding: 8px;
 }
 
@@ -64,23 +80,14 @@ article {
 	margin-top: 5px;
 }
 
-aside {
-	background-color: #F7F8E0;
-	width: 250px;
-	height: 400px;
-	margin-top: 10px;
-	padding: 5px;
-	float: left;
-	border-style: groove;	
-}
 
-footer {
+.footer_links {
 	clear: both;
 	background-color: #A9BCF5;
 	padding: 5px 20px;	
 }
 
-footer li {
+.footer_links li {
 	display: inline;
 	margin-left: 10px;
 	margin-right: 20px;
@@ -93,4 +100,16 @@ section p{
 	margin-top: 5px;
 	margin-left: 2px;
 	margin-right: 2px;
+}
+
+/* For desktop: */
+.zone { width: 75%; }
+.evento { width: 24%; }
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .evento, .zone, .main_link {
+        width: 100%;
+    }
 }

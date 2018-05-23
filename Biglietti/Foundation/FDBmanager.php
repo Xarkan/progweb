@@ -1,12 +1,11 @@
 <?php
 
 class FDBmanager {
-    
+
     //attributi
-    private $connection;
-    private $connected;
-    private $table;
-    
+    protected $connection;
+    protected $connected;
+
     //metodi
     public function __construct() {
         $dsn = 'mysql:dbname=DB_biglietti;host=localhost';
@@ -15,194 +14,168 @@ class FDBmanager {
 
     try {
         $this->connection = new PDO($dsn, $user, $password);
-        $this->connected = true;        
+        $this->connected = true;
     }
     catch (PDOException $e) {
         $this->connected = false;
         echo 'Connection failed: ' . $e->getMessage();
     }
 }
-    public function db_table($object) {
-        $class = get_class($object);
-        $tab = substr_replace($class, "", 0, 1);
-        return $tab;
+
+    public function getConnection() {
+        return $this->connection;
     }
-    
+
     //-------------------------exist methods------------------------------------
+
     
-    private function existevento($object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return count($rows) > 0;
-    }
-    private function existbiglietto($object) {
-        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
-               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
-               ." AND ".$this->connection->quote($object->getZona());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return count($rows) > 0;
-    }
-    private function existutente($object) {
-        $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return count($rows) > 0;
-        
-    }
-    public function exist($object) {    
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $found = $this->existevento($object);
-                break;
-            case "Biglietto":
-                $found = $this->existbiglietto($object);
-                break;
-            case "Utente_Reg":
-                $found = $this->existutente($object);
-                break;                            
-        }
+    
+    
+    public function exist($object) {
+
+            if($object instanceof EEvento) {
+                $evento = new FEvento();
+                $found = $evento->existevento($object);                
+            } 
+            if($object instanceof EBiglietti_Zona) {
+                $bigl_zona = new FBiglietto_Zona();
+                $bigl_disp = $bigl_zona->existbiglietto($object);
+                $found = $bigl_disp > 0;
+            }
+            if($object instanceof EUtente_Reg) {
+                $utente = new FUtente_Reg();
+                $found = $utente->existutente($object);
+            }
         return $found;
     }
-    
+
     //---------------------------load methods----------------------------------
     
-    private function loadevento($object) {
-        $sql = "SELECT * FROM evento WHERE cod_evento = ".$this->connection->quote($object->getCodev());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return $rows;
-    }
-    private function loadbiglietto($object) {
-        $sql = "SELECT codice FROM biglietti WHERE utente = NULL "
-               . "AND cod_evento = ".$this->connection->quote($object->getEvento())
-               ." AND ".$this->connection->quote($object->getZona());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return $rows;
-    }
-    private function loadutente($object) {
-        $sql = "SELECT mail FROM utente_r mail = ".$this->connection->quote($object->getMail());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-        return $rows;
-    }
+
+    
+    
+    
+
+   
     public function load($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $result = $this->loadevento($object);
-                break;
-            case "Biglietto":
-                $result = $this->loadbiglietto($object);
-                break;
-            case "Utente_Reg":
-                $result = $this->loadutente($object);
-                break;                            
-        }
+        
+            if($object instanceof EEvento) {
+                $evento = new FEvento();
+                $result = $evento->loadzona($object);
+            }    
+            if($object instanceof EBiglietti_Zona) {
+                $bigl_zona = new FBiglietto_Zona();
+                $result = $bigl_zona->loadbigliettidisp($object);
+            }
+            if($object instanceof EUtente_Reg) {
+                $utente = new FUtente_Reg();
+                $result = $utente->loadutente($object);
+            }
+            if($object instanceof EOrdine) {
+                $biglietti = new FBiglietto();
+                $result = $biglietti->loadbiglietticomprati($object);
+            }
+            if($object == "events") {
+                $evento = new FEvento();
+                $result = $evento->loadeventi();
+            }
         return $result;
     }
-    
+
     //----------------------------store methods---------------------------------
+
     
-    private function storeevento($object) {
-        
-        $sql = "INSERT INTO evento "
-             . "VALUES ( ".$this->connection->quote($object->getCodev()).","
-             .$this->connection->quote($object->getNome()).","
-             .$this->connection->quote($object->getCitta()).","
-             .$this->connection->quote($object->getStruttura()).","
-             .$this->connection->quote($object->getVia()).","
-             .$this->connection->quote($object->getData()).","
-             .$this->connection->quote($object->getDescrizione()).")";        
-        /*try
-        {
-            $this->connection->exec($sql);
-            echo "New record created successfully";
-        }
-        catch(PDOException $e)
-        {
-            echo $sql . "<br>" . $e->getMessage();
-        }*/
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
-    }
+
     
-    private function storeutente($object) {
-        $sql = "INSERT INTO utente_r VALUES ("
-                .$this->connection->quote($object->getMail()).","
-                .$this->connection->quote($object->getPassword()).","
-                .$this->connection->quote($object->getNome()).","
-                .$this->connection->quote($object->getCognome()).")";
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
-    }
+    
+    
 
     public function store($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $stored = $this->storeevento($object);
-                break;
-            case "Utente_Reg":
-                $stored = $this->storeutente($object);
-                break;
-        }
+
+            if($object instanceof EEvento) {
+                $evento = new FEvento();
+                $stored = $evento->storeevento($object);
+            }
+            if($object instanceof EUtente_Reg) {
+                $utente = new FUtente_Reg();
+                $stored = $utente->storeutente($object);
+            }
+            if($object instanceof EOrdine) {
+                $ordine = new FOrdine();
+                $stored = $ordine->storeordine($object);
+                $ordine->storeordine_bigl($object);
+            }
         return $stored;
     }
-    
+
     //-----------------------------update methods-------------------------------
+
     
-    private function updateevento($object) {
-        $sql = "UPDATE evento SET ";
-    }
+
     
-    private function updateutente($object) {
-        
-    }
-    
+   
     public function update($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $updated = $this->updateevento($object);
-                break;
-            case "Utente_Reg":
-                $updated = $this->updateutente($object);
-                break;
-        }
+
+            if($object instanceof EEvento) {
+                $evento = new FEvento();
+                $updated = $evento->updateevento($object);
+            }
+            if($object instanceof EUtente_Reg) {
+                $utente = new FUtente_Reg();
+                $updated = $utente->updateutente($object);
+            }
+            if($object instanceof EOrdine) {
+                $biglietto = new FBiglietto();
+                $ordine = new FOrdine();
+                $list_zone = $object->getLista_bigl();
+                $list_bigl = $ordine->load($list_zone[0]);
+                $utente = $object->getUtente();
+                $nome = $utente->getNome();
+                $cognome = $utente->getCognome();
+                $full_name = $nome." ".$cognome;
+                for($i = 0; $i < count($list_zone); $i++) { //da rivedere 
+                    $updated = $biglietto->updatebiglietto($list_bigl[$i], $full_name);
+                }
+            }   
         return $updated;
     }
-    
+
     //------------------------------delete methods-----------------------------
+
     
-    private function deleteutente($object) {
-        $sql = "DELETE FROM utente_r WHERE mail = "
-                .$this->connection->quote($object->getMail());
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
-    }
-    
-    private function deleteevento($object) {
-        $sql = "DELETE FROM evento WHERE cod_evento = "
-                .$this->connection->quote($object->getCodev());
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
-    }
+
     
     public function delete($object) {
-        $this->table = $this->db_table($object);
-        switch ($this->table) {
-            case "Evento" || "Partita" || "Spettacolo" || "Concerto":
-                $deleted = $this->deleteevento($object);
-                break;
-            case "Utente_Reg":
+
+            if($object instanceof EEvento) {
+                $evento = new FEvento();
+                $deleted = $evento->deleteevento($object);
+            }
+            if($object instanceof Utente_Reg) {
                 $deleted = $this->deleteutente($object);
-                break;
-        }
+            }
         return $deleted;
     }
-}
 
+    public function confermaordine(EOrdine $ordine) {
+        if($ordine->getPagato()) {
+            echo "confermaordine->";
+            $stored = $this->store($ordine);
+            $updated = $this->update($ordine);
+
+            }
+        return $stored && $updated;
+    }
+    
+
+    public function loadDataLuogoPrezzo(EEvento $evento){
+        $sql = "SELECT DISTINCT bz.data_evento,nome,descrizione,citta,struttura,via,MIN(bz.prezzo) AS prezzo"
+              ." FROM dettaglio_evento as e, biglietti_zona as bz"
+              ." WHERE e.cod_evento = ". $this->connection->quote($evento->getCodev())
+              ." AND e.cod_evento = bz.cod_evento GROUP BY bz.data_evento";
+        $reuslt = $this->connection->query($sql);
+        $rows = $reuslt->fetchAll();
+        
+        return $rows;
+    }
+}

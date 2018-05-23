@@ -4,12 +4,11 @@
 class ESpettacolo extends EEvento {
     
     //attributi
-    private $compagnia;
+    private $compagnia = "";
     
     //metodi
-    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione, $compagnia) {
-        parent::__construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione);
-        $this->compagnia = $compagnia;
+    function __construct($cod, $nome, $tipo) {
+        parent::__construct($cod, $nome, $tipo);
     }
 
     public function getCompagnia() {

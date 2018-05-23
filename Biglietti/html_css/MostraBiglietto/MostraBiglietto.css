@@ -1,0 +1,62 @@
+body{
+    background-color: rgba(255, 255, 255, 0.911);
+    
+}
+#header {
+	background-color: rgb(40, 29, 22);
+	color: rgb(240, 237, 237);
+	padding: 10px;
+	margin-bottom: 0px;
+	
+}
+
+.alert-success{
+    background-color: rgb(236, 6, 6);
+    color: white;
+}
+.alert-heading{
+    color:white;
+}
+#biglietto{
+    width: 70%;
+    height: 40%;
+    background-color: white;
+    border: 1px solid black;
+    margin-left: 15%;
+}
+#Titolo-bigl{
+    
+    float:right;
+    margin-right: 30%;
+    margin-top: -6%;
+    font-size: 4vw;
+}
+#image{
+    height: 30%;
+    width: 30%;
+    margin-top: -5%;
+}
+#dettagli-bigl{
+    float:right;
+    margin-right: 38%;
+    margin-top: -15%;
+    font-size: 1vw;
+}
+#codice-barre{
+    height: 20%;
+    width: 20%;
+    margin-top: -20%;
+    align:right;
+    margin-left: 80%;
+    
+    
+}
+.alert-primary{
+    margin-top: -8%;
+    margin-bottom: 10%;
+    margin-left: -17px;
+    width: 103.7%;
+    background-color:  rgb(40, 29, 22);
+    color:white;
+    resize: horizontal;
+}

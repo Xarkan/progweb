@@ -6,61 +6,51 @@ abstract class EEvento {
     //attributi
     private $codev;
     private $nome;
-    private $citta;
-    private $struttura;
-    private $via;
-    private $data;  //DateTime
-    private $descrizione; 
+    private $tipo; 
     
     //metodi
-    function __construct($cod, $nome, $citta, $struttura, $via, $data, $descrizione) {
+    function __construct($cod, $nome, $tipo) {
         $this->codev = $cod;
         $this->nome = $nome;
-        $this->citta = $citta;
-        $this->struttura = $struttura;
-        $this->via = $via;
-        $this->data = $data;
-        $this->descrizione = $descrizione;
+        $this->tipo = $tipo;
     }
     
-    public function getCodev() {
+    function getCodev() {
         return $this->codev;
     }
-    public function getNome() {
+
+    function getNome() {
         return $this->nome;
     }
-    public function getCitta() {
-        return $this->citta;
+
+    function getTipo() {
+        return $this->tipo;
     }
-    public function getStruttura() {
-        return $this->struttura;
+
+    function setCodev($codev) {
+        $this->codev = $codev;
     }
-    public function getVia() {
-        return $this->via;
+
+    function setNome($nome) {
+        $this->nome = $nome;
     }
-    public function setCitta($param) {
-        $this->citta = $param;
+
+    function setTipo($tipo) {
+        $this->tipo = $tipo;
     }
-    public function setStruttura($param) {
-        $this->struttura = $param;
-    }
-    public function setVia($param) {
-        $this->via = $param;
-    }   
-    public function setNome($param) {
-        $this->nome = $param;
+
+        
+    public function mostraZona() {
+        $mng = new FDBmanager();
+        $rows = $mng->load($this);
+        for($i = 0;$i < count($rows);$i++) {
+            list($codev, $data, $zona, $prezzo) = $rows[$i];
+            $zone = new EBiglietti_Zona($this, $zona, $prezzo);
+            $array_zone[$i] = $zone;
+        }
+        echo'mostrazona->';
+        return $array_zone;
+        
     }    
-    public function getData() {
-        return $this->data;
-    }
-    public function setData(DateTime $param) {
-        $this->data = $param;
-    }      
-    public function getDescrizione() {
-        return $this->descrizione;
-    }
-    public function setDescrizione($param) {
-        $this->descrizione = $param;
-    }
 }
 

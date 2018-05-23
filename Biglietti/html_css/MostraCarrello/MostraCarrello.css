@@ -1,0 +1,27 @@
+body{
+    background-color: rgba(10, 9, 9, 0.911);
+    
+}
+#header {
+	background-color: rgb(40, 29, 22);
+	color: rgb(240, 237, 237);
+	padding: 10px;
+	margin-bottom: 0px;
+	
+}
+.display-4{
+	text-align: left;
+	margin-left: -120px;
+
+}
+.table-bordered{
+	background-color: white;
+}
+#table2{
+	margin-top: -15px;
+}
+.first-row{
+	background-color: rgba(19, 19, 19, 0.589);
+	color: white;
+	
+}
