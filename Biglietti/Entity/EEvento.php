@@ -6,40 +6,62 @@ abstract class EEvento {
     //attributi
     private $codev;
     private $nome;
-    private $tipo; 
+    private $citta;
+    private $struttura;
+    private $via;
+    private $data;  //DateTime
+    private $descrizione = ""; 
     
     //metodi
-    function __construct($cod, $nome, $tipo) {
+    function __construct($cod, $data, $nome, $citta, $struttura, $via) {
         $this->codev = $cod;
+        $this->data = $data;
         $this->nome = $nome;
-        $this->tipo = $tipo;
+        $this->citta = $citta;
+        $this->struttura = $struttura;
+        $this->via = $via;
     }
     
-    function getCodev() {
+    public function getCodev() {
         return $this->codev;
     }
-
-    function getNome() {
+    public function getNome() {
         return $this->nome;
     }
-
-    function getTipo() {
-        return $this->tipo;
+    public function getCitta() {
+        return $this->citta;
     }
-
-    function setCodev($codev) {
-        $this->codev = $codev;
+    public function getStruttura() {
+        return $this->struttura;
     }
-
-    function setNome($nome) {
-        $this->nome = $nome;
+    public function getVia() {
+        return $this->via;
     }
-
-    function setTipo($tipo) {
-        $this->tipo = $tipo;
+    public function setCitta($param) {
+        $this->citta = $param;
     }
-
-        
+    public function setStruttura($param) {
+        $this->struttura = $param;
+    }
+    public function setVia($param) {
+        $this->via = $param;
+    }   
+    public function setNome($param) {
+        $this->nome = $param;
+    }    
+    public function getData() {
+        return $this->data;
+    }
+    public function setData(DateTime $param) {
+        $this->data = $param;
+    }      
+    public function getDescrizione() {
+        return $this->descrizione;
+    }
+    public function setDescrizione($param) {
+        $this->descrizione = $param;
+    }
+    
     public function mostraZona() {
         $mng = new FDBmanager();
         $rows = $mng->load($this);

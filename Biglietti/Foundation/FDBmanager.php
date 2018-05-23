@@ -170,7 +170,7 @@ class FDBmanager {
 
     public function loadDataLuogoPrezzo(EEvento $evento){
         $sql = "SELECT DISTINCT bz.data_evento,nome,descrizione,citta,struttura,via,MIN(bz.prezzo) AS prezzo"
-              ." FROM dettaglio_evento as e, biglietti_zona as bz"
+              ." FROM evento as e, biglietti_zona as bz"
               ." WHERE e.cod_evento = ". $this->connection->quote($evento->getCodev())
               ." AND e.cod_evento = bz.cod_evento GROUP BY bz.data_evento";
         $reuslt = $this->connection->query($sql);
