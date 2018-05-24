@@ -88,7 +88,8 @@ CREATE TABLE dettaglio_evento (
 --insert evento
 INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "abc");
 INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
-INSERT INTO evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO evento VALUES("1","22/5/2018-21:00", "Spettacolo", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO evento VALUES("1","28/5/2018-21:00", "Spettacolo", "L'Aquila"," Ridotto","via def",  "descrizione1");
 INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
 --insert biglietti_zona
@@ -115,7 +116,8 @@ INSERT INTO biglietti VALUES("2","8/7/2018-23:00", "C1", NULL, "prato", 52);
 
 INSERT INTO dettaglio_evento VALUES("0","19/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
 INSERT INTO dettaglio_evento VALUES("0","30/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
---INSERT INTO dettagli_evento VALUES("1","22/5/2018-21:00", "Ridotto", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO dettaglio_evento VALUES("1","22/5/2018-21:00", "Spettacolo", NULL," emmeb",NULL,NULL);
+INSERT INTO dettaglio_evento VALUES("1","28/5/2018-21:00", "Spettacolo", NULL," emmeb",NULL,NULL);
 --INSERT INTO dettagli_evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
  

@@ -18,12 +18,21 @@ class FEvento extends FDBmanager {
     }
     
     public function loadeventi() {
-        $sql = "SELECT evento.*, tipo FROM evento, dettaglio_evento "
+        $sql = "SELECT  evento.*, tipo FROM evento, dettaglio_evento "
                 . "WHERE evento.cod_evento=dettaglio_evento.cod_evento "
                 . "AND evento.data_evento<>dettaglio_evento.data_evento LIMIT 6";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
-        return $rows;      
+        $num_row = count($rows);
+        $array[] = $rows[0];
+        $j = 0;
+        for($i = 1;$i < $num_row;$i++){
+            if($array[$j]['cod_evento'] != $rows[$i]['cod_evento']){
+                  $array[$j+1] = $rows[$i];
+                  $j++;
+            }
+        }
+        return $array;
     }
        
     public function loadzona(EEvento $object) {
