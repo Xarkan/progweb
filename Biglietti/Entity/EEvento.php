@@ -4,13 +4,13 @@
 abstract class EEvento {
     
     //attributi
-    private $codev;
-    private $nome;
-    private $citta;
-    private $struttura;
-    private $via;
-    private $data;  //DateTime
-    private $descrizione = ""; 
+    public $codev;
+    public $nome;
+    public $citta;
+    public $struttura;
+    public $via;
+    public $data;  //DateTime
+    public $descrizione = ""; 
     
     //metodi
     function __construct($cod, $data, $nome, $citta, $struttura, $via) {

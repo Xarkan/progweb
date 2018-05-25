@@ -25,7 +25,8 @@ public function esegui(){
 	$istanzacontroller->$istruzione($argomento);//richiama il metodo $istruzione = $this->task
 	}else{
 	$chome=Usingleton::getInstance('CHome');
-	$chome->impostaHome();}	
+	$chome->avviaHome();        
+    }	
 }
 
 }
