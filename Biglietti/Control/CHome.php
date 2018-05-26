@@ -10,9 +10,8 @@ class CHome {
     }
     public function impostaHome() {
         $fdbm = USingleton::getInstance('FDBmanager');
-
-        
         $results = $fdbm->load("events");
+        
         $num_rows = count($results);
         for($i = 0; $i < $num_rows; $i++) {
         	list($cod_evento, $data, $nome, $citta, $struttura, $via, $descrizione, $tipo) = $results[$i];
@@ -26,5 +25,7 @@ class CHome {
         }*/
         $json = json_encode($array_eventi);
         echo $json;
+        //echo '{"nome":"pippo","cognome":"baudo"}';
+
     }
 }

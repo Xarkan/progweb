@@ -21,11 +21,16 @@ public function esegui(){
 	$istanzacontroller=USingleton::getInstance("$this->controller");//mi ritorna un'istanza di controller
 	
 	$istruzione="$this->task";//viene settato il metodo da richiamare
-        $argomento = "$this->element";
-	$istanzacontroller->$istruzione($argomento);//richiama il metodo $istruzione = $this->task
-	}else{
+        if ($this->element) {
+            $argomento = "$this->element";
+        } else {
+            $argomento = '';
+        }
+        $istanzacontroller->$istruzione($argomento);//richiama il metodo $istruzione = $this->task
+        
+        }else{
 	$chome=Usingleton::getInstance('CHome');
-	$chome->avviaHome();        
+	$chome->avviaHome();     
     }	
 }
 

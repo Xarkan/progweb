@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -10,7 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="smarty-dir/templates/css/Home.css">
     
-    <title>Zone Evento</title>
+    <title>TicketStore-Home</title>
   </head>
   <body onload="getAndFill()">
     <div class="jumbotron jumbotron-fluid" id="header">

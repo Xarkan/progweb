@@ -88,9 +88,13 @@ CREATE TABLE dettaglio_evento (
 --insert evento
 INSERT INTO evento VALUES("0","19/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "abc");
 INSERT INTO evento VALUES("0","30/4/2018-22:53", "derby", "Milano","San Siro","via abc",  "descrizion0");
-INSERT INTO evento VALUES("1","22/5/2018-21:00", "Spettacolo", "L'Aquila"," Ridotto","via def",  "descrizione1");
-INSERT INTO evento VALUES("1","28/5/2018-21:00", "Spettacolo", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO evento VALUES("1","22/5/2018-21:00", "Amleto", "L'Aquila"," Ridotto","via def",  "descrizione1");
+INSERT INTO evento VALUES("1","28/5/2018-21:00", "Amleto", "L'Aquila"," Ridotto","via def",  "descrizione1");
 INSERT INTO evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
+INSERT INTO evento VALUES("3","7/5/2019-22:00","Cyrano de Bergerac","Pizzo Calabro","SkyLab","via Washington","sdsjadh");
+INSERT INTO evento VALUES("3","9/5/2019-22:00","Cyrano de Bergerac","Pizzo Calabro","SkyLab","via Washington","sdsjaqdgh");
+INSERT INTO evento VALUES("4","14/7/2019-21:00","Roma-Napoli","Roma","via croce","Olimpico","sdkjsdjh");
+INSERT INTO evento VALUES("4","31/9/2019-21:00","Roma-Napoli","Roma","via croce","Olimpico","sdkjsdjh");
 
 --insert biglietti_zona
 INSERT INTO biglietti_zona VALUES("1","22/5/2018-21:00","platea",13);
@@ -114,10 +118,15 @@ INSERT INTO biglietti VALUES("0","30/4/2018-22:53", "A2", NULL, "tribuna", 15);
 INSERT INTO biglietti VALUES("2","8/7/2018-23:00", "C0", "federico raparelli", "prato", 43);
 INSERT INTO biglietti VALUES("2","8/7/2018-23:00", "C1", NULL, "prato", 52);
 
-INSERT INTO dettaglio_evento VALUES("0","19/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
-INSERT INTO dettaglio_evento VALUES("0","30/4/2018-22:53", "Partita", NULL,NULL,"Inter",  "Milan");
+INSERT INTO dettaglio_evento VALUES("0","19/4/2018-22:53", "Partita", NULL,NULL,"Inter","Milan");
+INSERT INTO dettaglio_evento VALUES("0","30/4/2018-22:53", "Partita", NULL,NULL,"Inter","Milan");
 INSERT INTO dettaglio_evento VALUES("1","22/5/2018-21:00", "Spettacolo", NULL," emmeb",NULL,NULL);
 INSERT INTO dettaglio_evento VALUES("1","28/5/2018-21:00", "Spettacolo", NULL," emmeb",NULL,NULL);
+INSERT INTO dettaglio_evento VALUES("2","8/7/2018-23:00","Concerto","Dream Theater",NULL,NULL,NULL);
+INSERT INTO dettaglio_evento VALUES("3","7/5/2019-22:00","Spettacolo", NULL,"AGG",NULL,NULL);
+INSERT INTO dettaglio_evento VALUES("3","9/5/2019-22:00","Spettacolo", NULL,"AGG",NULL,NULL);
+INSERT INTO dettaglio_evento VALUES("4","14/7/2019-21:00","Partita",NULL,NULL,"Roma","Napoli");
+INSERT INTO dettaglio_evento VALUES("4","31/9/2019-21:00","Partita",NULL,NULL,"Napoli","Roma");
 --INSERT INTO dettagli_evento VALUES("2","8/7/2018-23:00", "Live concert", "Roma","Parco","via boh",  "descrizione2");
 
  

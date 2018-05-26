@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Biglietti</title>
-    </head>
-    <body> 
-	<?php
+<?php
         
         require_once 'Autoload.php';
         require_once 'Config.php';
@@ -23,6 +15,3 @@
             //$cacquisto->mostraZona($evento);
         */    
         
-	?>
-    </body>
-</html>

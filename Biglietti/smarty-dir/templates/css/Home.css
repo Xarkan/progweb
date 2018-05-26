@@ -64,9 +64,9 @@ body {
 
 }
 
-.cards-block {
-	margin-top: 2%;
-	margin-left: 6%;
+#cards-block {
+	margin-top: 10px;
+	margin-left: 5%;
 }
 
 
