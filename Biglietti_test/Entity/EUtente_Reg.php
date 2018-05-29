@@ -30,7 +30,11 @@ class EUtente_Reg extends EUtente{
         $this->password = $password;
     }
     
-    public function paga(EOrdine $ordine) {
-        
+    public function pagaOrdine() { //assumiamo che abbia i soldi...
+        $ordine = USingleton::getInstance('EOrdine');
+        $db = USingleton::getInstance('FDBmanager');
+        //facciamo lo store dell'ordine nel db
+        $db->store($ordine);
+        $ordine->setPagato();       
     }
 }

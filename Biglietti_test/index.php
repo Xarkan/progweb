@@ -16,7 +16,7 @@
 	$tour = new EEvento("codice","DPLive",$eventi);
 
 	//viene creato all'avvio della Home tramite Control
-	$ordine = new EOrdine();  
+	$ordine = USingleton::getInstance('EOrdine');
 
 	//getEventi() restitutisce array di EEvSpec e scrive il nome in EOrdine
 	$date = $tour->getEventi(); 
@@ -32,13 +32,20 @@
         //selezionePartecipazione($index) restituisce la partecipazione selezionata
         $partSingola = $partecipazioni->selezionePartecipazione(2);
         
+        //addElementi() aggiunge all'ordine il numero di biglietti desiderato
         $ordine->addElementi($partSingola, 3);
         
+        //L'utente si è sbagliato e vuole toglierne uno..
+        $ordine->rimuoviElemento();
+        //ora ci sono solo 2 elementi
+        
+        //L'utente deve essere registrato per poter pagare
         $utente = new EUtente_Reg("pippo","baudo","pippo.baudo@gmail.com","password");
-
-	//A questo punto abbiamo la lista delle zone. L'utente deve scegliere la zona che
-	//preferisce (se disponibile) e una quantità. EZona produce un oggetto EItem del tipo
-
-
-
-
+        
+        //fa lo store dell'ordine nel db e imposta pagato = true
+	$utente->paga();
+        
+        //creaBiglietti() genera i biglietti e li restituisce
+        $ordine->creaBiglietti();
+        
+        //
