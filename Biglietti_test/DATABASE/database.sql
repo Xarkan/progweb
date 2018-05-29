@@ -11,7 +11,7 @@ CREATE TABLE evento (
   
 );
 
-CREATE TABLE utente (
+CREATE TABLE utente_r (
   mail          varchar(20)     NOT NULL,
   psw           varchar(16)     NOT NULL,
   nome          varchar(40)     NOT NULL,
@@ -19,9 +19,9 @@ CREATE TABLE utente (
 );
 
 CREATE TABLE ordine (
-  codo           int     	NOT NULL,
+  codo           int     	      NOT NULL,
   mail           varchar(40)    NOT NULL,
-  date_ordine    date        	NOT NULL,
+  data_ordine    date        	  NOT NULL,
  
   PRIMARY KEY (codo)
 
@@ -29,16 +29,16 @@ CREATE TABLE ordine (
 
 CREATE TABLE biglietto (
   codb          varchar(10)     NOT NULL,
-  codo          int	        NOT NULL,
+  codo          int	            NOT NULL,
   mail          varchar(40)     NOT NULL,
   evento        varchar(40)     NOT NULL,
-  date_evento   date        	NOT NULL,
+  data_evento   date        	  NOT NULL,
   zona          varchar(20)     NOT NULL,
   fila          int             NULL,
   posto         int             NULL,
   PRIMARY KEY(codb),
   FOREIGN KEY(codo) REFERENCES ordine(codo),
-  FOREIGN KEY(mail) REFERENCES utente(mail)
+  FOREIGN KEY(mail) REFERENCES utente_r(mail)
 
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE ord_part (
 
 CREATE TABLE evento_spec (
   code          varchar(10)     NOT NULL,
-  date_evento   date        	NOT NULL,
+  data_evento   date            NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
   zona          varchar(20)     NOT NULL,
   prezzo        int             NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE evento_spec (
   compagnia     varchar(20)     NULL,
   artista       varchar(20)     NULL,
 
-  PRIMARY KEY (code, date_evento, indirizzo),
+  PRIMARY KEY (code, dataS_evento, indirizzo),
   FOREIGN KEY (code) REFERENCES evento(code),
   FOREIGN KEY (zona, indirizzo, prezzo) REFERENCES partecipazione(zona, indirizzo, prezzo)
 );  

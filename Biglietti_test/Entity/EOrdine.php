@@ -81,6 +81,13 @@ class EOrdine {
     function setItems($items) {
         $this->items = $items;
     }
+    public function calcolaPrezzo() {
+        $tot = 0;
+        for($i=0; $i<count($this->getItems); $i++) {
+            $tot = $tot + $this->getItems[$i]->getPrezzo();
+        }
+        return $tot;
+    }
 
 
 
