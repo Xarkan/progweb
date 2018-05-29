@@ -98,15 +98,15 @@ CREATE TABLE evento_spec (
 );
 
 
-----------------------------------------INSERT eveto-----------------------------------------------------------
+----------------------------------------INSERT evento-----------------------------------------------------------
 INSERT INTO evento
-VALUES ('evento0','derby','.\Biglietti_test\img','derbymilano.jpg');
+VALUES ('evento0','derby','.\\Biglietti_test\\img','derbymilano.jpg');
 INSERT INTO evento
-VALUES ('evento1','derby Romano','.\Biglietti_test\img','romalazio.jpg');
+VALUES ('evento1','derby Romano','.\\Biglietti_test\\img','romalazio.jpg');
 INSERT INTO evento
-VALUES ('evento2','Deep Purple','.\Biglietti_test\img','Deep.jpg');
+VALUES ('evento2','Deep Purple','.\\Biglietti_test\\img','Deep.jpg');
 INSERT INTO evento
-VALUES ('evento3','Pinocchio','.\Biglietti_test\img','pinocchio-musical.jpg');
+VALUES ('evento3','Pinocchio','.\\Biglietti_test\\img','pinocchio-musical.jpg');
 
 
 

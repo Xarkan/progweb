@@ -12,7 +12,10 @@ function my_autoloader($className) {
             require_once (__DIR__ . '/Entity/'.$className.'.php');
             break;
         case 'C':
-            require_once (__DIR__ . '/Controller/'.$className.'.php');
+            require_once (__DIR__ . '/Control/'.$className.'.php');
+            break;
+        case 'U':
+            require_once (__DIR__ . '/Utility/'.$className.'.php');
             break;
     }
 

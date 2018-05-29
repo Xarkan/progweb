@@ -6,6 +6,7 @@ class EOrdine {
     //attributi
     private $id; //string
     private $nomeEvento; //string 
+    private $evento; //EEventoSpecifico
     private $dataAcquisto; //DataTime
     private $utente; //Utente
     private $items = []; //array(Partecipazione)
@@ -16,8 +17,8 @@ class EOrdine {
         
     }
     
-    function setPagato() {
-        $this->pagato = true;
+    function setPagato($bool) {
+        $this->pagato = $bool;
     }
     
     public function addElementi(EPartecipazione $item, $num) {

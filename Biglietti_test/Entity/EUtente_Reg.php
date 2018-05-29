@@ -34,7 +34,16 @@ class EUtente_Reg extends EUtente{
         $ordine = USingleton::getInstance('EOrdine');
         $db = USingleton::getInstance('FDBmanager');
         //facciamo lo store dell'ordine nel db
-        $db->store($ordine);
-        $ordine->setPagato();       
+        try {
+            $db->getConnection()->beginTransaction();
+            $db->store($ordine);
+            $ordine->setPagato(true);
+            $db->getConnection()->commit();
+        }
+        catch (Exception $e) {
+            $db->getConnection()->rollBack();
+            $ordine->setPagato(false);
+            echo $e->getMessage();
+        }        
     }
 }

@@ -28,6 +28,8 @@ class EEvento {
     }
     
     function getEventoSingolo($index) {
+        $ordine = USingleton::getInstance('EOrdine');
+        $ordine->setEvento($this->eventi[$index]);
         return $this->eventi[$index];
     }
     

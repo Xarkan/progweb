@@ -8,9 +8,10 @@ class FDBmanager {
 
     //metodi
     public function __construct() {
-        $dsn = 'mysql:dbname=DB_biglietti;host=localhost';
-        $user = 'root';
-        $password = '';
+        include 'Config.php';
+        $dsn = 'mysql:dbname='.$config['mysql']['database'].';host='.$config['mysql']['host'];
+        $user = $config['mysql']['user'];
+        $password = $config['mysql']['password'];
 
     try {
         $this->connection = new PDO($dsn, $user, $password);
@@ -79,7 +80,7 @@ public function load($object) {
         $biglietti = new FBiglietto();
         $result = $biglietti->loadbiglietticomprati($object);
     }
-    if($object == "events") {
+    if($object == "eventi") {
         $evento = new FEvento();
         $result = $evento->loadeventi();
     }
