@@ -6,6 +6,8 @@ USE DB_biglietti;
 CREATE TABLE evento (
   code          varchar(20)     NOT NULL,
   nome          varchar(20)     NOT NULL,
+  path_img      varchar(40)     NOT NULL,
+  nome_img      varchar(40)     NOT NULL,
 
   PRIMARY KEY(code)
   
@@ -93,17 +95,18 @@ CREATE TABLE evento_spec (
   PRIMARY KEY (code, data_evento, indirizzo,zona),
   FOREIGN KEY (code) REFERENCES evento(code),
   FOREIGN KEY (zona, indirizzo, prezzo) REFERENCES partecipazione(zona, indirizzo, prezzo)
-);  
+);
+
 
 ----------------------------------------INSERT eveto-----------------------------------------------------------
 INSERT INTO evento
-VALUES ('evento0','derby');
+VALUES ('evento0','derby','.\Biglietti_test\img','derbymilano.jpg');
 INSERT INTO evento
-VALUES ('evento1','derby Romano');
+VALUES ('evento1','derby Romano','.\Biglietti_test\img','romalazio.jpg');
 INSERT INTO evento
-VALUES ('evento2','Deep Purple');
+VALUES ('evento2','Deep Purple','.\Biglietti_test\img','Deep.jpg');
 INSERT INTO evento
-VALUES ('evento3','Pinocchio');
+VALUES ('evento3','Pinocchio','.\Biglietti_test\img','pinocchio-musical.jpg');
 
 
 
