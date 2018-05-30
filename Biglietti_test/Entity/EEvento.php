@@ -32,7 +32,7 @@ class EEvento {
         $ordine->setEvento($this->eventi[$index]);
         return $this->eventi[$index];
     }
-    
+ 
 
 
 }

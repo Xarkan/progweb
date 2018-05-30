@@ -60,45 +60,50 @@ CREATE TABLE zona (
   FOREIGN KEY (indirizzo) REFERENCES luogo(indirizzo)
 );
 
-CREATE TABLE partecipazione (
-  zona          varchar(20)     NOT NULL,
-  indirizzo     varchar(40)     NOT NULL,
-  prezzo        int             NOT NULL,
 
-  PRIMARY KEY (zona, indirizzo, prezzo),
-  FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)
-);
-
-CREATE TABLE ord_part (
-  codo          int             NOT NULL,
-  zona          varchar(20)     NOT NULL,
-  indirizzo     varchar(40)     NOT NULL,
-  prezzo        int             NOT NULL,
-
-  PRIMARY KEY (codo, zona, indirizzo, prezzo),
-  FOREIGN KEY (codo) REFERENCES ordine(codo),
-  FOREIGN KEY (zona, indirizzo, prezzo) REFERENCES partecipazione(zona, indirizzo, prezzo)
-);
 
 CREATE TABLE evento_spec (
   code          varchar(20)     NOT NULL,
   data_evento   date            NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
-  zona          varchar(20)     NOT NULL,
-  prezzo        int             NOT NULL,
   tipo          varchar(10)     NOT NULL,
   casa          varchar(20)     NULL,
   ospite        varchar(20)     NULL,
   compagnia     varchar(20)     NULL,
   artista       varchar(20)     NULL,
 
-  PRIMARY KEY (code, data_evento, indirizzo,zona),
+  PRIMARY KEY (code, data_evento),
   FOREIGN KEY (code) REFERENCES evento(code),
-  FOREIGN KEY (zona, indirizzo, prezzo) REFERENCES partecipazione(zona, indirizzo, prezzo)
+  FOREIGN KEY (indirizzo) REFERENCES luogo(indirizzo)
 );
 
+CREATE TABLE partecipazione (
+  code          varchar(40)     NOT NULL,
+  data_evento   date            NOT NULL,
+  zona          varchar(20)     NOT NULL,
+  indirizzo     varchar(40)     NOT NULL,
+  prezzo        int             NOT NULL,
+
+  PRIMARY KEY (code, data_evento, zona, indirizzo, prezzo),
+  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
+  FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)
+);
+
+CREATE TABLE ord_part (
+  codo          int             NOT NULL,
+  code          varchar(40)     NOT NULL,
+  data_evento   date            NOT NULL,
+  zona          varchar(20)     NOT NULL,
+  indirizzo     varchar(40)     NOT NULL,
+  prezzo        int             NOT NULL,
+
+  PRIMARY KEY (codo, code, zona, prezzo),
+  FOREIGN KEY (codo) REFERENCES ordine(codo),
+  FOREIGN KEY (code, data_evento, zona, indirizzo, prezzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo, prezzo)
+);
 
 ----------------------------------------INSERT evento-----------------------------------------------------------
+
 INSERT INTO evento
 VALUES ('evento0','derby','.\\Biglietti_test\\img','derbymilano.jpg');
 INSERT INTO evento
@@ -108,12 +113,8 @@ VALUES ('evento2','Deep Purple','.\\Biglietti_test\\img','Deep.jpg');
 INSERT INTO evento
 VALUES ('evento3','Pinocchio','.\\Biglietti_test\\img','pinocchio-musical.jpg');
 
-
-
-
-
-
 ------------------------------------------INSERT utente_r-------------------------------------------------------
+
 INSERT INTO utente_r
 VALUES ('edgardovittoria@hotmail.it','pippo','Edgardo Vittoria');
 INSERT INTO utente_r
@@ -122,10 +123,6 @@ INSERT INTO utente_r
 VALUES ('pier@hotmail.it','ciao','Pierluca Masiello');
 INSERT INTO utente_r
 VALUES ('paolino@hotmail.it','database','Paolino Di Felice');
-
-
-
-
 
 --------------------------------------------INSERT ordine---------------------------------------------------------
 
@@ -137,14 +134,6 @@ INSERT INTO ordine
 VALUES (2,'pier@hotmail.it','2018-04-10');
 INSERT INTO ordine
 VALUES (3,'paolino@hotmail.it','2018-12-05');
-
-
-
-
-
-
-
-
 
 ----------------------------------------------INSERT biglietto-----------------------------------------------------
 
@@ -163,13 +152,6 @@ VALUES (5,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,7);
 INSERT INTO biglietto
 VALUES (6,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,8);
 
-
-
-
-
-
-
-
 ------------------------------------------------INSERT luogo-----------------------------------------------------
 
 INSERT INTO luogo
@@ -180,16 +162,6 @@ INSERT INTO luogo
 VALUES ('Londra, via x','stadio Wembley');
 INSERT INTO luogo
 VALUES ('Roma, via Appia Antica','teatro Brancaccio');
-
-
-
-
-
-
-
-
-
-
 
 --------------------------------------------------INSERT zona-----------------------------------------------------
 
@@ -208,69 +180,45 @@ VALUES ('curva','Londra, via x',50000);
 INSERT INTO zona 
 VALUES ('galleria','Roma, via Appia Antica',1000);
 
+------------------------------------------------------INSERT evento_spec-----------------------------------------
 
-
-
-
+INSERT INTO evento_spec
+VALUES ('evento0','2018-05-29','Milano, Sansiro','Partita','Inter','Milan',NULL,NULL);
+INSERT INTO evento_spec
+VALUES ('evento1','2018-05-12','Roma, Olimpico','Partita','Roma','Lazio',NULL,NULL);
+INSERT INTO evento_spec
+VALUES ('evento2','2018-05-30','Londra, via x','Concerto',NULL,NULL,NULL,'Deep Purple');
+INSERT INTO evento_spec
+VALUES ('evento2','2018-06-15','Milano, Sansiro','Concerto',NULL,NULL,NULL,'Deep Purple');
+INSERT INTO evento_spec
+VALUES ('evento2','2018-06-30','Roma, Olimpico','Concerto',NULL,NULL,NULL,'Deep Purple');
+INSERT INTO evento_spec
+VALUES ('evento3','2019-05-21','Roma, via Appia Antica','Spettacolo',NULL,NULL,'EmmeBi',NULL);
 
 -----------------------------------------------------INSERT partecipazione----------------------------------------
 
 INSERT INTO partecipazione
-VALUES ('curva','Milano, Sansiro',40);
+VALUES ('evento0','2018-05-29','curva','Milano, Sansiro',40);
 INSERT INTO partecipazione
-VALUES ('prato','Milano, Sansiro',100);
+VALUES ('evento2','2018-06-15','prato','Milano, Sansiro',100);
 INSERT INTO partecipazione
-VALUES ('tribuna','Roma, Olimpico',70);
+VALUES ('evento1','2018-05-12','tribuna','Roma, Olimpico',70);
 INSERT INTO partecipazione
-VALUES ('prato','Roma, Olimpico',100);
+VALUES ('evento2','2018-06-30','prato','Roma, Olimpico',100);
 INSERT INTO partecipazione
-VALUES ('prato','Londra, via x',100);
+VALUES ('evento2','2018-05-30','prato','Londra, via x',100);
 INSERT INTO partecipazione
-VALUES ('curva','Londra, via x',80);
+VALUES ('evento2','2018-05-30','curva','Londra, via x',80);
 INSERT INTO partecipazione
-VALUES ('galleria','Roma, via Appia Antica',89);
-
-
-
-
-
+VALUES ('evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
 
 ------------------------------------------------------INSERT ord_part----------------------------------------------
 
 INSERT INTO ord_part
-VALUES (0,'curva','Milano, Sansiro',40);
+VALUES (0,'evento0','2018-05-29','curva','Milano, Sansiro',40);
 INSERT INTO ord_part
-VALUES (1,'tribuna','Roma, Olimpico',70);
+VALUES (1,'evento1','2018-05-12','tribuna','Roma, Olimpico',70);
 INSERT INTO ord_part
-VALUES (2,'prato','Londra, via x',100);
+VALUES (2,'evento2','2018-05-30','prato','Londra, via x',100);
 INSERT INTO ord_part
-VALUES (3,'galleria','Roma, via Appia Antica',89);
-
-
-
-
-
-
-
-------------------------------------------------------INSERT evento_spec-----------------------------------------
-
-INSERT INTO evento_spec
-VALUES ('evento0','2018-05-29','Milano, Sansiro','curva',40,'Partita','Inter','Milan',NULL,NULL);
-INSERT INTO evento_spec
-VALUES ('evento1','2018-05-12','Roma, Olimpico','tribuna',70,'Partita','Roma','Lazio',NULL,NULL);
-INSERT INTO evento_spec
-VALUES ('evento2','2018-05-30','Londra, via x','prato',100,'Concerto',NULL,NULL,NULL,'Deep Purple');
-INSERT INTO evento_spec
-VALUES ('evento2','2018-05-30','Londra, via x','curva',80,'Concerto',NULL,NULL,NULL,'Deep Purple');
-INSERT INTO evento_spec
-VALUES ('evento2','2018-06-15','Milano, Sansiro','prato',100,'Concerto',NULL,NULL,NULL,'Deep Purple');
-INSERT INTO evento_spec
-VALUES ('evento2','2018-06-30','Roma, Olimpico','prato',100,'Concerto',NULL,NULL,NULL,'Deep Purple');
-
-
-INSERT INTO evento_spec
-VALUES ('evento3','2019-05-21','Roma, via Appia Antica','galleria',89,'Spettacolo',NULL,NULL,'EmmeBi',NULL);
-
-
-
-
+VALUES (3,'evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
