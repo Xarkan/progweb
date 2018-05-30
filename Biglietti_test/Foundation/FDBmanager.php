@@ -228,25 +228,27 @@ public function recuperadsdDati() {
             
             //ciclo per le partecipazioni
             for ($j = 0; $j < count($rows_es); $j++) {
-                $sql_p = "SELECT * FROM partecipazione WHERE code = "
-                        .$this->connection->quote($rows_es[$j]['code'])." AND indirizzo = "
+                $sql_p = "SELECT partecipazione.*, zona.capacita "
+                        . "FROM partecipazione, zona WHERE code = "
+                        .$this->connection->quote($rows_es[$j]['code'])." AND partecipazione.indirizzo = "
                         .$this->connection->quote($rows_es[$j]['indirizzo'])." AND data_evento = "
-                        .$this->connection->quote($rows_es[$j]['data_evento']);
+                        .$this->connection->quote($rows_es[$j]['data_evento'])
+                        ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo";
+                //echo $sql_p;
+               
                 $resultp = $this->connection->query($sql_p);
-                $rows_p = $resultp->fetchAll(PDO::FETCH_ASSOC);
+                $rows_pz = $resultp->fetchAll(PDO::FETCH_ASSOC);
+                /*for ($k = 0; $k < count($rows_pz); $k++) {
+                    $zona = new EZona($rows_pz[$k]['zona'], $rows_pz[$k]['capacita']);
+                    $partecipazioni[$j][$k] = new EPartecipazione($zona, $rows_pz[$j]['prezzo']);
+                }*/
        
-                for ($k = 0; $k < count($rows_p); $k++) {
-                    $sql_z = "SELECT * FROM zona WHERE nome = "
-                        .$this->connection->quote($rows_p[$k]['zona'])." AND indirizzo = "
-                        .$this->connection->quote($rows_es[$j]['indirizzo']);
-                    $resultz = $this->connection->query($sql_z);
-                    $rows_z = $resultz->fetchAll(PDO::FETCH_ASSOC);
-                    $zona = new EZona($rows_z[0]['nome'], $rows_z[0]['capacita']);
-                    $partecipazioni[$j] = new EPartecipazione($zona, $rows_p[$j]['prezzo']);
-
-                }
+                
+                    //$zona = new EZona($rows_pz[0]['zona'], $rows_pz[0]['capacita']);
+                    //$partecipazioni[$j] = new EPartecipazione($zona, $rows_pz[$j]['prezzo']);
+                    
                 echo "<pre>";
-                print_r($partecipazioni);
+                print_r($rows_pz);
                 echo "</pre>";
         
    
