@@ -38,11 +38,7 @@ public function exist($object) {
         $evento = new FEvento();
         $found = $evento->existevento($object);                
     } 
-    /*if($object instanceof EEventospecifico) {
-        $bigl_zona = new FEventospecifico();
-        $bigl_disp = $bigl_zona->existbiglietto($object);
-        $found = $bigl_disp > 0;
-    }*/
+
     if($object instanceof EUtente) {
         $utente = new FUtente();
         $found = $utente->existutente($object);
@@ -60,18 +56,12 @@ return $found;
    
 public function load($object) {
         
-    /*if($object instanceof EEvento) {
-        $evento = new FEvento();
-        $result = $evento->loadzona($object);
-    }*/
+
     if($object instanceof EEvento) {
         $evento = new FEventospecifico();
         $result = $evento->loadDataLuogoPrezzo($object);
     }
-    /*if($object instanceof EBiglietti_Zona) {
-        $bigl_zona = new FBiglietto_Zona();
-        $result = $bigl_zona->loadbigliettidisp($object);
-    }*/
+
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
         $result = $utente->loadutente($object);
@@ -104,7 +94,6 @@ public function store($object) {
     if($object instanceof EOrdine) {
         $ordine = new FOrdine();
         $stored = $ordine->storeordine($object);
-        //$ordine->storeordine_bigl($object);
     }
 return $stored;
 }
@@ -125,18 +114,6 @@ public function update($object) {
         $utente = new FUtente_Reg();
         $updated = $utente->updateutente($object);
     }
-    /*if($object instanceof EOrdine) {
-        $biglietto = new FBiglietto();
-        $ordine = new FOrdine();
-        $list_zone = $object->getLista_bigl();
-        $list_bigl = $ordine->load($list_zone[0]);
-        $utente = $object->getUtente();
-        $nome = $utente->getNome();
-        $cognome = $utente->getCognome();
-        $full_name = $nome." ".$cognome;
-        for($i = 0; $i < count($list_zone); $i++) { //da rivedere 
-            $updated = $biglietto->updatebiglietto($list_bigl[$i], $full_name);
-        }*/
        
 return $updated;
 }
@@ -158,17 +135,126 @@ public function delete($object) {
 return $deleted;
 }
 
-/*public function confermaordine(EOrdine $ordine) {
-    if($ordine->getPagato()) {
-        echo "confermaordine->";
-        $stored = $this->store($ordine);
-        $updated = $this->update($ordine);
+
+
+public function recuperadsdDati() {
+        $db = USingleton::getInstance('FDBmanager');
+        $risultato_eventi = $db->load('eventi'); //6 eventi ( per il codice e il nome)
+        //questo sotto gli passi code e ti prende gli ev_spec associati
+        $ris_eventi_specifici = $db->loadEventiSpecifici($risultato_eventi[$i]['code']);
+        //deve essere ciclato per tutti gli eventi iniziali
+        
+        //ora servono le partecipazioni
+        $partecipazioni = $db->loadPartecipazioni("code","indirizzo","data");
+        //ritorna le partecipazioni associate alle chiavi passate
+        //va ciclato per tutti gli ev_spec  
+    }
+    
+    public function __recuperoDati() {
+        $sql_e = "SELECT  * FROM evento LIMIT 6";
+        $result = $this->connection->query($sql_e);
+        $rows_e = $result->fetchAll(PDO::FETCH_ASSOC);
+        echo 1;
+        
+        //ciclo pere gli eventi specifici
+        for ($i = 0; $i < count($rows_e); $i++) { //viene fatto 6 volte
+            $sql_es = "SELECT * FROM evento_spec WHERE code = "
+                    .$this->connection->quote($rows_e[$i]['code']);
+            $result = $this->connection->query($sql_es);
+            $rows_es[$i] = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            
+            //ciclo per le partecipazioni
+            for ($j = 0; $j < count($rows_es[$i]); $j++) {
+                $sql_p = "SELECT * FROM partecipazione WHERE code = "
+                        .$this->connection->quote($rows_es[$i][$j]['code'])." AND indirizzo = "
+                        .$this->connection->quote($rows_es[$i][$j]['indirizzo'])." AND data_evento = "
+                        .$this->connection->quote($rows_es[$i][$j]['data_evento']);
+                $resultp = $this->connection->query($sql_p);
+                $rows_p[$i][$j] = $resultp->fetchAll(PDO::FETCH_ASSOC);
+                
+                
+                //ciclo per le zone
+                for ($k = 0; $k < count($rows_p[$i][$j]); $k++) {  
+                   $sql_z = "SELECT * FROM zona WHERE nome = "
+                        .$this->connection->quote($rows_p[$i][$j][$k]['zona'])." AND indirizzo = "
+                        .$this->connection->quote($rows_p[$i][$j][$k]['indirizzo']);
+                    $resultz = $this->connection->query($sql_z);
+                    $rows_z[$i][$j][$k] = $resultz->fetchAll(PDO::FETCH_ASSOC);
+                    
+                }
+   
+            }
 
         }
-    return $stored && $updated;
-}*/
+        /*echo "<pre>";
+        print_r($rows_es);
+        echo "</pre>";
+        echo "<pre>";
+        print_r($rows_p);
+        echo "</pre>";
+        echo "<pre>";
+        print_r($rows_z);
+        echo "</pre>";
+        echo "<pre>";
+        print_r($zona);
+        echo "</pre>";*/
+    // print_r($zone);
+        
+        
+    for ($i = 0; $i < count($rows_e); $i++) {
+        for ($j = 0; $j < count($rows_es[$i]); $j++) {
+            for ($k = 0; $k < count($rows_p[$i][$j]); $k++) {
+                
+            }
+        }
+    }
+    
+  }
+    
+      public function recuperoDati() {
+        $sql_e = "SELECT  * FROM evento LIMIT 6";
+        $result = $this->connection->query($sql_e);
+        $rows_e = $result->fetchAll(PDO::FETCH_ASSOC);
 
+        
+        //ciclo pere gli eventi specifici
+        for ($i = 0; $i < count($rows_e); $i++) { //viene fatto 6 volte
+            $sql_es = "SELECT * FROM evento_spec WHERE code = "
+                    .$this->connection->quote($rows_e[$i]['code']);
+            $result = $this->connection->query($sql_es);
+            $rows_es = $result->fetchAll(PDO::FETCH_ASSOC);
 
+            
+            //ciclo per le partecipazioni
+            for ($j = 0; $j < count($rows_es); $j++) {
+                $sql_p = "SELECT * FROM partecipazione WHERE code = "
+                        .$this->connection->quote($rows_es[$j]['code'])." AND indirizzo = "
+                        .$this->connection->quote($rows_es[$j]['indirizzo'])." AND data_evento = "
+                        .$this->connection->quote($rows_es[$j]['data_evento']);
+                $resultp = $this->connection->query($sql_p);
+                $rows_p = $resultp->fetchAll(PDO::FETCH_ASSOC);
+       
+                for ($k = 0; $k < count($rows_p); $k++) {
+                    $sql_z = "SELECT * FROM zona WHERE nome = "
+                        .$this->connection->quote($rows_p[$k]['zona'])." AND indirizzo = "
+                        .$this->connection->quote($rows_es[$j]['indirizzo']);
+                    $resultz = $this->connection->query($sql_z);
+                    $rows_z = $resultz->fetchAll(PDO::FETCH_ASSOC);
+                    $zona = new EZona($rows_z[0]['nome'], $rows_z[0]['capacita']);
+                    $partecipazioni[$j] = new EPartecipazione($zona, $rows_p[$j]['prezzo']);
 
+                }
+                echo "<pre>";
+                print_r($partecipazioni);
+                echo "</pre>";
+        
+   
+            }
+            //RewriteCond %(REQUEST_FILENAME) !-f
+            //RewriteCond %(REQUEST_FILENAME) !-d
+            //RewriteCond %(REQUEST_FILENAME) !.*\.(png|jpg|css|js|html)$
+        }
+      }
 
 }

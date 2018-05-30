@@ -4,9 +4,9 @@ class EPartecipazione {
 
     private $zona;      //EZona
     private $prezzo;    //float
-    private $disponibilità = true;//bool
+    private $disponibilità;//bool
     
-    function __construct($zona, $prezzo, $disponibilità) {
+    function __construct($zona, $prezzo, $disponibilità = true) {
         $this->zona = $zona;
         $this->prezzo = $prezzo;
         $this->disponibilità = $disponibilità;

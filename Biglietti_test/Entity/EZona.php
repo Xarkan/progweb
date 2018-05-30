@@ -11,10 +11,10 @@ class EZona {
         public function __construct($nome,$capacità) {
             $this->nome = $nome;
             $this->capacità = $capacità;
-            for ($i = 0; $i < $capacità; $i++) {
+            /*for ($i = 0; $i < $capacità; $i++) {
                 $posto = new EPosto(0,$i);
                 $this->posti[] = $posto;
-            }
+            }*/
         }
         public function assegnaPosto() {
             $posto = array_pop($this->posti);
