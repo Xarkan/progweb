@@ -68,46 +68,11 @@
 <div class="carousel-section">
 
 <div id="carousel-left" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="smarty-dir/templates/imgs/Deep.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="smarty-dir/templates/imgs/Deep-Purple.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="smarty-dir/templates/imgs/DT.jpg" alt="Third slide">
-    </div>
-  </div>
+<div class="carousel-inner" id="c-left">
+    
 </div>
 
-<div id="carousel-right" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="box">
-        <div class="row">
-          <div class="col"><img src="smarty-dir/templates/imgs/Deep.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/Deep.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/Deep.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/Deep.jpg" class="img-fluid" alt="Responsive image"></div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class="box">
-        <div class="row">
-          <div class="col"><img src="smarty-dir/templates/imgs/DT.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/DT.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="w-100"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/DT.jpg" class="img-fluid" alt="Responsive image"></div>
-          <div class="col"><img src="smarty-dir/templates/imgs/DT.jpg" class="img-fluid" alt="Responsive image"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-
 </div>
 
 <div class="categorie">

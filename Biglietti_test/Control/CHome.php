@@ -4,7 +4,7 @@
 class CHome {
     
     //metodi
-    public function avviaHome() {
+    public function getHome() {
         $db = USingleton::getInstance('FDBmanager');
         $db->recuperoDati();
 

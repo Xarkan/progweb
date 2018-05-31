@@ -18,8 +18,7 @@ body {
 	margin-left: 7px;
 }
 .carousel-section {
-	display: flex;
-	align-items: flex-start;
+	
 	margin-bottom: 1%;
 	margin-top: 2%;
 }
@@ -29,20 +28,18 @@ body {
 }
 
 #carousel-left {
-	width: 48%;
+	width: 40%;
 	margin-left: 2%;
-}
-#carousel-right {
-		width: 46%;
-		margin-left: 2%;
-		margin-right: 2%;
+        float: left;
 }
 
 .d-block {
 	height: 400px;
 }
 .categorie {
-	    margin-left: 2%;
+    width: 54%;
+    float: right;
+    margin-left: 2%;
     margin-right: 2%;
 }
 
@@ -66,9 +63,14 @@ body {
 
 #cards-block {
 	margin-top: 10px;
-	margin-left: 5%;
+	margin-left: 3%;
 }
 
+@media only screen and (max-width: 768px) {
+    .carousel-section, .categorie {
+        width: 100%;
+    }
+}
 
 
 

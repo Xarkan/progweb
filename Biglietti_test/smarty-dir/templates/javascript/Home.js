@@ -5,7 +5,7 @@ function getAndFill() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
         setTable(risposta);
-        //document.getElementById("cards-block").innerHTML = xmlhttp.responseText;
+        setCarousel(risposta);
     }
 };
     xmlhttp.open("GET","index.php?controller=CHome&task=impostaHome", true);
@@ -33,3 +33,13 @@ function setTable(risposta) {
     document.getElementById("cards-block").innerHTML = table;
 }
 
+function setCarousel(risposta) {
+    html_command = '<div class="carousel-item active">'
+        +'<img class="d-block w-100" src="'+risposta[0].path_img+'/'+ risposta[0].nome_img +'" alt="First slide"></div>'
+        +'<div class="carousel-item">'
+        +'<img class="d-block w-100" src="'+risposta[1].path_img+'/'+ risposta[1].nome_img +'" alt="Second slide"></div>'
+        +'<div class="carousel-item">'
+        +'<img class="d-block w-100" src="'+risposta[2].path_img+'/'+ risposta[2].nome_img +'" alt="Third slide"></div>';
+  
+    document.getElementById("c-left").innerHTML = html_command ;    
+}
