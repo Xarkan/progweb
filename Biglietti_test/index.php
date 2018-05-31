@@ -6,4 +6,6 @@
         $controller = USingleton::getInstance('Controller');
         $controller->esegui();
   
+        $fdb = new FDBmanager();
+        $rows = $fdb->recuperoDati();
         
