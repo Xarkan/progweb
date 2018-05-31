@@ -9,6 +9,7 @@ class CFrontController {
     function __construct() {}
     
     function run(){
+        
         $resource = $_SERVER['$_REQUEST_URI'];
         $this->controller = 'C'.$resource;
         $method = $_SERVER['$_REQUEST_METHOD'];
