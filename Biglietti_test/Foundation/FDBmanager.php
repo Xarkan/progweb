@@ -135,21 +135,6 @@ public function delete($object) {
 return $deleted;
 }
 
-
-
-public function recuperadsdDati() {
-        $db = USingleton::getInstance('FDBmanager');
-        $risultato_eventi = $db->load('eventi'); //6 eventi ( per il codice e il nome)
-        //questo sotto gli passi code e ti prende gli ev_spec associati
-        $ris_eventi_specifici = $db->loadEventiSpecifici($risultato_eventi[$i]['code']);
-        //deve essere ciclato per tutti gli eventi iniziali
-        
-        //ora servono le partecipazioni
-        $partecipazioni = $db->loadPartecipazioni("code","indirizzo","data");
-        //ritorna le partecipazioni associate alle chiavi passate
-        //va ciclato per tutti gli ev_spec  
-    }
-    
     
     public function recuperoDati() {
         $sql_e = "SELECT  * FROM evento LIMIT 6";
