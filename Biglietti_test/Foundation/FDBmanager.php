@@ -150,69 +150,8 @@ public function recuperadsdDati() {
         //va ciclato per tutti gli ev_spec  
     }
     
-    /*public function __recuperoDati() {
-        $sql_e = "SELECT  * FROM evento LIMIT 6";
-        $result = $this->connection->query($sql_e);
-        $rows_e = $result->fetchAll(PDO::FETCH_ASSOC);
-        echo 1;
-        
-        //ciclo pere gli eventi specifici
-        for ($i = 0; $i < count($rows_e); $i++) { //viene fatto 6 volte
-            $sql_es = "SELECT * FROM evento_spec WHERE code = "
-                    .$this->connection->quote($rows_e[$i]['code']);
-            $result = $this->connection->query($sql_es);
-            $rows_es[$i] = $result->fetchAll(PDO::FETCH_ASSOC);
-
-            
-            //ciclo per le partecipazioni
-            for ($j = 0; $j < count($rows_es[$i]); $j++) {
-                $sql_p = "SELECT * FROM partecipazione WHERE code = "
-                        .$this->connection->quote($rows_es[$i][$j]['code'])." AND indirizzo = "
-                        .$this->connection->quote($rows_es[$i][$j]['indirizzo'])." AND data_evento = "
-                        .$this->connection->quote($rows_es[$i][$j]['data_evento']);
-                $resultp = $this->connection->query($sql_p);
-                $rows_p[$i][$j] = $resultp->fetchAll(PDO::FETCH_ASSOC);
-                
-                
-                //ciclo per le zone
-                for ($k = 0; $k < count($rows_p[$i][$j]); $k++) {  
-                   $sql_z = "SELECT * FROM zona WHERE nome = "
-                        .$this->connection->quote($rows_p[$i][$j][$k]['zona'])." AND indirizzo = "
-                        .$this->connection->quote($rows_p[$i][$j][$k]['indirizzo']);
-                    $resultz = $this->connection->query($sql_z);
-                    $rows_z[$i][$j][$k] = $resultz->fetchAll(PDO::FETCH_ASSOC);
-                    
-                }
-   
-            }
-
-        }
-        /*echo "<pre>";
-        print_r($rows_es);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($rows_p);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($rows_z);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($zona);
-        echo "</pre>";*/
-    // print_r($zone);
-        
-        
-    /*for ($i = 0; $i < count($rows_e); $i++) {
-        for ($j = 0; $j < count($rows_es[$i]); $j++) {
-            for ($k = 0; $k < count($rows_p[$i][$j]); $k++) {
-                
-            }
-        }
-    }
     
-  }*/
-    
-      public function recuperoDati() {
+    public function recuperoDati() {
         $sql_e = "SELECT  * FROM evento LIMIT 6";
         $result = $this->connection->query($sql_e);
         $rows_e = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -234,64 +173,31 @@ public function recuperadsdDati() {
                         .$this->connection->quote($rows_es[$j]['indirizzo'])." AND data_evento = "
                         .$this->connection->quote($rows_es[$j]['data_evento'])
                         ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo";
-                //echo $sql_p;
                
                 $resultp = $this->connection->query($sql_p);
                 $rows_pz = $resultp->fetchAll(PDO::FETCH_ASSOC);
-                /*for ($k = 0; $k < count($rows_pz); $k++) {
-                    $zona = new EZona($rows_pz[$k]['zona'], $rows_pz[$k]['capacita']);
-                    $partecipazioni[$j][$k] = new EPartecipazione($zona, $rows_pz[$j]['prezzo']);
-                }
-                echo "<pre>";
-                print_r($rows_es[$j]);
-                echo "</pre>"; */
-                     
                 
+
                 $count = count($rows_pz);
-                if($count == 1){
-                    $tipo = $rows_es[$j]['tipo'];
-                    $classe = 'E'.$tipo;
-                    $part = new EPartecipazione($rows_pz[0]['zona'],$rows_pz[0]['prezzo'],true);
-                    //$array_part[$z] = $part;
-                    $evento = new $classe($rows_es[$j]['indirizzo'],$rows_es[$j]['data_evento'],$part);
-                    $array_eventi_spec[$z] = $evento;
-                    $z++;
-                }
-                if($count > 1){
-                    for($k = 0;$k < $count;$k++){
-                        $part = new EPartecipazione($rows_pz[$k]['zona'],$rows_pz[$k]['prezzo'],true);
-                        $array_part[$k] = $part;
+                for($k = 0;$k < $count;$k++){
+                    $part = new EPartecipazione($rows_pz[$k]['zona'],$rows_pz[$k]['prezzo'],true);
+                    $array_part[$k] = $part;  
                     }
-                    $tipo = $rows_es[$j]['tipo'];
-                    $classe = 'E'.$tipo;
-                    $evento = new $classe($rows_es[$j]['indirizzo'],$rows_es[$j]['data_evento'],$array_part);
-                    $array_eventi_spec[$z] = $evento;
-                    $z++;
-                }
-                
-                
-                
-               
-                
-                    //for($k = 0;$k < count($))
-                    //$zona = new EZona($rows_pz[0]['zona'], $rows_pz[0]['capacita']);
-                    //$partecipazioni[$j] = new EPartecipazione($zona, $rows_pz[$j]['prezzo']);
-                    
-                
-        
-   
+
+                $tipo = $rows_es[$j]['tipo'];
+                $classe = 'E'.$tipo;
+
+                $evento = new $classe($rows_es[$j]['indirizzo'],$rows_es[$j]['data_evento'],$array_part);
+                $array_eventi_spec[$j] = $evento;
+
+                unset($array_part);
             }
-            
-            
-            
-            //RewriteCond %(REQUEST_FILENAME) !-f
-            //RewriteCond %(REQUEST_FILENAME) !-d
-            //RewriteCond %(REQUEST_FILENAME) !.*\.(png|jpg|css|js|html)$
+            $tour = new EEvento($rows_e[$i]['code'],$rows_e[$i]['nome'], $array_eventi_spec);
+            $lista_eventi_generici[$i] = $tour;
+            unset($array_eventi_spec);
+        
         }
-        echo "<pre>";
-                print_r($array_eventi_spec);
-                echo "</pre>";
-                echo '------------------------------------------------'. count($rows_pz);
+        return $lista_eventi_generici;
       }
 
 }

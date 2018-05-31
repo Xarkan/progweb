@@ -1,5 +1,10 @@
 <?php
 
+        
+        //RewriteCond %(REQUEST_FILENAME) !-f
+        //RewriteCond %(REQUEST_FILENAME) !-d
+        //RewriteCond %(REQUEST_FILENAME) !.*\.(png|jpg|css|js|html)$
+
 	include 'Autoload.php';
 
 	$zona1 = new EZona("Prato",20,24.50); //nome, capacità, prezzo, disponibilità, array?
