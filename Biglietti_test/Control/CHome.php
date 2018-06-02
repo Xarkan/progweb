@@ -4,7 +4,7 @@
 class CHome {
     
     //metodi
-    public function getHome() {
+    public function avviaHome() {
         $db = USingleton::getInstance('FDBmanager');
         $db->recuperoDati();
 
@@ -12,7 +12,7 @@ class CHome {
         $home->setTemplate('Home.tpl');
     }
     
-    public function impostaHome() {
+    public function getHome() {
         $db = USingleton::getInstance('FDBmanager');
         //$ordine = USingleton::getInstance('EOrdine');
         $sessione = USingleton::getInstance('USession');

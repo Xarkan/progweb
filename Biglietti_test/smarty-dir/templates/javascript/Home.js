@@ -8,7 +8,7 @@ function getAndFill() {
         setCarousel(risposta);
     }
 };
-    xmlhttp.open("GET","index.php?controller=CHome&task=impostaHome", true);
+    xmlhttp.open("GET","/Biglietti_test/home", true);
     xmlhttp.send();
 }
 
@@ -21,7 +21,7 @@ function setTable(risposta) {
         table += '<div class="row">';
         for (let c = 0; c < 3 && c < rest; c++) {
             let html_command = '<div class="card" style="width: 18rem;">' +
-            '<a href="Index.php?controller=CAcquistoBiglietto&task=DataLuogoPrezzo&id=' + k +'">' +
+            '<a href="/Biglietti_test/evento/' + k +'">' +
             '<img class="card-img-top" src="'+ risposta[k].path_img +'/'+ risposta[k].nome_img +'" alt="Card image cap"></a>' +
             '<div class="card-body"><p class="card-text">'+risposta[k].nome+'</p></div></div>';
             table += '<div class="col">' + html_command + '</div>';   
