@@ -3,9 +3,9 @@
 abstract class EEventoSpecifico {
 	
     //attributi
-    protected $luogo;   //Luogo
-    protected $data;    //DateTime
-    protected $partecipazioni = [];
+    public $luogo;   //Luogo
+    public $data;    //DateTime
+    public $partecipazioni = [];
 
     public function __construct($luogo,$data,$partecipazioni) {
         $this->luogo = $luogo;

@@ -3,9 +3,9 @@
 class EZona {
 
 	//attributi
-	private $nome;
-	private $capacità;
-	private $posti = []; //array(Posto) da capire se ci si mettono solo quelli presi...
+	public $nome;
+	public $capacità;
+	public $posti = []; //array(Posto) da capire se ci si mettono solo quelli presi...
 
 	//metodi
         public function __construct($nome,$capacità) {

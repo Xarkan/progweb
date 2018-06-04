@@ -4,7 +4,7 @@
 class ESpettacolo extends EEventoSpecifico {
     
     //attributi
-    private $compagnia;
+    public $compagnia;
     
     //metodi
     public function __construct($luogo,$data,$partecipazioni/*,$compagnia = ''*/) {

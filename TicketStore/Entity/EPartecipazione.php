@@ -2,19 +2,19 @@
 
 class EPartecipazione {
 
-    private $zona;      //EZona
-    private $prezzo;    //float
-    private $disponibilità;//bool
+    public $zona;      //EZona
+    public $prezzo;    //float
+    public $disp;//bool
     
-    function __construct($zona, $prezzo, $disponibilità = true) {
+    function __construct($zona, $prezzo, $disp = true) {
         $this->zona = $zona;
         $this->prezzo = $prezzo;
-        $this->disponibilità = $disponibilità;
+        $this->disp = $disp;
     }
     
     public function controllaDisp() {
         if(!$this->zona->getPostiDisp() > 0) {
-            $this->disponibilità = false;
+            $this->disp = false;
         }        
     }
     
@@ -23,6 +23,6 @@ class EPartecipazione {
     }
     
     public function getDisp() {
-        return $this->disponibilità;
+        return $this->disp;
     }
 }

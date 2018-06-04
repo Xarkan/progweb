@@ -4,8 +4,8 @@
 class EPartita extends EEventoSpecifico{
     
     //attributi
-    private $casa;
-    private $ospite;		//????
+    public $casa;
+    public $ospite;		//????
     
     //metodi
     public function __construct($luogo,$data,$partecipazioni/*,$casa = '',$ospite = ''*/) {

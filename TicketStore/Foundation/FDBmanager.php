@@ -152,32 +152,36 @@ return $deleted;
             
             //ciclo per le partecipazioni
             for ($j = 0; $j < count($rows_es); $j++) {
-                $sql_p = "SELECT partecipazione.*, zona.capacita "
-                        . "FROM partecipazione, zona WHERE code = "
+                $sql_p = "SELECT partecipazione.*, luogo.struttura, zona.capacita "
+                        . "FROM partecipazione, luogo, zona WHERE code = "
                         .$this->connection->quote($rows_es[$j]['code'])." AND partecipazione.indirizzo = "
                         .$this->connection->quote($rows_es[$j]['indirizzo'])." AND data_evento = "
                         .$this->connection->quote($rows_es[$j]['data_evento'])
-                        ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo";
+                        ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo"
+                        ." AND partecipazione.indirizzo = luogo.indirizzo";
                
                 $resultp = $this->connection->query($sql_p);
                 $rows_pz = $resultp->fetchAll(PDO::FETCH_ASSOC);
-                
+
 
                 $count = count($rows_pz);
                 for($k = 0;$k < $count;$k++){
                     $part = new EPartecipazione($rows_pz[$k]['zona'],$rows_pz[$k]['prezzo'],true);
-                    $array_part[$k] = $part;  
+                    $array_part[$k] = $part;
+                    list($città, $via) = explode(", ", $rows_es[$j]['indirizzo']);
+                    $luogo = new ELuogo($città, $via, $rows_pz[$k]['struttura']);
                     }
 
                 $tipo = $rows_es[$j]['tipo'];
                 $classe = 'E'.$tipo;
-
-                $evento = new $classe($rows_es[$j]['indirizzo'],$rows_es[$j]['data_evento'],$array_part);
+                
+                $evento = new $classe($luogo,$rows_es[$j]['data_evento'],$array_part);
                 $array_eventi_spec[$j] = $evento;
 
                 unset($array_part);
             }
-            $tour = new EEvento($rows_e[$i]['code'],$rows_e[$i]['nome'], $array_eventi_spec);
+            $path_img = $rows_e[$i]['path_img']."/".$rows_e[$i]['nome_img'];
+            $tour = new EEvento($rows_e[$i]['code'],$path_img,$rows_e[$i]['nome'], $array_eventi_spec);
             $lista_eventi_generici[$i] = $tour;
             unset($array_eventi_spec);
         

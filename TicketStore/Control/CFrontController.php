@@ -10,8 +10,7 @@ class CFrontController {
     function __construct() {        
         $cleared_url = str_replace("/TicketStore/", "", $_SERVER['REQUEST_URI']);
         $result = explode("/",$cleared_url);
-        
-   
+
         $this->controller = 'C'.$result[0];
         $this->file = $this->controller.".php";
             
@@ -31,20 +30,18 @@ class CFrontController {
             }
             else {
                 if ( method_exists($this->controller, $this->finalmethod ) ) {
-                    $real_controller = new $this->controller();
-                } else {
+                    $object = new $this->controller();
+                } else {                    
                 //header('HTTP/1.1 405 Method Not Allowed');   
-                    $chome=Usingleton::getInstance('CHome');
-                    $chome->avviaHome();
-                    exit;
-                }
-            
+                        $chome=Usingleton::getInstance('CHome');
+                        $chome->avviaHome();
+                        exit;
+                    }
+                  
             }
-
-            $fmethod = $this->finalmethod;
-            return $real_controller->$fmethod( $this->params );
+        $fmethod = $this->finalmethod;
+        return $object->$fmethod( $this->params );
             
- 
     }
     
 

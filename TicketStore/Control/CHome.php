@@ -8,13 +8,12 @@ class CHome {
     }
     
     public function getHome() {
-        $db = USingleton::getInstance('FDBmanager');
-        //$ordine = USingleton::getInstance('EOrdine');
+        $db = USingleton::getInstance('FDBmanager');        
         $sessione = USingleton::getInstance('USession');
-        //$eventi_generici deve essere un array tipo $array[k].path_img
-        $eventi_generici = $db->load('eventi');
-
+        
+        $eventi_generici = $db->recuperoDati();
         $json = json_encode($eventi_generici);
+        
         $sessione->imposta_valore('eventi',$json);
         echo $json;
     }
