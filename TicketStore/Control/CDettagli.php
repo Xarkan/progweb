@@ -1,10 +1,21 @@
 <?php
 
-class CAcquistoBiglietto {
+class CDettagli {
     
     //attributi
     
     //metodi
+    public function getDettagli($id) {
+        $db = USingleton::getInstance('FDBmanager');        
+        $sessione = USingleton::getInstance('USession');
+        
+        $view = Usingleton::getInstance('VDettagli');
+        $view->getLuoghiDate($id); 
+    }
+    
+    
+    
+    
     public function impostaDLP() {
         $sessione = USingleton::getInstance('USession');
         $json = $sessione->recupera_valore('eventi');

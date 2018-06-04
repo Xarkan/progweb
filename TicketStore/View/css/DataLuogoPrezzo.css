@@ -3,12 +3,7 @@ body{
     background-color:  rgba(254, 230, 171, 0.911);
     
 }
-#header {
-	background-color: rgb(40, 29, 22);
-	color: rgb(240, 237, 237);
-	padding: 10px;
-	margin-bottom: 0px;
-}
+
 .alert-success{
 background-color: rgb(40, 29, 22);
 margin-left: 10%;

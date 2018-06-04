@@ -9,6 +9,7 @@ class CEvento {
         $decoded = json_decode($sessione->recupera_valore('eventi'),true);
         $ordine->setNomeEvento($decoded[$id]["nome"]);
         $sessione->imposta_valore('ordine',$ordine);
-        header('Location: /TicketStore/View/html/dettagli.html?id='.$id);
+        $view = USingleton::getInstance('VEvento');
+        $view->getLuoghiDate($id);
     }
 }

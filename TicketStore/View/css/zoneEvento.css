@@ -80,13 +80,6 @@
 	margin-left: auto;
 }
 
-#header {
-	background-color: rgb(40, 29, 22);
-	color: rgb(240, 237, 237);
-	padding: 8px;
-	margin-bottom: 0px;
-}
-
 @media only screen and (max-width: 768px) {
     .aside, .zone-disp {
 		width: 97%;

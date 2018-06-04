@@ -13,7 +13,7 @@ class CFrontController {
 
         $this->controller = 'C'.$result[0];
         $this->file = $this->controller.".php";
-            
+    
         $method = $_SERVER['REQUEST_METHOD'];
         $this->finalmethod = $method.$result[0];
         if(isset($result[1])) {
@@ -22,10 +22,11 @@ class CFrontController {
     }
     
     function run(){
-        
-        if(!file_exists("Control/".$this->file)) { 
-            $chome=Usingleton::getInstance('CHome');
-            $chome->avviaHome();
+    
+        if(!file_exists("Control/".$this->file)) {
+            
+            $view=Usingleton::getInstance('View');
+            $view->avviaHome();
             exit;
             }
             else {
@@ -33,16 +34,15 @@ class CFrontController {
                     $object = new $this->controller();
                 } else {                    
                 //header('HTTP/1.1 405 Method Not Allowed');   
-                        $chome=Usingleton::getInstance('CHome');
-                        $chome->avviaHome();
-                        exit;
+                    $view=Usingleton::getInstance('View');
+                    $view->operazioneInvalida(); //?????
+                    exit;
                     }
                   
             }
         $fmethod = $this->finalmethod;
         return $object->$fmethod( $this->params );
-            
-    }
+      }
     
 
 
