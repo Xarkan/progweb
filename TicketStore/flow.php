@@ -7,10 +7,9 @@
 //RewriteCond %{REQUEST_FILENAME} !-f
 //RewriteCond %{REQUEST_FILENAME} !-d
 //RewriteCond %{REQUEST_FILENAME} !.*\.{png|jpg|css|js|html}$
-//RewriteCond %{REQUEST_FILENAME} !.*evento/([0-9])
 //RewriteRule ^(.*)$ index.php [NC,L]
 
-//RewriteRule ^evento/([0-9]+) dettagli.html?id=$1 [NC,L]
+//RewriteRule ^evento/([0-9]+) evento.html?id=$1 [NC,L]
 
 	include 'Autoload.php';
 

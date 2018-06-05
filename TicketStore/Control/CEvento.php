@@ -10,6 +10,6 @@ class CEvento {
         $ordine->setNomeEvento($decoded[$id]["nome"]);
         $sessione->imposta_valore('ordine',$ordine);
         $view = USingleton::getInstance('VEvento');
-        $view->getLuoghiDate($id);
+        $view->setLuoghiDate($id);
     }
 }
