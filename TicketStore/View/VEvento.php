@@ -6,6 +6,6 @@ class VEvento {
         /*echo "<pre>";
         print_r($_SERVER);
         echo "</pre>";*/
-        header('Location: /TicketStore/evento/'.$id);
+        //header('Location: /TicketStore/evento/'.$id);
     }
 }

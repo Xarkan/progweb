@@ -12,19 +12,28 @@ function fillLuogoData() {
     xmlhttp.send();
 }
 
+
+
 function setTable(risposta) {
+    
     var table = '';
     var url =  window.location.href;
     var splitted_url = url.split("/");
     var codice = splitted_url[splitted_url.length - 1];
-    for(let i = 0; i < risposta[codice].length; i++) {
-        let html_command = '<tr><th scope="row">'+risposta[codice][i].data+'</th>'+
-            '<td>'+risposta[codice][i].citta+'</td>'+
-            '<td>'+risposta[codice][i].struttura+'</td>'+
-            '<td>'+risposta[codice][i].via+'</td>'+
-            '<td>'+risposta[codice][i].prezzo+'</td>'+
+    
+    for(let i = 0; i < 1 ; i++) {
+        let html_command = '<tr><td>'+risposta[codice].eventi[i].data+'</td>'+
+            '<td>'+risposta[codice].eventi[i].luogo.citta+'</td>'+
+            '<td>'+risposta[codice].eventi[i].luogo.struttura+'</td>'+
+            '<td>'+risposta[codice].eventi[i].luogo.via+'</td>'+
+            '<td>'+risposta[codice].eventi[i].partecipazioni[i].prezzo+'</td>'+
             '<td><a type="button" class="btn btn-warning" href="#">Acquista</a></td></tr>';
         table += table + html_command;    
     }
     document.getElementById("table-section").innerHTML = table;
-}
+    let html_command_nome = '<h4>'+risposta[codice].nome+'</h4>';
+    document.getElementById("nome").innerHTML = html_command_nome;
+    let html_command_immagine = '<img src='+risposta[codice].img+'class="img-fluid" alt="Responsive image">'
+    document.getElementById("immagine").innerHTML = html_command_immagine;
+
+}   

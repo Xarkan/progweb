@@ -21,7 +21,7 @@ function setTable(risposta) {
         table += '<div class="row">';
         for (let c = 0; c < 3 && c < rest; c++) {
             let html_command = '<div class="card" style="width: 18rem;">' +
-            '<a href="/TicketStore/evento/' + k +'">' +
+            '<a href="/TicketStore/evento/'+ k +'">' +
             '<img class="card-img-top" src="/TicketStore/'+ risposta[k].img+'" alt="Card image cap"></a>' +
             '<div class="card-body"><p class="card-text">'+risposta[k].nome+'</p></div></div>';
             table += '<div class="col">' + html_command + '</div>';   

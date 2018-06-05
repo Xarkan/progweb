@@ -168,8 +168,8 @@ return $deleted;
                 for($k = 0;$k < $count;$k++){
                     $part = new EPartecipazione($rows_pz[$k]['zona'],$rows_pz[$k]['prezzo'],true);
                     $array_part[$k] = $part;
-                    list($città, $via) = explode(", ", $rows_es[$j]['indirizzo']);
-                    $luogo = new ELuogo($città, $via, $rows_pz[$k]['struttura']);
+                    list($citta, $via) = explode(", ", $rows_es[$j]['indirizzo']);
+                    $luogo = new ELuogo($citta, $via, $rows_pz[$k]['struttura']);
                     }
 
                 $tipo = $rows_es[$j]['tipo'];
@@ -180,7 +180,7 @@ return $deleted;
 
                 unset($array_part);
             }
-            $path_img = $rows_e[$i]['path_img']."/".$rows_e[$i]['nome_img'];
+            $path_img = $rows_e[$i]['path_img']."\\".$rows_e[$i]['nome_img'];
             $tour = new EEvento($rows_e[$i]['code'],$path_img,$rows_e[$i]['nome'], $array_eventi_spec);
             $lista_eventi_generici[$i] = $tour;
             unset($array_eventi_spec);

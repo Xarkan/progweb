@@ -3,20 +3,20 @@
 class ELuogo {
 
     //attributi
-    public $città;
+    public $citta;
     public $via;
     public $struttura;
     public $zone = []; //array(Zona)
 
 	//metodi
     public function __construct($città, $via, $struttura, $zone = null) {
-        $this->città = $città;
+        $this->citta = $città;
         $this->via = $via;
         $this->struttura = $struttura;
         $this->zone = $zone;
     }
-    function getCittà() {
-        return $this->città;
+    function getCitta() {
+        return $this->citta;
     }
 
     function getVia() {
