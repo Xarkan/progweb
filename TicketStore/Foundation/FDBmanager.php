@@ -39,7 +39,7 @@ public function exist($object) {
         $found = $evento->existevento($object);                
     } 
 
-    if($object instanceof EUtente) {
+    if($object instanceof EUtente_Reg) {
         $utente = new FUtente();
         $found = $utente->existutente($object);
     }
