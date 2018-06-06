@@ -22,7 +22,7 @@ class FUtente_Reg extends FDBmanager {
         return $rows;
     }
 
-    public function storeutente(EUtente $object) {
+    public function storeutente(EUtente_Reg $object) {
         $nome = $object->getNome();
         $cognome = $object->getCognome();
         $string = $nome." ".$cognome;

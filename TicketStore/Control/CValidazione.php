@@ -1,16 +1,16 @@
 <?php
 
 
-class CSignin {
+class CValidazione {
     
-    public function postSignin() {
+    public function postValidazione() {
          $db = USingleton::getInstance('FDBmanager');
          $sessione = USingleton::getInstance('USession');
          
          if($_POST['mail'] != "" && $_POST['psw'] != "" ){
              $utente = new EUtente_Reg($_POST['nome'], $_POST['cognome'], $_POST['mail'], $_POST['psw']);
              $exist = $db->exist($utente);
-             if($exist){
+             if(!$exist){
                  header('location : /TicketStore/Signin' );
              }
              else{
