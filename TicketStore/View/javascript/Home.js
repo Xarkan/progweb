@@ -34,7 +34,7 @@ function setTable(risposta) {
 }
 
 function setCarousel(risposta) {
-    html_command = '<div class="carousel-item active">'
+    html_command = '<div class="carousel-item active" id="carousel-imgs">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[0].img+'" alt="First slide"></div>'
         +'<div class="carousel-item">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[1].img+'" alt="Second slide"></div>'

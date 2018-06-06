@@ -56,8 +56,11 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .carousel-section, .categorie {
+     .categorie {
         width: 100%;
+    }
+    #carousel-imgs {
+        display: hidden;
     }
 }
 
