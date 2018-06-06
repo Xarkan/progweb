@@ -4,7 +4,8 @@
 class CFrontController {
     private $controller;
     private $finalmethod;
-    private $params = '';
+    private $param1 = '';
+    private $param2 = '';
     private $file;
             
     function __construct() {        
@@ -17,8 +18,12 @@ class CFrontController {
         $method = $_SERVER['REQUEST_METHOD'];
         $this->finalmethod = $method.$result[0];
         if(isset($result[1])) {
-            $this->params = $result[1];
+            $this->param1 = $result[1];
+            if(isset($result[2])) {
+                $this->param2 = $result[2];
+            }
         }
+       
     }
     
     function run(){
@@ -41,7 +46,11 @@ class CFrontController {
                   
             }
         $fmethod = $this->finalmethod;
-        return $object->$fmethod( $this->params );
+        $p2 = '';
+        if(isset($this->param2)) {
+            $p2 = ',';
+        }
+        return $object->$fmethod( $this->param1.$p2.$this->param2 );
       }
     
 

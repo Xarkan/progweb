@@ -27,7 +27,7 @@ function setTable(risposta) {
             '<td>'+risposta[codice].eventi[i].luogo.struttura+'</td>'+
             '<td>'+risposta[codice].eventi[i].luogo.via+'</td>'+
             '<td>'+risposta[codice].eventi[i].partecipazioni[0].prezzo+'</td>'+
-            '<td><a type="button" class="btn btn-warning" href="/TicketStore/evento/'+codice+'/zone/'+i+'">Acquista</a></td></tr>';
+            '<td><a type="button" class="btn btn-warning" href="/TicketStore/zone/'+codice+'/'+i+'">Acquista</a></td></tr>';
         table = table + html_command;    
     }
     document.getElementById("table-section").innerHTML = table;
