@@ -16,7 +16,7 @@ class FUtente_Reg extends FDBmanager {
     }
 
     public function loadutente(EUtente_Reg $object) {
-        $sql = "SELECT mail FROM utente_r WHERE mail = ".$this->connection->quote($object->getMail());
+        $sql = "SELECT psw FROM utente_r WHERE mail = ".$this->connection->quote($object->getMail());
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
         return $rows;

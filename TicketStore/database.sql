@@ -15,7 +15,7 @@ CREATE TABLE evento (
 
 CREATE TABLE utente_r (
   mail          varchar(40)     NOT NULL,
-  psw           varchar(16)     NOT NULL,
+  psw           varchar(132)     NOT NULL,
   nome          varchar(40)     NOT NULL,
   PRIMARY KEY(mail)
 );
