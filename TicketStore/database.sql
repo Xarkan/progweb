@@ -116,13 +116,13 @@ VALUES ('evento3','Pinocchio','.\\View\\imgs','pinocchio-musical.jpg');
 ------------------------------------------INSERT utente_r-------------------------------------------------------
 
 INSERT INTO utente_r
-VALUES ('edgardovittoria@hotmail.it','pippo','Edgardo Vittoria');
+VALUES ('edgardovittoria@hotmail.it',md5('pippo'),'Edgardo Vittoria');
 INSERT INTO utente_r
-VALUES ('federicoraparelli@hotmail.it','pluto','Federico Raparelli');
+VALUES ('federicoraparelli@hotmail.it',md5('pluto'),'Federico Raparelli');
 INSERT INTO utente_r
-VALUES ('pier@hotmail.it','ciao','Pierluca Masiello');
+VALUES ('pier@hotmail.it',md5('ciao'),'Pierluca Masiello');
 INSERT INTO utente_r
-VALUES ('paolino@hotmail.it','database','Paolino Di Felice');
+VALUES ('paolino@hotmail.it',md5('database'),'Paolino Di Felice');
 
 --------------------------------------------INSERT ordine---------------------------------------------------------
 

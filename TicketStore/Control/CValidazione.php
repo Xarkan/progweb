@@ -4,27 +4,36 @@
 class CValidazione {
     
     public function postValidazione() {
+       
          $db = USingleton::getInstance('FDBmanager');
          $sessione = USingleton::getInstance('USession');
-         
-         if($_POST['mail'] != "" && $_POST['psw'] != "" ){
-             $utente = new EUtente_Reg($_POST['nome'], $_POST['cognome'], $_POST['mail'], $_POST['psw']);
+         $nome = $_POST['nome'];
+         $cognome = $_POST['cognome'];
+         $mail = $_POST['mail'];
+         $password = $_POST['psw'];
+         $utente = new EUtente_Reg($nome, $cognome, $mail, $password);
+         if($mail != "" && $password != "" ){
              $exist = $db->exist($utente);
-             if(!$exist){
-                 header('location : /TicketStore/Signin' );
-             }
-             else{
-                 $registrato = $db->store($utente);
-                 if(!$registrato){
-                        $sessione->imposta_valore('logged', false);
-                        header('location : location : /TicketStore/Signin' );
-                        echo 'ERRORE! La registrazione non è avvenuta';
-                    }else{
-                         $sessione->imposta_valore('logged',true);
-                         header('location : /TicketStore/evento/0');
-                    }
+             if($exist){
+                 /*L'utente sta provando a registrarsi con una mail già usata per la registrazione
+                 Viene reindirizzato al login...l'ideale sarebbe comunicare all'utente che o si logga 
+                 o cambia mail per effettuare la registrazione*/
+                 header('HTTP/1.1 301 Moved Permanently');
+                 header('Location: login');
+            }
+            else{
+                $registrato = $db->store($utente);
+                if($registrato){
+                    //la registrazione è avvenuta con successo l'utente viene reinderizzato nella bellissima
+                    //pagina dove puo scegliere se andare alla home o procedere con l'ordine
+                    $sessione->imposta_valore('logged',$registrato);
+                    header('HTTP/1.1 301 Moved Permanently');
+                    header('Location: ValidazioneUtente');
+                }
+                
+                
             }
              
-         }
     }
+   }
 }

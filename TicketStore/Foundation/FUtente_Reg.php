@@ -28,7 +28,7 @@ class FUtente_Reg extends FDBmanager {
         $string = $nome." ".$cognome;
         $sql = "INSERT INTO utente_r VALUES ("
                 .$this->connection->quote($object->getMail()).","
-                .$this->connection->quote($object->getPassword()).","
+                .$this->connection->quote(md5($object->getPassword())).","
                 .$this->connection->quote($string).")";
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
