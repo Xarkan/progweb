@@ -2,38 +2,54 @@
 
 
 class CValidazione {
-    
+     
     public function postValidazione() {
-       
-         $db = USingleton::getInstance('FDBmanager');
-         $sessione = USingleton::getInstance('USession');
-         $nome = $_POST['nome'];
-         $cognome = $_POST['cognome'];
-         $mail = $_POST['mail'];
-         $password = $_POST['psw'];
-         $utente = new EUtente_Reg($nome, $cognome, $mail, $password);
-         if($mail != "" && $password != "" ){
-             $exist = $db->exist($utente);
-             if($exist){
-                 /*L'utente sta provando a registrarsi con una mail già usata per la registrazione
-                 Viene reindirizzato al login...l'ideale sarebbe comunicare all'utente che o si logga 
-                 o cambia mail per effettuare la registrazione*/
-                 header('HTTP/1.1 301 Moved Permanently');
-                 header('Location: login');
+        
+        $db = USingleton::getInstance('FDBmanager');
+        $sessione = USingleton::getInstance('USession');
+        
+        $mail = $_POST['mail'];
+        $psw = md5($_POST['psw']);
+        
+        if($mail != "" && $psw != ""){
+            $utente = new EUtente_Reg("","",$mail,$psw);
+            $psw_db = $db->load($utente);
+            $registrato = $db->exist($utente);
+            /*var_dump($registrato);
+            echo '<pre>';
+            echo $psw_db[0];
+            echo '</pre>';
+            echo '<pre>';
+            echo $psw;
+            echo '</pre>';*/
+            if($registrato && $psw === $psw_db[0]){
+                var_dump($registrato);
+                $sessione->imposta_valore('logged',true);
+                header('HTTP/1.1 301 Moved Permanently');
+                header('Location: home.html');
+                /*qui dobbiamo trovare il modo di rimandare l'utente 
+                 * all'ordine se lo stava effettuando oppure di mandarlo alla
+                 * home...credo che possiamo farlo con la sessione
+                 */
             }
-            else{
-                $registrato = $db->store($utente);
-                if($registrato){
-                    //la registrazione è avvenuta con successo l'utente viene reinderizzato nella bellissima
-                    //pagina dove puo scegliere se andare alla home o procedere con l'ordine
-                    $sessione->imposta_valore('logged',$registrato);
-                    header('HTTP/1.1 301 Moved Permanently');
-                    header('Location: ValidazioneUtente');
-                }
-                
-                
+            else if($registrato && $psw != $psw_db){
+                header('HTTP/1.1 301 Moved Permanently');
+                header('Location: login');
+                /*qui dobbiamo trovare il modo di comunicare all'utente
+                 * che la password inserita è sbagliata
+                 */
             }
-             
+            else if(!$registrato){
+                header('HTTP/1.1 301 Moved Permanently');
+                header('Location: signin');
+                /*qui dobbiamo trovare il modo di dire all'utente che non 
+                 * è ancora registrato e che deve registrarsi
+                 */
+            }
+            
+        }
+            
+        
+        
     }
-   }
 }
