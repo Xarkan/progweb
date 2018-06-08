@@ -4,14 +4,6 @@ body {
   background-color: rgb(200, 200, 235);
 }
 
-
-#header {
-	background-color: rgb(40, 29, 22);
-	color: rgb(240, 237, 237);
-	padding: 8px;
-	margin-bottom: 0px;
-}
-
 #home-link {
   color: rgb(240, 237, 237);
 }

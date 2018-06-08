@@ -19,7 +19,7 @@ function setTable(risposta) {
     var cod_esp = splitted_url[splitted_url.length - 1];
     
     for(let i = 0; i < risposta[cod_e].eventi[cod_esp].partecipazioni.length ; i++) {
-        var html = '<tr>'+
+        var html = '<form method="post" action="/TicketStore/ordine"  class="form-signin">'+'<tr>'+
             '<td>'+
                 '<div class="alert alert-secondary" role="alert">'+risposta[cod_e].eventi[cod_esp].partecipazioni[i].zona+'</div>'+
             '</td>'+
@@ -27,8 +27,8 @@ function setTable(risposta) {
                 '<div class="alert alert-secondary" role="alert">'+risposta[cod_e].eventi[cod_esp].partecipazioni[i].prezzo+'</div>'+
             '</td>'+
             '<td>'+
-                '<div class="input-group" id="num-bigl">'+
-                    '<select class="custom-select" id="inputGroupSelect04">'+
+                '<div class="input-group" id="num-bigl" name="num-bigl">'+
+                    '<select class="custom-select" id="inputGroupSelect04" name="num_bigl">'+
                         '<option selected></option>'+
                         '<option value="1">1</option>'+
                         '<option value="2">2</option>'+
@@ -38,9 +38,10 @@ function setTable(risposta) {
                 '</div>'+
             '</td>'+
             '<td>'+
-                '<button class="btn btn-warning" type="button">Carrello</button>'+
+                '<button class="btn btn-warning" type="submit">Carrello</button>'+
             '</td>'+
-        '</tr>';
+        '</tr>'+
+        '</form>';
         table = table + html;      
     }
     let nome = '<h1 class="display-4">'+risposta[cod_e].nome+'</h1>';
@@ -48,6 +49,12 @@ function setTable(risposta) {
     let html_command_immagine = '<img src=/TicketStore/'+risposta[cod_e].img+' class="img-fluid" alt="Responsive image" id="side-img">';
     document.getElementById("immagine").innerHTML = html_command_immagine;
     document.getElementById("tr").innerHTML = table;
+    
+    /*var x = document.createElement("STYLE");
+    var t = document.createTextNode("body {background: url("+risposta[cod_e].img+") no-repeat fixed center;}");
+    //var t = document.createTextNode("body {background: url(View/imgs/Deep.jpg) no-repeat fixed center;}");
+    x.appendChild(t);
+    document.head.appendChild(x);*/
 }
 
 

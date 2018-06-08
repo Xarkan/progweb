@@ -70,7 +70,11 @@ class EOrdine {
     function setNomeEvento($nome) {
         $this->nomeEvento = $nome;
     }
-
+    
+    function setEvento(EEventoSpecifico $evento) {
+        $this->evento = $evento;
+    }
+    
     function setData($data) {
         $this->dataAcquisto = $data;
     }
