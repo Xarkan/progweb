@@ -46,11 +46,13 @@ class CFrontController {
                   
             }
         $fmethod = $this->finalmethod;
-        $p2 = '';
-        if(isset($this->param2)) {
-            $p2 = ',';
+
+        if($this->param2 == '') {
+            return $object->$fmethod( $this->param1 );
         }
-        return $object->$fmethod( $this->param1.$p2.$this->param2 );
+        else {
+            return $object->$fmethod( $this->param1, $this->param2 );
+        }
       }
     
 

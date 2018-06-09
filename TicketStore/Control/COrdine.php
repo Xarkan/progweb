@@ -4,15 +4,18 @@
 class COrdine {
     
     public function getOrdine($param) {
+        if($param == 'json') {
         $sessione = USingleton::getInstance('USession');
         $ordine = $sessione->recupera_valore('ordine');
-       
         $view = USingleton::getInstance('VOrdine');
         $view->print_json($ordine);
         
         //$cod_e = $sessione->recupera_valore('cod_e');
         //$cod_esp = $sessione->recupera_valore('cod_esp');
-        
+        }
+        else {
+            header('Location: /TicketStore/ordine');
+        }
         
     }
     

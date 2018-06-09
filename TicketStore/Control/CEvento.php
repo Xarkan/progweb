@@ -6,8 +6,8 @@ class CEvento {
         $sessione = USingleton::getInstance('USession');
         $ordine = USingleton::getInstance('EOrdine');
         
-        $decoded = json_decode($sessione->recupera_valore('eventi'),true);
-        $ordine->setNomeEvento($decoded[$id]["nome"]);
+        $eventi = $sessione->recupera_valore('eventi');
+        $ordine->setNomeEvento($eventi[$id]->getNome());
         $sessione->imposta_valore('ordine',$ordine);
         /*$view = USingleton::getInstance('VEvento');
         $view->setLuoghiDate($id);*/

@@ -4,13 +4,13 @@
 class EOrdine {
     
     //attributi
-    private $id; //string
-    private $nomeEvento; //string 
-    private $evento; //EEventoSpecifico
-    private $dataAcquisto; //DataTime
-    private $utente; //Utente
-    private $items = []; //array(Partecipazione)
-    private $pagato = false; //bool
+    public $id; //string
+    public $nomeEvento; //string 
+    public $evento; //EEventoSpecifico
+    public $dataAcquisto; //DataTime
+    public $utente; //Utente
+    public $items = []; //array(Partecipazione)
+    public $pagato = false; //bool
     
     //metodi
     public function __construct() {
