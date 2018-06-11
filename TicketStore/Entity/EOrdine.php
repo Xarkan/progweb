@@ -10,6 +10,7 @@ class EOrdine {
     public $dataAcquisto; //DataTime
     public $utente; //Utente
     public $items = []; //array(Partecipazione)
+    public $prezzo_tot;
     public $pagato = false; //bool
     
     //metodi
@@ -91,7 +92,7 @@ class EOrdine {
         for($i=0; $i<count($this->getItems); $i++) {
             $tot = $tot + $this->getItems[$i]->getPrezzo();
         }
-        return $tot;
+        $this->prezzo_tot = $tot;
     }
 
 
