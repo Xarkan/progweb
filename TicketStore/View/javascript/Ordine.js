@@ -4,8 +4,9 @@ function getAndFill() {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
-        setDettagli(risposta);
-        setTable(risposta);
+        setDettagli(risposta.ordine);
+        setTable(risposta.ordine);
+        setImg(risposta);
     }
 };
     xmlhttp.open("GET","/TicketStore/ordine/json", true);
@@ -16,12 +17,12 @@ function getAndFill() {
 function setTable(risposta) {
     var table = '';
 
-    for(let i = 0; i < risposta.partecipazioni.length ; i++) {
+    for(let i = 0; i < risposta.items.length ; i++) {
         let html = '<div class="biglietti">'+
                 '<ul>'+
-                    '<li>Zona: '+risposta.partecipazioni[i].zona+'</li>'+
-                    '<li>Posto: '+risposta.partecipazioni[i].posto+'</li>'+
-                    '<li>Prezzo: '+risposta.partecipazioni[i].prezzo+'</li>'+
+                    '<li>Zona: '+risposta.items[i].zona.nome+'</li>'+
+                    '<li>Posto: '+risposta.items[i].posto+'</li>'+
+                    '<li>Prezzo: '+risposta.items[i].prezzo+'</li>'+
                     '<li><button type="button" class="btn btn-warning">X</button></li>' +   
                 '</ul>'+    
             '</div>';
@@ -32,13 +33,17 @@ function setTable(risposta) {
 }
 
 function setDettagli(risposta) {
-    let html = '<li><h4>'+risposta.nome+'</h4></li>'+
+    let html = '<li><h4>'+risposta.nomeEvento+'</h4></li>'+
                 '<li><h6>'+risposta.data+'</h6></li>'+
                 '<li><h6>'+risposta.citta+'</h6></li>'+
                 '<li><h6>'+risposta.struttura+'</h6></li>'+
                 '<li><h6>'+risposta.via+'</h6></li>';
     
     document.getElementById("dettagli").innerHTML = html;
+    
+}  
+
+function setImg(risposta) {
     let path_img = '<img src="'+risposta.img+'" class="img-fluid" alt="Responsive image" id="side-img">';
     document.getElementById("box-img").innerHTML = path_img;
-}        
+}

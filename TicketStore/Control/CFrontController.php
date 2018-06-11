@@ -6,6 +6,7 @@ class CFrontController {
     private $finalmethod;
     private $param1 = '';
     private $param2 = '';
+    private $param3 = '';
     private $file;
             
     function __construct() {        
@@ -21,6 +22,9 @@ class CFrontController {
             $this->param1 = $result[1];
             if(isset($result[2])) {
                 $this->param2 = $result[2];
+                if(isset($result[3])) {
+                    $this->param3 = $result[3];
+                }
             }
         }
        
@@ -51,7 +55,12 @@ class CFrontController {
             return $object->$fmethod( $this->param1 );
         }
         else {
-            return $object->$fmethod( $this->param1, $this->param2 );
+            if($this->param3 == '') {
+                return $object->$fmethod( $this->param1, $this->param2 );
+            }
+            else {
+                return $object->$fmethod( $this->param1, $this->param2, $this->param3 );
+            }
         }
       }
     

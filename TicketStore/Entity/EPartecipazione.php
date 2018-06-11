@@ -12,6 +12,10 @@ class EPartecipazione {
         $this->disp = $disp;
     }
     
+    public function setZona($zona) {
+        $this->zona = $zona;
+    }
+    
     public function controllaDisp() {
         if(!$this->zona->getPostiDisp() > 0) {
             $this->disp = false;

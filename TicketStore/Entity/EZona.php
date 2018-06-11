@@ -17,12 +17,17 @@ class EZona {
             }*/
         }
         public function assegnaPosto() {
-            $posto = array_pop($this->posti);
+            $posto = $this->posti[count($this->posti) - 1];
             return $posto;
         }
         
         public function getPostiDisp() {
             $postiDisp = count($this->posti);
             return $postiDisp;
+        }
+        
+        public function confermaPosto() {
+            $posto = array_pop($this->posti);
+            //roba di database
         }
 }

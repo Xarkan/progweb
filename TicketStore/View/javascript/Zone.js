@@ -19,7 +19,7 @@ function setTable(risposta) {
     var cod_esp = splitted_url[splitted_url.length - 1];
     
     for(let i = 0; i < risposta[cod_e].eventi[cod_esp].partecipazioni.length ; i++) {
-        var html = '<form method="post" action="/TicketStore/ordine"  class="form-signin">'+'<tr>'+
+        var html = '<form method="post" action="/TicketStore/ordine/'+cod_e+'/'+cod_esp+'/'+i+'"  class="form-signin">'+'<tr>'+
             '<td>'+
                 '<div class="alert alert-secondary" role="alert">'+risposta[cod_e].eventi[cod_esp].partecipazioni[i].zona+'</div>'+
             '</td>'+
