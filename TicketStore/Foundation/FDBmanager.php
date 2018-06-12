@@ -113,6 +113,7 @@ return $stored;
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $evento_spec = new FEventospecifico();
     $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+    return $stored;
 }
 
 public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
@@ -153,8 +154,9 @@ public function delete($object) {
         $evento = new FEvento();
         $deleted = $evento->deleteevento($object);
     }
-    if($object instanceof Utente_Reg) {
-        $deleted = $this->deleteutente($object);
+    if($object instanceof EUtente_Reg) {
+        $utente = new FUtente_Reg();
+        $deleted = $utente->deleteutente($object);
     }
 return $deleted;
 }

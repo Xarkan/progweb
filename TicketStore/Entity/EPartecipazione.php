@@ -23,7 +23,7 @@ class EPartecipazione {
     }
     
     public function getPostiAssegnati($num) {
-        return $this->zone->assegnaPosti($num);
+        return $this->zona->assegnaPosti($num);
     }
     
     public function getDisp() {

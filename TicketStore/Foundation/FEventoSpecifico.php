@@ -35,20 +35,51 @@ class FEventospecifico extends FDBmanager {
     }
     public function storeeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     
-    $sql = "INSERT INTO evento_spec"
+    $cod = $this->connection->quote($codes);
+    $dat = $this->connection->quote($data);
+    $luo = $this->connection->quote($luogo);
+    $tip = $this->connection->quote($tipo);
+    $cas = $this->connection->quote($casa);
+    $osp = $this->connection->quote($ospite);
+    $com = $this->connection->quote($compagnia);
+    $art = $this->connection->quote($artista);
+    /*echo '<pre>';
+    echo $cod;
+    echo $dat;
+    echo $luo;
+    echo $tip;
+    echo $cas;
+    echo $osp;
+    echo $com;
+    echo $art;
+    echo '</pre>';*/
+    
+    $statement = $this->connection->prepare("INSERT INTO evento_spec (code,data_evento,indirizzo,tipo,casa,ospite,compagnia,artista) VALUES(:code,:data_evento,:indirizzo,:tipo,:casa,:ospite,:compagnia,:artista)");
+    $statement->bindParam(':code', $cod, PDO::PARAM_STR, 255);
+    $statement->bindParam(':data_evento', $dat);
+    $statement->bindParam(':indirizzo', $luo, PDO::PARAM_STR, 255);
+    $statement->bindParam(':tipo', $tip, PDO::PARAM_STR, 255);
+    $statement->bindParam(':casa', $cas, PDO::PARAM_STR, 255);
+    $statement->bindParam(':ospite', $osp, PDO::PARAM_STR, 255);
+    $statement->bindParam(':compagnia', $com, PDO::PARAM_STR, 255);
+    $statement->bindParam(':artista', $art, PDO::PARAM_STR, 255);
+    
+    $statement->execute();
+    //var_dump($statement->execute());
+    /*$sql = "INSERT INTO evento_spec "
           .'VALUES ('.$this->connection->quote($codes).','
           .$this->connection->quote($data).","
           .$this->connection->quote($luogo).","
           .$this->connection->quote($tipo).","
           .$this->connection->quote($casa).","
           .$this->connection->quote($ospite).","
-          .$compagnia.","
-          .$artista."".")";
+          .$this->connection->quote($compagnia).","
+          .$this->connection->quote($artista)."".")";
     $result = $this->connection->exec($sql);
-    echo $sql;
-    var_dump($result);
+    //echo $sql;
+    //var_dump($result);
     return $result;
-    
+    */
     }
     public function deleteeventospec($codes,$data) {
 

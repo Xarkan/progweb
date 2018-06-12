@@ -64,10 +64,11 @@ class CAmministrazione {
         $artista = $_POST['artista'];
         if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
             if($operazione == 'inserimento'){
-                echo '<pre>';
-                print_r($_POST);
-                echo '</pre>';
-               $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista); 
+               $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+               echo '<pre>';
+               print_r($_POST);
+               echo '</pre>';
+               //var_dump($stored);
             }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
