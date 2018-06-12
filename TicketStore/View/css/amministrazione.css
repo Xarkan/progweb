@@ -1,0 +1,41 @@
+body{
+    background-color: #666666;
+}
+#header {
+	background-color: rgb(40, 29, 22);
+	color: rgb(240, 237, 237);
+	padding: 8px;
+	margin-bottom: 0px;
+        margin-left: 0px;
+}
+input{
+    width: 120px;
+    background-color: whitesmoke;
+}
+td{
+    text-align: center;
+    padding: 25px;
+    color: whitesmoke;
+    
+}
+legend{
+    margin-left: 21px;
+    color: whitesmoke;
+}
+#mail{
+    width: 250px;
+}
+
+#btn{
+    margin-left: 1200px;
+    margin-bottom: 10px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: bold 12px Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 10px 20px;
+    border: solid 1px black;
+    background: whitesmoke;
+}
