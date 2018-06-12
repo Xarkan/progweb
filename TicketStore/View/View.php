@@ -2,6 +2,11 @@
 
 class View {
     
+    public function print_json($object) {
+        $json = json_encode($object);
+        echo $json;
+    }
+    
     public function operazioneInvalida() {
         header('Location: /TicketStore/View/html/not-found.html');
     }

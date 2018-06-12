@@ -23,6 +23,15 @@ class FEvento extends FDBmanager {
         return $rows;
         
     }
+    
+    public function loadEvento($cod_e) {
+        $sql = "SELECT * FROM evento WHERE code=".$this->connection->quote($cod_e);
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $rows;
+    }
+   
 
     public function storeevento(EEvento $object) {
 

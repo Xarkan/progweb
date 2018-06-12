@@ -2,7 +2,7 @@
 
 class VEvento {
     
-    public function setLuoghiDate($id) {
+    public function set_html($id) {
 
         header('Location: /TicketStore/eventi/'.$id);
     }

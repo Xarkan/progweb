@@ -8,7 +8,7 @@ function getAndFill() {
         setCarousel(risposta);
     }
 };
-    xmlhttp.open("GET","/TicketStore/home", true);
+    xmlhttp.open("GET","/TicketStore/Json/home", true);
     xmlhttp.send();
 }
 
@@ -21,7 +21,7 @@ function setTable(risposta) {
         table += '<div class="row">';
         for (let c = 0; c < 3 && c < rest; c++) {
             let html_command = '<div class="card" style="width: 18rem;">' +
-            '<a href="/TicketStore/evento/'+ k +'">' +
+            '<a href="/TicketStore/evento/'+ risposta[k].id +'">' +
             '<img class="card-img-top" src="/TicketStore/'+ risposta[k].img+'" alt="Card image cap"></a>' +
             '<div class="card-body"><p class="card-text">'+risposta[k].nome+'</p></div></div>';
             table += '<div class="col">' + html_command + '</div>';   
@@ -34,7 +34,7 @@ function setTable(risposta) {
 }
 
 function setCarousel(risposta) {
-    html_command = '<div class="carousel-item active" id="carousel-imgs">'
+    let html_command = '<div class="carousel-item active" id="carousel-imgs">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[0].img+'" alt="First slide"></div>'
         +'<div class="carousel-item">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[1].img+'" alt="Second slide"></div>'

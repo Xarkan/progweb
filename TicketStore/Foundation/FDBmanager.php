@@ -54,14 +54,13 @@ return $found;
     
 
    
-public function load($object) {
+public function load($object, $param = '') {
         
 
     if($object instanceof EEvento) {
         $evento = new FEventospecifico();
         $result = $evento->loadDataLuogoPrezzo($object);
     }
-
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
         $result = $utente->loadutente($object);
@@ -70,9 +69,31 @@ public function load($object) {
         $biglietti = new FBiglietto();
         $result = $biglietti->loadbiglietticomprati($object);
     }
-    if($object == "eventi") {
-        $evento = new FEvento();
-        $result = $evento->loadeventi();
+    if(is_string($object)) {
+        if($object == "eventi") {
+            $evento = new FEvento();
+            $result = $evento->loadeventi();
+        }else{ 
+            if($object == "home") {
+                $result = $this->recuperoDati();
+            } //allora è un codice di evento
+            if($param == '' && $object != "home") { 
+                $evento = USingleton::getInstance('FEvento');
+                $evento_sp = USingleton::getInstance('FEventoSpecifico');
+                $result1 = $evento->loadEvento($object);
+                $path_img = $result1[0]['path_img']."\\".$result1[0]['nome_img'];
+                
+                $result2 = $evento_sp->loadEventiSp($object);
+                
+                $evento = new EEvento($result1[0]['code'], $path_img, $result1[0]['nome']);
+            }        
+            if($param != '' && $object != "home") {
+                $evento = USingleton::getInstance('FEventoSpecifico');
+                $result = $evento->loadEventoSp($object,$param);
+            }
+        }
+        
+        
     }
 return $result;
 }
