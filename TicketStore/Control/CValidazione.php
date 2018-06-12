@@ -27,6 +27,7 @@ class CValidazione {
                 $sessione->imposta_valore('logged',true);
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: home.html');
+                
                 /*qui dobbiamo trovare il modo di rimandare l'utente 
                  * all'ordine se lo stava effettuando oppure di mandarlo alla
                  * home...credo che possiamo farlo con la sessione

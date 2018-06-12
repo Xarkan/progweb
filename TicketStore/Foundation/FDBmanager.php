@@ -110,6 +110,17 @@ public function store($object) {
     }
 return $stored;
 }
+public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
+    $evento_spec = new FEventospecifico();
+    $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+}
+
+public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
+    $sql = "INSERT INTO partecipazione"
+         . "VALUES (".$codep.",".$datap.",".$zona.",".$indirizzop.",".$prezzo.")";
+    $stored = $this->connection->exec($sql);
+    return $stored;
+}
 
 //-----------------------------update methods-------------------------------
 
@@ -147,7 +158,21 @@ public function delete($object) {
     }
 return $deleted;
 }
+public function delete_es($codes,$data) {
+    $sql = "DELETE FROM evento_spec WHERE code = ".$codes." AND data_evento = ".$data;
+    $deleted = $this->connection->exec($sql);
+    return $deleted;
+}
 
+public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
+    $sql = "DELETE FROM partecipazione WHERE code = ".$codep." AND data_evento = ".$datap." AND zona = ".$zona
+          ." AND indirizzo = ".$indirizzop." AND prezzo = ".$prezzo;
+    $deleted = $this->connection->exec($sql);
+    return $deleted;
+}
+
+
+//------------------------------------------------------------------------------------------------------------
  
       
     public function recuperoDati()  {

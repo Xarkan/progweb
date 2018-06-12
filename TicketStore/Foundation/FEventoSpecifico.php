@@ -33,4 +33,27 @@ class FEventospecifico extends FDBmanager {
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
     }
+    public function storeeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
+    
+    $sql = "INSERT INTO evento_spec"
+          .'VALUES ('.$this->connection->quote($codes).','
+          .$this->connection->quote($data).","
+          .$this->connection->quote($luogo).","
+          .$this->connection->quote($tipo).","
+          .$this->connection->quote($casa).","
+          .$this->connection->quote($ospite).","
+          .$compagnia.","
+          .$artista."".")";
+    $result = $this->connection->exec($sql);
+    echo $sql;
+    var_dump($result);
+    return $result;
+    
+    }
+    public function deleteeventospec($codes,$data) {
+
+        $sql = "DELETE FROM evento_spec WHERE code = ".$codes." AND data_evento = ".$data; 
+        $result = $this->connection->exec($sql);
+        return $result;
+    }
 }

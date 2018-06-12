@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Amministrazione</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form method="post" action="Amministrazione">
+                <fieldset>
+                    <legend>Possibili Operazioni</legend>   
+                      <table>
+                        <tr> 
+                          <td> Operazione</td>
+                          <td> <select name="Operazione">
+                                  
+                                     <option>inserimento</option>
+                                     <option>modifica</option>
+                                     <option>cancellazione</option>
+                                     
+                               </select>
+                           </td>
+                        </tr> 
+                      </table>
+                </fieldset>   
+                <fieldset>
+                    <legend>Tabella</legend>   
+                      <table>
+                        <tr> 
+                          <td>Tabella su cui agire</td>
+                          <td> <select name="Tabella">
+                                  
+                                     <option>evento</option>
+                                     <option>utente_r</option>
+                                     <option>evento_spec</option>
+                                     <option>partecipazione</option>
+                                     
+                              </select>
+                          </td>
+                        </tr> 
+                     </table>
+                </fieldset>
+                <fieldset>
+                    <legend>Dati da inserire/modificare/cancellare-evento</legend>
+                    <table>
+                        <tr>
+                            <td>codice_evento<input type="text" name="codice_evento"></td>
+                            <td>nome<input type="text" name="nome_evento"></td>
+                            <td>path_immagine<input type="text" name="path_immagine"></td>
+                            <td>nome_immagine<input type="text" name="nome_immagine"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>Cancellazione-utente_r</legend>
+                    <table>
+                        <tr>
+                            <td>mail<input type="email" name="mail"></td>
+                        </tr>
+                    </table>
+                </fieldset> 
+                <fieldset>
+                    <legend>Dati da inserire/modificare/cancellare-evento_specifico</legend>
+                    <table>
+                        <tr>
+                            <td>codice_evento<input type="text" name="codes"></td>
+                            <td>data_evento<input type="date" name="data_es"></td>
+                            <td>indirizzo<input type="text" name="indirizzo"></td>
+                            <td>Tipo <select name="tipo">
+                                  
+                                     <option>Partita</option>
+                                     <option>Spettacolo</option>
+                                     <option>Concerto</option>
+                                     
+                                 </select>
+                            </td>
+                            <td>Casa<input type="text" name="casa"></td>
+                            <td>Ospite<input type="text" name="ospite"></td>
+                            <td>Compagnia<input type="text" name="compagnia"></td>
+                            <td>Artista<input type="text" name="artista"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>Dati da inserire/modificare/cancellare-partecipazioni</legend>
+                    <table>
+                        <tr>
+                            <td>codice_evento<input type="text" name="codep"></td>
+                            <td>data_evento<input type="date" name="datap"></td>
+                            <td>zona<input type="text" name="zona"></td>
+                            <td>indirizzo<input type="text" name="indirizzop"></td>
+                            <td>prezzo<input name="prezzo"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <button type="submit">Procedi</button>
+            </form>
+        </div>
+    </body>
+</html>
