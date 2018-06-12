@@ -33,9 +33,9 @@ function setTable(risposta,codice) {
         table = table + html_command;    
     }
     document.getElementById("table-section").innerHTML = table;
-    let html_command_nome = '<h4>'+risposta[codice].nome+'</h4>';
+    let html_command_nome = '<h4>'+risposta.nome+'</h4>';
     document.getElementById("nome").innerHTML = html_command_nome;
-    let html_command_immagine = '<img src=/TicketStore/'+risposta[codice].img+' class="img-fluid" alt="Responsive image">';
+    let html_command_immagine = '<img src=/TicketStore/'+risposta.img+' class="img-fluid" alt="Responsive image">';
     document.getElementById("immagine").innerHTML = html_command_immagine;
 
 }   

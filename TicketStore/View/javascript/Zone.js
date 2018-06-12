@@ -1,30 +1,41 @@
 
 function getAndFill() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var risposta = JSON.parse(xmlhttp.responseText);
-        setTable(risposta);
-    }
-};
-    xmlhttp.open("GET","/TicketStore/home", true);
-    xmlhttp.send();
-}
-
-function setTable(risposta) {    
-    var table = '';
     var url =  window.location.href;
     var splitted_url = url.split("/");
     var cod_e = splitted_url[splitted_url.length - 2];
     var cod_esp = splitted_url[splitted_url.length - 1];
     
-    for(let i = 0; i < risposta[cod_e].eventi[cod_esp].partecipazioni.length ; i++) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var risposta = JSON.parse(xmlhttp.responseText);
+        setTable(risposta, cod_e, cod_esp);
+    }
+};
+    xmlhttp.open("GET","/TicketStore/Json/"+cod_e+"/"+cod_esp, true);
+    xmlhttp.send();
+    
+    var xmlhttp2 = new XMLHttpRequest();
+    xmlhttp2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var risposta2 = JSON.parse(xmlhttp2.responseText);
+        setDettagli(risposta2);
+    }
+};    
+    xmlhttp2.open("GET","/TicketStore/Json/"+cod_e, true);
+    xmlhttp2.send();
+}
+
+function setTable(risposta, cod_e, cod_esp) {    
+    var table = '';
+ 
+    for(let i = 0; i < risposta.partecipazioni.length ; i++) {
         var html = '<form method="post" action="/TicketStore/ordine/'+cod_e+'/'+cod_esp+'/'+i+'"  class="form-signin">'+'<tr>'+
             '<td>'+
-                '<div class="alert alert-secondary" role="alert">'+risposta[cod_e].eventi[cod_esp].partecipazioni[i].zona+'</div>'+
+                '<div class="alert alert-secondary" role="alert">'+risposta.partecipazioni[i].zona+'</div>'+
             '</td>'+
             '<td>'+
-                '<div class="alert alert-secondary" role="alert">'+risposta[cod_e].eventi[cod_esp].partecipazioni[i].prezzo+'</div>'+
+                '<div class="alert alert-secondary" role="alert">'+risposta.partecipazioni[i].prezzo+'</div>'+
             '</td>'+
             '<td>'+
                 '<div class="input-group" id="num-bigl" name="num-bigl">'+
@@ -44,10 +55,7 @@ function setTable(risposta) {
         '</form>';
         table = table + html;      
     }
-    let nome = '<h1 class="display-4">'+risposta[cod_e].nome+'</h1>';
-    document.getElementById("nome-evento").innerHTML = nome;
-    let html_command_immagine = '<img src=/TicketStore/'+risposta[cod_e].img+' class="img-fluid" alt="Responsive image" id="side-img">';
-    document.getElementById("immagine").innerHTML = html_command_immagine;
+    
     document.getElementById("tr").innerHTML = table;
     
     /*var x = document.createElement("STYLE");
@@ -55,6 +63,13 @@ function setTable(risposta) {
     //var t = document.createTextNode("body {background: url(View/imgs/Deep.jpg) no-repeat fixed center;}");
     x.appendChild(t);
     document.head.appendChild(x);*/
+}
+
+function setDettagli(risposta) {
+    let nome = '<h1 class="display-4">'+risposta.nome+'</h1>';
+    document.getElementById("nome-evento").innerHTML = nome;
+    let html_command_immagine = '<img src=/TicketStore/'+risposta.img+' class="img-fluid" alt="Responsive image" id="side-img">';
+    document.getElementById("immagine").innerHTML = html_command_immagine;
 }
 
 

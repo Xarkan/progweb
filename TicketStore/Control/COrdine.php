@@ -23,7 +23,7 @@ class COrdine {
     public function postOrdine($id_e, $id_esp, $id_part) {
         $sessione = USingleton::getInstance('USession');
         $ordine = $sessione->recupera_valore('ordine');
-        $eventi = $sessione->recupera_valore('eventi');
+        
         $part = $eventi[$id_e]->getEventoSingolo($id_esp)->selezionePartecipazione($id_part);
         $num = $_POST['num_bigl'];
 

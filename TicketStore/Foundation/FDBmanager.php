@@ -78,18 +78,10 @@ public function load($object, $param = '') {
                 $result = $this->recuperoDati();
             } //allora è un codice di evento
             if($param == '' && $object != "home") { 
-                $evento = USingleton::getInstance('FEvento');
-                $evento_sp = USingleton::getInstance('FEventoSpecifico');
-                $result1 = $evento->loadEvento($object);
-                $path_img = $result1[0]['path_img']."\\".$result1[0]['nome_img'];
-                
-                $result2 = $evento_sp->loadEventiSp($object);
-                
-                $evento = new EEvento($result1[0]['code'], $path_img, $result1[0]['nome']);
+                $result = $this->istanziaEvento($object);
             }        
-            if($param != '' && $object != "home") {
-                $evento = USingleton::getInstance('FEventoSpecifico');
-                $result = $evento->loadEventoSp($object,$param);
+            if($param != '' && $object != "home") {                
+                $result = $this->istanziaEventiSp($object,$param);
             }
         }
         
@@ -156,58 +148,65 @@ public function delete($object) {
 return $deleted;
 }
 
-    
-    public function recuperoDati() {
-        $sql_e = "SELECT  * FROM evento LIMIT 6";
-        $result = $this->connection->query($sql_e);
-        $rows_e = $result->fetchAll(PDO::FETCH_ASSOC);
-        $z = 0;
-               
-        //ciclo pere gli eventi specifici
-        for ($i = 0; $i < count($rows_e); $i++) { //viene fatto 6 volte
-            $sql_es = "SELECT * FROM evento_spec WHERE code = "
-                    .$this->connection->quote($rows_e[$i]['code']);
-            $result = $this->connection->query($sql_es);
-            $rows_es = $result->fetchAll(PDO::FETCH_ASSOC);
-              
-            
-            //ciclo per le partecipazioni
-            for ($j = 0; $j < count($rows_es); $j++) {
-                $sql_p = "SELECT partecipazione.*, luogo.struttura, zona.capacita "
-                        . "FROM partecipazione, luogo, zona WHERE code = "
-                        .$this->connection->quote($rows_es[$j]['code'])." AND partecipazione.indirizzo = "
-                        .$this->connection->quote($rows_es[$j]['indirizzo'])." AND data_evento = "
-                        .$this->connection->quote($rows_es[$j]['data_evento'])
-                        ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo"
-                        ." AND partecipazione.indirizzo = luogo.indirizzo";
-               
-                $resultp = $this->connection->query($sql_p);
-                $rows_pz = $resultp->fetchAll(PDO::FETCH_ASSOC);
-
-
-                $count = count($rows_pz);
-                for($k = 0;$k < $count;$k++){
-                    $part = new EPartecipazione($rows_pz[$k]['zona'],$rows_pz[$k]['prezzo'],true);
-                    $array_part[$k] = $part;
-                    list($citta, $via) = explode(", ", $rows_es[$j]['indirizzo']);
-                    $luogo = new ELuogo($citta, $via, $rows_pz[$k]['struttura']);
-                    }
-
-                $tipo = $rows_es[$j]['tipo'];
-                $classe = 'E'.$tipo;
-                
-                $evento = new $classe($luogo,$rows_es[$j]['data_evento'],$array_part);
-                $array_eventi_spec[$j] = $evento;
-
-                unset($array_part);
-            }
-            $path_img = $rows_e[$i]['path_img']."\\".$rows_e[$i]['nome_img'];
-            $tour = new EEvento($rows_e[$i]['code'],$path_img,$rows_e[$i]['nome'], $array_eventi_spec);
-            $lista_eventi_generici[$i] = $tour;
-            unset($array_eventi_spec);
-        
+ 
+      
+    public function recuperoDati()  {
+        $fevento = USingleton::getInstance('FEvento');
+        $result = $fevento->loadeventiHome();
+        for ($i = 0; $i < count($result); $i++) {
+            $eventi[$i] = $this->istanziaEvento($result[$i]['code']);
         }
-        return $lista_eventi_generici;
-      }
+        return $eventi;
+    }
+      
+    private function istanziaEvento($code) {
+        $fevento = USingleton::getInstance('FEvento');
+        $result = $fevento->loadEvento($code);
+        $path_img = $result[0]['path_img']."\\".$result[0]['nome_img'];
+        $eventi_spec = $this->istanziaEventiSp($code);
+        $tour = new EEvento($result[0]['code'],$path_img,$result[0]['nome'], $eventi_spec);
+        return $tour;
+    }  
+    
+    private function istanziaEventiSp($code, $data = '') {
+        $feventosp = USingleton::getInstance('FEventoSpecifico');
+        if($data == '') {
+            $result = $feventosp->loadEventiSp($code);
+            for ($i = 0; $i < count($result); $i++) {
+                $eventi_spec[$i] = $this->getLuogoZonaPart($result[$i]);
+            }
+        }
+        else {
+            $result = $feventosp->loadEventoSp($code,$data);
+            $eventi_spec = $this->getLuogoZonaPart($result[0]);
+        }
+        return $eventi_spec;
+    }
+      
+    private function getLuogoZonaPart($boh) { //boh è na roba di ar
+        $sql= "SELECT partecipazione.*, luogo.struttura, zona.capacita "
+                ."FROM partecipazione, luogo, zona WHERE code = "
+                .$this->connection->quote($boh['code'])." AND partecipazione.indirizzo = "
+                .$this->connection->quote($boh['indirizzo'])." AND data_evento = "
+                .$this->connection->quote($boh['data_evento'])
+                ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo"
+                ." AND partecipazione.indirizzo = luogo.indirizzo";
+               
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        for($k = 0;$k < count($rows);$k++){
+            $part = new EPartecipazione($rows[$k]['zona'],$rows[$k]['prezzo'],true);
+            $array_part[$k] = $part;
+            list($citta, $via) = explode(", ", $boh['indirizzo']);
+            $luogo = new ELuogo($citta, $via, $rows[$k]['struttura']);
+        }
+
+        $tipo = $boh['tipo'];
+        $classe = 'E'.$tipo;
+                
+        $evento = new $classe($luogo,$boh['data_evento'],$array_part);
+        return $evento;
+    }
 
 }
