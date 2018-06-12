@@ -8,11 +8,10 @@ class COrdine {
         $sessione = USingleton::getInstance('USession');
         $dettagli_ordine['ordine'] = $sessione->recupera_valore('ordine');
         $dettagli_ordine['img'] = $sessione->recupera_valore('img');
+        //$dettagli_ordine['posti'] = $sessione->recupera_valore('posti');
         $view = USingleton::getInstance('VOrdine');
         $view->print_json($dettagli_ordine);
         
-        //$cod_e = $sessione->recupera_valore('cod_e');
-        //$cod_esp = $sessione->recupera_valore('cod_esp');
         }
         else {
             header('Location: /TicketStore/carrello');
@@ -22,14 +21,18 @@ class COrdine {
     
     public function postOrdine($id_e, $id_esp, $id_part) {
         $sessione = USingleton::getInstance('USession');
+        $db = USingleton::getInstance('FDBmanager');
         $ordine = $sessione->recupera_valore('ordine');
         
-        $part = $eventi[$id_e]->getEventoSingolo($id_esp)->selezionePartecipazione($id_part);
+        $evento_sp = $db->load($id_e, $id_esp);
+        $part = $evento_sp->selezionePartecipazione($id_part);
         $num = $_POST['num_bigl'];
-
-        $zona = new EZona("pippo", 13);
-        $part->setZona($zona);
+                
         $ordine->addElementi($part, $num);
+        
+        $posti = $part->getPostiAssegnati($num);
+        $sessione->imposta_valore('posti',$posti);
+        
         $sessione->imposta_valore('ordine',$ordine);
         $view = USingleton::getInstance('VOrdine');
         $view->set_html();

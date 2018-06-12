@@ -32,7 +32,7 @@ function setTable(risposta, cod_e, cod_esp) {
     for(let i = 0; i < risposta.partecipazioni.length ; i++) {
         var html = '<form method="post" action="/TicketStore/ordine/'+cod_e+'/'+cod_esp+'/'+i+'"  class="form-signin">'+'<tr>'+
             '<td>'+
-                '<div class="alert alert-secondary" role="alert">'+risposta.partecipazioni[i].zona+'</div>'+
+                '<div class="alert alert-secondary" role="alert">'+risposta.partecipazioni[i].zona.nome+'</div>'+
             '</td>'+
             '<td>'+
                 '<div class="alert alert-secondary" role="alert">'+risposta.partecipazioni[i].prezzo+'</div>'+

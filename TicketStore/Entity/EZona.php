@@ -16,9 +16,12 @@ class EZona {
                 $this->posti[] = $posto;
             }*/
         }
-        public function assegnaPosto() {
-            $posto = $this->posti[count($this->posti) - 1];
-            return $posto;
+        public function assegnaPosti($num) {
+            for ($i = 1; $i <= $num; $i++) {
+                $posti[$i] = $this->posti[count($this->posti) - $i];
+            }
+            
+            return $posti;
         }
         
         public function getPostiDisp() {

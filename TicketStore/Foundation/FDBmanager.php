@@ -221,7 +221,8 @@ public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
         for($k = 0;$k < count($rows);$k++){
-            $part = new EPartecipazione($rows[$k]['zona'],$rows[$k]['prezzo'],true);
+            $zona = new EZona($rows[$k]['zona'], $rows[$k]['capacita']);
+            $part = new EPartecipazione($zona,$rows[$k]['prezzo'],true);
             $array_part[$k] = $part;
             list($citta, $via) = explode(", ", $boh['indirizzo']);
             $luogo = new ELuogo($citta, $via, $rows[$k]['struttura']);

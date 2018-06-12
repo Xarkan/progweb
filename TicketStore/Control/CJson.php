@@ -25,7 +25,10 @@ class CJson {
                     $view->print_json($evento_sp);
                 }
                 else { //questo fa l'ultimo caso della partecipazione
-                    
+                    $evento_sp = $db->load($p1, $p2);
+                    $part = $evento_sp->selezionePartecipazione($p3);
+                    $view = USingleton::getInstance('View');
+                    $view->print_json($part);
                 }
             }
         }
