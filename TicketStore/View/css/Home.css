@@ -11,10 +11,26 @@
 	margin-bottom: 1%;
 	margin-top: 2%;
 }
+.row{
+    height: 950px;
+}
 
 .col {
 	margin-bottom: 2%;
+        width: 368.3px;
+        height: 280.5px;
 }
+div.card{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 2%;
+        
+}
+img.card-img-top{
+    width: 298px;
+    height: 225px;
+}
+
 
 #carousel-left {
 	width: 40%;
@@ -53,6 +69,7 @@
 #cards-block {
 	margin-top: 10px;
 	margin-left: 3%;
+        
 }
 
 @media only screen and (max-width: 768px) {

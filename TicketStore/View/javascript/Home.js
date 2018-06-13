@@ -19,15 +19,15 @@ function setTable(risposta) {
     var k = 0;
     while(rest > 0) {
         table += '<div class="row">';
-        for (let c = 0; c < 3 && c < rest; c++) {
-            let html_command = '<div class="card" style="width: 18rem;">' +
+        for (let c = 0; c < 6 && c < rest; c++) {
+            let html_command = '<div class="card">' +
             '<a href="/TicketStore/evento/'+ risposta[k].id +'">' +
             '<img class="card-img-top" src="/TicketStore/'+ risposta[k].img+'" alt="Card image cap"></a>' +
             '<div class="card-body"><p class="card-text">'+risposta[k].nome+'</p></div></div>';
             table += '<div class="col">' + html_command + '</div>';   
             k++; 
         }
-        rest = rest - 3;
+        rest = rest - 6;
         table += '</div>';
     }
     document.getElementById("cards-block").innerHTML = table;
@@ -39,7 +39,13 @@ function setCarousel(risposta) {
         +'<div class="carousel-item">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[1].img+'" alt="Second slide"></div>'
         +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[2].img+'" alt="Third slide"></div>';
-  
+        +'<img class="d-block w-100" src="/TicketStore/'+risposta[2].img+'" alt="Third slide"></div>'
+        +'<div class="carousel-item">'
+        +'<img class="d-block w-100" src="/TicketStore/'+risposta[3].img+'" alt="Third slide"></div>'
+        +'<div class="carousel-item">'
+        +'<img class="d-block w-100" src="/TicketStore/'+risposta[4].img+'" alt="Third slide"></div>'
+        +'<div class="carousel-item">'
+        +'<img class="d-block w-100" src="/TicketStore/'+risposta[5].img+'" alt="Third slide"></div>';
+
     document.getElementById("c-left").innerHTML = html_command ;    
 }
