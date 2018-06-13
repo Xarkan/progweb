@@ -59,7 +59,7 @@ class FUtente_Reg extends FDBmanager {
         $sql = "DELETE FROM utente_r WHERE mail = "
                 .$this->connection->quote($object->getMail());
         $affected_rows = $this->connection->exec($sql);
-        var_dump($this->connection);
+        echo($sql);
         return $affected_rows > 0 ;
     }
 

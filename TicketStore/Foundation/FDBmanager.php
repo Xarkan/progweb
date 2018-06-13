@@ -90,6 +90,11 @@ public function load($object, $param = '') {
 return $result;
 }
 
+public function loadultimocodice() {
+    $evento = new FEvento();
+    $codice = $evento->loadultimoevento();
+    return $codice;
+}
 //----------------------------store methods---------------------------------
 
 
@@ -118,8 +123,13 @@ public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$art
 
 public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
     $sql = "INSERT INTO partecipazione"
-         . "VALUES (".$codep.",".$datap.",".$zona.",".$indirizzop.",".$prezzo.")";
+         . "VALUES (".$this->connection->quote($codep).","
+         .$this->connection->quote($datap).","
+         .$this->connection->quote($zona).","
+         .$this->connection->quote($indirizzop).","
+         .$this->connection->quote($prezzo).")";
     $stored = $this->connection->exec($sql);
+    var_dump($stored);
     return $stored;
 }
 

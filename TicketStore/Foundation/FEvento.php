@@ -15,7 +15,14 @@ class FEvento extends FDBmanager {
         $rows = $result->fetchAll();
         return count($rows) > 0;
     }
-
+    
+    public function loadultimoevento() {
+        $sql = "SELECT code FROM evento ORDER BY code DESC LIMIT 1";
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
+        return $rows;
+    }
+    
     public function loadeventiHome() {
         $sql = "SELECT  * FROM evento LIMIT 6";
         $result = $this->connection->query($sql);

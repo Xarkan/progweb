@@ -107,4 +107,11 @@ class CAmministrazione {
         
         
     }
+    
+    public function getAmministrazione() {
+        $db = USingleton::getInstance('FDBmanager');
+        $ultimo_cod = $db->loadultimocodice();
+        $vamministrazione = new VAmministrazione();
+        $vamministrazione->print_json($ultimo_cod);
+    }
 }
