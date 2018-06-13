@@ -41,11 +41,15 @@ class FEvento extends FDBmanager {
    
 
     public function storeevento(EEvento $object) {
-
+        $result = explode("/",$object->getImg());
+        $nome_img = $result[count($result)-1];
+        array_pop($result);
+        $path = implode('/', $result);
         $sql = "INSERT INTO evento "
              . "VALUES ( ".$this->connection->quote($object->getId()).","
-             .$this->connection->quote($object->getNome()).")";
-
+             .$this->connection->quote($object->getNome()).","
+             .$this->connection->quote($path).","
+             .$this->connection->quote($nome_img).")";
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }

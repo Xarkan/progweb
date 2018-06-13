@@ -122,12 +122,13 @@ public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$art
 }
 
 public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
-    $sql = "INSERT INTO partecipazione"
+    $sql = "INSERT INTO partecipazione "
          . "VALUES (".$this->connection->quote($codep).","
          .$this->connection->quote($datap).","
          .$this->connection->quote($zona).","
          .$this->connection->quote($indirizzop).","
          .$this->connection->quote($prezzo).")";
+    echo $sql;
     $stored = $this->connection->exec($sql);
     var_dump($stored);
     return $stored;

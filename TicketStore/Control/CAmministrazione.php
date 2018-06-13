@@ -10,6 +10,7 @@ class CAmministrazione {
         $tabella = $_POST['Tabella'];
         
         //----------------------------gestione evento------------------------------------------------------
+        if($tabella == 'evento') {
         $id = $_POST['codice_evento'];
         $nome_evento = $_POST['nome_evento'];
         $img = $_POST['path_immagine'].$_POST['nome_immagine'];
@@ -31,11 +32,13 @@ class CAmministrazione {
         else{
             //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
         }
+        }
         
         //----------------------------gestione utente_r------------------------------------------------------
+        if($tabella == 'utente_r') {
         $mail = $_POST['mail'];
         if($mail != ""){
-            $utente = new EUtente_Reg("", "" , $mail, "");
+            $utente = new EUtente_Reg("", "", $mail, "");
             if($operazione == 'cancellazione'){
                 /*echo '<pre>';
                 print_r($_POST);
@@ -43,17 +46,14 @@ class CAmministrazione {
                 $deleted = $db->delete($utente);
                 //var_dump($db);
             }
-            if($deleted){
-                /*echo '<pre>';
-                print_r($_POST);
-                echo '</pre>';*/
-            }
+
         }
         else{
             //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
         }
-        
+        }
         //----------------------------gestione evento_specifico------------------------------------------------------
+        if( $tabella == 'evento_spec') {
         $tipo = $_POST['tipo'];
         $data = $_POST['data_es'];
         $luogo = $_POST['indirizzo'];
@@ -65,10 +65,7 @@ class CAmministrazione {
         if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
             if($operazione == 'inserimento'){
                $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
-               /*echo '<pre>';
-               print_r($_POST);
-               echo '</pre>';*/
-               var_dump($stored);
+         
             }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
@@ -82,8 +79,9 @@ class CAmministrazione {
         else{
             //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
         }
-        
+        }
         //----------------------------gestione partecipazioni------------------------------------------------------
+        if($tabella == 'partecipazione') {
         $codep = $_POST['codep'];
         $datap = $_POST['datap'];
         $zona = $_POST['zona'];
@@ -104,7 +102,7 @@ class CAmministrazione {
             //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
             }
         }
-        
+        }
         
     }
     

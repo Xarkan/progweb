@@ -179,6 +179,8 @@ INSERT INTO zona
 VALUES ('curva','Londra, via x',50000);
 INSERT INTO zona 
 VALUES ('galleria','Roma, via Appia Antica',1000);
+INSERT INTO zona 
+VALUES ('platea','Roma, via Appia Antica',500);
 
 ------------------------------------------------------INSERT evento_spec-----------------------------------------
 
