@@ -39,8 +39,7 @@ CREATE TABLE biglietto (
   fila          int             NULL,
   posto         int             NULL,
   PRIMARY KEY(codb),
-  FOREIGN KEY(codo) REFERENCES ordine(codo),
-  FOREIGN KEY(mail) REFERENCES utente_r(mail)
+  FOREIGN KEY(codo) REFERENCES ordine(codo)
 
 );
 
@@ -112,7 +111,10 @@ INSERT INTO evento
 VALUES ('evento2','Deep Purple','.\\View\\imgs','Deep.jpg');
 INSERT INTO evento
 VALUES ('evento3','Pinocchio','.\\View\\imgs','pinocchio-musical.jpg');
-
+INSERT INTO evento
+VALUES ('evento4','Vasco Rossi','.\\View\\imgs','vascorossi.jpg');
+INSERT INTO evento
+VALUES ('evento5','Real Madrid-Barcellona','.\\View\\imgs','realbarca.jpg');
 ------------------------------------------INSERT utente_r-------------------------------------------------------
 
 INSERT INTO utente_r
@@ -196,7 +198,10 @@ INSERT INTO evento_spec
 VALUES ('evento2','2018-06-30','Roma, Olimpico','Concerto',NULL,NULL,NULL,'Deep Purple');
 INSERT INTO evento_spec
 VALUES ('evento3','2019-05-21','Roma, via Appia Antica','Spettacolo',NULL,NULL,'EmmeBi',NULL);
-
+INSERT INTO evento_spec
+VALUES ('evento4','2019-06-30','Roma, Olimpico','Concerto',NULL,NULL,NULL,'Vasco Rossi');
+INSERT INTO evento_spec
+VALUES ('evento5','2018-06-2','Milano, Sansiro','Partita','Real Madrid','Barcellona',NULL,NULL);
 -----------------------------------------------------INSERT partecipazione----------------------------------------
 
 INSERT INTO partecipazione
@@ -213,7 +218,10 @@ INSERT INTO partecipazione
 VALUES ('evento2','2018-05-30','curva','Londra, via x',80);
 INSERT INTO partecipazione
 VALUES ('evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
-
+INSERT INTO partecipazione
+VALUES ('evento4','2019-06-30','prato','Roma, Olimpico',100);
+INSERT INTO partecipazione
+-- VALUES ('evento5','2018-06-2','curva','Milano, Sansiro',40);
 ------------------------------------------------------INSERT ord_part----------------------------------------------
 
 INSERT INTO ord_part
