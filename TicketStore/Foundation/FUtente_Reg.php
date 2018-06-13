@@ -8,30 +8,43 @@ class FUtente_Reg extends FDBmanager {
     }
     
     public function existutente(EUtente_Reg $object) {
-        $sql = "SELECT mail FROM utente_r WHERE mail = ".$this->connection->quote($object->getMail());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
+        $sql = "SELECT mail FROM utente_r WHERE mail = ? ";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindparam(1,$mail);
+        $mail = $object->getMail();
+        $statement->execute();
+        $rows = $statement->fetchAll();
         return count($rows) > 0;
 
     }
 
     public function loadutente(EUtente_Reg $object) {
-        $sql = "SELECT psw FROM utente_r WHERE mail = ".$this->connection->quote($object->getMail());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll(PDO::FETCH_COLUMN, 0);
+        $sql = "SELECT psw FROM utente_r WHERE mail = ? ";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindparam(1,$mail);
+        $mail = $object->getMail();
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_COLUMN,0);
+        
         return $rows;
     }
 
     public function storeutente(EUtente_Reg $object) {
         $nome = $object->getNome();
         $cognome = $object->getCognome();
+        $sql = "INSERT INTO utente_r VALUES (?,?,?)";
+        $statement = $this->connection->prepare($sql);
+        
+        $statement->bindparam(1,$mail);        
+        $statement->bindparam(2,$psw);
+        $statement->bindparam(3,$string);
+        $mail = $object->getMail();
+        $psw = md5($object->getPassword());
         $string = $nome." ".$cognome;
-        $sql = "INSERT INTO utente_r VALUES ("
-                .$this->connection->quote($object->getMail()).","
-                .$this->connection->quote(md5($object->getPassword())).","
-                .$this->connection->quote($string).")";
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0 ;
+        
+        $result = $statement->execute();
+        
+        return $result > 0 ;
     }
     
     public function updateutente($object) {

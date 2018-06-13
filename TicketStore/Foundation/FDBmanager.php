@@ -111,7 +111,7 @@ public function store($object) {
 return $stored;
 }
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
-    $evento_spec = new FEventospecifico();
+    $evento_spec = new FEventoSpecifico();
     $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
     return $stored;
 }

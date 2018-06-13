@@ -37,16 +37,16 @@ class CAmministrazione {
         if($mail != ""){
             $utente = new EUtente_Reg("", "" , $mail, "");
             if($operazione == 'cancellazione'){
-                echo '<pre>';
+                /*echo '<pre>';
                 print_r($_POST);
-                echo '</pre>';
+                echo '</pre>';*/
                 $deleted = $db->delete($utente);
                 //var_dump($db);
             }
             if($deleted){
-                echo '<pre>';
+                /*echo '<pre>';
                 print_r($_POST);
-                echo '</pre>';
+                echo '</pre>';*/
             }
         }
         else{
@@ -65,10 +65,10 @@ class CAmministrazione {
         if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
             if($operazione == 'inserimento'){
                $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
-               echo '<pre>';
+               /*echo '<pre>';
                print_r($_POST);
-               echo '</pre>';
-               //var_dump($stored);
+               echo '</pre>';*/
+               var_dump($stored);
             }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){

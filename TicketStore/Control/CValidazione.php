@@ -15,15 +15,14 @@ class CValidazione {
             $utente = new EUtente_Reg("","",$mail,$psw);
             $psw_db = $db->load($utente);
             $registrato = $db->exist($utente);
-            /*var_dump($registrato);
-            echo '<pre>';
-            echo $psw_db[0];
+            //var_dump($registrato);
+            /*echo '<pre>';
+            print_r($psw_db) ;
             echo '</pre>';
             echo '<pre>';
             echo $psw;
             echo '</pre>';*/
             if($registrato && $psw === $psw_db[0]){
-                var_dump($registrato);
                 $sessione->imposta_valore('logged',true);
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: home.html');
