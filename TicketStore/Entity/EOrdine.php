@@ -28,8 +28,8 @@ class EOrdine {
         }
     }
     
-    public function rimuoviElemento() {
-        array_pop($this->items);
+    public function rimuoviElemento($p) {
+        array_splice($this->items,$p,1);
     }
     
     public function creaBiglietti() {

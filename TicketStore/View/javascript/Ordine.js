@@ -23,7 +23,7 @@ function setTable(risposta) {
                     '<li>Zona: '+risposta.ordine.items[i].zona.nome+'</li>'+
                     '<li>Posto: f'+risposta.posti[i].fila+', p'+risposta.posti[i].posto+'</li>'+
                     '<li>Prezzo: '+risposta.ordine.items[i].prezzo+'</li>'+
-                    '<li><button type="button" class="btn btn-warning">X</button></li>' +   
+                    '<li><button type="button" class="btn btn-warning" onclick="alterTable('+i+')">X</button></li>' +   
                 '</ul>'+    
             '</div>';
         table = table + html; 
@@ -46,4 +46,17 @@ function setDettagli(risposta) {
 function setImg(risposta) {
     let path_img = '<img src="'+risposta.img+'" class="img-fluid" alt="Responsive image" id="side-img">';
     document.getElementById("box-img").innerHTML = path_img;
+}
+
+
+function alterTable(p) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var risposta = JSON.parse(xmlhttp.responseText);
+        setTable(risposta);
+    }
+};
+    xmlhttp.open("GET","/TicketStore/ordine/"+p, true);
+    xmlhttp.send();
 }

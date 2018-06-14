@@ -22,7 +22,7 @@ class EZona {
                 $fila++;
             }
         }
-        public function assegnaPosti($num) {
+        public function assegnaPosti($num) { //deve controllare nel db i posti assegnati dentro la tabella bigl
             for ($i = 1; $i <= $num; $i++) {
                 $posti[$i-1] = $this->posti[count($this->posti) - $i];
             }
