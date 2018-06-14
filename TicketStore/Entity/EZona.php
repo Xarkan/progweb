@@ -4,16 +4,16 @@ class EZona {
 
 	//attributi
 	public $nome;
-	public $capacità;
+	public $capacita;
 	public $posti = []; //array(Posto) da capire se ci si mettono solo quelli presi...
 
 	//metodi
-        public function __construct($nome,$capacità) {
+        public function __construct($nome,$capacita) {
             $this->nome = $nome;
-            $this->capacità = $capacità;
+            $this->capacita = $capacita;
             $k = 1;
             $fila = 1;
-            while($k < $capacità) {
+            while($k < $capacita) {
                 for ($i = 0; $i < 5; $i++) {
                     $posto = new EPosto($fila,$i);
                     $this->posti[] = $posto;
