@@ -9,7 +9,7 @@ class COrdine {
         $dettagli_ordine['ordine'] = $sessione->recupera_valore('ordine');
         $dettagli_ordine['img'] = $sessione->recupera_valore('img');
         //$dettagli_ordine['posti'] = $sessione->recupera_valore('posti');
-        $view = USingleton::getInstance('VOrdine');
+        $view = USingleton::getInstance('View');
         $view->print_json($dettagli_ordine);
         
         }

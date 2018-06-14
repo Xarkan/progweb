@@ -5,11 +5,11 @@ function getAndFill() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
         setDettagli(risposta.ordine);
-        setTable(risposta.ordine);
+        setTable(risposta);
         setImg(risposta);
     }
 };
-    xmlhttp.open("GET","/TicketStore/ordine/json", true);
+    xmlhttp.open("GET","/TicketStore/Json/ordine", true);
     xmlhttp.send();
 }
 
@@ -17,12 +17,12 @@ function getAndFill() {
 function setTable(risposta) {
     var table = '';
 
-    for(let i = 0; i < risposta.items.length ; i++) {
+    for(let i = 0; i < risposta.ordine.items.length ; i++) {
         let html = '<div class="biglietti">'+
                 '<ul>'+
-                    '<li>Zona: '+risposta.items[i].zona.nome+'</li>'+
-                    '<li>Posto: '+risposta.items[i].posto+'</li>'+
-                    '<li>Prezzo: '+risposta.items[i].prezzo+'</li>'+
+                    '<li>Zona: '+risposta.ordine.items[i].zona.nome+'</li>'+
+                    '<li>Posto: f'+risposta.posti[i].fila+', p'+risposta.posti[i].posto+'</li>'+
+                    '<li>Prezzo: '+risposta.ordine.items[i].prezzo+'</li>'+
                     '<li><button type="button" class="btn btn-warning">X</button></li>' +   
                 '</ul>'+    
             '</div>';

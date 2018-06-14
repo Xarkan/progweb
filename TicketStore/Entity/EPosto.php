@@ -2,12 +2,14 @@
 
 class EPosto {
 
-	private $fila;
-	private $posto;
+	public $fila;
+	public $posto;
+        public $disp;
 
-	public function __costruct($fila,$posto) {
+	public function __construct($fila,$posto,$disp = true) {
 		$this->fila = $fila;
 		$this->posto = $posto;
+                $this->disp = $disp;
 	}
 
 	public function getFila() {

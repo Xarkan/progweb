@@ -221,7 +221,7 @@ public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
         return $eventi_spec;
     }
       
-    private function getLuogoZonaPart($boh) { //boh è na roba di ar
+    private function getLuogoZonaPart($boh) { //cambiare boh
         $sql= "SELECT partecipazione.*, luogo.struttura, zona.capacita "
                 ."FROM partecipazione, luogo, zona WHERE code = "
                 .$this->connection->quote($boh['code'])." AND partecipazione.indirizzo = "

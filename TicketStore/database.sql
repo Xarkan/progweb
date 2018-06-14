@@ -168,21 +168,21 @@ VALUES ('Roma, via Appia Antica','teatro Brancaccio');
 --------------------------------------------------INSERT zona-----------------------------------------------------
 
 INSERT INTO zona 
-VALUES ('curva','Milano, Sansiro',50000);
+VALUES ('curva','Milano, Sansiro',50);
 INSERT INTO zona 
-VALUES ('prato','Milano, Sansiro',10000);
+VALUES ('prato','Milano, Sansiro',10);
 INSERT INTO zona 
-VALUES ('tribuna','Roma, Olimpico',30000);
+VALUES ('tribuna','Roma, Olimpico',30);
 INSERT INTO zona 
-VALUES ('prato','Roma, Olimpico',10000);
+VALUES ('prato','Roma, Olimpico',10);
 INSERT INTO zona 
-VALUES ('prato','Londra, via x',20000);
+VALUES ('prato','Londra, via x',20);
 INSERT INTO zona 
-VALUES ('curva','Londra, via x',50000);
+VALUES ('curva','Londra, via x',50);
 INSERT INTO zona 
-VALUES ('galleria','Roma, via Appia Antica',1000);
+VALUES ('galleria','Roma, via Appia Antica',10);
 INSERT INTO zona 
-VALUES ('platea','Roma, via Appia Antica',500);
+VALUES ('platea','Roma, via Appia Antica',20);
 
 ------------------------------------------------------INSERT evento_spec-----------------------------------------
 
@@ -221,7 +221,7 @@ VALUES ('evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
 INSERT INTO partecipazione
 VALUES ('evento4','2019-06-30','prato','Roma, Olimpico',100);
 INSERT INTO partecipazione
--- VALUES ('evento5','2018-06-2','curva','Milano, Sansiro',40);
+VALUES ('evento5','2018-06-2','curva','Milano, Sansiro',40);
 ------------------------------------------------------INSERT ord_part----------------------------------------------
 
 INSERT INTO ord_part
