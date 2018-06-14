@@ -35,7 +35,7 @@ class FEventospecifico extends FDBmanager {
     }
     public function storeeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     
-    /*$sql = "INSERT INTO evento_spec VALUES(?,?,?,?,?,?,?,?)"; 
+    $sql = "INSERT INTO evento_spec VALUES (?,?,?,?,?,?,?,?)"; 
     $statement = $this->connection->prepare($sql);
     
     $statement->bindParam(1,$codes);
@@ -48,9 +48,10 @@ class FEventospecifico extends FDBmanager {
     $statement->bindParam(8,$artista);
     
     $result = $statement->execute();
-    var_dump($this->connection);
-    return $result;*/
-        $sql = "INSERT INTO evento_spec VALUES(".$this->connection->quote($codes).","
+    var_dump($statement = $this->connection->prepare($sql));
+    echo $artista;
+    return $result;
+        /*$sql = "INSERT INTO evento_spec VALUES(".$this->connection->quote($codes).","
                 .$this->connection->quote($data).","
                 .$this->connection->quote($luogo).","
                 .$this->connection->quote($tipo).","
@@ -60,7 +61,7 @@ class FEventospecifico extends FDBmanager {
                 .$this->connection->quote($artista).")";
         echo $sql;
         $result = $this->connection->exec($sql);
-        return $result;
+        return $result;*/
     }
     public function deleteeventospec($codes,$data) {
 

@@ -13,14 +13,19 @@ class CAmministrazione {
         if($tabella == 'evento') {
         $id = $_POST['codice_evento'];
         $nome_evento = $_POST['nome_evento'];
-        $img = $_POST['path_immagine'].$_POST['nome_immagine'];
-        
+        $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
+        $eventi = "";
         if($id != "" && $nome_evento != "" && $img != ""){
-            $eventi = "";
+            
             $evento = new EEvento($id, $img, $nome_evento, $eventi);
             if($operazione == 'inserimento'){
                 $stored = $db->store($evento);
+                var_dump($stored);
             }
+            /*echo '<pre>';
+            //print_r($_POST);
+            echo $img;
+            echo '</pre>';*/
             if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
@@ -31,8 +36,12 @@ class CAmministrazione {
             if(($operazione == 'modifica')){
                 $db->update($evento);
             }*/
+        }
+        if($id != "" && $_POST['nome_immagine'] == "" ){
+            $evento = new EEvento($id, $img, $nome_evento, $eventi);
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete($evento);
+                var_dump($deleted);
             }
              if($deleted){
                 echo '<script type="text/javascript">
@@ -95,13 +104,14 @@ class CAmministrazione {
             }*/
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_es($codes,$data);
-            }
-             if($deleted){
+                if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
             }
+            }
+            
            
         }
         else{

@@ -20,9 +20,14 @@ function setcodice(risposta){
 function setTableEvento(){
     var x = document.getElementById("table").selectedIndex;
     var y = document.getElementById("table").options;
-    //tabella.options.value
-    if(y[x].index == 1){
-        let html_command = '<legend>Dati da inserire/modificare/cancellare-evento</legend>'+
+    
+    var i = document.getElementById("operazione").selectedIndex;
+    var j = document.getElementById("operazione").options;
+    
+//----------------------------------operazioni su evento--------------------------------------------------------------------------------------
+    //inserimento
+    if(y[x].index == 1 && j[i].index == 1){
+        let html_command = '<legend>Inserimento di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
                             '<td id="ultimo"></td>'+
@@ -35,8 +40,35 @@ function setTableEvento(){
         document.getElementById('sezione').innerHTML = html_command;
                            
     }
-    if(y[x].index == 2){
-        let html_command = '<legend>Cancellazione-utente_r</legend>'+
+    //cancellazione qui dobbiamo gestire la cancellazione delle foreign key
+    if(y[x].index == 1 && j[i].index == 3){
+        let html_command = '<legend>Cancellazione di un evento dal database</legend>'+
+                       '<table>'+
+                            '<tr>'+
+                            '<td id="ultimo"></td>'+
+                            '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                            '<td>nome<br><input type="text" readonly name="nome_evento"></td>'+
+                            '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
+                            '<td>nome_immagine<br><input type="text" readonly name="nome_immagine"></td>'+
+                            '</tr>'+
+                       '</table>';
+        document.getElementById('sezione').innerHTML = html_command;
+                           
+    }
+    
+    
+//----------------------------------operazioni su utente_r--------------------------------------------------------------------------------------    
+     
+    //inserimento e modifica
+    if(y[x].index == 2 && (j[i].index == 1 || j[i].index == 2)){
+        let html_command = '<legend>Spiacente, Non sei autorizzato a questo tipo di operazione</legend>';
+                                
+        document.getElementById('sezione').innerHTML = html_command;
+    }
+    
+    //cancellazione
+    if(y[x].index == 2 && j[i].index == 3){
+        let html_command = '<legend>Cancellazione di un utente registrato dal database</legend>'+
                                 '<table>'+
                                     '<tr>'+
                                         '<td>mail<br>'+
@@ -46,8 +78,12 @@ function setTableEvento(){
                                 '</table>';
         document.getElementById('sezione').innerHTML = html_command;
     }
-    if(y[x].index == 3){
-        let html_command = '<legend>Dati da inserire/modificare/cancellare-evento_specifico</legend>'+
+    
+    
+//----------------------------------operazioni su evento_specifico--------------------------------------------------------------------------------------    
+    //inserimento
+    if(y[x].index == 3 && j[i].index == 1){
+        let html_command = '<legend>Inserimento di un evento specifico nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<input type="text" name="codes"></td>'+
@@ -67,13 +103,44 @@ function setTableEvento(){
                                     '<td>Compagnia<input type="text" name="compagnia"></td>'+
                                     '<td>Artista<input type="text" name="artista"></td>'+
                                 '</tr>'+
+                            '</table>'+
+                            '<legend>Prima di inserire un nuovo evento specifico, assicurati che sia già stato<br>'+
+                            'inserito un evento generico che abbia lo stesso codice che stai inserendo,<br>'+
+                            'altrimenti l operazione di inserimento ti sarà negata';  
+                
+        document.getElementById('sezione').innerHTML = html_command;        
+                
+    }
+    //cancellazione
+    if(y[x].index == 3 && j[i].index == 3){
+        let html_command = '<legend>Cancellazione di un evento specifico dal database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>codice_evento<input type="text" name="codes"></td>'+
+                                    '<td>data_evento<input type="date" name="data_es"></td>'+
+                                    '<td>indirizzo<input type="text" readonly name="indirizzo"></td>'+
+                                    '<td>Tipo <select name="tipo" readonly>'+
+
+                                             '<option></option>'+
+
+                                         '</select>'+
+                                    '</td>'+
+                                    '<td>Casa<input type="text" readonly name="casa"></td>'+
+                                    '<td>Ospite<input type="text" readonly name="ospite"></td>'+
+                                    '<td>Compagnia<input type="text" readonly name="compagnia"></td>'+
+                                    '<td>Artista<input type="text" readonly name="artista"></td>'+
+                                '</tr>'+
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
                 
     }
-    if(y[x].index == 4){
-        let html_command = '<legend>Dati da inserire/modificare/cancellare-partecipazioni</legend>'+
+    
+    
+//----------------------------------operazioni su partecipazioni--------------------------------------------------------------------------------------        
+    //inserimento
+    if(y[x].index == 4 && j[i].index == 1){
+        let html_command = '<legend>Inserimento di una partecipazione nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codep"></td>'+
@@ -86,7 +153,22 @@ function setTableEvento(){
                 
         document.getElementById('sezione').innerHTML = html_command;        
     }
-
+     
+    //cancellazione
+    if(y[x].index == 4 && j[i].index == 3){
+        let html_command = '<legend>Inserimento di una partecipazione nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>codice_evento<br><input type="text" name="codep"></td>'+
+                                    '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>zona<br><input type="text" name="zona"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
+                                    '<td>prezzo<br><input name="prezzo"></td>'+
+                                '</tr>'+
+                            '</table>';
+                
+        document.getElementById('sezione').innerHTML = html_command;        
+    }
 
     
 }

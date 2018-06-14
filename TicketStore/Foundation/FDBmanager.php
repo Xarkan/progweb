@@ -115,10 +115,25 @@ public function store($object) {
     }
 return $stored;
 }
+public function storeluogo($indirizzo, $struttura) {
+    $sql = "INSERT INTO luogo VALUES (?,?)";
+    $statement = $this->connection->prepare($sql);
+    
+    $statement->bindParam(1, $indirizzo);
+    $statement->bindParam(2, $struttura);
+    
+    $result = $statement->execute();
+    return $result;
+}
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $evento_spec = new FEventoSpecifico();
-    $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
-    return $stored;
+    $struttura = "";
+    $stored_luogo = $this->storeluogo($luogo, $struttura);
+    if($stored_luogo){
+        $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+        return $stored;
+    }
+    
 }
 
 public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
