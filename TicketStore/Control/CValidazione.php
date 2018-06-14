@@ -33,15 +33,23 @@ class CValidazione {
                  */
             }
             else if($registrato && $psw != $psw_db){
-                header('HTTP/1.1 301 Moved Permanently');
-                header('Location: login');
+                /*header('HTTP/1.1 301 Moved Permanently');
+                header('Location: login');*/
+                echo '<script type="text/javascript">
+                        alert("la password inserita è sbagliata.")
+                        window.location= "/TicketStore/login"
+                      </script>'; 
                 /*qui dobbiamo trovare il modo di comunicare all'utente
                  * che la password inserita è sbagliata
                  */
             }
             else if(!$registrato){
-                header('HTTP/1.1 301 Moved Permanently');
-                header('Location: signin');
+                /*header('HTTP/1.1 301 Moved Permanently');
+                header('Location: signin');*/
+                echo '<script type="text/javascript">
+                        alert("la mail inserita non è stata ancora registrata. Procedi alla registrazione")
+                        window.location= "/TicketStore/signin"
+                      </script>';
                 /*qui dobbiamo trovare il modo di dire all'utente che non 
                  * è ancora registrato e che deve registrarsi
                  */

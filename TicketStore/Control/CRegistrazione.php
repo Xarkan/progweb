@@ -17,13 +17,14 @@ class CRegistrazione {
              if($exist){
                  /*L'utente sta provando a registrarsi con una mail già usata per la registrazione
                  Viene reindirizzato al login...l'ideale sarebbe comunicare all'utente che o si logga 
-                 o cambia mail per effettuare la registrazione*/
-                 
+                 o cambia mail per effettuare la registrazione
                  header('HTTP/1.1 301 Moved Permanently');
-                 header('Location: login');
+                 header('Location: login');*/
                  echo '<script type="text/javascript">
-                 alert("La mail inserita è stata già registrato. Procedi al login")
-                 </script>';
+                        alert("La mail inserita è stata già registrata. Procedi al login")
+                        window.location= "/TicketStore/login"
+                      </script>'; 
+                 
             }
             else{
                 $registrato = $db->store($utente);

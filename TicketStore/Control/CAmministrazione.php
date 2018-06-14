@@ -19,14 +19,26 @@ class CAmministrazione {
             $eventi = "";
             $evento = new EEvento($id, $img, $nome_evento, $eventi);
             if($operazione == 'inserimento'){
-                $db->store($evento);
+                $stored = $db->store($evento);
+            }
+            if($stored){
+                echo '<script type="text/javascript">
+                        alert("inserimento avvenuto")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
                 $db->update($evento);
             }*/
             if($operazione == 'cancellazione'){
-                $db->delete($evento);
+                $deleted = $db->delete($evento);
+            }
+             if($deleted){
+                echo '<script type="text/javascript">
+                        alert("la cancellazione è avvenuta correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
         }
         else{
@@ -40,11 +52,15 @@ class CAmministrazione {
         if($mail != ""){
             $utente = new EUtente_Reg("", "", $mail, "");
             if($operazione == 'cancellazione'){
-                /*echo '<pre>';
-                print_r($_POST);
-                echo '</pre>';*/
+                
                 $deleted = $db->delete($utente);
                 //var_dump($db);
+            }
+            if($deleted){
+                echo '<script type="text/javascript">
+                        alert("la cancellazione è avvenuta correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
 
         }
@@ -67,12 +83,24 @@ class CAmministrazione {
                $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
          
             }
+            if($stored){
+                echo '<script type="text/javascript">
+                        alert("inserimento avvenuto")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+            }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
                 
             }*/
             if($operazione == 'cancellazione'){
-                $db->delete_es($codes,$data);
+                $deleted = $db->delete_es($codes,$data);
+            }
+             if($deleted){
+                echo '<script type="text/javascript">
+                        alert("la cancellazione è avvenuta correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
            
         }
@@ -89,14 +117,26 @@ class CAmministrazione {
         $prezzo = $_POST['prezzo'];
         if($codep != "" && $datap != "" && $zona != "" && $indirizzop != "" && $prezzo != ""){
             if($operazione == 'inserimento'){
-                $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+                $stored = $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+            }
+            if($stored){
+                echo '<script type="text/javascript">
+                        alert("inserimento avvenuto")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
                 
             }*/
             if($operazione == 'cancellazione'){
-                $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+                $deleted = $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+            }
+             if($deleted){
+                echo '<script type="text/javascript">
+                        alert("la cancellazione è avvenuta correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
             }
             else{
             //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
