@@ -4,9 +4,15 @@ function getAndFill() {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
-        setDettagli(risposta.ordine);
-        setTable(risposta);
-        setImg(risposta);
+        if (risposta.ordine.items.length > 0) {
+            setDettagli(risposta.ordine);
+            setTable(risposta);
+            setImg(risposta);
+            //pagamento();
+        }else{
+            isEmpty();
+        }
+        
     }
 };
     xmlhttp.open("GET","/TicketStore/Json/ordine", true);
@@ -16,7 +22,7 @@ function getAndFill() {
 
 function setTable(risposta) {
     var table = '';
-
+    
     for(let i = 0; i < risposta.ordine.items.length ; i++) {
         let html = '<div class="biglietti">'+
                 '<ul>'+
@@ -27,7 +33,7 @@ function setTable(risposta) {
                 '</ul>'+    
             '</div>';
         table = table + html; 
-    }
+        }
     document.getElementById("items").innerHTML = table;
     
 }
@@ -48,15 +54,34 @@ function setImg(risposta) {
     document.getElementById("box-img").innerHTML = path_img;
 }
 
+function isEmpty() {
+    let html = '<h4>Vuoto.</h4>';
+    document.getElementById("carrello").innerHTML = html;
+}
+
 
 function alterTable(p) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
-        setTable(risposta);
+        if(risposta.ordine.items.length > 0) {
+            setTable(risposta);
+            //pagamento();
+        }
+        else{
+            setTable(risposta);
+            isEmpty();
+        }
     }
 };
     xmlhttp.open("GET","/TicketStore/ordine/"+p, true);
     xmlhttp.send();
 }
+
+/*function pagamento() {
+    let button = document.getElementById("acquisto");
+    let href = document.createAttribute('href');
+    href.value = '/TicketStore/pagamento';
+    button.setAttributeNode(href);
+}*/

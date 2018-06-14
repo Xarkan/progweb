@@ -7,13 +7,19 @@ class COrdine {
         $sessione = USingleton::getInstance('USession');
         $ordine = $sessione->recupera_valore('ordine');
         $posti = $sessione->recupera_valore('posti');
-        $ordine->rimuoviElemento($param);
-        array_splice($posti, $param, 1);
         
-        $sessione->imposta_valore('posti',$posti);        
-        $sessione->imposta_valore('ordine',$ordine);
-        $control = USingleton::getInstance('CJson');
-        $control->getJson('ordine');
+        if(count($ordine->getItems()) > 0) {
+            
+                $ordine->rimuoviElemento($param);
+                array_splice($posti, $param, 1);
+        
+                $sessione->imposta_valore('posti',$posti);        
+                $sessione->imposta_valore('ordine',$ordine);
+            
+                $control = USingleton::getInstance('CJson');
+                $control->getJson('ordine');
+        }
+
     }
     
     public function postOrdine($id_e, $id_esp, $id_part) {
