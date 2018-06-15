@@ -40,6 +40,21 @@ function setTableEvento(){
         document.getElementById('sezione').innerHTML = html_command;
                            
     }
+    //modifica
+    if(y[x].index == 1 && j[i].index == 2){
+        let html_command = '<legend>Modifica di un evento nel database</legend>'+
+                       '<table>'+
+                            '<tr>'+
+                            '<td id="ultimo"></td>'+
+                            '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                            '<td>nome<br><input type="text" name="nome_evento"></td>'+
+                            '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
+                            '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
+                            '</tr>'+
+                       '</table>';
+        document.getElementById('sezione').innerHTML = html_command;
+                           
+    }
     //cancellazione qui dobbiamo gestire la cancellazione delle foreign key
     if(y[x].index == 1 && j[i].index == 3){
         let html_command = '<legend>Cancellazione di un evento dal database</legend>'+
@@ -106,11 +121,45 @@ function setTableEvento(){
                             '</table>'+
                             '<legend>Prima di inserire un nuovo evento specifico, assicurati che sia già stato<br>'+
                             'inserito un evento generico che abbia lo stesso codice che stai inserendo,<br>'+
-                            'altrimenti l operazione di inserimento ti sarà negata';  
+                            'altrimenti l operazione di inserimento ti sarà negata</legend>';  
                 
         document.getElementById('sezione').innerHTML = html_command;        
                 
     }
+    
+    //modifica
+    if(y[x].index == 3 && j[i].index == 2){
+        let html_command = '<legend>Modifica di un evento specifico nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>codice_evento<input type="text" name="codes"></td>'+
+                                    '<td>data_evento<input type="date" name="data_es"></td>'+
+                                    '<td>indirizzo<input type="text" name="indirizzo"></td>'+
+                                    '<td>Tipo <select name="tipo">'+
+
+                                             '<option></option>'+
+                                             '<option>Partita</option>'+
+                                             '<option>Spettacolo</option>'+
+                                             '<option>Concerto</option>'+
+
+                                         '</select>'+
+                                    '</td>'+
+                                    '<td>Casa<input type="text" name="casa"></td>'+
+                                    '<td>Ospite<input type="text" name="ospite"></td>'+
+                                    '<td>Compagnia<input type="text" name="compagnia"></td>'+
+                                    '<td>Artista<input type="text" name="artista"></td>'+
+                                '</tr>'+
+                            '</table>'+
+                            '<legend>Per modificare correttamente un evento specifico bisogna procedere seguendo queste regole<br>'+
+                            '<ul><li>INSERIRE IL CODICE E LA DATA RELATIVI ALL EVENTO DA MODIFICARE</li>'+
+                            '<li>EFFETTUARE LE MODIFICHE PREVISTE</li>'+
+                            '<li>I CAMPI NON MODIFICATI DEVONO CONTENERE IL VALORE GIA PRESENTE NEL DATABASE</li></ul><br>'+
+                            'BUON LAVORO!!</legend>';
+                
+        document.getElementById('sezione').innerHTML = html_command;        
+                
+    }
+    
     //cancellazione
     if(y[x].index == 3 && j[i].index == 3){
         let html_command = '<legend>Cancellazione di un evento specifico dal database</legend>'+

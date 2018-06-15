@@ -46,6 +46,20 @@ public function exist($object) {
 return $found;
 }   
 
+public function existluogo($indirizzo) {
+    $sql = "SELECT indirizzo FROM luogo WHERE indirizzo = ? ";
+    $statement = $this->connection->prepare($sql);
+    $statement->bindParam(1, $indirizzo);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_COLUMN,0);
+    if(count($result) > 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+}
 //---------------------------load methods----------------------------------
     
 
@@ -184,6 +198,25 @@ public function update($object) {
        
 return $updated;
 }
+
+public function update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
+    $evento_spec = new FEventospecifico();
+    $exist = $this->existluogo($luogo);
+    if(!$exist){
+        $struttura = "";
+        
+        $stored_luogo = $this->storeluogo($luogo, $struttura);
+        if($stored_luogo){
+            $updated = $evento_spec->updateeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+        }
+    }
+    else{
+        $updated = $evento_spec->updateeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+    }
+    return $updated;
+    
+}
+
 
 //------------------------------delete methods-----------------------------
 

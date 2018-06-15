@@ -60,6 +60,28 @@ class FEvento extends FDBmanager {
     }
 
     public function updateevento($object) {
+        if($object->getNome() != ""){
+            $sql = "UPDATE evento SET nome = ? WHERE code = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->bindparam(1,$nome);
+            $statement->bindparam(2,$id);
+            $nome = $object->getNome();
+            $id = $object->getId();
+            $result = $statement->execute();
+            return $result;
+        }
+        if($object->getImg() != ""){
+            $explode = explode("\\",$object->getImg());
+            $nome_img = $explode[count($explode)-1];
+            
+            $sql = "UPDATE evento SET nome_img = ? WHERE code = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->bindparam(1,$nome_img);
+            $statement->bindparam(2,$id);
+            $id = $object->getId();
+            $result = $statement->execute();
+            return $result;
+        }
         
     }
     

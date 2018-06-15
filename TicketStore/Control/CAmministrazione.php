@@ -16,65 +16,72 @@ class CAmministrazione {
         $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
         $eventi = "";
         if($id != "" && $nome_evento != "" && $img != ""){
-            
             $evento = new EEvento($id, $img, $nome_evento, $eventi);
+            //inserimento
             if($operazione == 'inserimento'){
                 $stored = $db->store($evento);
-                var_dump($stored);
-            }
-            /*echo '<pre>';
-            //print_r($_POST);
-            echo $img;
-            echo '</pre>';*/
-            if($stored){
+                if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
+            } 
             }
-            /*da vedere bene l'operazione di modifica
+            //modifica
             if(($operazione == 'modifica')){
-                $db->update($evento);
-            }*/
+                $evento = new EEvento($id, $img, $nome_evento, $eventi);
+                $update = $db->update($evento);
+                if($update){
+                echo '<script type="text/javascript">
+                        alert("Modifica avvenuta")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+            }
         }
         if($id != "" && $_POST['nome_immagine'] == "" ){
             $evento = new EEvento($id, $img, $nome_evento, $eventi);
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete($evento);
-                var_dump($deleted);
-            }
-             if($deleted){
+                if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
+                }
             }
-        }
-        else{
-            //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
-        }
+             
         }
         
+    }
+        else{
+            echo '<script type="text/javascript">
+                        alert("Bisogna riempire tutti i campi correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+        }
+        }
         //----------------------------gestione utente_r------------------------------------------------------
         if($tabella == 'utente_r') {
         $mail = $_POST['mail'];
         if($mail != ""){
             $utente = new EUtente_Reg("", "", $mail, "");
             if($operazione == 'cancellazione'){
-                
                 $deleted = $db->delete($utente);
-                //var_dump($db);
-            }
-            if($deleted){
+                if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
             }
+            }
+            
 
         }
         else{
-            //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
+            echo '<script type="text/javascript">
+                        alert("Bisogna riempire tutti i campi correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>';
         }
         }
         //----------------------------gestione evento_specifico------------------------------------------------------
@@ -90,18 +97,24 @@ class CAmministrazione {
         if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
             if($operazione == 'inserimento'){
                $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
-         
-            }
-            if($stored){
+               if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
             }
-            /*da vedere bene l'operazione di modifica
+            }
+            
+            //modifica
             if(($operazione == 'modifica')){
-                
-            }*/
+                $update = $db->update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+                if($update){
+                echo '<script type="text/javascript">
+                        alert("Modifica avvenuta")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+            }
+            }
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_es($codes,$data);
                 if($deleted){
@@ -115,7 +128,10 @@ class CAmministrazione {
            
         }
         else{
-            //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
+            echo '<script type="text/javascript">
+                        alert("Bisogna riempire tutti i campi correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>';
         }
         }
         //----------------------------gestione partecipazioni------------------------------------------------------
@@ -128,33 +144,38 @@ class CAmministrazione {
         if($codep != "" && $datap != "" && $zona != "" && $indirizzop != "" && $prezzo != ""){
             if($operazione == 'inserimento'){
                 $stored = $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
-            }
-            if($stored){
+                if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
             }
+            }
+            
             /*da vedere bene l'operazione di modifica
             if(($operazione == 'modifica')){
                 
             }*/
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
-            }
-             if($deleted){
+                if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
                         window.location= "/TicketStore/amministratore"
                       </script>'; 
-            }
-            else{
-            //messaggi di alert che comunicano all'amministratore che non ha inserito alcuni campi
+                }
             }
         }
+        else{
+            echo '<script type="text/javascript">
+                        alert("Bisogna riempire tutti i campi correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>';
+            }
         }
         
     }
+
     
     public function getAmministrazione() {
         $db = USingleton::getInstance('FDBmanager');
