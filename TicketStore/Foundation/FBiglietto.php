@@ -6,6 +6,17 @@ class FBiglietto extends FDBmanager{
         parent::__construct();   
     }
     
+    public function updateBiglietti(EOrdine $ordine) {
+        $sessione = USingleton::getInstance('USession');
+        $posti = $sessione->recupera_valore('posti');
+        $sql = "INSERT INTO biglietto VALUES (";    //da finire!
+        
+        $affected_rows = $this->connection->exec($sql);
+        return $affected_rows > 0;        
+    }
+    
+    
+    
     public function loadbiglietticomprati($object) {
         $utente = $object->getUtente();
         //$nome = $utente->getNome();

@@ -110,11 +110,23 @@ public function store($object) {
         $stored = $utente->storeutente($object);
     }
     if($object instanceof EOrdine) {
-        $ordine = new FOrdine();
-        $stored = $ordine->storeordine($object);
+        $fordine = USingleton::getInstance('FOrdine');
+        try {
+            $this->connection->beginTransaction();
+            $stored1 = $fordine->storeordine($object);
+            $stored2 = $fordine->storeord_part($object);
+            $this->connection->commit();
+            $stored = $stored1 && $stored2;
+        }
+        catch (Exception $e) {
+            $this->connection->rollBack();
+            $stored = false;
+            echo $e->getMessage();
+        }           
     }
 return $stored;
 }
+
 public function storeluogo($indirizzo, $struttura) {
     $sql = "INSERT INTO luogo VALUES (?,?)";
     $statement = $this->connection->prepare($sql);
@@ -164,6 +176,10 @@ public function update($object) {
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
         $updated = $utente->updateutente($object);
+    }
+    if($object instanceof EOrdine) {
+        $fbigl = USingleton::getInstance('FBiglietto');
+        $updated = $fbigl->updateBiglietti($object);
     }
        
 return $updated;

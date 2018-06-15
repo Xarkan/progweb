@@ -4,7 +4,7 @@
 class EOrdine {
     
     //attributi
-    public $id; //string
+    public $code; //string code
     public $nomeEvento; //string 
     public $evento; //EEventoSpecifico
     public $dataAcquisto; //DataTime
@@ -44,8 +44,12 @@ class EOrdine {
         }
     }
     
-    function getId() {
-        return $this->id;
+    function getCode() {
+        return $this->code;
+    }
+    
+    function getEvento() {
+        return $this->evento;
     }
 
     function getData() {

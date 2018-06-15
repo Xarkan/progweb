@@ -39,4 +39,8 @@ class EZona {
             $posto = array_pop($this->posti);
             //roba di database
         }
+        
+        public function getNome() {
+            return $this->nome;
+        }
 }

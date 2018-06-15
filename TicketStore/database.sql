@@ -21,7 +21,7 @@ CREATE TABLE utente_r (
 );
 
 CREATE TABLE ordine (
-  codo           int     	      NOT NULL,
+  codo           int     	NOT NULL    AUTO_INCREMENT,
   mail           varchar(40)    NOT NULL,
   data_ordine    date        	  NOT NULL,
  
@@ -128,31 +128,31 @@ VALUES ('paolino@hotmail.it',md5('database'),'Paolino Di Felice');
 
 --------------------------------------------INSERT ordine---------------------------------------------------------
 
-INSERT INTO ordine
-VALUES (0,'edgardovittoria@hotmail.it','2018-05-10');
-INSERT INTO ordine
-VALUES (1,'federicoraparelli@hotmail.it','2018-05-01');
-INSERT INTO ordine
-VALUES (2,'pier@hotmail.it','2018-04-10');
-INSERT INTO ordine
-VALUES (3,'paolino@hotmail.it','2018-12-05');
+INSERT INTO ordine (mail,data_ordine)
+VALUES ('edgardovittoria@hotmail.it','2018-05-10');
+INSERT INTO ordine (mail,data_ordine)
+VALUES ('federicoraparelli@hotmail.it','2018-05-01');
+INSERT INTO ordine (mail,data_ordine)
+VALUES ('pier@hotmail.it','2018-04-10');
+INSERT INTO ordine (mail,data_ordine)
+VALUES ('paolino@hotmail.it','2018-12-05');
 
 ----------------------------------------------INSERT biglietto-----------------------------------------------------
 
 INSERT INTO biglietto
-VALUES (0,0,'edgardovittoria@hotmail.it','derby','2018-05-29','curva',10,56);
+VALUES (0,1,'edgardovittoria@hotmail.it','derby','2018-05-29','curva',10,56);
 INSERT INTO biglietto
-VALUES (1,1,'federicoraparelli@hotmail.it','derby','2018-05-12','tribuna',15,86);
+VALUES (1,2,'federicoraparelli@hotmail.it','derby','2018-05-12','tribuna',15,86);
 INSERT INTO biglietto
-VALUES (2,2,'pier@hotmail.it','Deep Purple','2018-05-30','prato',NULL,NULL);
+VALUES (2,3,'pier@hotmail.it','Deep Purple','2018-05-30','prato',NULL,NULL);
 INSERT INTO biglietto
-VALUES (3,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,5);
+VALUES (3,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,5);
 INSERT INTO biglietto
-VALUES (4,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,6);
+VALUES (4,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,6);
 INSERT INTO biglietto
-VALUES (5,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,7);
+VALUES (5,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,7);
 INSERT INTO biglietto
-VALUES (6,3,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,8);
+VALUES (6,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,8);
 
 ------------------------------------------------INSERT luogo-----------------------------------------------------
 
@@ -225,10 +225,10 @@ VALUES ('evento5','2018-06-2','curva','Milano, Sansiro',40);
 ------------------------------------------------------INSERT ord_part----------------------------------------------
 
 INSERT INTO ord_part
-VALUES (0,'evento0','2018-05-29','curva','Milano, Sansiro',40);
+VALUES (1,'evento0','2018-05-29','curva','Milano, Sansiro',40);
 INSERT INTO ord_part
-VALUES (1,'evento1','2018-05-12','tribuna','Roma, Olimpico',70);
+VALUES (2,'evento1','2018-05-12','tribuna','Roma, Olimpico',70);
 INSERT INTO ord_part
-VALUES (2,'evento2','2018-05-30','prato','Londra, via x',100);
+VALUES (3,'evento2','2018-05-30','prato','Londra, via x',100);
 INSERT INTO ord_part
-VALUES (3,'evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
+VALUES (4,'evento3','2019-05-21','galleria','Roma, via Appia Antica',89);
