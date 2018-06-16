@@ -13,11 +13,17 @@ class CValidazione {
         
         if($mail != "" && $psw != ""){
             $utente = new EUtente_Reg("","",$mail,$psw);
-            $psw_db = $db->load($utente);
+            $result = $db->load($utente);
             $registrato = $db->exist($utente);          /*qui bisogna istanziare un oggetto utente completo da
                                                          *salvare nella sessione per passarlo all'ordine*/   
-            if($registrato && $psw === $psw_db[0]){
+            if($registrato && $psw === $result[0]['psw']){
                 $sessione->imposta_valore('logged',true);
+                
+                $nom_cogn = explode(" ", $result[0]['nome']);
+                $utente->setNome($nom_cogn[0]);
+                $utente->setCognome($nom_cogn[1]);
+                
+                $sessione->imposta_valore('utente',$utente);
                 $pagina = $sessione->recupera_valore('pagina');
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: '.$pagina);
@@ -27,7 +33,7 @@ class CValidazione {
                  * home...credo che possiamo farlo con la sessione
                  */
             }
-            else if($registrato && $psw != $psw_db){
+            else if($registrato && $psw != $result[0]['psw']){
                 /*header('HTTP/1.1 301 Moved Permanently');
                 header('Location: login');*/
                 echo '<script type="text/javascript">

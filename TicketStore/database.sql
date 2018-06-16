@@ -208,7 +208,8 @@ INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, f
 VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,7);
 INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
 VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,8);
-
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo)
+VALUES ('evento0','derby','2018-05-29','curva','Milano, Sansiro');
 -----------------------------------------------------INSERT partecipazione----------------------------------------
 
 INSERT INTO partecipazione

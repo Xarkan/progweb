@@ -20,6 +20,38 @@ class CPagamento {
         }
 
     }
+    
+    
+    public function postPagamento() {
+        $sessione = USingleton::getInstance('USession');
+        $db = USingleton::getInstance('FDBmanager');
+        $ordine = $sessione->recupera_valore('ordine');
+        try {  
+            $db->getConnection()->beginTransaction();  
+            $ordine->setPagato(true);   
+            //$ordine->setData();   bisogna vedere con DateTime ma per ora simuliamo con una data a caso
+            $ordine->dataAcquisto = "2018-11-17";
+            
+            $stored = $db->store($ordine); //fa sia dentro ordine che dentro ord_part
+        
+            if($stored) {
+                //qui si fa update biglietto 
+                $updated = $db->update($ordine);  //questa parte va chiarita sul database
+                if($updated) {
+                    $biglietti = $db->load($ordine);
+                    $db->getConnection()->commit();
+                        //roba di view del biglietto
+                }else {
+                    $db->getConnection()->rollBack();
+                }
+            }else {
+                $db->getConnection()->rollBack();
+            }           
+        }
+        catch (Exception $e) {            
+            echo $e->getMessage();
+        }
+    }
 }
 
 /*              try {  

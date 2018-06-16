@@ -8,6 +8,7 @@ class CEvento {
         $ordine = USingleton::getInstance('EOrdine');
         
         $evento = $db->load($id);
+        $ordine->setCode($id);
         $ordine->setNomeEvento($evento->getNome());
         $img = $evento->getImg();
         $sessione->imposta_valore('ordine',$ordine);

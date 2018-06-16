@@ -28,9 +28,7 @@ class FDBmanager {
     }
 
 //-------------------------exist methods------------------------------------
-
-    
-    
+        
     
 public function exist($object) {
 
@@ -61,10 +59,6 @@ public function existluogo($indirizzo) {
     
 }
 //---------------------------load methods----------------------------------
-    
-
-    
-    
     
 
    
@@ -125,15 +119,12 @@ public function store($object) {
     }
     if($object instanceof EOrdine) {
         $fordine = USingleton::getInstance('FOrdine');
-        try {
-            $this->connection->beginTransaction();
+        try {           
             $stored1 = $fordine->storeordine($object);
             $stored2 = $fordine->storeord_part($object);
-            $this->connection->commit();
             $stored = $stored1 && $stored2;
         }
         catch (Exception $e) {
-            $this->connection->rollBack();
             $stored = false;
             echo $e->getMessage();
         }           

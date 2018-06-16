@@ -19,7 +19,7 @@ class FOrdine extends FDBmanager{
     }
     
     public function storeord_part(EOrdine $object) { //tocca settare code dentro ordine (id)
-        $query_id = "SELECT LAST_INSERT_ID()"; //da sempre zero...vedere con edgardo
+        $query_id = "SELECT LAST_INSERT_ID()"; 
         $result = $this->connection->query($query_id);
         $rows = $result->fetchAll();
         

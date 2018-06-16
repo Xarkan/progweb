@@ -68,8 +68,8 @@ class EOrdine {
         return $this->pagato;
     }
 
-    function setId($id) {
-        $this->id = $id;
+    function setCode($id) {
+        $this->code = $id;
     }
     
     function setNomeEvento($nome) {
@@ -80,7 +80,8 @@ class EOrdine {
         $this->evento = $evento;
     }
     
-    function setData($data) {
+    function setData() {
+        $data = new DateTime(); //da vedere
         $this->dataAcquisto = $data;
     }
 
