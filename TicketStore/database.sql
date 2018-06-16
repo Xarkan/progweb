@@ -15,7 +15,7 @@ CREATE TABLE evento (
 
 CREATE TABLE utente_r (
   mail          varchar(40)     NOT NULL,
-  psw           varchar(132)     NOT NULL,
+  psw           varchar(132)    NOT NULL,
   nome          varchar(40)     NOT NULL,
   PRIMARY KEY(mail)
 );
@@ -23,23 +23,9 @@ CREATE TABLE utente_r (
 CREATE TABLE ordine (
   codo           int     	NOT NULL    AUTO_INCREMENT,
   mail           varchar(40)    NOT NULL,
-  data_ordine    date        	  NOT NULL,
+  data_ordine    date        	NOT NULL,
  
   PRIMARY KEY (codo)
-
-);
-
-CREATE TABLE biglietto (
-  codb          int             NOT NULL,
-  codo          int	            NOT NULL,
-  mail          varchar(40)     NOT NULL,
-  evento        varchar(40)     NOT NULL,
-  data_evento   date        	  NOT NULL,
-  zona          varchar(20)     NOT NULL,
-  fila          int             NULL,
-  posto         int             NULL,
-  PRIMARY KEY(codb),
-  FOREIGN KEY(codo) REFERENCES ordine(codo)
 
 );
 
@@ -86,6 +72,24 @@ CREATE TABLE partecipazione (
   PRIMARY KEY (code, data_evento, zona, indirizzo, prezzo),
   FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
   FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)
+);
+
+CREATE TABLE biglietto (
+  codb          int             NOT NULL    AUTO_INCREMENT,
+  code          varchar(20)     NOT NULL,
+  codo          int	        NULL,
+  mail          varchar(40)     NULL,
+  evento        varchar(40)     NOT NULL,
+  data_evento   date        	NOT NULL,
+  zona          varchar(40)     NOT NULL,
+  indirizzo     varchar(40)     NOT NULL,
+  fila          int             NULL,
+  posto         int             NULL,
+
+  PRIMARY KEY (codb, code, data_evento, zona, indirizzo),
+  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
+  FOREIGN KEY (zona, indirizzo) REFERENCES zona(nome, indirizzo)
+
 );
 
 CREATE TABLE ord_part (
@@ -137,22 +141,6 @@ VALUES ('pier@hotmail.it','2018-04-10');
 INSERT INTO ordine (mail,data_ordine)
 VALUES ('paolino@hotmail.it','2018-12-05');
 
-----------------------------------------------INSERT biglietto-----------------------------------------------------
-
-INSERT INTO biglietto
-VALUES (0,1,'edgardovittoria@hotmail.it','derby','2018-05-29','curva',10,56);
-INSERT INTO biglietto
-VALUES (1,2,'federicoraparelli@hotmail.it','derby','2018-05-12','tribuna',15,86);
-INSERT INTO biglietto
-VALUES (2,3,'pier@hotmail.it','Deep Purple','2018-05-30','prato',NULL,NULL);
-INSERT INTO biglietto
-VALUES (3,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,5);
-INSERT INTO biglietto
-VALUES (4,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,6);
-INSERT INTO biglietto
-VALUES (5,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,7);
-INSERT INTO biglietto
-VALUES (6,4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria',3,8);
 
 ------------------------------------------------INSERT luogo-----------------------------------------------------
 
@@ -202,6 +190,25 @@ INSERT INTO evento_spec
 VALUES ('evento4','2019-06-30','Roma, Olimpico','Concerto',NULL,NULL,NULL,'Vasco Rossi');
 INSERT INTO evento_spec
 VALUES ('evento5','2018-06-2','Milano, Sansiro','Partita','Real Madrid','Barcellona',NULL,NULL);
+
+
+----------------------------------------------INSERT biglietto-----------------------------------------------------
+
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento0',1,'edgardovittoria@hotmail.it','derby','2018-05-29','curva','Milano, Sansiro',10,56);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento1',2,'federicoraparelli@hotmail.it','derby Romano','2018-05-12','tribuna','Roma, Olimpico',15,86);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento2',3,'pier@hotmail.it','Deep Purple','2018-05-30','prato','Londra, via x',NULL,NULL);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,5);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,6);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,7);
+INSERT INTO biglietto (code, codo, mail, evento, data_evento, zona, indirizzo, fila, posto)
+VALUES ('evento3',4,'paolino@hotmail.it','Pinocchio','2019-05-21','galleria','Roma, via Appia Antica',3,8);
+
 -----------------------------------------------------INSERT partecipazione----------------------------------------
 
 INSERT INTO partecipazione

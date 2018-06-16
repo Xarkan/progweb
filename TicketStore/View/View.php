@@ -11,6 +11,8 @@ class View {
         header('Location: /TicketStore/View/html/not-found.html');
     }
     public function avviaHome() {
+        //$sessione = USingleton::getInstance('USession');
+        //$sessione->distruggiSessioneCookie();
         header('Location: /TicketStore/home.html');
     }  
 }

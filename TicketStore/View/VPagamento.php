@@ -3,7 +3,11 @@
 
 class VPagamento {
     
-    public function set_html() {
+    public function set_html_metodo() {
+        header("Location: /TicketStore/metodo-di-pagamento");
+    }
+    
+    public function set_html_biglietti() {
         header("Location: /TicketStore/View/html/biglietti.html"); //da cambiare in /TicketStore/biglietti nel caso
     }
 }

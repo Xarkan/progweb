@@ -14,18 +14,13 @@ class CValidazione {
         if($mail != "" && $psw != ""){
             $utente = new EUtente_Reg("","",$mail,$psw);
             $psw_db = $db->load($utente);
-            $registrato = $db->exist($utente);
-            //var_dump($registrato);
-            /*echo '<pre>';
-            print_r($psw_db) ;
-            echo '</pre>';
-            echo '<pre>';
-            echo $psw;
-            echo '</pre>';*/
+            $registrato = $db->exist($utente);          /*qui bisogna istanziare un oggetto utente completo da
+                                                         *salvare nella sessione per passarlo all'ordine*/   
             if($registrato && $psw === $psw_db[0]){
                 $sessione->imposta_valore('logged',true);
+                $pagina = $sessione->recupera_valore('pagina');
                 header('HTTP/1.1 301 Moved Permanently');
-                header('Location: home.html');
+                header('Location: '.$pagina);
                 
                 /*qui dobbiamo trovare il modo di rimandare l'utente 
                  * all'ordine se lo stava effettuando oppure di mandarlo alla

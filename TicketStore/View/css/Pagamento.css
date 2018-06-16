@@ -1,0 +1,12 @@
+
+
+.card {
+    float: left;
+}
+
+#home-link {
+  color: rgb(240, 237, 237);
+}
+#home-link:hover {
+  text-decoration: none;
+}

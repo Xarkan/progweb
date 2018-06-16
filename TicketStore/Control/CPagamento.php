@@ -9,32 +9,38 @@ class CPagamento {
         $ordine = $sessione->recupera_valore('ordine');
         
         if(isset($_SESSION['logged'])) { //una roba simile per l'utente che si è registrato
-              
-            $utente = $sessione->recupera_valore('utente'); //è un oggetto utente_reg
-            $ordine->setUtente($utente);
-          try {  
-            $db->getConnection()->beginTransaction();  
-            $ordine->setPagato(true);           
-            $stored = $db->store($ordine); //fa sia dentro ordine che dentro ord_part
-        
-            if($stored) {
-                //qui si fa update biglietto 
-                $updated = $db->update($ordine);
-                if($updated) {
-                    $biglietti = $db->load($ordine);
-                    $view = USingleton::getInstance('VPagamento');
-                    $view->set_html();
-                }
-            }
-            $db->getConnection()->commit();
-          }
-          catch (Exception $e) {
-            $db->getConnection()->rollBack();
-            echo $e->getMessage();
-          }
+                $utente = $sessione->recupera_valore('utente'); //è un oggetto utente_reg
+                $ordine->setUtente($utente);
+                $view = USingleton::getInstance('VPagamento');
+                $view->set_html_metodo();
         } else { //bisogna farlo tornare dopo il login all'ordine
+            $pagina = "/TicketStore/pagamento";
+            $sessione->imposta_valore('pagina', $pagina);
             header("Location: /TicketStore/login");
         }
-      
+
     }
 }
+
+/*              try {  
+                $db->getConnection()->beginTransaction();  
+                $ordine->setPagato(true);           
+                $stored = $db->store($ordine); //fa sia dentro ordine che dentro ord_part
+        
+                if($stored) {
+                //qui si fa update biglietto 
+                    $updated = $db->update($ordine);  //questa parte va chiarita sul database
+                    if($updated) {
+                        $biglietti = $db->load($ordine);
+                        $db->getConnection()->commit();
+                        //roba di view del biglietto
+                    }else {
+                        $db->getConnection()->rollBack();
+                    }
+                }else {
+                    $db->getConnection()->rollBack();
+                }           
+              }
+              catch (Exception $e) {            
+                echo $e->getMessage();
+              }*/
