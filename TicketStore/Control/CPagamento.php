@@ -37,9 +37,10 @@ class CPagamento {
             if($stored) {
                 //qui si fa update biglietto 
                 $updated = $db->update($ordine); 
-                if($updated) {
-                    $biglietti = $db->load($ordine);
+                if($updated) {                    
                     $db->getConnection()->commit();
+                    $biglietti = $db->load($ordine);
+                    $sessione->imposta_valore('biglietti',$biglietti);
                     $view = USingleton::getInstance('VPagamento');
                     $view->set_html_biglietti();
                 }else {

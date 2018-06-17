@@ -52,9 +52,9 @@ class FBiglietto extends FDBmanager{
         //$string = $nome." ".$cognome;
         $string = $utente->getMail();
         $sql = "SELECT biglietto.* FROM biglietto,ordine WHERE biglietto.mail ="
-                .$this->connection->quote($string)." AND biglietto.codo = ordine.codo";
+                .$this->connection->quote($string)." AND biglietto.codo = ordine.codo AND biglietto.codo=".$object->getId();
         $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         //echo "loadbiglietticomprati->";
         return $rows;
     }
