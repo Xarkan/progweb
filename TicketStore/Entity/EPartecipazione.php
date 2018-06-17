@@ -29,4 +29,12 @@ class EPartecipazione {
     public function getDisp() {
         return $this->disp;
     }
+    
+    public function getZona() {
+        return $this->zona;
+    }
+    
+    public function getPrezzo() {
+        return $this->prezzo;
+    }
 }

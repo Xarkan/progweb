@@ -14,32 +14,37 @@ class FOrdine extends FDBmanager{
                 .$this->connection->quote($object->getData()).")";
 
         $affected_rows = $this->connection->exec($sql);
-        echo "storeordine->";
+        //echo "storeordine->";
         return $affected_rows > 0;
     }
     
     public function storeord_part(EOrdine $object) { //tocca settare code dentro ordine (id)
-        $query_id = "SELECT LAST_INSERT_ID()"; 
-        $result = $this->connection->query($query_id);
-        $rows = $result->fetchAll();
-        
-        $id = $rows[0][0];
+
         $part = $object->getItems();
         $evento = $object->getEvento();
         $citta = $evento->getLuogo()->getCitta();
         $via = $evento->getLuogo()->getVia();
         $indirizzo = $citta.", ".$via;
         
-        $sql = "INSERT INTO ord_part VALUES (".$id.","
+        $sql = "INSERT INTO ord_part VALUES (".$object->getId().","
                 .$this->connection->quote($object->getCode()).","
                 .$this->connection->quote($evento->getData()).","
                 .$this->connection->quote($part[0]->getZona()->getNome()).","
                 .$this->connection->quote($indirizzo).","
-                .$this->connection->quote($object->calcolaPrezzo()).")";
+                .$this->connection->quote($object->getPrezzo()).")";
         $affected_rows = $this->connection->exec($sql);
-        echo "storeord_part->";
+        //echo "storeord_part->";
         return $affected_rows > 0;
         
+    }
+    
+    
+    public function recuperoId(EOrdine $ordine) {
+        $query_id = "SELECT LAST_INSERT_ID()"; 
+        $result = $this->connection->query($query_id);
+        $rows = $result->fetchAll();
+        
+        $ordine->setId($rows[0][0]);
     }
 
 

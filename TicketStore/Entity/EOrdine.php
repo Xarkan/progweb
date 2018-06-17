@@ -4,6 +4,7 @@
 class EOrdine {
     
     //attributi
+    public $id; //id dell'ordine
     public $code; //string code
     public $nomeEvento; //string 
     public $evento; //EEventoSpecifico
@@ -44,6 +45,10 @@ class EOrdine {
         }
     }
     
+    function getId() {
+        return $this->id;
+    }
+    
     function getCode() {
         return $this->code;
     }
@@ -63,9 +68,17 @@ class EOrdine {
     function getItems() {
         return $this->items;
     }
+    
+    function getPrezzo() {
+        return $this->prezzo_tot;
+    }
 
     function getPagato() {
         return $this->pagato;
+    }
+    
+    function setId($id) {
+        $this->id = $id;
     }
 
     function setCode($id) {
@@ -94,8 +107,8 @@ class EOrdine {
     }
     public function calcolaPrezzo() {
         $tot = 0;
-        for($i=0; $i<count($this->getItems); $i++) {
-            $tot = $tot + $this->getItems[$i]->getPrezzo();
+        for($i=0; $i<count($this->items); $i++) {
+            $tot = $tot + $this->items[$i]->getPrezzo();
         }
         $this->prezzo_tot = $tot;
     }

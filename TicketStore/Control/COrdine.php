@@ -12,6 +12,7 @@ class COrdine {
             
                 $ordine->rimuoviElemento($param);
                 array_splice($posti, $param, 1);
+                $ordine->calcolaPrezzo();
         
                 $sessione->imposta_valore('posti',$posti);        
                 $sessione->imposta_valore('ordine',$ordine);
@@ -32,6 +33,7 @@ class COrdine {
         $num = $_POST['num_bigl'];
                 
         $ordine->addElementi($part, $num);
+        $ordine->calcolaPrezzo();
         
         $posti = $part->getPostiAssegnati($num);
         $sessione->imposta_valore('posti',$posti);

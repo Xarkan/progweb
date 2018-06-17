@@ -32,15 +32,16 @@ class CPagamento {
             //$ordine->setData();   bisogna vedere con DateTime ma per ora simuliamo con una data a caso
             $ordine->dataAcquisto = "2018-11-17";
             
-            $stored = $db->store($ordine); //fa sia dentro ordine che dentro ord_part
+            $stored = $db->store($ordine); 
         
             if($stored) {
                 //qui si fa update biglietto 
-                $updated = $db->update($ordine);  //questa parte va chiarita sul database
+                $updated = $db->update($ordine); 
                 if($updated) {
                     $biglietti = $db->load($ordine);
                     $db->getConnection()->commit();
-                        //roba di view del biglietto
+                    $view = USingleton::getInstance('VPagamento');
+                    $view->set_html_biglietti();
                 }else {
                     $db->getConnection()->rollBack();
                 }

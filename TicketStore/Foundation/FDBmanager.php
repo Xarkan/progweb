@@ -121,6 +121,7 @@ public function store($object) {
         $fordine = USingleton::getInstance('FOrdine');
         try {           
             $stored1 = $fordine->storeordine($object);
+            $fordine->recuperoId($object);
             $stored2 = $fordine->storeord_part($object);
             $stored = $stored1 && $stored2;
         }
