@@ -69,7 +69,7 @@ CREATE TABLE partecipazione (
   indirizzo     varchar(40)     NOT NULL,
   prezzo        int             NOT NULL,
 
-  PRIMARY KEY (code, data_evento, zona, indirizzo, prezzo),
+  PRIMARY KEY (code, data_evento, zona, indirizzo),
   FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
   FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)
 );
@@ -100,9 +100,9 @@ CREATE TABLE ord_part (
   indirizzo     varchar(40)     NOT NULL,
   prezzo        int             NOT NULL,
 
-  PRIMARY KEY (codo, code, zona, prezzo),
+  PRIMARY KEY (codo, code, zona),
   FOREIGN KEY (codo) REFERENCES ordine(codo),
-  FOREIGN KEY (code, data_evento, zona, indirizzo, prezzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo, prezzo)
+  FOREIGN KEY (code, data_evento, zona, indirizzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo)
 );
 
 ----------------------------------------INSERT evento-----------------------------------------------------------

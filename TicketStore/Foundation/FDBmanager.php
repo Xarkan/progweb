@@ -55,7 +55,27 @@ public function existluogo($indirizzo) {
     }
     else{
         return false;
+    }   
+}
+
+public function existzona($nome, $indirizzo) {
+    $sql = "SELECT nome FROM zona WHERE nome = ? AND indirizzo = ? ";
+    $statement = $this->connection->prepare($sql);
+    $statement->bindParam(1, $nome);
+    $statement->bindParam(2, $indirizzo);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    if(count($result) > 0){
+        return true;
     }
+    else{
+        return false;
+    }   
+}
+public function exist_es($code,$data){
+    $evento_spec = new FEventospecifico();
+    $exist = $evento_spec->existeventospec($code, $data);
+    return $exist;
     
 }
 //---------------------------load methods----------------------------------
@@ -121,7 +141,6 @@ public function store($object) {
         $fordine = USingleton::getInstance('FOrdine');
         try {           
             $stored1 = $fordine->storeordine($object);
-            $fordine->recuperoId($object);
             $stored2 = $fordine->storeord_part($object);
             $stored = $stored1 && $stored2;
         }
@@ -143,14 +162,42 @@ public function storeluogo($indirizzo, $struttura) {
     $result = $statement->execute();
     return $result;
 }
+public function storezona($nome, $indirizzo, $capacita) {
+    $sql = "INSERT INTO zona VALUES (?,?,?)";
+    $statement = $this->connection->prepare($sql);
+    
+    $statement->bindParam(1, $nome);
+    $statement->bindParam(2, $indirizzo);
+    $statement->bindParam(3, $capacita);
+    
+    $exist_luogo = $this->existluogo($indirizzo);
+    if(!$exist_luogo){
+        $struttura = "";
+       $stored_luogo = $this->storeluogo($indirizzo, $struttura);
+        if($stored_luogo){
+            $stored = $statement->execute();
+    } 
+    }
+    else{
+        $stored = $statement->execute();
+    }
+    return $stored;
+    
+}
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $evento_spec = new FEventoSpecifico();
-    $struttura = "";
-    $stored_luogo = $this->storeluogo($luogo, $struttura);
-    if($stored_luogo){
-        $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
-        return $stored;
+    $exist_luogo = $this->existluogo($luogo);
+    if(!$exist_luogo){
+        $struttura = "";
+       $stored_luogo = $this->storeluogo($luogo, $struttura);
+        if($stored_luogo){
+            $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+    } 
     }
+    else{
+        $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+    }
+    return $stored;
     
 }
 
@@ -163,7 +210,6 @@ public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
          .$this->connection->quote($prezzo).")";
     echo $sql;
     $stored = $this->connection->exec($sql);
-    var_dump($stored);
     return $stored;
 }
 
@@ -208,7 +254,67 @@ public function update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$ar
     return $updated;
     
 }
-
+public function update_partecipazione($code,$data,$zona,$indirizzo,$prezzo) {
+    
+    $sql = "UPDATE partecipazione SET zona = ?, indirizzo = ?, prezzo = ?"
+         . "WHERE code = ? AND data_evento = ?";
+    $statement = $this->connection->prepare($sql);
+    $statement->bindParam(1, $zona);
+    $statement->bindParam(2, $indirizzo);
+    $statement->bindParam(3, $prezzo);
+    $statement->bindParam(4, $code);
+    $statement->bindParam(5, $data);
+    
+    $existzona = $this->existzona($zona, $indirizzo);
+    $existluogo = $this->existluogo($indirizzo);
+    $existeventospec = $this->exist_es($code, $data);
+    
+    if($existeventospec){
+        if($existzona){
+            $updated = $statement->execute();
+            
+        }
+        else{
+            echo '<script type="text/javascript">
+                        alert("Prima di modificare la zona di una partecipazione.Asicurarsi che questa sia presente nella tabella zona.Inserire la zona in questione e riprovare con la modifica")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+        }
+        return $updated;
+    }
+    else{
+        echo '<script type="text/javascript">
+                        alert("evento non esistente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+                }
+    
+    
+    
+}
+public function updatezona($nome, $indirizzo, $capacita) {
+    $sql = "UPDATE zona SET capacita = ? WHERE nome = ? AND indirizzo = ?";
+    $statement = $this->connection->prepare($sql);
+    
+    $statement->bindParam(1, $capacita);
+    $statement->bindParam(2, $nome);
+    $statement->bindParam(3, $indirizzo);
+    
+    $exist_luogo = $this->existluogo($indirizzo);
+    $exist_zona = $this->existzona($nome, $indirizzo);
+    if($exist_luogo && $exist_zona){
+       $updated = $statement->execute();
+       return $updated;
+    }
+    else{
+        echo '<script type="text/javascript">
+                        alert("nome/indirizzo non presente nel database.Ricontrollare i campi inseriti.")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+                
+    }
+    
+}
 
 //------------------------------delete methods-----------------------------
 
@@ -237,6 +343,16 @@ public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
     $sql = "DELETE FROM partecipazione WHERE code = ".$codep." AND data_evento = ".$datap." AND zona = ".$zona
           ." AND indirizzo = ".$indirizzop." AND prezzo = ".$prezzo;
     $deleted = $this->connection->exec($sql);
+    return $deleted;
+}
+public function deletezona($nome, $indirizzo) {
+    $sql = "DELETE FROM zona WHERE nome = ? AND indirizzo = ?";
+    $statement = $this->connection->prepare($sql);
+    
+    $statement->bindParam(1, $nome);
+    $statement->bindParam(2, $indirizzo);
+    
+    $deleted = $statement->execute();
     return $deleted;
 }
 

@@ -145,17 +145,25 @@ class CAmministrazione {
             if($operazione == 'inserimento'){
                 $stored = $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
                 if($stored){
-                echo '<script type="text/javascript">
-                        alert("inserimento avvenuto")
-                        window.location= "/TicketStore/amministratore"
-                      </script>'; 
+                    echo '<script type="text/javascript">
+                            alert("inserimento avvenuto")
+                            window.location= "/TicketStore/amministratore"
+                          </script>'; 
             }
             }
             
-            /*da vedere bene l'operazione di modifica
+            
             if(($operazione == 'modifica')){
-                
-            }*/
+                $updated = $db->update_partecipazione($codep, $datap, $zona, $indirizzop, $prezzo);
+                    if($updated){
+                        echo '<script type="text/javascript">
+                                alert("Modifica avvenuta")
+                                window.location= "/TicketStore/amministratore"
+                              </script>'; 
+                    }
+                }
+               
+            
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
                 if($deleted){
@@ -173,7 +181,50 @@ class CAmministrazione {
                       </script>';
             }
         }
-        
+//----------------------------gestione zona------------------------------------------------------
+        if($tabella == 'zona'){
+            $nomez = $_POST['zona'];
+            $indirizzoz = $_POST['indirizzoz'];
+            
+            if($nomez != "" && $indirizzoz != ""){
+                if($operazione == 'inserimento'){
+                    $capacita = $_POST['capacita'];
+                    $stored = $db->storezona($nomez, $indirizzoz, $capacita);
+                    if($stored){
+                        echo '<script type="text/javascript">
+                            alert("inserimento avvenuto")
+                            window.location= "/TicketStore/amministratore"
+                          </script>'; 
+                    }
+                }
+                
+                if ($operazione == 'modifica'){
+                    $capacita = $_POST['capacita'];
+                    $updated = $db->updatezona($nomez, $indirizzoz, $capacita);
+                    if($updated){
+                            echo '<script type="text/javascript">
+                                    alert("Modifica avvenuta")
+                                    window.location= "/TicketStore/amministratore"
+                                  </script>'; 
+                    }
+                }        
+                if($operazione == 'cancellazione'){
+                     $deleted = $db->deletezona($nomez, $indirizzoz);
+                     if($deleted){
+                         echo '<script type="text/javascript">
+                                alert("cancellazione avvenuta")
+                                window.location= "/TicketStore/amministratore"
+                               </script>'; 
+                        }
+                    }
+                }
+                 else{
+                    echo '<script type="text/javascript">
+                                alert("Bisogna riempire tutti i campi correttamente")
+                                window.location= "/TicketStore/amministratore"
+                              </script>';
+                }
+        }
     }
 
     

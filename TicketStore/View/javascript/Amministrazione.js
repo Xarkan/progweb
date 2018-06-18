@@ -202,10 +202,31 @@ function setTableEvento(){
                 
         document.getElementById('sezione').innerHTML = html_command;        
     }
-     
+    
+    //modifica
+    if(y[x].index == 4 && j[i].index == 2){
+        let html_command = '<legend>Modifica di una partecipazione nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>codice_evento<br><input type="text" name="codep"></td>'+
+                                    '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>zona<br><input type="text" name="zona"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
+                                    '<td>prezzo<br><input name="prezzo"></td>'+
+                                '</tr>'+
+                            '</table>'+
+                            '<legend>Per modificare correttamente una partecipazione bisogna procedere seguendo queste regole<br>'+
+                            '<ul><li>INSERIRE IL CODICE E LA DATA RELATIVI ALLA PARTECIPAZIONE DA MODIFICARE</li>'+
+                            '<li>EFFETTUARE LE MODIFICHE PREVISTE</li>'+
+                            '<li>I CAMPI NON MODIFICATI DEVONO CONTENERE IL VALORE GIA PRESENTE NEL DATABASE</li></ul><br>'+
+                            'BUON LAVORO!!</legend>';
+                
+        document.getElementById('sezione').innerHTML = html_command;        
+    }
+    
     //cancellazione
     if(y[x].index == 4 && j[i].index == 3){
-        let html_command = '<legend>Inserimento di una partecipazione nel database</legend>'+
+        let html_command = '<legend>Cancellazione di una partecipazione nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codep"></td>'+
@@ -218,9 +239,52 @@ function setTableEvento(){
                 
         document.getElementById('sezione').innerHTML = html_command;        
     }
+//----------------------------------operazioni su zona--------------------------------------------------------------------------------------   
+//inserimento
+    if(y[x].index == 5 && j[i].index == 1){
+        let html_command = '<legend>Inserimento di una zona nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>nome<br><input type="text" name="zona"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
+                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
+                                '</tr>'+
+                            '</table>';
+                
+        document.getElementById('sezione').innerHTML = html_command;
+    } 
 
+//modifica
+    if(y[x].index == 5 && j[i].index == 2){
+        let html_command = '<legend>Modifica di una zona nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>nome<br><input type="text" name="zona"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
+                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
+                                '</tr>'+
+                            '</table>'+
+                            '<legend>Per modificare correttamente una zona bisogna procedere seguendo queste regole<br>'+
+                            '<ul><li>INSERIRE IL NOME E L INDIRIZZO RELATIVI ALLA ZONA DA MODIFICARE</li>'+
+                            '<li>EFFETTUARE LE MODIFICHE PREVISTE</li>'+
+                            '<li>I CAMPI NON MODIFICATI DEVONO CONTENERE IL VALORE GIA PRESENTE NEL DATABASE</li></ul><br>'+
+                            'BUON LAVORO!!</legend>';
+                
+        document.getElementById('sezione').innerHTML = html_command;
+    }           
     
+//cancellazione
+    if(y[x].index == 5 && j[i].index == 3){
+        let html_command = '<legend>Cancellazione di una zona nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>nome<br><input type="text" name="zona"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
+                                '</tr>'+
+                            '</table>';
+                
+        document.getElementById('sezione').innerHTML = html_command;
 }
 
-
+}
 
