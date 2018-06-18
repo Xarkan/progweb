@@ -13,6 +13,6 @@ class View {
     public function avviaHome() {
         //$sessione = USingleton::getInstance('USession');
         //$sessione->distruggiSessioneCookie();
-        header('Location: /TicketStore/home.html');
+        header('Location: /TicketStore/home');
     }  
 }

@@ -35,6 +35,8 @@ class CFrontController {
         if(!file_exists("Control/".$this->file)) {
             
             $view=Usingleton::getInstance('View');
+            //$aut = USingleton::getInstance('CAutenticazione');
+            //$aut->isLogged();
             $view->avviaHome();
             exit;
             }

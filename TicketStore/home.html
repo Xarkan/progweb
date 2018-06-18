@@ -12,7 +12,7 @@
     
     <title>TicketStore-Home</title>
   </head>
-  <body onload="getAndFill()">
+  <body onload="getAndFill(); isLogged()">
     <div class="jumbotron jumbotron-fluid" id="header">
   <div class="container">
     <h1 class="display-4">TicketStore</h1>
@@ -55,8 +55,8 @@
     </form>
         </div>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/TicketStore/login">Accedi</a>
+      <li class="nav-item" id="user">
+          
         </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -89,5 +89,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="/TicketStore/View/javascript/Home.js"></script>
+    <script src="/TicketStore/View/javascript/NavBar.js"></script>
   </body>
 </html>

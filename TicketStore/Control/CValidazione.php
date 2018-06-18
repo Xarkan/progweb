@@ -24,7 +24,12 @@ class CValidazione {
                 $utente->setCognome($nom_cogn[1]);
                 
                 $sessione->imposta_valore('utente',$utente);
-                $pagina = $sessione->recupera_valore('pagina');
+                if(isset($_SESSION['pagina'])) {
+                    $pagina = $sessione->recupera_valore('pagina');
+                }else{
+                    $pagina = "/TicketStore/home";
+                }
+                
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: '.$pagina);
                 

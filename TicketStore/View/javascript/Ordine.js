@@ -34,6 +34,8 @@ function setTable(risposta) {
             '</div>';
         table = table + html; 
         }
+        let price = '<div class="biglietti"><ul><li></li><li></li><li>ToT:'+risposta.ordine.prezzo_tot+'</li></ul></div>';
+        table = table + price;
     document.getElementById("items").innerHTML = table;
     
 }
