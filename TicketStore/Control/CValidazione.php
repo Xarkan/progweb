@@ -18,18 +18,23 @@ class CValidazione {
                                                          *salvare nella sessione per passarlo all'ordine*/   
             if($registrato && $psw === $result[0]['psw']){
                 $sessione->imposta_valore('logged',true);
+                $dominio = explode('@', $mail);
+                if($dominio[1] != 'ticketstore.it') { //controlla che non sia amministratore
+                    $nom_cogn = explode(" ", $result[0]['nome']);
+                    $utente->setNome($nom_cogn[0]);
+                    $utente->setCognome($nom_cogn[1]);
                 
-                $nom_cogn = explode(" ", $result[0]['nome']);
-                $utente->setNome($nom_cogn[0]);
-                $utente->setCognome($nom_cogn[1]);
-                
-                $sessione->imposta_valore('utente',$utente);
-                if(isset($_SESSION['pagina'])) {
-                    $pagina = $sessione->recupera_valore('pagina');
+                    $sessione->imposta_valore('utente',$utente);
+                    if(isset($_SESSION['pagina'])) {
+                        $pagina = $sessione->recupera_valore('pagina');
+                    }else{
+                        $pagina = "/TicketStore/home";
+                    }
                 }else{
-                    $pagina = "/TicketStore/home";
+                    $utente = 'amministratore';
+                    $sessione->imposta_valore('utente',$utente);
+                    $pagina = '/TicketStore/amministrazione';
                 }
-                
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: '.$pagina);
                 

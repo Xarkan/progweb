@@ -120,7 +120,8 @@ VALUES ('evento4','Vasco Rossi','.\\View\\imgs','vascorossi.jpg');
 INSERT INTO evento
 VALUES ('evento5','Real Madrid-Barcellona','.\\View\\imgs','realbarca.jpg');
 ------------------------------------------INSERT utente_r-------------------------------------------------------
-
+INSERT INTO utente_r
+VALUES ('admin@ticketstore.it',md5('password'),'Mago Santucci');
 INSERT INTO utente_r
 VALUES ('edgardovittoria@hotmail.it',md5('pippo'),'Edgardo Vittoria');
 INSERT INTO utente_r

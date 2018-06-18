@@ -20,4 +20,5 @@ function setNav(risposta) {
         html = '<a class="nav-link" href="/TicketStore/autenticazione">Logout</a>';
     }
     document.getElementById("user").innerHTML = html;
+    document.getElementById("home-link").setAttribute("href","/TicketStore/home");
 }

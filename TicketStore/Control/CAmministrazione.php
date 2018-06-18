@@ -271,9 +271,21 @@ class CAmministrazione {
       
     
     public function getAmministrazione() {
-        $db = USingleton::getInstance('FDBmanager');
-        $ultimo_cod = $db->loadultimocodice();
-        $vamministrazione = new VAmministrazione();
-        $vamministrazione->print_json($ultimo_cod);
+        $sessione = USingleton::getInstance('USession');
+        $aut = USingleton::getInstance('CAutenticazione');
+        if(isset($_SESSION['utente'])) {
+            $utente = $sessione->recupera_valore('utente');
+            if($aut->isLogged() && $utente == 'amministratore'){
+                $view = USingleton::getInstance('VAmministrazione');
+                $view->set_html();
+            }else{
+                $view = USingleton::getInstance('View');
+                $view->avviaHome();
+            }
+        }else{
+            $view = USingleton::getInstance('View');
+            $view->avviaHome();
+        }    
+        
     }
 }
