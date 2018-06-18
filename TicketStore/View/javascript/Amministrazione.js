@@ -1,4 +1,4 @@
-function getAndFill() {
+/*function getAndFill() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -14,7 +14,7 @@ function getAndFill() {
 function setcodice(risposta){
     let html_command = '<p>il codice inserito per ultimo è :<br> ' +risposta+'</p>';
     document.getElementById('ultimo').innerHTML = html_command;
-}
+}*/
 
 
 function setTableEvento(){
@@ -30,8 +30,6 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td id="ultimo"></td>'+
-                            '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
                             '<td>nome<br><input type="text" name="nome_evento"></td>'+
                             '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
                             '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
@@ -45,7 +43,6 @@ function setTableEvento(){
         let html_command = '<legend>Modifica di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td id="ultimo"></td>'+
                             '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
                             '<td>nome<br><input type="text" name="nome_evento"></td>'+
                             '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
@@ -60,7 +57,6 @@ function setTableEvento(){
         let html_command = '<legend>Cancellazione di un evento dal database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td id="ultimo"></td>'+
                             '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
                             '<td>nome<br><input type="text" readonly name="nome_evento"></td>'+
                             '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+

@@ -59,4 +59,11 @@ class FBiglietto extends FDBmanager{
         return $rows;
     }
 
+    public function generabiglietti($num) {
+        
+        for($i = 0;$i < $num;$i++){
+            $biglietto = new EBiglietto($nome, $data, $proprietario, $zona, $posto);
+        }
+    }
+    
     }

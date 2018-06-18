@@ -334,26 +334,42 @@ public function delete($object) {
 return $deleted;
 }
 public function delete_es($codes,$data) {
-    $sql = "DELETE FROM evento_spec WHERE code = ".$codes." AND data_evento = ".$data;
-    $deleted = $this->connection->exec($sql);
-    return $deleted;
+    $sql = "DELETE FROM evento_spec WHERE code = ".$this->connection->quote($codes)
+          ."AND data_evento = ".$this->connection->quote($data);
+    $result = $this->connection->exec($sql);
+    if($result > 0){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
-    $sql = "DELETE FROM partecipazione WHERE code = ".$codep." AND data_evento = ".$datap." AND zona = ".$zona
-          ." AND indirizzo = ".$indirizzop." AND prezzo = ".$prezzo;
-    $deleted = $this->connection->exec($sql);
-    return $deleted;
+    $sql = "DELETE FROM partecipazione WHERE code = ".$this->connection->quote($codep)
+            ."AND data_evento = ".$this->connection->quote($datap)
+            ."AND zona = ".$this->connection->quote($zona)
+            ."AND indirizzo = ".$this->connection->quote($indirizzop)
+            ."AND prezzo = ".$this->connection->quote($prezzo);
+    $result = $this->connection->exec($sql);
+    if($result > 0){
+        return true;
+    }
+    else {
+        return false;
+    }
+             
 }
 public function deletezona($nome, $indirizzo) {
-    $sql = "DELETE FROM zona WHERE nome = ? AND indirizzo = ?";
-    $statement = $this->connection->prepare($sql);
-    
-    $statement->bindParam(1, $nome);
-    $statement->bindParam(2, $indirizzo);
-    
-    $deleted = $statement->execute();
-    return $deleted;
+    $sql = "DELETE FROM zona WHERE nome = ".$this->connection->quote($nome)
+          ."AND indirizzo = ".$this->connection->quote($indirizzo);
+    $result = $this->connection->exec($sql);
+    if($result > 0){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
