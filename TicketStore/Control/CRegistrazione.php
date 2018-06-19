@@ -35,6 +35,7 @@ class CRegistrazione {
                     //la registrazione è avvenuta con successo l'utente viene reinderizzato nella bellissima
                     //pagina dove puo scegliere se andare alla home o procedere con l'ordine
                         $sessione->imposta_valore('logged',$registrato);
+                        $sessione->imposta_valore('utente',$utente);
                         header('HTTP/1.1 301 Moved Permanently');
                         header('Location: ValidazioneUtente');
                     }

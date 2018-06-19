@@ -45,7 +45,6 @@ class CPagamento {
                     $view->set_html_biglietti();
                 }else {
                     $db->getConnection()->rollBack();
-                    echo 'nsuobocbbas';
                 }
             }else {
                 $db->getConnection()->rollBack();
