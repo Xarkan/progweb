@@ -27,6 +27,8 @@ class COrdine {
         $sessione = USingleton::getInstance('USession');
         $db = USingleton::getInstance('FDBmanager');
         $ordine = $sessione->recupera_valore('ordine');
+        $string = explode("_", $id_esp);
+        $id_esp = $string[0]." ".$string[1];
         
         $evento_sp = $db->load($id_e, $id_esp);
         $part = $evento_sp->selezionePartecipazione($id_part);

@@ -3,12 +3,14 @@
 class CDebug {
     
     public function getDebug() {
-        
-        $data = new DateTime(null, new DateTimeZone('Europe/Rome'));
-        $result = date_format($data, 'd-m-Y H:i:sP');
+        $sessione = USingleton::getInstance('USession');
+        $db = USingleton::getInstance('FDBmanager');
+        $sql = "SELECT code FROM evento ORDER BY code DESC LIMIT 1";
+        $result = $db->getConnection()->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
         
         echo "<pre>";
-        print_r($result);
+        print_r($_SESSION);
         echo "</pre>";
     }
 }

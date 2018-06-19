@@ -14,17 +14,17 @@ class FOrdine extends FDBmanager{
                 .$this->connection->quote($object->getData()).")";
 
         $affected_rows = $this->connection->exec($sql);
-        //echo "storeordine->";
+        //echo "storeordine->".$sql;
         return $affected_rows > 0;
     }
     
     public function storeord_part(EOrdine $object) { //tocca settare code dentro ordine (id)
-
+        $this->recuperoId($object);
         $part = $object->getItems();
         $evento = $object->getEvento();
         $citta = $evento->getLuogo()->getCitta();
-        $via = $evento->getLuogo()->getVia();
-        $indirizzo = $citta.", ".$via;
+        $struttura = $evento->getLuogo()->getStruttura();
+        $indirizzo = $citta.", ".$struttura;
         
         $sql = "INSERT INTO ord_part VALUES (".$object->getId().","
                 .$this->connection->quote($object->getCode()).","
@@ -33,14 +33,14 @@ class FOrdine extends FDBmanager{
                 .$this->connection->quote($indirizzo).","
                 .$this->connection->quote($object->getPrezzo()).")";
         $affected_rows = $this->connection->exec($sql);
-        //echo "storeord_part->";
+        //echo "storeord_part->".$sql;
         return $affected_rows > 0;
         
     }
     
     
     public function recuperoId(EOrdine $ordine) {
-        $query_id = "SELECT LAST_INSERT_ID()"; 
+        $query_id = "SELECT max(codo) FROM ordine"; 
         $result = $this->connection->query($query_id);
         $rows = $result->fetchAll();
         

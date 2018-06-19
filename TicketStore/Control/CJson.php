@@ -3,7 +3,7 @@
 
 class CJson {
     
-    public function getJson($p1 , $p2 = '', $p3 = '') {
+    public function getJson($p1 , $data = '', $index_partecipazione = '') {
         $sessione = USingleton::getInstance('USession');
         $db = USingleton::getInstance('FDBmanager');
         $view = USingleton::getInstance('View');
@@ -28,16 +28,18 @@ class CJson {
                         $biglietti = $sessione->recupera_valore('biglietti');
                         $view->print_json($biglietti);
                     }else{ //questo fa la roba con i codici del db
-                        if($p2 == '') { //questo fa la roba del'evento generico-->p1 = cod_e
+                        if($data == '') { //questo fa la roba del'evento generico-->p1 = cod_e
                             $evento = $db->load($p1);
                             $view->print_json($evento);
                         }else{
-                            if($p3 == '') { //questo fa la roba dell'evento specifico
-                                $evento_sp = $db->load($p1, $p2);
+                            $string = explode("_", $data);
+                            $data = $string[0]." ".$string[1];
+                            if($index_partecipazione == '') { //questo fa la roba dell'evento specifico
+                                $evento_sp = $db->load($p1, $data);
                                 $view->print_json($evento_sp);
                             }else{ //questo fa l'ultimo caso della partecipazione
-                                $evento_sp = $db->load($p1, $p2);
-                                $part = $evento_sp->selezionePartecipazione($p3);
+                                $evento_sp = $db->load($p1, $data);
+                                $part = $evento_sp->selezionePartecipazione($index_partecipazione);
                                 $view->print_json($part);
                             }
                         }

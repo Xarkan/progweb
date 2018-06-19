@@ -3,7 +3,8 @@ function getAndFill() {
     var url =  window.location.href;
     var splitted_url = url.split("/");
     var cod_e = splitted_url[splitted_url.length - 2];
-    var cod_esp = splitted_url[splitted_url.length - 1];
+    var splitted_data = splitted_url[splitted_url.length - 1].split(" ");
+    var cod_esp = splitted_data[0] +"_"+ splitted_data[1];
     
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

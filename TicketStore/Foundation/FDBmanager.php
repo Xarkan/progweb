@@ -417,7 +417,7 @@ public function deletezona($nome, $indirizzo) {
     }
       
     private function getLuogoZonaPart($boh) { //cambiare boh
-        $sql= "SELECT partecipazione.*, luogo.struttura, zona.capacita "
+        $sql= "SELECT partecipazione.*, zona.capacita "
                 ."FROM partecipazione, luogo, zona WHERE code = "
                 .$this->connection->quote($boh['code'])." AND partecipazione.indirizzo = "
                 .$this->connection->quote($boh['indirizzo'])." AND data_evento = "
@@ -432,8 +432,8 @@ public function deletezona($nome, $indirizzo) {
             $zona = new EZona($rows[$k]['zona'], $rows[$k]['capacita']);
             $part = new EPartecipazione($zona,$rows[$k]['prezzo'],true);
             $array_part[$k] = $part;
-            list($citta, $via) = explode(", ", $boh['indirizzo']);
-            $luogo = new ELuogo($citta, $via, $rows[$k]['struttura']);
+            list($citta, $struttura) = explode(", ", $boh['indirizzo']);
+            $luogo = new ELuogo($citta, $struttura);
         }
 
         $tipo = $boh['tipo'];

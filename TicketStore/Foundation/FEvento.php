@@ -20,6 +20,9 @@ class FEvento extends FDBmanager {
         $sql = "SELECT code FROM evento ORDER BY code DESC LIMIT 1";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
+        if(count($rows) == 0) {
+            $rows[0] = "evento-1";
+        }
         return $rows;
     }
     

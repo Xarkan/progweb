@@ -43,8 +43,7 @@ function setDettagli(risposta) {
     let html = '<li><h4>'+risposta.nomeEvento+'</h4></li>'+
                 '<li><h6>'+risposta.evento.data+'</h6></li>'+
                 '<li><h6>'+risposta.evento.luogo.citta+'</h6></li>'+
-                '<li><h6>'+risposta.evento.luogo.struttura+'</h6></li>'+
-                '<li><h6>'+risposta.evento.luogo.via+'</h6></li>';
+                '<li><h6>'+risposta.evento.luogo.struttura+'</h6></li>';
     
     document.getElementById("dettagli").innerHTML = html;
     

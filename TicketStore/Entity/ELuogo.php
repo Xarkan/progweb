@@ -4,23 +4,17 @@ class ELuogo {
 
     //attributi
     public $citta;
-    public $via;
     public $struttura;
     public $zone = []; //array(Zona)
 
 	//metodi
-    public function __construct($città, $via, $struttura, $zone = null) {
+    public function __construct($città, $struttura, $zone = null) {
         $this->citta = $città;
-        $this->via = $via;
         $this->struttura = $struttura;
         $this->zone = $zone;
     }
     function getCitta() {
         return $this->citta;
-    }
-
-    function getVia() {
-        return $this->via;
     }
 
     function getStruttura() {
@@ -33,10 +27,6 @@ class ELuogo {
 
     function setCittà($città) {
         $this->città = $città;
-    }
-
-    function setVia($via) {
-        $this->via = $via;
     }
 
     function setStruttura($struttura) {

@@ -9,18 +9,12 @@ class FBiglietto extends FDBmanager{
     public function updateBiglietti(EOrdine $ordine) { 
         $sessione = USingleton::getInstance('USession');
         $posti = $sessione->recupera_valore('posti');
-        //--------------da controllare---------------
-        /*$query_id = "SELECT codo FROM ordine ORDER BY codo DESC LIMIT 1";
-        $result = $this->connection->query($query_id);
-        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
-        
-        $id = $rows[0];*/
-        //-------------------------------------------
+
         $part = $ordine->getItems();
         $luogo = $ordine->getEvento()->getLuogo();
         $citta = $luogo->getCitta();
-        $via = $luogo->getVia();
-        $indirizzo = $citta.", ".$via;
+        $struttura = $luogo->getStruttura();
+        $indirizzo = $citta.", ".$struttura;
         $updated = true;
         for ($i = 0; $i < count($ordine->getItems()); $i++) {
            
