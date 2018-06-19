@@ -9,8 +9,8 @@ class CJson {
         $view = USingleton::getInstance('View');
         
         if($p1 == 'logged') {
-            $aut = USingleton::getInstance('CAutenticazione');
-            $logged = $aut->isLogged();
+            $validazione = USingleton::getInstance('CValidazione');
+            $logged = $validazione->isLogged();
             $view->print_json($logged);
         }else {
             if($p1 == 'ordine') {

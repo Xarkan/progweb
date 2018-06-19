@@ -16,6 +16,6 @@ class View {
     }  
     
     public function set_html_logout() {
-        header('Location: /TicketStore/logout');
+        header('Location: /TicketStore/View/html/logout.html');
     }
 }

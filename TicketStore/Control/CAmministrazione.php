@@ -282,25 +282,5 @@ class CAmministrazione {
                               </script>';
                 }
         }
-    }
-      
-    
-    public function getAmministrazione() {
-        $sessione = USingleton::getInstance('USession');
-        $aut = USingleton::getInstance('CAutenticazione');
-        if(isset($_SESSION['utente'])) {
-            $utente = $sessione->recupera_valore('utente');
-            if($aut->isLogged() && $utente == 'amministratore'){
-                $view = USingleton::getInstance('VAmministrazione');
-                $view->set_html();
-            }else{
-                $view = USingleton::getInstance('View');
-                $view->avviaHome();
-            }
-        }else{
-            $view = USingleton::getInstance('View');
-            $view->avviaHome();
-        }    
-        
-    }
+    }    
 }

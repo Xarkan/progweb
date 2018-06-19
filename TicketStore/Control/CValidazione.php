@@ -2,7 +2,40 @@
 
 
 class CValidazione {
-     
+    
+    public function isLogged() {
+        if(isset($_SESSION['logged'])) {
+            if($_SESSION['logged']) {
+                $logged = true;
+            }else{
+                $logged = false;
+            }
+        }else{
+            $logged = false;
+        }
+        return $logged;
+    }
+    
+    
+    public function getValidazione() {
+        $sessione = USingleton::getInstance('USession');
+        if(isset($_SESSION['utente'])) {
+            $utente = $sessione->recupera_valore('utente');
+            if($this->isLogged() && $utente == 'amministratore'){
+                $view = USingleton::getInstance('VAmministrazione');
+                $view->set_html();
+            }else{
+                $view = USingleton::getInstance('View');
+                $view->avviaHome();
+            }
+        }else{
+            $view = USingleton::getInstance('View');
+            $view->avviaHome();
+        }    
+        
+    }
+    
+         
     public function postValidazione() {
         
         $db = USingleton::getInstance('FDBmanager');
@@ -33,7 +66,7 @@ class CValidazione {
                 }else{
                     $utente = 'amministratore';
                     $sessione->imposta_valore('utente',$utente);
-                    $pagina = '/TicketStore/amministrazione';
+                    $pagina = '/TicketStore/validazione';
                 }
                 header('HTTP/1.1 301 Moved Permanently');
                 header('Location: '.$pagina);
