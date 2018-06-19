@@ -17,21 +17,16 @@ class USession {
         $_SESSION[$chiave]=$valore;
     }
     
-    function recupera_valore($chiave1,$chiave2 = null) {
-        if($chiave2 != null) {
-            $valore = $_SESSION[$chiave1][$chiave2];
-        }
-        else {
-            $valore = $_SESSION[$chiave1];
-        }
+    function recupera_valore($chiave) {
+        $valore = $_SESSION[$chiave];
         return $valore;
     }
 
     
     function distruggiSessioneCookie(){
-    	$_SESSION = array();// Desetta tutte le variabili di sessione.
-    	session_destroy();// Infine distrugge la sessione.  
-        setcookie("PHPSESSID",null,time()-3600);//cancella cookie
+            $_SESSION = array();// Desetta tutte le variabili di sessione.
+            session_destroy();// Infine distrugge la sessione.  
+            setcookie("PHPSESSID",null,time()-3600);//cancella cookie
 
     }
     

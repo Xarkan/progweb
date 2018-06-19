@@ -42,7 +42,6 @@ class CPagamento {
                     $biglietti = $db->load($ordine);
                     $sessione->imposta_valore('biglietti',$biglietti);
                     $view = USingleton::getInstance('VPagamento');
-                    //echo "pippo";
                     $view->set_html_biglietti();
                 }else {
                     $db->getConnection()->rollBack();
