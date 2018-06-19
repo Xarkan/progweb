@@ -56,7 +56,7 @@ class CValidazione {
                     $nom_cogn = explode(" ", $result[0]['nome']);
                     $utente->setNome($nom_cogn[0]);
                     $utente->setCognome($nom_cogn[1]);
-                
+                    var_dump($utente);
                     $sessione->imposta_valore('utente',$utente);
                     if(isset($_SESSION['pagina'])) {
                         $pagina = $sessione->recupera_valore('pagina');

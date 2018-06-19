@@ -17,11 +17,11 @@ class FEvento extends FDBmanager {
     }
     
     public function loadultimoevento() {
-        $sql = "SELECT code FROM evento ORDER BY code DESC LIMIT 1";
+        $sql = "SELECT MAX(code) FROM evento";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
         if(count($rows) == 0) {
-            $rows[0] = "evento-1";
+            $rows[0] = -1;
         }
         return $rows;
     }
@@ -35,7 +35,7 @@ class FEvento extends FDBmanager {
     }
     
     public function loadEvento($cod_e) {
-        $sql = "SELECT * FROM evento WHERE code=".$this->connection->quote($cod_e);
+        $sql = "SELECT * FROM evento WHERE code=".$cod_e;
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
@@ -48,8 +48,8 @@ class FEvento extends FDBmanager {
         $nome_img = $result[count($result)-1];
         array_pop($result);
         $path = implode('\\', $result);
-        $sql = "INSERT INTO evento "
-             . "VALUES ( ".$this->connection->quote($object->getId()).","
+        $sql = "INSERT INTO evento (code,nome,path_img,nome_img) "
+             . "VALUES ( ".$this->connection->quote(NULL).","
              .$this->connection->quote($object->getNome()).","
              .$this->connection->quote($path).","
              .$this->connection->quote($nome_img).")";

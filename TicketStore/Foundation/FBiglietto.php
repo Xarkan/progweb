@@ -21,8 +21,8 @@ class FBiglietto extends FDBmanager{
         $sql = "UPDATE biglietto SET codo=".$ordine->getId().","     //codo mail fila posto
                 ." mail=".$this->connection->quote($ordine->getUtente()->getMail()).","
                 ." fila=".$this->connection->quote($posti[$i]->getFila()).","
-                ." posto=".$this->connection->quote($posti[$i]->getPosto()). " WHERE code="
-                .$this->connection->quote($ordine->getCode())." AND zona="
+                ." posto=".$this->connection->quote($posti[$i]->getPosto()). " WHERE codb= "
+                .$this->recuperoId()." AND code=".$ordine->getCode()." AND zona="
                 .$this->connection->quote($part[$i]->getZona()->getNome())." AND indirizzo="
                 .$this->connection->quote($indirizzo)." AND data_evento="
                 .$this->connection->quote($ordine->getEvento()->getData())." AND mail IS NULL";    
@@ -34,7 +34,7 @@ class FBiglietto extends FDBmanager{
         //echo "updatebiglietti->";
         }
         
-        return $updated;        
+        return $updated;      
     }
     
     
@@ -74,6 +74,15 @@ class FBiglietto extends FDBmanager{
             
         }
         return $stored;
+    }
+    
+    public function recuperoId() {
+        $query_id = "SELECT min(codb) FROM biglietto WHERE mail IS NULL "; 
+        $result = $this->connection->query($query_id);
+        $rows = $result->fetchAll();
+        return $rows[0][0];
+        
+        //$ordine->setId($rows[0][0]);
     }
     
     }

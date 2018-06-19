@@ -4,7 +4,7 @@ USE DB_biglietti;
 
 
 CREATE TABLE evento (
-  code          varchar(20)     NOT NULL,
+  code          int             NOT NULL    AUTO_INCREMENT,
   nome          varchar(20)     NOT NULL,
   path_img      varchar(40)     NOT NULL,
   nome_img      varchar(40)     NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE zona (
 
 
 CREATE TABLE evento_spec (
-  code          varchar(20)     NOT NULL,
-  data_evento   datetime            NOT NULL,
+  code          int             NOT NULL,
+  data_evento   datetime        NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
   tipo          varchar(10)     NOT NULL,
   casa          varchar(20)     NULL,
@@ -63,8 +63,8 @@ CREATE TABLE evento_spec (
 );
 
 CREATE TABLE partecipazione (
-  code          varchar(40)     NOT NULL,
-  data_evento   datetime            NOT NULL,
+  code          int             NOT NULL,
+  data_evento   datetime        NOT NULL,
   zona          varchar(20)     NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
   prezzo        int             NOT NULL,
@@ -76,11 +76,11 @@ CREATE TABLE partecipazione (
 
 CREATE TABLE biglietto (
   codb          int             NOT NULL    AUTO_INCREMENT,
-  code          varchar(20)     NOT NULL,
+  code          int             NOT NULL,
   codo          int	        NULL,
   mail          varchar(40)     NULL,
   evento        varchar(40)     NOT NULL,
-  data_evento   datetime        	NOT NULL,
+  data_evento   datetime        NOT NULL,
   zona          varchar(40)     NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
   fila          int             NULL,
@@ -94,8 +94,8 @@ CREATE TABLE biglietto (
 
 CREATE TABLE ord_part (
   codo          int             NOT NULL,
-  code          varchar(40)     NOT NULL,
-  data_evento   datetime            NOT NULL,
+  code          int             NOT NULL,
+  data_evento   datetime        NOT NULL,
   zona          varchar(20)     NOT NULL,
   indirizzo     varchar(40)     NOT NULL,
   prezzo        int             NOT NULL,

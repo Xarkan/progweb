@@ -14,10 +14,10 @@ class CAmministrazione {
         
         if($tabella == 'evento' && $operazione == 'inserimento') {
         //$id = $_POST['codice_evento'];
-        $ultimo_cod = $db->loadultimocodice();
-        $num = explode("evento", $ultimo_cod[0]);
-        $num = $num[1]+1;
-        $id_ultimo = 'evento'.($num);
+        $num = $db->loadultimocodice();
+        
+        $num = $num[0]+1;
+        $id_ultimo = $num;
         $nome_evento = $_POST['nome_evento'];
         $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
         $eventi = "";
@@ -191,6 +191,7 @@ class CAmministrazione {
         $zona = $_POST['zona'];
         $indirizzop = $_POST['indirizzop'];
         $prezzo = $_POST['prezzo'];
+        print_r($_POST);
         if($codep != "" && $datap != "" && $zona != "" && $indirizzop != "" && $prezzo != ""){
             if($operazione == 'inserimento'){
                 $stored = $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
