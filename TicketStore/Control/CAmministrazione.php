@@ -122,6 +122,8 @@ class CAmministrazione {
         if( $tabella == 'evento_spec') {
         $tipo = $_POST['tipo'];
         $data = $_POST['data_es'];
+        $ora = $_POST['ora_es'];
+        $data = $data." ".$ora;
         $luogo = $_POST['indirizzo'];
         $codes = $_POST['codes'];
         $casa = $_POST['casa'];
@@ -188,6 +190,8 @@ class CAmministrazione {
         if($tabella == 'partecipazione') {
         $codep = $_POST['codep'];
         $datap = $_POST['datap'];
+        $ora = $_POST['ora_es'];
+        $datap = $datap." ".$ora;
         $zona = $_POST['zona'];
         $indirizzop = $_POST['indirizzop'];
         $prezzo = $_POST['prezzo'];
@@ -288,6 +292,8 @@ class CAmministrazione {
           $num = (int)$_POST['numero_bigl'];
           $nome_evento = $_POST['nome_evento'];
           $data = $_POST['data'];
+          $ora = $_POST['ora_es'];
+          $data = $data." ".$ora;
           $zona = $_POST['zona'];
           $code = $_POST['codice_evento'];
           $indirizzo = $_POST['indirizzo'];

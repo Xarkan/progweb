@@ -99,6 +99,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<input type="text" name="codes"></td>'+
                                     '<td>data_evento<input type="date" name="data_es"></td>'+
+                                    '<td>ora_evento<input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<input type="text" name="indirizzo"></td>'+
                                     '<td>Tipo <select name="tipo">'+
 
@@ -130,6 +131,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<input type="text" name="codes"></td>'+
                                     '<td>data_evento<input type="date" name="data_es"></td>'+
+                                    '<td>ora_evento<input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<input type="text" name="indirizzo"></td>'+
                                     '<td>Tipo <select name="tipo">'+
 
@@ -163,6 +165,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<input type="text" name="codes"></td>'+
                                     '<td>data_evento<input type="date" name="data_es"></td>'+
+                                    '<td>ora_evento<input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<input type="text" readonly name="indirizzo"></td>'+
                                     '<td>Tipo <select name="tipo" readonly>'+
 
@@ -190,6 +193,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codep"></td>'+
                                     '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>zona<br><input type="text" name="zona"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
                                     '<td>prezzo<br><input name="prezzo"></td>'+
@@ -206,6 +210,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codep"></td>'+
                                     '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>zona<br><input type="text" name="zona"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
                                     '<td>prezzo<br><input name="prezzo"></td>'+
@@ -227,6 +232,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codep"></td>'+
                                     '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>zona<br><input type="text" name="zona"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
                                     '<td>prezzo<br><input name="prezzo"></td>'+
@@ -290,6 +296,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
                                     '<td>data<br><input type="date" name="data"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzo"></td>'+
                                     '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
                                     '<td>numero_bigl<br><input type="number" name="numero_bigl"></td>'+

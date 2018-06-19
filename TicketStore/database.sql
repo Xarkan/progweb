@@ -105,3 +105,4 @@ CREATE TABLE ord_part (
   FOREIGN KEY (code, data_evento, zona, indirizzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo)
 );
 
+INSERT INTO utente_r VALUES('admin@ticketstore.it',md5('password'),'admin'); 
