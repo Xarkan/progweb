@@ -12,7 +12,7 @@ class CAmministrazione {
         //----------------------------gestione evento------------------------------------------------------
         
         
-        /*if($tabella == 'evento' && $operazione == 'inserimento') {
+        if($tabella == 'evento' && $operazione == 'inserimento') {
         //$id = $_POST['codice_evento'];
         $ultimo_cod = $db->loadultimocodice();
         $num = explode("evento", $ultimo_cod[0]);
@@ -27,18 +27,18 @@ class CAmministrazione {
             if($operazione == 'inserimento'){
                 $stored = $db->store($evento);
                 if($stored){
-                echo '<script type="text/javascript">
-                        alert("inserimento avvenuto")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-            } 
+                    echo '<script type="text/javascript">
+                            alert("inserimento avvenuto")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+                } 
+            }   
         }else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-             }
-          }
+                echo '<script type="text/javascript">
+                            alert("Bisogna riempire tutti i campi correttamente")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+         }
         }
         if($tabella == 'evento' && $operazione != 'inserimento') {   
             $id = $_POST['codice_evento'];
@@ -50,10 +50,10 @@ class CAmministrazione {
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete($evento);
                 if($deleted){
-                echo '<script type="text/javascript">
-                        alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
+                    echo '<script type="text/javascript">
+                            alert("la cancellazione è avvenuta correttamente")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
                 }
             }
         }
@@ -68,22 +68,25 @@ class CAmministrazione {
         
             //modifica
             if(($operazione == 'modifica')){
-                $evento = new EEvento($id, $img, $nome_evento, $eventi);
-                $update = $db->update($evento);
-                if($update){
-                echo '<script type="text/javascript">
-                        alert("Modifica avvenuta")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
+                if($id != "" && $nome_evento != "" && $img != ""){
+                    $evento = new EEvento($id, $img, $nome_evento, $eventi);
+                    $update = $db->update($evento);
+                    if($update){
+                        echo '<script type="text/javascript">
+                                alert("Modifica avvenuta")
+                                window.location= "/TicketStore/validazione"
+                              </script>'; 
+                    } 
+                }
+                else {
+                    echo '<script type="text/javascript">
+                                alert("Bisogna riempire tutti i campi correttamente")
+                                window.location= "/TicketStore/validazione"
+                              </script>';
+                }
             }
         }
-        }
-        else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-        }
+        
         
              
     
@@ -105,10 +108,8 @@ class CAmministrazione {
                         alert("la cancellazione è avvenuta correttamente")
                         window.location= "/TicketStore/validazione"
                       </script>'; 
+                }
             }
-            }
-            
-
         }
         else{
             echo '<script type="text/javascript">
@@ -130,22 +131,21 @@ class CAmministrazione {
         
         
         if($codes != "" && $data != ""){
-        
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_es($codes,$data);
                 var_dump($deleted);
                 if($deleted){
-                echo '<script type="text/javascript">
-                        alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-            }
-            else{
-                echo '<script type="text/javascript">
-                        alert("Assicurarsi che tutte le partecipazioni relative all evento che si desidera cancellare siano cancellate")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-            }
+                    echo '<script type="text/javascript">
+                            alert("la cancellazione è avvenuta correttamente")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+                }
+                else{
+                    echo '<script type="text/javascript">
+                            alert("Assicurarsi che tutte le partecipazioni relative all evento che si desidera cancellare siano cancellate")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+                }
             }
         }
         else{
@@ -159,12 +159,12 @@ class CAmministrazione {
             if($operazione == 'inserimento'){
                $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
                if($stored){
-                echo '<script type="text/javascript">
-                        alert("inserimento avvenuto")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-            }
-            }
+                    echo '<script type="text/javascript">
+                            alert("inserimento avvenuto")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+                }
+            } 
             
             //modifica
             if(($operazione == 'modifica')){
@@ -199,7 +199,7 @@ class CAmministrazione {
                             alert("inserimento avvenuto")
                             window.location= "/TicketStore/validazione"
                           </script>'; 
-            }
+                }
             }
             
             
@@ -281,17 +281,18 @@ class CAmministrazione {
                                 window.location= "/TicketStore/validazione"
                               </script>';
                 }
-        }*/
+        }
 //----------------------------gestione biglietto------------------------------------------------------
         if($tabella == 'biglietti'){
-          $num = $_POST['numero_bigl'];
+          $num = (int)$_POST['numero_bigl'];
           $nome_evento = $_POST['nome_evento'];
           $data = $_POST['data'];
           $zona = $_POST['zona'];
           $code = $_POST['codice_evento'];
-          $indirizzo = $_POST['indirizzo']; 
+          $indirizzo = $_POST['indirizzo'];
+          
          
-          if(is_int($num) && $nome_evento != "" && $data != "" && $zona != "" && $code != "" && $indirizzo != ""){
+         if(is_int($num) && $nome_evento != "" && $data != "" && $zona != "" && $code != "" && $indirizzo != ""){
                 if($operazione == 'inserimento'){
                     $stored = $db->store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo);
                    
