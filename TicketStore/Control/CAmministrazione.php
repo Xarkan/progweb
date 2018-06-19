@@ -12,8 +12,8 @@ class CAmministrazione {
         //----------------------------gestione evento------------------------------------------------------
         
         
-        if($tabella == 'evento') {
-        $id = $_POST['codice_evento'];
+        if($tabella == 'evento' && $operazione == 'inserimento') {
+        //$id = $_POST['codice_evento'];
         $ultimo_cod = $db->loadultimocodice();
         $num = explode("evento", $ultimo_cod[0]);
         $num = $num[1]+1;
@@ -21,7 +21,31 @@ class CAmministrazione {
         $nome_evento = $_POST['nome_evento'];
         $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
         $eventi = "";
-        if($id != ""){
+        if($nome_evento != "" && $img != ""){
+            $evento = new EEvento($id_ultimo, $img, $nome_evento, $eventi);
+            //inserimento
+            if($operazione == 'inserimento'){
+                $stored = $db->store($evento);
+                if($stored){
+                echo '<script type="text/javascript">
+                        alert("inserimento avvenuto")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+            } 
+        }else{
+            echo '<script type="text/javascript">
+                        alert("Bisogna riempire tutti i campi correttamente")
+                        window.location= "/TicketStore/amministratore"
+                      </script>'; 
+             }
+          }
+        }
+        if($tabella == 'evento' && $operazione != 'inserimento') {   
+            $id = $_POST['codice_evento'];
+            $nome_evento = $_POST['nome_evento'];
+            $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
+            $eventi = "";
+            if($id != ""){
             $evento = new EEvento($id, $img, $nome_evento, $eventi);
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete($evento);
@@ -40,18 +64,7 @@ class CAmministrazione {
                       </script>';
         }
         
-        if($nome_evento != "" && $img != ""){
-            $evento = new EEvento($id_ultimo, $img, $nome_evento, $eventi);
-            //inserimento
-            if($operazione == 'inserimento'){
-                $stored = $db->store($evento);
-                if($stored){
-                echo '<script type="text/javascript">
-                        alert("inserimento avvenuto")
-                        window.location= "/TicketStore/amministratore"
-                      </script>'; 
-            } 
-            }
+        
         
             //modifica
             if(($operazione == 'modifica')){
@@ -73,9 +86,11 @@ class CAmministrazione {
         }
         
              
-        }
+    
         
     
+         
+        
         
         
         //----------------------------gestione utente_r------------------------------------------------------
