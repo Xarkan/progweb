@@ -152,6 +152,13 @@ public function store($object) {
 return $stored;
 }
 
+public function store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo) {
+    $bigl = new FBiglietto();
+    $stored = $bigl->generabiglietti($num, $nome_evento, $data, $zona, $code, $indirizzo);
+   
+    return $stored;
+}
+
 public function storeluogo($indirizzo, $struttura) {
     $sql = "INSERT INTO luogo VALUES (?,?)";
     $statement = $this->connection->prepare($sql);

@@ -58,12 +58,28 @@ class FBiglietto extends FDBmanager{
         //echo "loadbiglietticomprati->";
         return $rows;
     }
-
-    public function generabiglietti($num) {
+    
+    public function storebiglietto(EBiglietto $biglietto, $code, $indirizzo) {
+        $sql = "INSERT INTO biglietto (code,evento,data_evento,zona,indirizzo)"
+                . "VALUES (".$this->connection->quote($code).","
+                .$this->connection->quote($biglietto->getNomeEvento()).","
+                . $this->connection->quote($biglietto->getData()).","
+                . $this->connection->quote($biglietto->getZona()).","
+                . $this->connection->quote($indirizzo).")";
+        $result = $this->connection->exec($sql);
+      
+        return $result > 0;
         
-        for($i = 0;$i < $num;$i++){
-            $biglietto = new EBiglietto($nome, $data, $proprietario, $zona, $posto);
+    }
+    
+    public function generabiglietti($num, $nome_evento, $data, $zona, $code, $indirizzo) {
+        $stored = true;
+        for($i = 0;$i < $num && $stored;$i++){
+            $biglietto = new EBiglietto($nome_evento, $data, NULL, $zona, NULL);
+            $stored = $this->storebiglietto($biglietto,$code,$indirizzo);
+            
         }
+        return $stored;
     }
     
     }

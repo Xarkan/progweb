@@ -12,7 +12,7 @@ class CAmministrazione {
         //----------------------------gestione evento------------------------------------------------------
         
         
-        if($tabella == 'evento' && $operazione == 'inserimento') {
+        /*if($tabella == 'evento' && $operazione == 'inserimento') {
         //$id = $_POST['codice_evento'];
         $ultimo_cod = $db->loadultimocodice();
         $num = explode("evento", $ultimo_cod[0]);
@@ -29,13 +29,13 @@ class CAmministrazione {
                 if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             } 
         }else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
              }
           }
@@ -52,7 +52,7 @@ class CAmministrazione {
                 if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
                 }
             }
@@ -60,7 +60,7 @@ class CAmministrazione {
         else {
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
         }
         
@@ -73,7 +73,7 @@ class CAmministrazione {
                 if($update){
                 echo '<script type="text/javascript">
                         alert("Modifica avvenuta")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             }
         }
@@ -81,7 +81,7 @@ class CAmministrazione {
         else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
         }
         
@@ -103,7 +103,7 @@ class CAmministrazione {
                 if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             }
             }
@@ -113,7 +113,7 @@ class CAmministrazione {
         else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
         }
         }
@@ -137,13 +137,13 @@ class CAmministrazione {
                 if($deleted){
                 echo '<script type="text/javascript">
                         alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             }
             else{
                 echo '<script type="text/javascript">
                         alert("Assicurarsi che tutte le partecipazioni relative all evento che si desidera cancellare siano cancellate")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             }
             }
@@ -151,7 +151,7 @@ class CAmministrazione {
         else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
         }
         
@@ -161,7 +161,7 @@ class CAmministrazione {
                if($stored){
                 echo '<script type="text/javascript">
                         alert("inserimento avvenuto")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
             }
             }
@@ -172,7 +172,7 @@ class CAmministrazione {
                 if($update){
                 echo '<script type="text/javascript">
                         alert("Modifica avvenuta")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>'; 
                 }
             }
@@ -180,7 +180,7 @@ class CAmministrazione {
         else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
         }
         }
@@ -197,7 +197,7 @@ class CAmministrazione {
                 if($stored){
                     echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
-                            window.location= "/TicketStore/amministratore"
+                            window.location= "/TicketStore/validazione"
                           </script>'; 
             }
             }
@@ -208,7 +208,7 @@ class CAmministrazione {
                     if($updated){
                         echo '<script type="text/javascript">
                                 alert("Modifica avvenuta")
-                                window.location= "/TicketStore/amministratore"
+                                window.location= "/TicketStore/validazione"
                               </script>'; 
                     }
                 }
@@ -220,13 +220,13 @@ class CAmministrazione {
                 if($deleted){
                     echo '<script type="text/javascript">
                             alert("la cancellazione è avvenuta correttamente")
-                            window.location= "/TicketStore/amministratore"
+                            window.location= "/TicketStore/validazione"
                           </script>'; 
                 }
                 else{
                     echo '<script type="text/javascript">
                             alert("Sono presenti errori di sintassi in qualcuno dei campi inseriti.Coreggere e Riprovare")
-                            window.location= "/TicketStore/amministratore"
+                            window.location= "/TicketStore/validazione"
                           </script>'; 
                 }
             }
@@ -234,7 +234,7 @@ class CAmministrazione {
         else{
             echo '<script type="text/javascript">
                         alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/amministratore"
+                        window.location= "/TicketStore/validazione"
                       </script>';
             }
         }
@@ -250,7 +250,7 @@ class CAmministrazione {
                     if($stored){
                         echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
-                            window.location= "/TicketStore/amministratore"
+                            window.location= "/TicketStore/validazione"
                           </script>'; 
                     }
                 }
@@ -261,7 +261,7 @@ class CAmministrazione {
                     if($updated){
                             echo '<script type="text/javascript">
                                     alert("Modifica avvenuta")
-                                    window.location= "/TicketStore/amministratore"
+                                    window.location= "/TicketStore/validazione"
                                   </script>'; 
                     }
                 }        
@@ -270,7 +270,7 @@ class CAmministrazione {
                      if($deleted){
                          echo '<script type="text/javascript">
                                 alert("cancellazione avvenuta")
-                                window.location= "/TicketStore/amministratore"
+                                window.location= "/TicketStore/validazione"
                                </script>'; 
                         }
                     }
@@ -278,9 +278,40 @@ class CAmministrazione {
                  else{
                     echo '<script type="text/javascript">
                                 alert("Bisogna riempire tutti i campi correttamente")
-                                window.location= "/TicketStore/amministratore"
+                                window.location= "/TicketStore/validazione"
                               </script>';
                 }
+        }*/
+//----------------------------gestione biglietto------------------------------------------------------
+        if($tabella == 'biglietti'){
+          $num = $_POST['numero_bigl'];
+          $nome_evento = $_POST['nome_evento'];
+          $data = $_POST['data'];
+          $zona = $_POST['zona'];
+          $code = $_POST['codice_evento'];
+          $indirizzo = $_POST['indirizzo']; 
+         
+          if(is_int($num) && $nome_evento != "" && $data != "" && $zona != "" && $code != "" && $indirizzo != ""){
+                if($operazione == 'inserimento'){
+                    $stored = $db->store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo);
+                   
+                    if($stored){
+                        echo '<script type="text/javascript">
+                                alert("inserimento avvenuto")
+                                window.location= "/TicketStore/validazione"
+                              </script>'; 
+                    }
+                }
+            } 
+            else{
+                    echo '<script type="text/javascript">
+                                alert("Bisogna riempire tutti i campi correttamente")
+                                window.location= "/TicketStore/validazione"
+                              </script>';
+            }  
         }
-    }    
+              
+    }  
 }
+
+

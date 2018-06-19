@@ -282,5 +282,22 @@ function setTableEvento(){
         document.getElementById('sezione').innerHTML = html_command;
 }
 
+//----------------------------------operazioni su biglietto--------------------------------------------------------------------------------------   
+    //inserimento biglietti 
+    if(y[x].index == 6 && j[i].index == 1){
+        let html_command = '<legend>Inserimento di biglietti acquistabili nel database</legend>'+
+                            '<table>'+
+                                '<tr>'+
+                                    '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                                    '<td>data<br><input type="date" name="data"></td>'+
+                                    '<td>indirizzo<br><input type="text" name="indirizzo"></td>'+
+                                    '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td>numero_bigl<br><input type="text" name="numero_bigl"></td>'+
+                                    '<td>zona<br><input type="text" name="zona"></td>'+
+                                '</tr>'+
+                            '</table>';
+                
+        document.getElementById('sezione').innerHTML = html_command;
 }
 
+}

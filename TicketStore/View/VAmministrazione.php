@@ -57,6 +57,7 @@ class VAmministrazione {
     echo '                              <option>evento_spec</option>';
     echo '                              <option>partecipazione</option>';
     echo '                              <option>zona</option>';
+    echo '                              <option>biglietti</option>';
                                   
     echo '                          </select>';
     echo '                      </td>';
