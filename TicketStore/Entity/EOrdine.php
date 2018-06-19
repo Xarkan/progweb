@@ -58,7 +58,8 @@ class EOrdine {
     }
 
     function getData() {
-        return $this->dataAcquisto;
+        $result = date_format($this->dataAcquisto, 'Y-m-d H:i:sP');
+        return $result;
     }
 
     function getUtente() {
@@ -94,7 +95,7 @@ class EOrdine {
     }
     
     function setData() {
-        $data = new DateTime(); //da vedere
+        $data = new DateTime(null, new DateTimeZone('Europe/Rome'));
         $this->dataAcquisto = $data;
     }
 

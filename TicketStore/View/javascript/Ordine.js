@@ -8,7 +8,6 @@ function getAndFill() {
             setDettagli(risposta.ordine);
             setTable(risposta);
             setImg(risposta);
-            //pagamento();
         }else{
             isEmpty();
         }
@@ -69,7 +68,6 @@ function alterTable(p) {
         var risposta = JSON.parse(xmlhttp.responseText);
         if(risposta.ordine.items.length > 0) {
             setTable(risposta);
-            //pagamento();
         }
         else{
             setTable(risposta);
@@ -80,10 +78,3 @@ function alterTable(p) {
     xmlhttp.open("GET","/TicketStore/ordine/"+p, true);
     xmlhttp.send();
 }
-
-/*function pagamento() {
-    let button = document.getElementById("acquisto");
-    let href = document.createAttribute('href');
-    href.value = '/TicketStore/pagamento';
-    button.setAttributeNode(href);
-}*/

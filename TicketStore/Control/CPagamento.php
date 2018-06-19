@@ -28,9 +28,9 @@ class CPagamento {
         $ordine = $sessione->recupera_valore('ordine');
         try {  
             $db->getConnection()->beginTransaction();  
-            $ordine->setPagato(true);   
-            //$ordine->setData();   bisogna vedere con DateTime ma per ora simuliamo con una data a caso
-            $ordine->dataAcquisto = "2018-11-17";
+            $ordine->setPagato(true);
+            
+            $ordine->setData();
             
             $stored = $db->store($ordine); 
         

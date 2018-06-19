@@ -3,14 +3,12 @@
 class CDebug {
     
     public function getDebug() {
-        $db = USingleton::getInstance('FDBmanager');
-        $sql = "SELECT codo FROM ordine ORDER BY codo DESC LIMIT 1";
-        $result = $db->getConnection()->query($sql);
-        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
+        
+        $data = new DateTime(null, new DateTimeZone('Europe/Rome'));
+        $result = date_format($data, 'd-m-Y H:i:sP');
         
         echo "<pre>";
-        print_r($rows);
+        print_r($result);
         echo "</pre>";
-        echo "pippo";
     }
 }

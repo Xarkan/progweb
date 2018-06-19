@@ -23,7 +23,7 @@ CREATE TABLE utente_r (
 CREATE TABLE ordine (
   codo           int     	NOT NULL    AUTO_INCREMENT,
   mail           varchar(40)    NOT NULL,
-  data_ordine    date        	NOT NULL,
+  data_ordine    datetime        	NOT NULL,
  
   PRIMARY KEY (codo)
 
