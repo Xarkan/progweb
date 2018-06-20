@@ -123,3 +123,14 @@ ALTER TABLE evento_spec_mirror ENGINE = MyISAM;
 
 
 INSERT INTO utente_r VALUES('admin@ticketstore.it',md5('password'),'admin'); 
+INSERT INTO evento_spec_mirror
+VALUES ('derby',1,'2018-05-29 21:00:00','Milano, San Siro','Partita','Inter','Milan',NULL,NULL);
+
+INSERT INTO evento (nome, path_img, nome_img) VALUES ('derby','.\\View\\imgs','derbymilano.jpg');
+INSERT INTO luogo VALUES ('Milano, San Siro');
+INSERT INTO evento_spec
+VALUES (1,'2018-05-29 21:00:00','Milano, San Siro','Partita','Inter','Milan',NULL,NULL);
+INSERT INTO zona 
+VALUES ('curva','Milano, San Siro',50);
+INSERT INTO partecipazione
+VALUES (1,'2018-05-29 21:00:00','curva','Milano, San Siro',40);

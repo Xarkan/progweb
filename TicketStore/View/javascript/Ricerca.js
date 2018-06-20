@@ -7,7 +7,7 @@ function getAndFill() {
         
     }
 };
-    xmlhttp.open("POST","/TicketStore/ricerca", true);
+    xmlhttp.open("GET","/TicketStore/Json/ricerca", true);
     xmlhttp.send();
 }
 

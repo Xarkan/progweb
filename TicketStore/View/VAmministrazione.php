@@ -22,7 +22,7 @@ class VAmministrazione {
     
     echo '<div class="jumbotron jumbotron-fluid" id="header">';
     echo '<div class="container">';
-    echo '<h1 class="display-4">TicketStore</h1>';
+    echo '<h1 class="display-4"><a href="/TicketStore/logout" id="home-link">TicketStore</a></h1>';
     echo '</div>';
     echo '</div>';
     echo '    <div>';

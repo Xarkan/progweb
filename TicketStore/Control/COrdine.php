@@ -27,6 +27,7 @@ class COrdine {
         $sessione = USingleton::getInstance('USession');
         $db = USingleton::getInstance('FDBmanager');
         $ordine = $sessione->recupera_valore('ordine');
+        $sessione->distruggiValore('posti');
         $string = explode("_", $id_esp);
         $id_esp = $string[0]." ".$string[1];
         

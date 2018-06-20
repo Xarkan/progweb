@@ -21,6 +21,15 @@ class USession {
         $valore = $_SESSION[$chiave];
         return $valore;
     }
+    
+    function distruggiValore($string) {
+        $bool  = false;
+        if(isset($_SESSION[$string])) {
+            unset($_SESSION[$string]);
+            $bool = true;
+        }
+        return $bool;
+    }
 
     
     function distruggiSessioneCookie(){

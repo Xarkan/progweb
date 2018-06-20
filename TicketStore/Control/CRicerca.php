@@ -9,9 +9,9 @@ class CRicerca {
         $nome_evento = $_POST['nome_evento'];
         $eventi = $db->search($nome_evento);
         //print_r($eventi);
+        $sessione->imposta_valore('ricerca',$eventi);
         $vricerca = USingleton::getInstance('VRicerca');
-        //$vricerca->print_json($eventi);
-       //$vricerca->set_html();
+        $vricerca->set_html();
         
         
         

@@ -8,6 +8,14 @@ body{
 	margin-bottom: 0px;
         margin-left: 0px;
 }
+
+#home-link {
+  color: rgb(240, 237, 237);
+}
+#home-link:hover {
+  text-decoration: none;
+}
+
 input{
     width: 120px;
     background-color: whitesmoke;

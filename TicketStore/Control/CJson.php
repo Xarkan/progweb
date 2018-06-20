@@ -9,7 +9,10 @@ class CJson {
         $view = USingleton::getInstance('View');
         
         
-        
+        if($p1 == 'ricerca') {
+            $eventi = $sessione->recupera_valore('ricerca');
+            $view->print_json($eventi);
+        }else {
         if($p1 == 'logged') {
             $validazione = USingleton::getInstance('CValidazione');
             $logged = $validazione->isLogged();
@@ -48,6 +51,7 @@ class CJson {
                     }
                 }
             }  
+        }
         }
     }
 }
