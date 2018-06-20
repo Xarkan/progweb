@@ -31,7 +31,6 @@ CREATE TABLE ordine (
 
 CREATE TABLE luogo (
   indirizzo     varchar(40)     NOT NULL,
-  struttura     varchar(40)     NOT NULL,
 
   PRIMARY KEY (indirizzo)
 );
