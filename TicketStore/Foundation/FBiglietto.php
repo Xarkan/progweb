@@ -98,4 +98,28 @@ class FBiglietto extends FDBmanager{
         //$ordine->setId($rows[0][0]);
     }
     
+    public function loadPostiDisp(EOrdine $ordine) {
+        $citta = $ordine->getEvento()->getLuogo()->getCitta();
+        $struttura = $ordine->getEvento()->getLuogo()->getStruttura();
+        $indirizzo = $citta.", ".$struttura;
+        $sql2 = "SELECT max(fila) FROM biglietto WHERE "
+                ."code=".$ordine->getCode()." AND "
+                ."data_evento=".$this->connection->quote($ordine->getEvento()->getData())." AND "
+                ."indirizzo=".$this->connection->quote($indirizzo)." AND "
+                ."zona=".$this->connection->quote($ordine->getItems()[0]->getZona()->getNome());
+        
+        $sql1 = "SELECT fila, max(posto) AS posto FROM biglietto WHERE "
+                ."code=".$ordine->getCode()." AND "
+                ."data_evento=".$this->connection->quote($ordine->getEvento()->getData())." AND "
+                ."indirizzo=".$this->connection->quote($indirizzo)." AND "
+                ."zona=".$this->connection->quote($ordine->getItems()[0]->getZona()->getNome())." AND "
+                ."fila IN (".$sql2.")";
+        //echo $sql1;
+        //*
+        $result = $this->connection->query($sql1);
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $rows;//*/
+        
     }
+}

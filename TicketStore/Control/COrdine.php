@@ -36,10 +36,10 @@ class COrdine {
                 
         $ordine->addElementi($part, $num);
         $ordine->calcolaPrezzo();
-        
-        $posti = $part->getPostiAssegnati($num);
+
+        $posti = $part->getPostiAssegnati($ordine, $num);
         $sessione->imposta_valore('posti',$posti);
-        
+
         $sessione->imposta_valore('ordine',$ordine);
         $view = USingleton::getInstance('VOrdine');
         $view->set_html();

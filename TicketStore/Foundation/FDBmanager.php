@@ -94,8 +94,15 @@ public function load($object, $param = '') {
         $result = $utente->loadutente($object);
     }
     if($object instanceof EOrdine) {
-        $biglietti = new FBiglietto();
-        $result = $biglietti->loadbiglietticomprati($object);
+        if($param == '') {
+            $biglietti = new FBiglietto();
+            $result = $biglietti->loadbiglietticomprati($object);
+        }else{
+            if($param == 'posti') {
+                $fbigl = new FBiglietto;
+                $result = $fbigl->loadPostiDisp($object);
+            }
+        }
     }
     if(is_string($object)) {
         if($object == "eventi") {

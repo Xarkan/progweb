@@ -14,7 +14,7 @@ class EZona {
             $k = 1;
             $fila = 1;
             while($k < $capacita) {
-                for ($i = 0; $i < 5; $i++) {
+                for ($i = 1; $i <= 5; $i++) {
                     $posto = new EPosto($fila,$i);
                     $this->posti[] = $posto;
                     $k++;
@@ -22,10 +22,20 @@ class EZona {
                 $fila++;
             }
         }
-        public function assegnaPosti($num) { //deve controllare nel db i posti assegnati dentro la tabella bigl
-            $posti = array();
-            for ($i = 1; $i <= $num; $i++) {
-                $posti[$i-1] = $this->posti[count($this->posti) - $i];
+        public function assegnaPosti(EOrdine $ordine, $num) { //deve controllare nel db i posti assegnati dentro la tabella bigl
+            $db = USingleton::getInstance('FDBmanager');
+            $result = $db->load($ordine,'posti');
+            if(isset($result[0]['fila'])) {
+                $fila = (int) $result[0]['fila'];                
+                $posto = (int) $result[0]['posto'];
+                $assegnati = (($fila - 1) * 5) + $posto;
+                for ($i = 0; $i < $num; $i++) {               
+                    $posti[$i] = $this->posti[$assegnati + $i];
+                }
+            }else{
+                for ($i = 0; $i < $num; $i++) {               
+                    $posti[$i] = $this->posti[$i];
+                }
             }
             
             return $posti;
