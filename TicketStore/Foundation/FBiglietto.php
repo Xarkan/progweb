@@ -6,10 +6,23 @@ class FBiglietto extends FDBmanager{
         parent::__construct();   
     }
     
+    public function lockbiglietto($num_bigl) {
+        $id = $this->recuperoId();
+        for($i = 0;$i < $num_bigl;$i++){
+            $sql = "SELECT * FROM biglietto WHERE codb = ".$id." FOR UPDATE";
+            $result = $this->connection->query($sql);
+            $id++;
+        }
+        
+    }
+    
     public function updateBiglietti(EOrdine $ordine) { 
+        
+        $num_bigl = count($ordine->getItems());
+        $this->lockbiglietto($num_bigl);
         $sessione = USingleton::getInstance('USession');
         $posti = $sessione->recupera_valore('posti');
-
+        
         $part = $ordine->getItems();
         $luogo = $ordine->getEvento()->getLuogo();
         $citta = $luogo->getCitta();
