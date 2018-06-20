@@ -77,12 +77,45 @@ class FEventospecifico extends FDBmanager {
         $result = $this->connection->exec($sql);
         return $result;*/
     }
-    public function deleteeventospec($codes,$data) {
+    public function storeeventospecmirror($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
+    $nome = $this->recuperanomeevento($codes);
+    $sql = "INSERT INTO evento_spec_mirror VALUES (?,?,?,?,?,?,?,?,?)"; 
+    $statement = $this->connection->prepare($sql);
+    
+    $statement->bindParam(1,$nome);
+    $statement->bindParam(2,$codes);
+    $statement->bindParam(3,$data);
+    $statement->bindParam(4,$luogo);
+    $statement->bindParam(5,$tipo);
+    $statement->bindParam(6,$casa);
+    $statement->bindParam(7,$ospite);
+    $statement->bindParam(8,$compagnia);
+    $statement->bindParam(9,$artista);
+    
+    $result = $statement->execute();
+    
+    return $result;
+    }
+    
+    public function recuperanomeevento($code) {
+        $sql = "SELECT nome FROM evento WHERE code = ".$code;
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
+        return $rows[0];
+    }
+    
+    /*public function deleteeventospec($codes,$data) {
 
         $sql = "DELETE FROM evento_spec WHERE code = ".$codes." AND data_evento = ".$data; 
         $result = $this->connection->exec($sql);
         return $result;
     }
+    public function deleteeventospecmirror($codes,$data) {
+
+        $sql = "DELETE FROM evento_spec_mirror WHERE code = ".$codes." AND data_evento = ".$data; 
+        $result = $this->connection->exec($sql);
+        return $result;
+    }*/
     
     public function updateeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
         $sql = "UPDATE evento_spec SET  indirizzo = ?,"

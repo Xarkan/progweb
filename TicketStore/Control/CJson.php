@@ -8,6 +8,8 @@ class CJson {
         $db = USingleton::getInstance('FDBmanager');
         $view = USingleton::getInstance('View');
         
+        
+        
         if($p1 == 'logged') {
             $validazione = USingleton::getInstance('CValidazione');
             $logged = $validazione->isLogged();

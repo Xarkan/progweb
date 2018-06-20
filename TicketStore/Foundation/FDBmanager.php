@@ -1,3 +1,4 @@
+
 <?php
 
 class FDBmanager {
@@ -166,12 +167,12 @@ public function store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo) {
     return $stored;
 }
 
-public function storeluogo($indirizzo, $struttura) {
-    $sql = "INSERT INTO luogo VALUES (?,?)";
+public function storeluogo($indirizzo) {
+    $sql = "INSERT INTO luogo VALUES (?)";
     $statement = $this->connection->prepare($sql);
     
     $statement->bindParam(1, $indirizzo);
-    $statement->bindParam(2, $struttura);
+   
     
     $result = $statement->execute();
     return $result;
@@ -200,18 +201,20 @@ public function storezona($nome, $indirizzo, $capacita) {
 }
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $evento_spec = new FEventoSpecifico();
+    
     $exist_luogo = $this->existluogo($luogo);
     if(!$exist_luogo){
-        $struttura = "";
-       $stored_luogo = $this->storeluogo($luogo, $struttura);
+       $stored_luogo = $this->storeluogo($luogo);
         if($stored_luogo){
             $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+            $stored_mirror = $evento_spec->storeeventospecmirror($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
     } 
     }
     else{
         $stored = $evento_spec->storeeventospec($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
+        $stored_mirror = $evento_spec->storeeventospecmirror($codes, $data, $luogo, $tipo, $casa, $ospite, $compagnia, $artista);
     }
-    return $stored;
+    return $stored && $stored_mirror;
     
 }
 
@@ -351,12 +354,18 @@ public function delete_es($codes,$data) {
     $sql = "DELETE FROM evento_spec WHERE code = ".$this->connection->quote($codes)
           ."AND data_evento = ".$this->connection->quote($data);
     $result = $this->connection->exec($sql);
-    if($result > 0){
-        return true;
-    }
-    else {
-        return false;
-    }
+    
+    return $result > 0;
+    
+}
+
+public function delete_es_mirror($codes,$data) {
+    $sql = "DELETE FROM evento_spec_mirror WHERE code = ".$this->connection->quote($codes)
+          ."AND data_evento = ".$this->connection->quote($data);
+    $result = $this->connection->exec($sql);
+    
+    return $result > 0;
+    
 }
 
 public function delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
@@ -448,6 +457,17 @@ public function deletezona($nome, $indirizzo) {
                 
         $evento = new $classe($luogo,$boh['data_evento'],$array_part);
         return $evento;
+    }
+    
+    public function search($nome_cercato) {
+        $nome_cercato = $nome_cercato."%";
+        //$sql = "SELECT * FROM evento_spec_mirror";
+       $sql = "SELECT * FROM evento_spec_mirror WHERE nome LIKE ".$this->connection->quote($nome_cercato);
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+        
+        
     }
 
 }

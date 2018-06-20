@@ -135,8 +135,8 @@ class CAmministrazione {
         if($codes != "" && $data != ""){
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_es($codes,$data);
-                var_dump($deleted);
-                if($deleted){
+                $deleted_mirror = $db->delete_es_mirror($codes,$data);
+                if($deleted && $deleted_mirror){
                     echo '<script type="text/javascript">
                             alert("la cancellazione è avvenuta correttamente")
                             window.location= "/TicketStore/validazione"

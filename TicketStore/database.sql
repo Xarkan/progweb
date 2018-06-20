@@ -104,4 +104,22 @@ CREATE TABLE ord_part (
   FOREIGN KEY (code, data_evento, zona, indirizzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo)
 );
 
+CREATE TABLE evento_spec_mirror (
+  nome          varchar(40)     NOT NULL,
+  code          int             NOT NULL,
+  data_evento   datetime        NOT NULL,
+  indirizzo     varchar(40)     NOT NULL,
+  tipo          varchar(10)     NOT NULL,
+  casa          varchar(20)     NULL,
+  ospite        varchar(20)     NULL,
+  compagnia     varchar(20)     NULL,
+  artista       varchar(20)     NULL,
+
+  PRIMARY KEY (code, data_evento),
+  FULLTEXT (nome)
+  
+);
+ALTER TABLE evento_spec_mirror ENGINE = MyISAM;
+
+
 INSERT INTO utente_r VALUES('admin@ticketstore.it',md5('password'),'admin'); 
