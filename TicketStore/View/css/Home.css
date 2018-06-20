@@ -1,4 +1,5 @@
 
+
 .dropdown-menu .form-inline {
 	width: 300px;
 }
@@ -13,12 +14,13 @@
 }
 .row{
     height: 950px;
+    margin:auto;
+    padding: auto;
+    margin-left: 5%;
 }
 
 .col {
-	margin-bottom: 2%;
-        width: 368.3px;
-        height: 280.5px;
+        height: 300px;
 }
 div.card{
         width: 300px;
@@ -42,14 +44,15 @@ img.card-img-top{
 	height: 400px;
 }
 .categorie {
-    width: 54%;
+    width: 100%;
     float: right;
     margin-left: 2%;
     margin-right: 2%;
 }
 
 .header-categorie{
-	box-sizing: border-box;
+    width: 96.65%;
+    box-sizing: border-box;
     background: transparent;
     border-top-style: hidden;
     border-right-style: hidden;
@@ -58,11 +61,12 @@ img.card-img-top{
     border-width: 2px;
     border-color: rgba(0, 0, 0, 0.523);
 	font-size: 20px;
-    padding-left: 5%;
+    padding-left: 2%;
     padding-top: 4px;
     opacity: 0.9;
     color: rgb(206, 202, 202);
     background-color: rgb(48, 36, 28);
+    margin-left: 42px;
 
 }
 

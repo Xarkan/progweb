@@ -27,7 +27,7 @@ class FEvento extends FDBmanager {
     }
     
     public function loadeventiHome() {
-        $sql = "SELECT  * FROM evento LIMIT 6";
+        $sql = "SELECT  * FROM evento LIMIT 12";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         return $rows;

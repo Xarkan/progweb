@@ -19,7 +19,7 @@ function setTable(risposta) {
     var k = 0;
     while(rest > 0) {
         table += '<div class="row">';
-        for (let c = 0; c < 6 && c < rest; c++) {
+        for (let c = 0; c < 9 && c < rest; c++) {
             let html_command = '<div class="card">' +
             '<a href="/TicketStore/evento/'+ risposta[k].id +'">' +
             '<img class="card-img-top" src="/TicketStore/'+ risposta[k].img+'" alt="Card image cap"></a>' +
@@ -27,7 +27,7 @@ function setTable(risposta) {
             table += '<div class="col">' + html_command + '</div>';   
             k++; 
         }
-        rest = rest - 6;
+        rest = rest - 9;
         table += '</div>';
     }
     document.getElementById("cards-block").innerHTML = table;

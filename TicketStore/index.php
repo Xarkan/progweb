@@ -18,7 +18,7 @@
             }
         }
         
-        if (php_cookie_enable() == false || !isset ($_COOKIE['js']) ){
+        if (php_cookie_enable() == false /*|| !isset ($_COOKIE['js'])*/ ){
                 if (php_cookie_enable() == false){
                     echo "I cookie sono disabilitati. Per Un corretto uso dell applicazione, Abilitare i cookie!";
                     echo "<html><br><a href='https://www.aranzulla.it/come-abilitare-i-cookie-21458.html'>Come abilitare i cookie<a></html>";

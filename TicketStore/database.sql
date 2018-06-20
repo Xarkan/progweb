@@ -123,14 +123,70 @@ ALTER TABLE evento_spec_mirror ENGINE = MyISAM;
 
 
 INSERT INTO utente_r VALUES('admin@ticketstore.it',md5('password'),'admin'); 
-INSERT INTO evento_spec_mirror
-VALUES ('derby',1,'2018-05-29 21:00:00','Milano, San Siro','Partita','Inter','Milan',NULL,NULL);
 
-INSERT INTO evento (nome, path_img, nome_img) VALUES ('derby','.\\View\\imgs','derbymilano.jpg');
-INSERT INTO luogo VALUES ('Milano, San Siro');
-INSERT INTO evento_spec
-VALUES (1,'2018-05-29 21:00:00','Milano, San Siro','Partita','Inter','Milan',NULL,NULL);
-INSERT INTO zona 
-VALUES ('curva','Milano, San Siro',50);
-INSERT INTO partecipazione
-VALUES (1,'2018-05-29 21:00:00','curva','Milano, San Siro',40);
+
+INSERT INTO evento (nome, path_img, nome_img) VALUES
+('derby', '.\\View\\imgs', 'derbymilano.jpg'),
+('derbyromano', '.\\View\\imgs', 'romalazio.jpg'),
+('pinocchio', '.\\View\\imgs', 'pinocchio-musical.jpg'),
+('Real-Barca', '.\\View\\imgs', 'realbarca.jpg'),
+('deep purple', '.\\View\\imgs', 'Deep.jpg'),
+('enrico brignano', '.\\View\\imgs', 'enricobrignano.jpg'),
+('Gigi Proietti', '.\\View\\imgs', 'gigiproietti.gif'),
+('ligabue', '.\\View\\imgs', 'ligabue.jpg'),
+('romeo e giulietta', '.\\View\\imgs', 'romeoegiulietta.jpg');
+
+INSERT INTO luogo (indirizzo) VALUES
+('Bari, San Nicola'),
+('L\'Aquila, teatro comunale'),
+('Londra, Wembley'),
+('Madrid, Bernabeu'),
+('Milano, San Siro'),
+('Milano, Scala'),
+('Palena, Teatro Comunale'),
+('Roma, Brancaccio'),
+('Roma, Olimpico');
+
+
+INSERT INTO evento_spec (code, data_evento, indirizzo, tipo, casa, ospite, compagnia, artista) VALUES
+(1, '2018-05-29 21:00:00', 'Milano, San Siro', 'Partita', 'Inter', 'Milan', NULL, NULL),
+(2, '2018-06-20 20:00:00', 'Roma, Olimpico', 'Partita', 'Lazio', 'Roma', NULL, NULL),
+(3, '2018-06-20 20:00:00', 'L\'Aquila, teatro comunale', 'Spettacolo', NULL, NULL, 'emmebi', NULL),
+(4, '2018-06-20 20:00:00', 'Madrid, Bernabeu', 'Partita', 'Real Madrid', 'Barcellona', '', ''),
+(5, '2018-06-20 20:00:00', 'Londra, Wembley', 'Concerto', NULL, NULL, NULL, 'Deep Purple'),
+(6, '2018-06-20 20:00:00', 'Roma, Brancaccio', 'Spettacolo',NULL, NULL, 'Enrico Brignano',NULL),
+(7, '2018-06-20 20:00:00', 'Milano, Scala', 'Spettacolo',NULL, NULL, 'Gigi Proietti', NULL),
+(8, '2018-06-20 20:00:00', 'Bari, San Nicola', 'Concerto', NULL, NULL, NULL, 'Luciano Ligabue'),
+(9, '2018-06-20 20:00:00', 'Palena, Teatro Comunale', 'Spettacolo', NULL, NULL, 'emmebi',NULL);
+
+INSERT INTO evento_spec_mirror (nome, code, data_evento, indirizzo, tipo, casa, ospite, compagnia, artista) VALUES
+('derby', 1, '2018-05-29 21:00:00', 'Milano, San Siro', 'Partita', 'Inter', 'Milan', NULL, NULL),
+('derbyromano', 2, '2018-06-20 20:00:00', 'Roma, Olimpico', 'Partita', 'Lazio', 'Roma', '', ''),
+('pinocchio', 3, '2018-06-20 20:00:00', 'L\'Aquila, teatro comunale', 'Spettacolo', '', '', 'emmebi', ''),
+('Real-Barca', 4, '2018-06-20 20:00:00', 'Madrid, Bernabeu', 'Partita', 'Real Madrid', 'Barcellona', '', ''),
+('deep purple', 5, '2018-06-20 20:00:00', 'Londra, Wembley', 'Concerto', '', '', '', 'Deep Purple'),
+('enrico brignano', 6, '2018-06-20 20:00:00', 'Roma, Brancaccio', 'Spettacolo', '', '', 'Enrico Brignano', ''),
+('Gigi Proietti', 7, '2018-06-20 20:00:00', 'Milano, Scala', 'Spettacolo', '', '', 'Gigi Proietti', ''),
+('ligabue', 8, '2018-06-20 20:00:00', 'Bari, San Nicola', 'Concerto', '', '', '', 'Luciano Ligabue'),
+('romeo e giulietta', 9, '2018-06-20 20:00:00', 'Palena, Teatro Comunale', 'Spettacolo', '', '', 'emmebi', '');
+
+INSERT INTO zona (nome, indirizzo, capacita) VALUES
+('curva', 'Bari, San Nicola', 40),
+('curva', 'Milano, San Siro', 50),
+('curva', 'Roma, Olimpico', 50),
+('galleria', 'L\'Aquila, teatro comunale', 50),
+('galleria', 'Milano, Scala', 14),
+('platea', 'Roma, Brancaccio', 20),
+('prato', 'Londra, Wembley', 100),
+('tribuna', 'Madrid, Bernabeu', 100);
+
+INSERT INTO partecipazione (code, data_evento, zona, indirizzo, prezzo) VALUES
+(1, '2018-05-29 21:00:00', 'curva', 'Milano, San Siro', 40),
+(2, '2018-06-20 20:00:00', 'curva', 'Roma, Olimpico', 50),
+(3, '2018-06-20 20:00:00', 'galleria', 'L\'Aquila, teatro comunale', 100),
+(4, '2018-06-20 20:00:00', 'tribuna', 'Madrid, Bernabeu', 100),
+(5, '2018-06-20 20:00:00', 'prato', 'Londra, Wembley', 150),
+(6, '2018-06-20 20:00:00', 'platea', 'Roma, Brancaccio', 70),
+(7, '2018-06-20 20:00:00', 'galleria', 'Milano, Scala', 60),
+(8, '2018-06-20 20:00:00', 'curva', 'Bari, San Nicola', 30);
+
