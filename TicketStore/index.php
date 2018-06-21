@@ -4,6 +4,7 @@
                 $_SERVER['REQUEST_SCHEME'] = "https";
             }
         }*/
+        $i = 0;
         error_reporting(E_WARNING);
         setcookie("cookie_test", "cookie_value", time()+3600);
         function php_cookie_enable()
@@ -18,7 +19,7 @@
             }
         }
         
-        if (php_cookie_enable() == false /*|| !isset ($_COOKIE['js'])*/ ){
+        if (php_cookie_enable() == false && $i > 0){
                 if (php_cookie_enable() == false){
                     echo "I cookie sono disabilitati. Per Un corretto uso dell applicazione, Abilitare i cookie!";
                     echo "<html><br><a href='https://www.aranzulla.it/come-abilitare-i-cookie-21458.html'>Come abilitare i cookie<a></html>";
@@ -32,7 +33,7 @@
         else{
             require_once 'Autoload.php';
             require_once 'Config.php';
-
+            $i++;
             $controller = USingleton::getInstance('CFrontController');
             $controller->run();
         }
