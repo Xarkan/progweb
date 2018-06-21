@@ -39,12 +39,11 @@ class CPagamento {
             
             $ordine->setData();
             
-            $stored = $db->store($ordine); 
-        
+            $stored = $db->store($ordine);
             if($stored) {
                 //qui si fa update biglietto 
-                $updated = $db->update($ordine); 
-                if($updated) {                    
+                $updated = $db->update($ordine);
+                if($updated) {                     
                     $db->getConnection()->commit();
                     $biglietti = $db->load($ordine);
                     $sessione->imposta_valore('biglietti',$biglietti);

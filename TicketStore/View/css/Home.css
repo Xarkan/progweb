@@ -44,14 +44,11 @@ img.card-img-top{
 	height: 400px;
 }
 .categorie {
-    width: 100%;
-    float: right;
-    margin-left: 2%;
-    margin-right: 2%;
+    width: 90%;
+    margin: auto;
 }
 
 .header-categorie{
-    width: 96.65%;
     box-sizing: border-box;
     background: transparent;
     border-top-style: hidden;
@@ -66,13 +63,11 @@ img.card-img-top{
     opacity: 0.9;
     color: rgb(206, 202, 202);
     background-color: rgb(48, 36, 28);
-    margin-left: 42px;
 
 }
 
 #cards-block {
 	margin-top: 10px;
-	margin-left: 3%;
         
 }
 
