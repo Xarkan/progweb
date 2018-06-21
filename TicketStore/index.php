@@ -4,8 +4,11 @@
                 $_SERVER['REQUEST_SCHEME'] = "https";
             }
         }*/
+        /*echo '<pre>';
+        print_r($_SERVER);
+        echo'</pre>';*/
         $i = 0;
-        error_reporting(E_WARNING);
+        //error_reporting(E_WARNING);
         setcookie("cookie_test", "cookie_value", time()+3600);
         function php_cookie_enable()
         {

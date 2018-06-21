@@ -13,21 +13,25 @@ function getAndFill() {
 
 
 function setTable(risposta) {
+    
     var table = '';
-    var rest = risposta.length;
-    var k = 0;
-    while(rest > 0) {
-        table += '<div class="row">';
-        for (let c = 0; c < 6 && c < rest; c++) {
-            let html_command = '<div class="card">' +
-            '<a href="/TicketStore/evento/'+ risposta[k].id +'">' +
-            '<img class="card-img-top" src="/TicketStore/'+ risposta[k].img+'" alt="Card image cap"></a>' +
-            '<div class="card-body"><p class="card-text">'+risposta[k].nome+'</p></div></div>';
-            table += '<div class="col">' + html_command + '</div>';   
-            k++; 
+    
+    for(let i = 0; i < risposta.length ; i++) {
+        
+        for(let j = 0; j < risposta[i].eventi.length; j++){
+            var splitted_data = risposta[i].eventi[j].data.split(" ");
+            var data = splitted_data[0] +"_"+ splitted_data[1];
+            let html_command = '<tr><td>'+risposta[i].eventi[j].data+'</td>'+
+                '<td>'+risposta[i].nome+'</td>'+   
+                '<td>'+risposta[i].eventi[j].luogo.citta+'</td>'+
+                '<td>'+risposta[i].eventi[j].luogo.struttura+'</td>'+
+                '<td>'+risposta[i].eventi[j].partecipazioni[0].prezzo+'</td>'+
+                '<td><a type="button" class="btn btn-warning" href="/TicketStore/zone/'+risposta[i].id+'/'+data+'">Acquista</a></td></tr>';
+            table = table + html_command;
         }
-        rest = rest - 6;
-        table += '</div>';
+            
     }
-    document.getElementById("cards-block").innerHTML = table;
-}
+    document.getElementById("table").innerHTML = table;
+    
+
+}   

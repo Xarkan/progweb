@@ -33,7 +33,7 @@ function setTable(risposta) {
     document.getElementById("cards-block").innerHTML = table;
 }
 
-function setCarousel(risposta) {
+/*function setCarousel(risposta) {
     let html_command = '<div class="carousel-item active" id="carousel-imgs">'
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[0].img+'" alt="First slide"></div>'
         +'<div class="carousel-item">'
@@ -48,4 +48,4 @@ function setCarousel(risposta) {
         +'<img class="d-block w-100" src="/TicketStore/'+risposta[5].img+'" alt="Third slide"></div>';
 
     document.getElementById("c-left").innerHTML = html_command ;    
-}
+}*/

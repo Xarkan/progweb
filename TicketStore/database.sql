@@ -178,7 +178,8 @@ INSERT INTO zona (nome, indirizzo, capacita) VALUES
 ('galleria', 'Milano, Scala', 14),
 ('platea', 'Roma, Brancaccio', 20),
 ('prato', 'Londra, Wembley', 100),
-('tribuna', 'Madrid, Bernabeu', 100);
+('tribuna', 'Madrid, Bernabeu', 100),
+('platea','Palena, teatro comunale',2);
 
 INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
 (1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
@@ -214,5 +215,6 @@ INSERT INTO partecipazione (code, data_evento, zona, indirizzo, prezzo) VALUES
 (5, '2018-06-20 20:00:00', 'prato', 'Londra, Wembley', 150),
 (6, '2018-06-20 20:00:00', 'platea', 'Roma, Brancaccio', 70),
 (7, '2018-06-20 20:00:00', 'galleria', 'Milano, Scala', 60),
-(8, '2018-06-20 20:00:00', 'curva', 'Bari, San Nicola', 30);
+(8, '2018-06-20 20:00:00', 'curva', 'Bari, San Nicola', 30),
+(9, '2018-06-20 20:00:00', 'platea','Palena, teatro comunale',2);
 
