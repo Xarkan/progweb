@@ -38,8 +38,11 @@ class CRegistrazione {
                         //pagina dove puo scegliere se andare alla home o procedere con l'ordine
                             $sessione->imposta_valore('logged',$registrato);
                             $sessione->imposta_valore('utente',$utente);
-                            header('HTTP/1.1 301 Moved Permanently');
-                            header('Location: ValidazioneUtente');
+                            echo '<script type="text/javascript">
+                                alert("La registrazione è avvenuta correttamente.")
+                                window.location= "/TicketStore/home"
+                              </script>';
+
                         }
                    }
                 

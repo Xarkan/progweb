@@ -53,11 +53,7 @@ class FEvento extends FDBmanager {
              .$this->connection->quote($object->getNome()).","
              .$this->connection->quote($path).","
              .$this->connection->quote($nome_img).")";
-     echo '<pre>';
-     echo $sql;
-     echo'<br>';
-     //echo $nome_img;
-     echo '</pre>';
+     
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }
@@ -91,7 +87,7 @@ class FEvento extends FDBmanager {
     public function deleteevento(EEvento $object) {
         $sql = "DELETE FROM evento WHERE code = "
                 .$this->connection->quote($object->getId());
-        echo $sql;
+       
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0 ;
     }

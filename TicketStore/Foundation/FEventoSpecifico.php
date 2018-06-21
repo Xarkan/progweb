@@ -13,7 +13,7 @@ class FEventospecifico extends FDBmanager {
         $statement->bindparam(1,$code);
         $statement->bindparam(2,$data);
         $result = $statement->execute();
-        //var_dump($result);
+        
         $rows = $statement->fetchAll(PDO::FETCH_COLUMN,0);
         if(count($rows) > 0){
             return true;
@@ -65,17 +65,7 @@ class FEventospecifico extends FDBmanager {
     $result = $statement->execute();
     
     return $result;
-        /*$sql = "INSERT INTO evento_spec VALUES(".$this->connection->quote($codes).","
-                .$this->connection->quote($data).","
-                .$this->connection->quote($luogo).","
-                .$this->connection->quote($tipo).","
-                .$this->connection->quote($casa).","
-                .$this->connection->quote($ospite).","
-                .$this->connection->quote($compagnia).","
-                .$this->connection->quote($artista).")";
-        echo $sql;
-        $result = $this->connection->exec($sql);
-        return $result;*/
+        
     }
     public function storeeventospecmirror($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $nome = $this->recuperanomeevento($codes);

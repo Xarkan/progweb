@@ -225,7 +225,7 @@ public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
          .$this->connection->quote($zona).","
          .$this->connection->quote($indirizzop).","
          .$this->connection->quote($prezzo).")";
-    echo $sql;
+    
     $stored = $this->connection->exec($sql);
     return $stored;
 }
@@ -481,7 +481,7 @@ public function deletezona($nome, $indirizzo) {
     
     public function search($nome_cercato) {
         $nome_cercato = $nome_cercato."%";
-        //$sql = "SELECT * FROM evento_spec_mirror";
+       
         $sql = "SELECT * FROM evento_spec_mirror WHERE nome LIKE  ?";
         $statement = $this->connection->prepare($sql);
         
@@ -504,11 +504,9 @@ public function deletezona($nome, $indirizzo) {
         
         $statement->bindParam(1, $tipo);
         $statement->execute();
-        //var_dump($statement->execute());
+        
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        //echo $tipo;
-        //print_r($rows);
-        //return $rows;
+        
         for($i=0;$i < count($rows);$i++){
             $code = $rows[$i]['code'];
             $eventi[$i] = $this->istanziaEvento($code);

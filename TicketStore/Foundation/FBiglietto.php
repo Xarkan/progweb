@@ -114,12 +114,12 @@ class FBiglietto extends FDBmanager{
                 ."indirizzo=".$this->connection->quote($indirizzo)." AND "
                 ."zona=".$this->connection->quote($ordine->getItems()[0]->getZona()->getNome())." AND "
                 ."fila IN (".$sql2.")";
-        //echo $sql1;
-        //*
+        
+        
         $result = $this->connection->query($sql1);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
-        return $rows;//*/
+        return $rows;
         
     }
 }

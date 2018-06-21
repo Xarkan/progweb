@@ -51,7 +51,7 @@ class FUtente_Reg extends FDBmanager {
         $sql = "UPDATE utente_r SET psw = "
                 .$this->connection->quote($object->getPassword())." WHERE mail = "
                 .$this->connection->quote($object->getMail());
-        echo $sql;
+       
         $affected_rows = $this->connection->exec($sql);
         return $affected_rows > 0;
     }

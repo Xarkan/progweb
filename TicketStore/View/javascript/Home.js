@@ -5,7 +5,7 @@ function getAndFill() {
     if (this.readyState == 4 && this.status == 200) {
         var risposta = JSON.parse(xmlhttp.responseText);
         setTable(risposta);
-        setCarousel(risposta);
+        
     }
 };
     xmlhttp.open("GET","/TicketStore/Json/home", true);
@@ -33,19 +33,3 @@ function setTable(risposta) {
     document.getElementById("cards-block").innerHTML = table;
 }
 
-/*function setCarousel(risposta) {
-    let html_command = '<div class="carousel-item active" id="carousel-imgs">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[0].img+'" alt="First slide"></div>'
-        +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[1].img+'" alt="Second slide"></div>'
-        +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[2].img+'" alt="Third slide"></div>'
-        +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[3].img+'" alt="Third slide"></div>'
-        +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[4].img+'" alt="Third slide"></div>'
-        +'<div class="carousel-item">'
-        +'<img class="d-block w-100" src="/TicketStore/'+risposta[5].img+'" alt="Third slide"></div>';
-
-    document.getElementById("c-left").innerHTML = html_command ;    
-}*/

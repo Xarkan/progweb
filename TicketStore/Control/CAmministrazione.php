@@ -13,7 +13,6 @@ class CAmministrazione {
         
         
         if($tabella == 'evento' && $operazione == 'inserimento') {
-        //$id = $_POST['codice_evento'];
         $num = $db->loadultimocodice();
         
         $num = $num[0]+1;
@@ -221,7 +220,7 @@ class CAmministrazione {
             
             if($operazione == 'cancellazione'){
                 $deleted = $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
-                var_dump($deleted);
+                
                 if($deleted){
                     echo '<script type="text/javascript">
                             alert("la cancellazione è avvenuta correttamente")
