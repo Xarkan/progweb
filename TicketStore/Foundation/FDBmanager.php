@@ -432,12 +432,12 @@ public function deletezona($nome, $indirizzo) {
         return $eventi_spec;
     }
       
-    private function getLuogoZonaPart($boh) { //cambiare boh
+    private function getLuogoZonaPart($array) { //cambiare boh
         $sql= "SELECT partecipazione.*, zona.capacita "
                 ."FROM partecipazione, luogo, zona WHERE code = "
-                .$this->connection->quote($boh['code'])." AND partecipazione.indirizzo = "
-                .$this->connection->quote($boh['indirizzo'])." AND data_evento = "
-                .$this->connection->quote($boh['data_evento'])
+                .$this->connection->quote($array['code'])." AND partecipazione.indirizzo = "
+                .$this->connection->quote($array['indirizzo'])." AND data_evento = "
+                .$this->connection->quote($array['data_evento'])
                 ." AND partecipazione.zona = zona.nome AND partecipazione.indirizzo = zona.indirizzo"
                 ." AND partecipazione.indirizzo = luogo.indirizzo";
                
@@ -445,24 +445,44 @@ public function deletezona($nome, $indirizzo) {
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
         for($k = 0;$k < count($rows);$k++){
+            $result = $this->contaBigliettiDisp($array, $rows[$k]); //è un int di biglietti disponibili
+
+            $bool = $result['disponibili'] > 0;
+
             $zona = new EZona($rows[$k]['zona'], $rows[$k]['capacita']);
-            $part = new EPartecipazione($zona,$rows[$k]['prezzo'],true);
+            $part = new EPartecipazione($zona,$rows[$k]['prezzo'], $result['disponibili'], $bool);
             $array_part[$k] = $part;
-            list($citta, $struttura) = explode(", ", $boh['indirizzo']);
+            list($citta, $struttura) = explode(", ", $array['indirizzo']);
             $luogo = new ELuogo($citta, $struttura);
         }
 
-        $tipo = $boh['tipo'];
+        $tipo = $array['tipo'];
         $classe = 'E'.$tipo;
                 
-        $evento = new $classe($luogo,$boh['data_evento'],$array_part);
+        $evento = new $classe($luogo,$array['data_evento'],$array_part);
         return $evento;
+    }
+    
+    public function contaBigliettiDisp($array, $rowsk) {
+        //deve andare nel database e vedere quanti biglietti sono stati presi e quanti no
+        $sql = "SELECT count(*) AS disponibili FROM biglietto WHERE "
+                ."code=".$array['code']." AND "
+                ."data_evento=".$this->connection->quote($array['data_evento'])." AND "
+                ."indirizzo=".$this->connection->quote($array['indirizzo'])." AND "
+                ."zona=".$this->connection->quote($rowsk['zona'])." AND mail IS NULL";
+                
+        $result = $this->connection->query($sql);
+        
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $rows[0];        
+
     }
     
     public function search($nome_cercato) {
         $nome_cercato = $nome_cercato."%";
         //$sql = "SELECT * FROM evento_spec_mirror";
-       $sql = "SELECT * FROM evento_spec_mirror WHERE nome LIKE ".$this->connection->quote($nome_cercato);
+        $sql = "SELECT * FROM evento_spec_mirror WHERE nome LIKE ".$this->connection->quote($nome_cercato);
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         return $rows;

@@ -3,10 +3,10 @@
 class CDebug {
     
     public function getDebug() {
-        /*$sessione = USingleton::getInstance('USession');
-        $db = USingleton::getInstance('FBiglietto');
-
-        $ordine = $sessione->recupera_valore('ordine');
+        $sessione = USingleton::getInstance('USession');
+        $db = USingleton::getInstance('FDBmanager');
+        $result = $db->recuperoDati();
+        /*$ordine = $sessione->recupera_valore('ordine');
         $zona = new EZona('curva', 10);
         $result1 = $zona->assegnaPosti($ordine, 2);       
         $result2 = $db->loadPostiDisp($ordine);
@@ -14,7 +14,7 @@ class CDebug {
         */
         //unset($_COOKIE['js']);
         echo "<pre>";
-        print_r($_COOKIE);
+        print_r($result);
         echo "</pre>";//*/
     }
 }

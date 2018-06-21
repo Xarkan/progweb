@@ -180,6 +180,32 @@ INSERT INTO zona (nome, indirizzo, capacita) VALUES
 ('prato', 'Londra, Wembley', 100),
 ('tribuna', 'Madrid, Bernabeu', 100);
 
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(1,'derby','2018-05-29 21:00:00', 'curva', 'Milano, San Siro');
+
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(2,'derbyromano', '2018-06-20 20:00:00', 'curva', 'Roma, Olimpico');
+INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
+(2,'derbyromano', '2018-06-20 20:00:00', 'curva', 'Roma, Olimpico');
+
 INSERT INTO partecipazione (code, data_evento, zona, indirizzo, prezzo) VALUES
 (1, '2018-05-29 21:00:00', 'curva', 'Milano, San Siro', 40),
 (2, '2018-06-20 20:00:00', 'curva', 'Roma, Olimpico', 50),

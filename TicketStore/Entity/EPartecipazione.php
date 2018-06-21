@@ -4,11 +4,13 @@ class EPartecipazione {
 
     public $zona;      //EZona
     public $prezzo;    //float
+    public $numPosti;  //int
     public $disp;//bool
     
-    function __construct($zona, $prezzo, $disp = true) {
+    function __construct($zona, $prezzo, $num, $disp) {
         $this->zona = $zona;
         $this->prezzo = $prezzo;
+        $this->numPosti = $num;
         $this->disp = $disp;
     }
     
@@ -16,10 +18,8 @@ class EPartecipazione {
         $this->zona = $zona;
     }
     
-    public function controllaDisp() {
-        if(!$this->zona->getPostiDisp() > 0) {
-            $this->disp = false;
-        }        
+    public function getNumPostiDisp() {
+        return $this->numPosti;
     }
     
     public function getPostiAssegnati(EOrdine $ordine, $num) {
