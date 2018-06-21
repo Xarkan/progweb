@@ -14,7 +14,7 @@ class CDebug {
         */
         //unset($_COOKIE['js']);
         echo "<pre>";
-        print_r($result);
+        print_r($_SESSION);
         echo "</pre>";//*/
     }
 }

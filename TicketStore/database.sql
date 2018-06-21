@@ -173,6 +173,7 @@ INSERT INTO evento_spec_mirror (nome, code, data_evento, indirizzo, tipo, casa, 
 INSERT INTO zona (nome, indirizzo, capacita) VALUES
 ('curva', 'Bari, San Nicola', 40),
 ('curva', 'Milano, San Siro', 50),
+('spalti', 'Milano, San Siro', 60),
 ('curva', 'Roma, Olimpico', 50),
 ('galleria', 'L\'Aquila, teatro comunale', 50),
 ('galleria', 'Milano, Scala', 14),
@@ -209,6 +210,7 @@ INSERT INTO biglietto (code, evento, data_evento, zona, indirizzo) VALUES
 
 INSERT INTO partecipazione (code, data_evento, zona, indirizzo, prezzo) VALUES
 (1, '2018-05-29 21:00:00', 'curva', 'Milano, San Siro', 40),
+(1, '2018-05-29 21:00:00', 'spalti', 'Milano, San Siro', 50),
 (2, '2018-06-20 20:00:00', 'curva', 'Roma, Olimpico', 50),
 (3, '2018-06-20 20:00:00', 'galleria', 'L\'Aquila, teatro comunale', 100),
 (4, '2018-06-20 20:00:00', 'tribuna', 'Madrid, Bernabeu', 100),
