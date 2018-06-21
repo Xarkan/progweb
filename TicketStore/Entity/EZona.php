@@ -23,21 +23,25 @@ class EZona {
             }
         }
         public function assegnaPosti(EOrdine $ordine, $num) { //deve controllare nel db i posti assegnati dentro la tabella bigl
-            $db = USingleton::getInstance('FDBmanager');
-            $result = $db->load($ordine,'posti');
-            if(isset($result[0]['fila'])) {
-                $fila = (int) $result[0]['fila'];                
-                $posto = (int) $result[0]['posto'];
-                $assegnati = (($fila - 1) * 5) + $posto;
-                for ($i = 0; $i < $num; $i++) {               
-                    $posti[$i] = $this->posti[$assegnati + $i];
+            $db = USingleton::getInstance('FDBmanager');            
+            if($num != 0) {
+                $result = $db->load($ordine,'posti');
+                if(isset($result[0]['fila'])) {
+                    $fila = (int) $result[0]['fila'];                
+                    $posto = (int) $result[0]['posto'];
+                    $assegnati = (($fila - 1) * 5) + $posto;
+                    for ($i = 0; $i < $num; $i++) {               
+                        $posti[$i] = $this->posti[$assegnati + $i];
+                    }
+                }else{
+                    for ($i = 0; $i < $num; $i++) {               
+                        $posti[$i] = $this->posti[$i];
+                    }
                 }
             }else{
-                for ($i = 0; $i < $num; $i++) {               
-                    $posti[$i] = $this->posti[$i];
-                }
+                $posti = array();
             }
-            
+            var_dump($posti);
             return $posti;
         }
         

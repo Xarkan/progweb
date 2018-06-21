@@ -33,14 +33,19 @@ class COrdine {
         
         $evento_sp = $db->load($id_e, $id_esp);
         $part = $evento_sp->selezionePartecipazione($id_part);
-        $num = $_POST['num_bigl'];
-                
+        
+        if($_POST['num_bigl'] == NULL) {
+            $num = 0;
+        }else{
+            $num = $_POST['num_bigl'];            
+        }        
         $ordine->addElementi($part, $num);
         $ordine->calcolaPrezzo();
 
         $posti = $part->getPostiAssegnati($ordine, $num);
+        var_dump($posti);
         $sessione->imposta_valore('posti',$posti);
-
+        
         $sessione->imposta_valore('ordine',$ordine);
         $view = USingleton::getInstance('VOrdine');
         $view->set_html();
