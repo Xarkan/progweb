@@ -13,4 +13,13 @@ class EPartita extends EEventoSpecifico{
 	/*$this->casa = $casa;
 	$this->ospite = $ospite;*/
     }
+    function getCasa() {
+        return $this->casa;
+    }
+
+    function getOspite() {
+        return $this->ospite;
+    }
+
+
 }
