@@ -46,10 +46,10 @@ function setTableEvento(){
                             '</table>'+
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
-                           
-    }
+}
+
     //modifica
-    if(y[x].index == 1 && j[i].index == 2){
+    /*if(y[x].index == 1 && j[i].index == 2){
         let html_command = '<legend>Modifica di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
@@ -75,7 +75,7 @@ function setTableEvento(){
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
                            
-    }
+    }*/
     
     
 //----------------------------------operazioni su utente_r--------------------------------------------------------------------------------------    
@@ -107,11 +107,11 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di un evento specifico nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<input type="text" name="codes"></td>'+
-                                    '<td>data_evento<input type="date" name="data_es"></td>'+
-                                    '<td>ora_evento<input type="time" name="ora_es"></td>'+
-                                    '<td>indirizzo<input type="text" name="indirizzo"></td>'+
-                                    '<td>Tipo <select name="tipo">'+
+                                    '<td>codice_evento<br><input type="text" name="code"></td>'+
+                                    '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td>data_evento<br><input type="date" name="data"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
+                                    '<td>Tipo<br><select name="tipo">'+
 
                                              '<option></option>'+
                                              '<option>Partita</option>'+
@@ -120,22 +120,31 @@ function setTableEvento(){
 
                                          '</select>'+
                                     '</td>'+
-                                    '<td>Casa<input type="text" name="casa"></td>'+
-                                    '<td>Ospite<input type="text" name="ospite"></td>'+
-                                    '<td>Compagnia<input type="text" name="compagnia"></td>'+
-                                    '<td>Artista<input type="text" name="artista"></td>'+
+                            '</tr>'+
+                            '<tr>'+
+                                    '<td>Casa<br><input type="text" name="casa"></td>'+
+                                    '<td>Ospite<br><input type="text" name="ospite"></td>'+
+                                    '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
+                                    '<td>Artista<br><input type="text" name="artista"></td>'+
+                            '</tr>'+        
+                                '</tr>'+
+                                '<tr>'+
+                                    '<td>citta<br><input type="text" name="citta"></td>'+
+                                    '<td>struttura<br><input name="struttura"></td>'+
+                                '</tr>'+
+                                '<tr>'+
+                                    '<td>zona<br><input type="text" name="zona"></td>'+
+                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
+                                    '<td>prezzo<br><input type="text" name="prezzo"></td>'+
                                 '</tr>'+
                             '</table>'+
-                            '<legend>Prima di inserire un nuovo evento specifico, assicurati che sia già stato<br>'+
-                            'inserito un evento generico che abbia lo stesso codice che stai inserendo,<br>'+
-                            'altrimenti l operazione di inserimento ti sarà negata</legend>';  
-                
+                       '</table>';
         document.getElementById('sezione').innerHTML = html_command;        
                 
     }
     
     //modifica
-    if(y[x].index == 3 && j[i].index == 2){
+   /* if(y[x].index == 3 && j[i].index == 2){
         let html_command = '<legend>Modifica di un evento specifico nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
@@ -192,7 +201,7 @@ function setTableEvento(){
                 
         document.getElementById('sezione').innerHTML = html_command;        
                 
-    }
+    }*/
     
     
 //----------------------------------operazioni su partecipazioni--------------------------------------------------------------------------------------        
@@ -201,20 +210,27 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di una partecipazione nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<br><input type="text" name="codep"></td>'+
-                                    '<td>data_evento<br><input type="date" name="datap"></td>'+
+                                    '<td>codice_evento<br><input type="text" name="code"></td>'+
+                                    '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td>data_evento<br><input type="date" name="data"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
-                                    '<td>zona<br><input type="text" name="zona"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
-                                    '<td>prezzo<br><input name="prezzo"></td>'+
+                                    '<tr>'+
+                                    '<td>citta<br><input type="text" name="citta"></td>'+
+                                    '<td>struttura<br><input name="struttura"></td>'+
                                 '</tr>'+
-                            '</table>';
+                                '<tr>'+
+                                    '<td>zona<br><input type="text" name="zona"></td>'+
+                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
+                                    '<td>prezzo<br><input type="text" name="prezzo"></td>'+
+                                '</tr>'+
+                            '</table>'+
+                       '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
     }
     
     //modifica
-    if(y[x].index == 4 && j[i].index == 2){
+    /*if(y[x].index == 4 && j[i].index == 2){
         let html_command = '<legend>Modifica di una partecipazione nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
@@ -315,6 +331,5 @@ function setTableEvento(){
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;
-}
-
+}*/
 }
