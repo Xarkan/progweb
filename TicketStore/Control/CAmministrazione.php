@@ -1,325 +1,90 @@
 <?php
 
-
 class CAmministrazione {
     
+    private $operazione;
+    private $tabella;
+    private $dati = [];
+    private $classe;
+    
+    public function __construct() {
+        $this->operazione = $_POST['Operazione'];
+        $this->tabella = $_POST['Tabella'];
+        
+        $this->dati = $this->assegnaDati();
+        $dati = $this->dati;
+        $this->classe = "E".$dati['tipo'];
+    }
+    
     public function postAmministrazione() {
-        $db = USingleton::getInstance('FDBmanager');
-        $fam = USingleton::getInstance('FAmministrazione');
-        
-        $operazione = $_POST['Operazione'];
-        $tabella = $_POST['Tabella'];
-        
-        //----------------------------gestione evento------------------------------------------------------
-        
-        
-        if($tabella == 'evento' && $operazione == 'inserimento') {
-        $num = $fam->loadultimocodice();
-        
-        $num = $num[0]+1;
-        $id_ultimo = $num;
-        $nome_evento = $_POST['nome_evento'];
-        $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
-        $eventi = "";
-        if($nome_evento != "" && $img != ""){
-            $evento = new EEvento($id_ultimo, $img, $nome_evento, $eventi);
-            //inserimento
-            if($operazione == 'inserimento'){
-                $stored = $db->store($evento);
-                if($stored){
-                    echo '<script type="text/javascript">
-                            alert("inserimento avvenuto")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                } 
-            }   
-        }else{
-                echo '<script type="text/javascript">
-                            alert("Bisogna riempire tutti i campi correttamente")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-         }
-        }
-        if($tabella == 'evento' && $operazione != 'inserimento') {   
-            $id = $_POST['codice_evento'];
-            $nome_evento = $_POST['nome_evento'];
-            $img = $_POST['path_immagine']."\\".$_POST['nome_immagine'];
-            $eventi = "";
-            if($id != ""){
-            $evento = new EEvento($id, $img, $nome_evento, $eventi);
-            if($operazione == 'cancellazione'){
-                $deleted = $db->delete($evento);
-                if($deleted){
-                    echo '<script type="text/javascript">
-                            alert("la cancellazione è avvenuta correttamente")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-            }
-        }
-        else {
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-        }
-        
-        
-        
-            //modifica
-            if(($operazione == 'modifica')){
-                if($id != "" && $nome_evento != "" && $img != ""){
-                    $evento = new EEvento($id, $img, $nome_evento, $eventi);
-                    $update = $db->update($evento);
-                    if($update){
-                        echo '<script type="text/javascript">
-                                alert("Modifica avvenuta")
-                                window.location= "/TicketStore/validazione"
-                              </script>'; 
-                    } 
-                }
-                else {
-                    echo '<script type="text/javascript">
-                                alert("Bisogna riempire tutti i campi correttamente")
-                                window.location= "/TicketStore/validazione"
-                              </script>';
-                }
-            }
-        }
-        
-        
-             
-    
-        
-    
-         
-        
-        
-        
-        //----------------------------gestione utente_r------------------------------------------------------
-        if($tabella == 'utente_r') {
-        $mail = $_POST['mail'];
-        if($mail != ""){
-            $utente = new EUtente_Reg("", "", $mail, "");
-            if($operazione == 'cancellazione'){
-                $deleted = $db->delete($utente);
-                if($deleted){
-                echo '<script type="text/javascript">
-                        alert("la cancellazione è avvenuta correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-                }
-            }
-        }
-        else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-        }
-        }
-        //----------------------------gestione evento_specifico------------------------------------------------------
-        if( $tabella == 'evento_spec') {
-        $tipo = $_POST['tipo'];
-        $data = $_POST['data_es'];
-        $ora = $_POST['ora_es'];
-        $data = $data." ".$ora;
-        $luogo = $_POST['indirizzo'];
-        $codes = $_POST['codes'];
-        $casa = $_POST['casa'];
-        $ospite = $_POST['ospite'];
-        $compagnia = $_POST['compagnia'];
-        $artista = $_POST['artista'];
-        
-        
-        if($codes != "" && $data != ""){
-            if($operazione == 'cancellazione'){
-                $deleted = $fam->delete_es($codes,$data);
-                $deleted_mirror = $fam->delete_es_mirror($codes,$data);
-                if($deleted && $deleted_mirror){
-                    echo '<script type="text/javascript">
-                            alert("la cancellazione è avvenuta correttamente")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-                else{
-                    echo '<script type="text/javascript">
-                            alert("Assicurarsi che tutte le partecipazioni relative all evento che si desidera cancellare siano cancellate")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-            }
-        }
-        else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-        }
-        
-        if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
-            if($operazione == 'inserimento'){
-               $stored = $fam->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
-               if($stored){
-                    echo '<script type="text/javascript">
-                            alert("inserimento avvenuto")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-            } 
-            
-            //modifica
-            if(($operazione == 'modifica')){
-                $update = $fam->update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
-                if($update){
-                echo '<script type="text/javascript">
-                        alert("Modifica avvenuta")
-                        window.location= "/TicketStore/validazione"
-                      </script>'; 
-                }
-            }
-        }
-        else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-        }
-        }
-        //----------------------------gestione partecipazioni------------------------------------------------------
-        if($tabella == 'partecipazione') {
-        $codep = $_POST['codep'];
-        $datap = $_POST['datap'];
-        $ora = $_POST['ora_es'];
-        $datap = $datap." ".$ora;
-        $zona = $_POST['zona'];
-        $indirizzop = $_POST['indirizzop'];
-        $prezzo = $_POST['prezzo'];
+        $db = USingleton::getInstance('FDBmanager');        
+        if($this->operazione == 'inserimento' && $this->tabella == 'evento') { //evento con nuovi dati non presenti nel db
+            $evento = $this->creaEvento();  //EEvento
 
-        if($codep != "" && $datap != "" && $zona != "" && $indirizzop != "" && $prezzo != ""){
-            if($operazione == 'inserimento'){
-                $stored = $fam->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
-                if($stored){
-                    echo '<script type="text/javascript">
+            $stored = $db->store($evento); 
+            /*
+            if($stored) {
+                 echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
                             window.location= "/TicketStore/validazione"
                           </script>'; 
-                }
+            }else {
+                echo '<script type="text/javascript">
+                            alert("inserimento NONNONONONOON avvenuto")
+                            window.location= "/TicketStore/validazione"
+                          </script>';
+            }//*/
+        }
+        
+        
+    }
+    
+    private function creaEvento() {
+        $fevento = USingleton::getInstance('FEvento');
+        $id = 1 + $fevento->loadultimoevento()[0];
+        $classe = $this->classe;
+
+        $dati = $this->dati;
+            
+            $zona = [new EZona($dati['zona'], $dati['capacita'])];
+            $luogo = new ELuogo($dati['citta'], $dati['struttura'],$zona);
+            $partecipazioni = [new EPartecipazione($zona[0], $dati['prezzo'])];
+            
+            if($classe == 'EPartita') {
+                $eventoSpecifico = [new EPartita($luogo,$dati['data'],$partecipazioni,$dati['casa'], $dati['ospite'])];
+            }
+            if($classe == 'ESpettacolo') {
+                $eventoSpecifico = [new ESpettacolo($luogo,$dati['data'],$partecipazioni,$dati['compagnia'])];
+            }
+            if($classe == 'EConcerto') {
+                $eventoSpecifico = [new EConcerto($luogo,$dati['data'],$partecipazioni,$dati['artista'])];
             }
             
-            
-            if(($operazione == 'modifica')){
-                $updated = $fam->update_partecipazione($codep, $datap, $zona, $indirizzop, $prezzo);
-                    if($updated){
-                        echo '<script type="text/javascript">
-                                alert("Modifica avvenuta")
-                                window.location= "/TicketStore/validazione"
-                              </script>'; 
-                    }
-                }
-               
-            
-            if($operazione == 'cancellazione'){
-                $deleted = $fam->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
-                
-                if($deleted){
-                    echo '<script type="text/javascript">
-                            alert("la cancellazione è avvenuta correttamente")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-                else{
-                    echo '<script type="text/javascript">
-                            alert("Sono presenti errori di sintassi in qualcuno dei campi inseriti.Coreggere e Riprovare")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                }
-            }
-        }
-        else{
-            echo '<script type="text/javascript">
-                        alert("Bisogna riempire tutti i campi correttamente")
-                        window.location= "/TicketStore/validazione"
-                      </script>';
-            }
-        }
-//----------------------------gestione zona------------------------------------------------------
-        if($tabella == 'zona'){
-            $nomez = $_POST['zona'];
-            $indirizzoz = $_POST['indirizzoz'];
-            
-            if($nomez != "" && $indirizzoz != ""){
-                if($operazione == 'inserimento'){
-                    $capacita = $_POST['capacita'];
-                    $stored = $fam->storezona($nomez, $indirizzoz, $capacita);
-                    if($stored){
-                        echo '<script type="text/javascript">
-                            alert("inserimento avvenuto")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-                    }
-                }
-                
-                if ($operazione == 'modifica'){
-                    $capacita = $_POST['capacita'];
-                    $updated = $fam->updatezona($nomez, $indirizzoz, $capacita);
-                    if($updated){
-                            echo '<script type="text/javascript">
-                                    alert("Modifica avvenuta")
-                                    window.location= "/TicketStore/validazione"
-                                  </script>'; 
-                    }
-                }        
-                if($operazione == 'cancellazione'){
-                     $deleted = $fam->deletezona($nomez, $indirizzoz);
-                     if($deleted){
-                         echo '<script type="text/javascript">
-                                alert("cancellazione avvenuta")
-                                window.location= "/TicketStore/validazione"
-                               </script>'; 
-                        }
-                    }
-                }
-                 else{
-                    echo '<script type="text/javascript">
-                                alert("Bisogna riempire tutti i campi correttamente")
-                                window.location= "/TicketStore/validazione"
-                              </script>';
-                }
-        }
-//----------------------------gestione biglietto------------------------------------------------------
-        if($tabella == 'biglietti'){
-          $num = (int)$_POST['numero_bigl'];
-          $nome_evento = $_POST['nome_evento'];
-          $data = $_POST['data'];
-          $ora = $_POST['ora_es'];
-          $data = $data." ".$ora;
-          $zona = $_POST['zona'];
-          $code = $_POST['codice_evento'];
-          $indirizzo = $_POST['indirizzo'];
-          
-         
-         if(is_int($num) && $nome_evento != "" && $data != "" && $zona != "" && $code != "" && $indirizzo != ""){
-                if($operazione == 'inserimento'){
-                    $stored = $fam->store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo);
-                   
-                    if($stored){
-                        echo '<script type="text/javascript">
-                                alert("inserimento avvenuto")
-                                window.location= "/TicketStore/validazione"
-                              </script>'; 
-                    }
-                }
-            } 
-            else{
-                    echo '<script type="text/javascript">
-                                alert("Bisogna riempire tutti i campi correttamente")
-                                window.location= "/TicketStore/validazione"
-                              </script>';
-            }  
-        }
-              
-    }  
+            $evento = new EEvento($id, $dati['immagine'], $dati['nome_evento'],$eventoSpecifico);
+        
+            return $evento;
+    }
+    
+    
+    public function assegnaDati() {
+        //eventospecifico
+        $dati['nome_evento'] = $_POST['nome_evento'];
+        $dati['immagine'] = $_POST['nome_immagine'];
+        $dati['data'] = $_POST['data_es']." ".$_POST['ora_es'];
+        $dati['tipo'] = $_POST['tipo'];
+        
+        $dati['casa'] = $_POST['casa'];
+        $dati['ospite'] = $_POST['ospite'];
+        $dati['compagnia'] = $_POST['compagnia'];
+        $dati['artista'] = $_POST['artista'];
+        
+        $dati['citta'] = $_POST['citta'];
+        $dati['struttura'] = $_POST['struttura'];
+
+        $dati['zona'] = $_POST['zona'];
+        $dati['capacita'] = $_POST['capacita'];
+        $dati['prezzo'] = $_POST['prezzo'];                
+        
+        return $dati;
+    }
 }
-
-

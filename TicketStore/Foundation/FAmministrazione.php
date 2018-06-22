@@ -4,19 +4,7 @@ class FAmministrazione extends FDBmanager {
     
 //-------------------------exist methods------------------------------------    
     
-public function existluogo($indirizzo) {
-    $sql = "SELECT indirizzo FROM luogo WHERE indirizzo = ? ";
-    $statement = $this->connection->prepare($sql);
-    $statement->bindParam(1, $indirizzo);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_COLUMN,0);
-    if(count($result) > 0){
-        return true;
-    }
-    else{
-        return false;
-    }   
-}
+
 
 public function existzona($nome, $indirizzo) {
     $sql = "SELECT nome FROM zona WHERE nome = ? AND indirizzo = ? ";
@@ -50,38 +38,8 @@ public function store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo) {
     return $stored;
 }
 
-public function storeluogo($indirizzo) {
-    $sql = "INSERT INTO luogo VALUES (?)";
-    $statement = $this->connection->prepare($sql);
-    
-    $statement->bindParam(1, $indirizzo);
-   
-    
-    $result = $statement->execute();
-    return $result;
-}
-public function storezona($nome, $indirizzo, $capacita) {
-    $sql = "INSERT INTO zona VALUES (?,?,?)";
-    $statement = $this->connection->prepare($sql);
-    
-    $statement->bindParam(1, $nome);
-    $statement->bindParam(2, $indirizzo);
-    $statement->bindParam(3, $capacita);
-    
-    $exist_luogo = $this->existluogo($indirizzo);
-    if(!$exist_luogo){
-        $struttura = "";
-       $stored_luogo = $this->storeluogo($indirizzo, $struttura);
-        if($stored_luogo){
-            $stored = $statement->execute();
-    } 
-    }
-    else{
-        $stored = $statement->execute();
-    }
-    return $stored;
-    
-}
+
+
 public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
     $evento_spec = new FEventoSpecifico();
     
@@ -101,17 +59,7 @@ public function store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$art
     
 }
 
-public function store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo) {
-    $sql = "INSERT INTO partecipazione "
-         . "VALUES (".$codep.","
-         .$this->connection->quote($datap).","
-         .$this->connection->quote($zona).","
-         .$this->connection->quote($indirizzop).","
-         .$this->connection->quote($prezzo).")";
-    
-    $stored = $this->connection->exec($sql);
-    return $stored;
-}
+
 
 
 //---------------------------load methods----------------------------------

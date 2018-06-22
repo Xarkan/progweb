@@ -100,9 +100,37 @@ return $result;
 public function store($object) {
 
     if($object instanceof EEvento) {
-        $evento = new FEvento();
-        $stored = $evento->storeevento($object);
+        
+        $fevento = USingleton::getInstance('FEvento');
+        $fevsp = USingleton::getInstance('FEventoSpecifico');
+        $fluogo = USingleton::getInstance('FLuogo');
+        $fzona = USingleton::getInstance('FZona');
+        $fpart = USingleton::getInstance('FPartecipazione');
+        $eventoSpecifico = $object->getEventoSingolo(0);
+        
+        $stored_evento = $fevento->storeevento($object);
+        $exist_luogo = $fluogo->existLuogo($eventoSpecifico->getLuogo());
+        if(!$exist_luogo){
+            $stored_luogo = $fluogo->storeLuogo($eventoSpecifico->getLuogo());
+            if($stored_luogo){
+                $stored_zona = $fzona->storeZona($eventoSpecifico->getLuogo());
+                if($stored_zona) {
+                    $stored_evsp = $fevsp->storeEventoSpec($object);
+                    $stored_mirror = $fevsp->storeEventoSpec_Mirror($object); 
+                    if($stored_evsp && $stored_mirror) {                   
+                        $stored = $fpart->storePartecipazione($object);
+                    }
+                }
+            } 
+        }else{
+            $stored_evsp = $fevsp->storeEventoSpec($object);
+            $stored_mirror = $fevsp->storeEventoSpec_Mirror($object);
+            $stored = $stored_evsp && $stored_mirror;
+            
+        }    
+        return $stored;
     }
+    
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
         $stored = $utente->storeutente($object);
@@ -256,8 +284,18 @@ public function search($string, $tipo) {
 
         $tipo = $array['tipo'];
         $classe = 'E'.$tipo;
-                
-        $evento = new $classe($luogo,$array['data_evento'],$array_part);
+        //*
+            if($classe == 'EPartita') {
+                $evento= new EPartita($luogo,$array['data_evento'],$array_part,$array['casa'], $array['ospite']);
+            }
+            if($classe == 'ESpettacolo') {
+                $evento = new ESpettacolo($luogo,$array['data_evento'],$array_part,$array['compagnia']);
+            }
+            if($classe == 'EConcerto') {
+                $evento= new EConcerto($luogo,$array['data_evento'],$array_part,$array['artista']);
+            }
+        //*/    
+        //$evento = new $classe($luogo,$array['data_evento'],$array_part);
         return $evento;
     }
     

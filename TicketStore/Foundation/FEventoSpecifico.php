@@ -48,40 +48,75 @@ class FEventospecifico extends FDBmanager {
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
     }
-    public function storeeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
-    
+    public function storeEventoSpec(EEvento $evento, $i = 0) {
+    $null = NULL;
     $sql = "INSERT INTO evento_spec VALUES (?,?,?,?,?,?,?,?)"; 
     $statement = $this->connection->prepare($sql);
     
-    $statement->bindParam(1,$codes);
-    $statement->bindParam(2,$data);
-    $statement->bindParam(3,$luogo);
-    $statement->bindParam(4,$tipo);
-    $statement->bindParam(5,$casa);
-    $statement->bindParam(6,$ospite);
-    $statement->bindParam(7,$compagnia);
-    $statement->bindParam(8,$artista);
+    $eventoSpecifico = $evento->getEventoSingolo($i);
+    $indirizzo = $eventoSpecifico->getLuogo()->getCitta().", ".$eventoSpecifico->getLuogo()->getStruttura();
+    $tipo = str_replace("E","",get_class($eventoSpecifico));
     
+    $statement->bindParam(1,$evento->getId());
+    $statement->bindParam(2,$eventoSpecifico->getData());
+    $statement->bindParam(3,$indirizzo);
+    $statement->bindParam(4, $tipo);
+    if($eventoSpecifico instanceof EPartita) {
+        $statement->bindParam(5,$eventoSpecifico->getCasa());
+        $statement->bindParam(6,$eventoSpecifico->getOspite());
+        $statement->bindParam(7,$null);
+        $statement->bindParam(8,$null);
+    }
+    if($eventoSpecifico instanceof ESpettacolo) {
+        $statement->bindParam(5,$null);
+        $statement->bindParam(6,$null);
+        $statement->bindParam(7,$eventoSpecifico->getCompagnia());
+        $statement->bindParam(8,$null);
+    }
+    if($eventoSpecifico instanceof EConcerto) {
+        $statement->bindParam(5,$null);
+        $statement->bindParam(6,$null);
+        $statement->bindParam(7,$null);
+        $statement->bindParam(8,$eventoSpecifico->getArtista());
+    }
     $result = $statement->execute();
     
     return $result;
         
     }
-    public function storeeventospecmirror($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
-    $nome = $this->recuperanomeevento($codes);
-    $sql = "INSERT INTO evento_spec_mirror VALUES (?,?,?,?,?,?,?,?,?)"; 
+    public function storeEventoSpec_Mirror(EEvento $evento, $i = 0) {
+    $null = NULL;
+            $sql = "INSERT INTO evento_spec_mirror VALUES (?,?,?,?,?,?,?,?,?)"; 
     $statement = $this->connection->prepare($sql);
     
-    $statement->bindParam(1,$nome);
-    $statement->bindParam(2,$codes);
-    $statement->bindParam(3,$data);
-    $statement->bindParam(4,$luogo);
-    $statement->bindParam(5,$tipo);
-    $statement->bindParam(6,$casa);
-    $statement->bindParam(7,$ospite);
-    $statement->bindParam(8,$compagnia);
-    $statement->bindParam(9,$artista);
+    $eventoSpecifico = $evento->getEventoSingolo($i);
+    $indirizzo = $eventoSpecifico->getLuogo()->getCitta().", ".$eventoSpecifico->getLuogo()->getStruttura();
     
+    $tipo = str_replace("E","",get_class($eventoSpecifico));
+    
+    $statement->bindParam(1,$evento->getNome());
+    $statement->bindParam(2,$evento->getId());
+    $statement->bindParam(3,$eventoSpecifico->getData());
+    $statement->bindParam(4,$indirizzo);
+    $statement->bindParam(5,$tipo);
+    if($eventoSpecifico instanceof EPartita) {
+        $statement->bindParam(6,$eventoSpecifico->getCasa());
+        $statement->bindParam(7,$eventoSpecifico->getOspite());
+        $statement->bindParam(8,$null);
+        $statement->bindParam(9,$null);
+    }
+    if($eventoSpecifico instanceof ESpettacolo) {
+        $statement->bindParam(6,$null);
+        $statement->bindParam(7,$null);
+        $statement->bindParam(8,$eventoSpecifico->getCompagnia());
+        $statement->bindParam(9,$null);
+    }
+    if($eventoSpecifico instanceof EConcerto) {
+        $statement->bindParam(6,$null);
+        $statement->bindParam(7,$null);
+        $statement->bindParam(8,$null);
+        $statement->bindParam(9,$eventoSpecifico->getArtista());
+    }
     $result = $statement->execute();
     
     return $result;

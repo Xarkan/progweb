@@ -24,6 +24,10 @@ class ELuogo {
     function getZone() {
         return $this->zone;
     }
+    
+    function getZonaSingola($index) {
+        return $this->zone[$index];
+    }
 
     function setCittà($città) {
         $this->città = $città;

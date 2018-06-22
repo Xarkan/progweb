@@ -58,4 +58,8 @@ class EZona {
         public function getNome() {
             return $this->nome;
         }
+        
+        public function getCapacita() {
+            return $this->capacita;
+        }
 }

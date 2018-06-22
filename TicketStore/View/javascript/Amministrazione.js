@@ -14,11 +14,9 @@ function setTableEvento(){
                             '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
                             '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                             '</tr>'+
-                            '<tr>'+
-                                    '<td>codice_evento<br><input type="text" name="codes"></td>'+
+                            '<tr>'+                                    
                                     '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzo"></td>'+
                                     '<td>Tipo<br><select name="tipo">'+
 
                                              '<option></option>'+
