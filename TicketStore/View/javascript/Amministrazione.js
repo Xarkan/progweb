@@ -109,7 +109,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
                                     '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
-                                    '<td>data_evento<br><input type="date" name="data"></td>'+
+                                    '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>Tipo<br><select name="tipo">'+
 
@@ -137,7 +137,6 @@ function setTableEvento(){
                                     '<td>capacita<br><input type="text" name="capacita"></td>'+
                                     '<td>prezzo<br><input type="text" name="prezzo"></td>'+
                                 '</tr>'+
-                            '</table>'+
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;        
                 
@@ -211,10 +210,27 @@ function setTableEvento(){
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
-                                    '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
-                                    '<td>data_evento<br><input type="date" name="data"></td>'+
+                                    '<td hidden="hidden">nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
-                                    '<tr>'+
+                                    '<td hidden="hidden">Tipo<br><select name="tipo">'+
+
+                                             '<option></option>'+
+                                             '<option>Partita</option>'+
+                                             '<option>Spettacolo</option>'+
+                                             '<option>Concerto</option>'+
+
+                                         '</select>'+
+                                    '</td>'+
+                            '</tr>'+
+                            '<tr hidden="hidden">'+
+                                    '<td>Casa<br><input type="text" name="casa"></td>'+
+                                    '<td>Ospite<br><input type="text" name="ospite"></td>'+
+                                    '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
+                                    '<td>Artista<br><input type="text" name="artista"></td>'+
+                            '</tr>'+        
+                                '</tr>'+
+                                '<tr>'+
                                     '<td>citta<br><input type="text" name="citta"></td>'+
                                     '<td>struttura<br><input name="struttura"></td>'+
                                 '</tr>'+
@@ -223,7 +239,6 @@ function setTableEvento(){
                                     '<td>capacita<br><input type="text" name="capacita"></td>'+
                                     '<td>prezzo<br><input type="text" name="prezzo"></td>'+
                                 '</tr>'+
-                            '</table>'+
                        '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
