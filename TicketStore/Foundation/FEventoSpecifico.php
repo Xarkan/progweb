@@ -89,7 +89,7 @@ class FEventospecifico extends FDBmanager {
     }
     public function storeEventoSpec_Mirror(EEvento $evento, $i = 0) {
     $null = NULL;
-            $sql = "INSERT INTO evento_spec_mirror VALUES (?,?,?,?,?,?,?,?,?)"; 
+    $sql = "INSERT INTO evento_spec_mirror VALUES (?,?,?,?,?,?,?,?,?)"; 
     $statement = $this->connection->prepare($sql);
     
     $eventoSpecifico = $evento->getEventoSingolo($i);

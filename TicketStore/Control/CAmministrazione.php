@@ -22,7 +22,8 @@ class CAmministrazione {
         if($this->operazione == 'inserimento') { //evento con nuovi dati non presenti nel db
             $evento = $this->creaEvento();  //EEvento
 
-            $stored = $db->store($evento); 
+            $stored = $db->store($evento);
+            var_dump($stored);
             
             if($stored) {
                  echo '<script type="text/javascript">

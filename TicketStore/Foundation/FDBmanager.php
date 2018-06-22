@@ -108,7 +108,7 @@ public function store($object) {
         $fpart = USingleton::getInstance('FPartecipazione');
         $eventoSpecifico = $object->getEventoSingolo(0);
         
-        if($fevento->existEvento($object)) {
+        if(!$fevento->existEvento($object)) {
             $fevento->storeEvento($object);
         }
         
@@ -126,8 +126,31 @@ public function store($object) {
                 }        
             } 
         }else{
-            echo "ippo";
-            $stored = $fpart->storePartecipazione($object);
+            $exist_evsp = $fevsp->existEventoSpec($eventoSpecifico);
+            if(!$exist_evsp){        
+                $stored_zona = $fzona->storeZona($eventoSpecifico->getLuogo());
+                if($stored_zona) {
+                        $stored_evsp = $fevsp->storeEventoSpec($object);
+                        $stored_mirror = $fevsp->storeEventoSpec_Mirror($object);                   
+                        if($stored_evsp && $stored_mirror) {                   
+                            $stored = $fpart->storePartecipazione($object);
+                        }
+                }
+            }else{
+                $exist_zona = $fzona->existZona($eventoSpecifico->getLuogo());
+                if(!$exist_zona){
+                    $stored_zona = $fzona->storeZona($eventoSpecifico->getLuogo());
+                    if($stored_zona) {
+                        $stored = $fpart->storePartecipazione($object);
+                    }
+                }else{
+                    $stored = $fpart->storePartecipazione($object);
+                }
+            }    
+             
+            
+            /*$stored = $fpart->storePartecipazione($object);
+            var_dump($stored);*/
         }    
         return $stored;
     }
