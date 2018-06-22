@@ -7,20 +7,23 @@ class FEventospecifico extends FDBmanager {
         
     }
 
-    public function existeventospec($code,$data) {
-        $sql = "SELECT code FROM evento_spec WHERE code = ? AND data_evento = ?";
+    public function existEventoSpec(EEventoSpecifico $evento) {
+        $indirizzo = $evento->getLuogo()->getCitta().", ".$evento->getLuogo()->getStruttura();
+        $sql = "SELECT * FROM evento_spec WHERE data_evento = ? AND indirizzo = ?";
         $statement = $this->connection->prepare($sql);
-        $statement->bindparam(1,$code);
-        $statement->bindparam(2,$data);
-        $result = $statement->execute();
+        $statement->bindparam(1,$evento->getData());
+        $statement->bindparam(2,$indirizzo);
+        $statement->execute();
         
         $rows = $statement->fetchAll(PDO::FETCH_COLUMN,0);
-        if(count($rows) > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return count($rows) > 0;
+    }
+    
+    public function loadTipo($id) {
+        $sql = "SELECT tipo FROM evento_spec WHERE code = ".$id;
+        $result = $this->connection->query($sql);
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $rows[0];
     }
     
     public function loadDataLuogoPrezzo(EEvento $evento){

@@ -9,8 +9,8 @@ class FEvento extends FDBmanager {
     }
 
     
-    public function existevento(EEvento $object) {
-        $sql = "SELECT * FROM evento WHERE code = ".$this->connection->quote($object->getId());
+    public function existEvento(EEvento $object) {
+        $sql = "SELECT * FROM evento WHERE code = ".$object->getId();
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         return count($rows) > 0;
@@ -43,7 +43,7 @@ class FEvento extends FDBmanager {
     }
    
 
-    public function storeevento(EEvento $object) {
+    public function storeEvento(EEvento $object) {
         $result = explode("\\",$object->getImg());
         $nome_img = $result[count($result)-1];
         array_pop($result);

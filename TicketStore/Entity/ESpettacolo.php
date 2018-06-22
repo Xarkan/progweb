@@ -7,7 +7,7 @@ class ESpettacolo extends EEventoSpecifico {
     public $compagnia;
     
     //metodi
-    public function __construct($luogo,$data,$partecipazioni,$compagnia) {
+    public function __construct($luogo,$data,$partecipazioni,$compagnia = '') {
         parent::__construct($luogo, $data, $partecipazioni);
 	$this->compagnia = $compagnia;
 	}

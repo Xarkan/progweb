@@ -109,6 +109,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
                                     '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td hidden="hidden">nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                                     '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>Tipo<br><select name="tipo">'+
@@ -211,6 +212,7 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
                                     '<td hidden="hidden">nome_evento<br><input type="text" name="nome_evento"></td>'+
+                                    '<td hidden="hidden">nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                                     '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td hidden="hidden">Tipo<br><select name="tipo">'+

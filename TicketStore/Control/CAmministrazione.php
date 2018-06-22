@@ -17,12 +17,13 @@ class CAmministrazione {
     }
     
     public function postAmministrazione() {
-        $db = USingleton::getInstance('FDBmanager');        
-        if($this->operazione == 'inserimento' && $this->tabella == 'evento') { //evento con nuovi dati non presenti nel db
+        $db = USingleton::getInstance('FDBmanager');  
+        
+        if($this->operazione == 'inserimento') { //evento con nuovi dati non presenti nel db
             $evento = $this->creaEvento();  //EEvento
 
             $stored = $db->store($evento); 
-            /*
+            
             if($stored) {
                  echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
@@ -30,10 +31,10 @@ class CAmministrazione {
                           </script>'; 
             }else {
                 echo '<script type="text/javascript">
-                            alert("inserimento NONNONONONOON avvenuto")
+                            alert("inserimento NON avvenuto")
                             window.location= "/TicketStore/validazione"
                           </script>';
-            }//*/
+            }
         }
         
         
@@ -41,10 +42,23 @@ class CAmministrazione {
     
     private function creaEvento() {
         $fevento = USingleton::getInstance('FEvento');
-        $id = 1 + $fevento->loadultimoevento()[0];
-        $classe = $this->classe;
-
         $dati = $this->dati;
+        $classe = $this->classe;
+        
+        if($this->tabella == 'partecipazione') {
+            $feventosp = USingleton::getInstance('FEventoSPecifico');
+            $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
+            $classe = "E".$tipo;
+            $id = $dati['code'];
+        }
+            if($this->tabella == 'evento') {
+                $id = 1 + $fevento->loadultimoevento()[0];
+            }
+            if($this->tabella == 'evento_spec') {
+                $id = $dati['code'];
+        }
+
+        
             
             $zona = [new EZona($dati['zona'], $dati['capacita'])];
             $luogo = new ELuogo($dati['citta'], $dati['struttura'],$zona);
@@ -62,12 +76,14 @@ class CAmministrazione {
             
             $evento = new EEvento($id, $dati['immagine'], $dati['nome_evento'],$eventoSpecifico);
         
-            return $evento;
+            return $evento;            
+        
     }
     
     
     public function assegnaDati() {
         //eventospecifico
+        $dati['code'] = $_POST['code'];
         $dati['nome_evento'] = $_POST['nome_evento'];
         $dati['immagine'] = $_POST['nome_immagine'];
         $dati['data'] = $_POST['data_es']." ".$_POST['ora_es'];

@@ -9,11 +9,12 @@ class CDebug {
         $ev = new ESpettacolo("sdfshdf", "data", "partecipazioni");
         $tipo = str_replace("E","",get_class($ev));       
        
-        
+        $feventosp = USingleton::getInstance('FEventoSPecifico');
+        $tipoz = $feventosp->loadTipo(1)['tipo'];
         
         
         echo "<pre>";
-        print_r($tipo);
+        print_r($tipoz);
         echo "</pre>";//*/
     }
 }

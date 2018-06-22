@@ -7,7 +7,7 @@ class EConcerto extends EEventoSpecifico{
     public $artista;
     
     //metodi
-    public function __construct($luogo,$data,$partecipazioni,$artista) {
+    public function __construct($luogo,$data,$partecipazioni,$artista = '') {
         parent::__construct($luogo, $data,$partecipazioni);
     	$this->artista = $artista;
     }
