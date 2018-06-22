@@ -90,3 +90,7 @@
 		float: none;
     }
 }
+form{
+    flex-direction: column;
+    height: 100px;
+}
