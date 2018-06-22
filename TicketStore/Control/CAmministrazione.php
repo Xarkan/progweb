@@ -5,6 +5,7 @@ class CAmministrazione {
     
     public function postAmministrazione() {
         $db = USingleton::getInstance('FDBmanager');
+        $fam = USingleton::getInstance('FAmministrazione');
         
         $operazione = $_POST['Operazione'];
         $tabella = $_POST['Tabella'];
@@ -13,7 +14,7 @@ class CAmministrazione {
         
         
         if($tabella == 'evento' && $operazione == 'inserimento') {
-        $num = $db->loadultimocodice();
+        $num = $fam->loadultimocodice();
         
         $num = $num[0]+1;
         $id_ultimo = $num;
@@ -133,8 +134,8 @@ class CAmministrazione {
         
         if($codes != "" && $data != ""){
             if($operazione == 'cancellazione'){
-                $deleted = $db->delete_es($codes,$data);
-                $deleted_mirror = $db->delete_es_mirror($codes,$data);
+                $deleted = $fam->delete_es($codes,$data);
+                $deleted_mirror = $fam->delete_es_mirror($codes,$data);
                 if($deleted && $deleted_mirror){
                     echo '<script type="text/javascript">
                             alert("la cancellazione è avvenuta correttamente")
@@ -158,7 +159,7 @@ class CAmministrazione {
         
         if($tipo != "" && $data != "" && $luogo != "" && $codes != ""){
             if($operazione == 'inserimento'){
-               $stored = $db->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+               $stored = $fam->store_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
                if($stored){
                     echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
@@ -169,7 +170,7 @@ class CAmministrazione {
             
             //modifica
             if(($operazione == 'modifica')){
-                $update = $db->update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
+                $update = $fam->update_es($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista);
                 if($update){
                 echo '<script type="text/javascript">
                         alert("Modifica avvenuta")
@@ -194,10 +195,10 @@ class CAmministrazione {
         $zona = $_POST['zona'];
         $indirizzop = $_POST['indirizzop'];
         $prezzo = $_POST['prezzo'];
-        print_r($_POST);
+
         if($codep != "" && $datap != "" && $zona != "" && $indirizzop != "" && $prezzo != ""){
             if($operazione == 'inserimento'){
-                $stored = $db->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+                $stored = $fam->store_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
                 if($stored){
                     echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
@@ -208,7 +209,7 @@ class CAmministrazione {
             
             
             if(($operazione == 'modifica')){
-                $updated = $db->update_partecipazione($codep, $datap, $zona, $indirizzop, $prezzo);
+                $updated = $fam->update_partecipazione($codep, $datap, $zona, $indirizzop, $prezzo);
                     if($updated){
                         echo '<script type="text/javascript">
                                 alert("Modifica avvenuta")
@@ -219,7 +220,7 @@ class CAmministrazione {
                
             
             if($operazione == 'cancellazione'){
-                $deleted = $db->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
+                $deleted = $fam->delete_partecipazione($codep,$datap,$zona,$indirizzop,$prezzo);
                 
                 if($deleted){
                     echo '<script type="text/javascript">
@@ -250,7 +251,7 @@ class CAmministrazione {
             if($nomez != "" && $indirizzoz != ""){
                 if($operazione == 'inserimento'){
                     $capacita = $_POST['capacita'];
-                    $stored = $db->storezona($nomez, $indirizzoz, $capacita);
+                    $stored = $fam->storezona($nomez, $indirizzoz, $capacita);
                     if($stored){
                         echo '<script type="text/javascript">
                             alert("inserimento avvenuto")
@@ -261,7 +262,7 @@ class CAmministrazione {
                 
                 if ($operazione == 'modifica'){
                     $capacita = $_POST['capacita'];
-                    $updated = $db->updatezona($nomez, $indirizzoz, $capacita);
+                    $updated = $fam->updatezona($nomez, $indirizzoz, $capacita);
                     if($updated){
                             echo '<script type="text/javascript">
                                     alert("Modifica avvenuta")
@@ -270,7 +271,7 @@ class CAmministrazione {
                     }
                 }        
                 if($operazione == 'cancellazione'){
-                     $deleted = $db->deletezona($nomez, $indirizzoz);
+                     $deleted = $fam->deletezona($nomez, $indirizzoz);
                      if($deleted){
                          echo '<script type="text/javascript">
                                 alert("cancellazione avvenuta")
@@ -300,7 +301,7 @@ class CAmministrazione {
          
          if(is_int($num) && $nome_evento != "" && $data != "" && $zona != "" && $code != "" && $indirizzo != ""){
                 if($operazione == 'inserimento'){
-                    $stored = $db->store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo);
+                    $stored = $fam->store_bigl($num,$nome_evento,$data,$zona,$code,$indirizzo);
                    
                     if($stored){
                         echo '<script type="text/javascript">

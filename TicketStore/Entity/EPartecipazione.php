@@ -7,7 +7,7 @@ class EPartecipazione {
     public $numPosti;  //int
     public $disp;//bool
     
-    function __construct($zona, $prezzo, $num, $disp) {
+    function __construct($zona, $prezzo, $num = 0, $disp = false) {
         $this->zona = $zona;
         $this->prezzo = $prezzo;
         $this->numPosti = $num;

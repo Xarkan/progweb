@@ -294,8 +294,8 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di biglietti acquistabili nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<br><input type="text" name="code"></td>'+
-                                    '<td>data<br><input type="date" name="data_es"></td>'+
+                                    '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                                    '<td>data<br><input type="date" name="data"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzo"></td>'+
                                     '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+

@@ -48,9 +48,8 @@ class FEvento extends FDBmanager {
         $nome_img = $result[count($result)-1];
         array_pop($result);
         $path = implode('\\', $result);
-        $sql = "INSERT INTO evento (code,nome,path_img,nome_img) "
-             . "VALUES ( ".$this->connection->quote(NULL).","
-             .$this->connection->quote($object->getNome()).","
+        $sql = "INSERT INTO evento (nome,path_img,nome_img) "
+             . "VALUES (".$this->connection->quote($object->getNome()).","
              .$this->connection->quote($path).","
              .$this->connection->quote($nome_img).")";
      
