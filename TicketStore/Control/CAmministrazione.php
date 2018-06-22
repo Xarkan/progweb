@@ -23,7 +23,6 @@ class CAmministrazione {
             $evento = $this->creaEvento();  //EEvento
 
             $stored = $db->store($evento);
-            var_dump($stored);
             
             if($stored) {
                  echo '<script type="text/javascript">

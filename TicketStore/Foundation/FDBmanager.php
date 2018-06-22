@@ -108,6 +108,7 @@ public function store($object) {
         $fpart = USingleton::getInstance('FPartecipazione');
         $eventoSpecifico = $object->getEventoSingolo(0);
         
+        $this->connection->beginTransaction();
         if(!$fevento->existEvento($object)) {
             $fevento->storeEvento($object);
         }
@@ -151,7 +152,12 @@ public function store($object) {
             
             /*$stored = $fpart->storePartecipazione($object);
             var_dump($stored);*/
-        }    
+        }
+        if($stored) {
+            $this->connection->commit();
+        }else{
+            $this->connection->rollBack();
+        }
         return $stored;
     }
     

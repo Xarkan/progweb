@@ -11,6 +11,7 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
+                            '<td hidden="hidden">codice_evento<br><input type="text" name="code"></td>'+
                             '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
                             '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                             '</tr>'+
