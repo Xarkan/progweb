@@ -29,19 +29,7 @@ abstract class EEventoSpecifico {
         return $this->partecipazioni[$index];
     }
     
-    //ci vuole qualcosa per il controllo della disponibilità
-    
-    
-    
-    /*function selezionePartecipazione($index) {
-        $length = count($this->partecipazioni);
-        for($i = 0; $i < $length; $i++) {
-            if($this->partecipazioni[$i]->getDisp()) {
-                $opzioniDisp = $this->partecipazioni[$i];
-            }
-        }
-        return $opzioniDisp[$index];
-    }*/ 
+ 
 
 
 }

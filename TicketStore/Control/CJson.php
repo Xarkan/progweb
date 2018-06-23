@@ -46,10 +46,10 @@ class CJson {
                             } else {
                                 $string = explode("_", $data);
                                 $data = $string[0] . " " . $string[1];
-                                if ($index_partecipazione == '') { //questo fa la roba dell'evento specifico
+                                if ($index_partecipazione == '') { 
                                     $evento_sp = $db->load($p1, $data);
                                     $view->print_json($evento_sp);
-                                } else { //questo fa l'ultimo caso della partecipazione
+                                } else { 
                                     $evento_sp = $db->load($p1, $data);
                                     $part = $evento_sp->selezionePartecipazione($index_partecipazione);
                                     $view->print_json($part);

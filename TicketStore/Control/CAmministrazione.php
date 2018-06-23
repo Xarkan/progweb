@@ -48,7 +48,9 @@ class CAmministrazione {
         $fevento = USingleton::getInstance('FEvento');
         $dati = $this->dati;
         $classe = $this->classe;
-
+        
+        //----------------sezione di controllo delle operazioni-----------------
+        
         if ($this->operazione == 'inserimento') {
             if ($this->tabella == 'evento') {
                 $id = 1 + $fevento->loadultimoevento()[0];
@@ -88,36 +90,8 @@ class CAmministrazione {
                 $classe = "E" . $tipo;
                 $id = $dati['code'];
             }
-            
         }
-
-
-        /*if ($this->tabella == 'partecipazione') {
-            $feventosp = USingleton::getInstance('FEventoSPecifico');
-            $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
-            $classe = "E" . $tipo;
-            $id = $dati['code'];
-        }
-        if ($this->operazione == 'inserimento') {
-            if ($this->tabella == 'evento') {
-                $id = 1 + $fevento->loadultimoevento()[0];
-            }
-            if ($this->tabella = 'biglietti') {
-                $feventosp = USingleton::getInstance('FEventoSPecifico');
-                $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
-                $classe = "E" . $tipo;
-                $id = $dati['code'];
-            }
-        }
-        if ($this->tabella == 'evento_spec' || $this->operazione == 'cancellazione') {
-            $id = $dati['code'];
-            if ($this->operazione == 'cancellazione' && $this->tabella != 'utente_r') {
-                $feventosp = USingleton::getInstance('FEventoSPecifico');
-                $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
-                $classe = "E" . $tipo;
-            }
-        }*/
-
+//---------------------------------------------------------------------------------------------------------
 
         $zona = [new EZona($dati['zona'], $dati['capacita'])];
         $luogo = new ELuogo($dati['citta'], $dati['struttura'], $zona);
@@ -173,7 +147,7 @@ class CAmministrazione {
         $keys[] = 'mail';
 
         //controlla se $_POST ha determinate chiavi e imposta i valori con la
-        //stringa vuota se non 
+        //stringa vuota se non le ha
         for ($i = 0; $i < count($keys); $i++) {
             if (!isset($_POST[$keys[$i]])) {
                 $dati[$keys[$i]] = '';

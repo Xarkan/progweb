@@ -5,7 +5,7 @@ class EZona {
 	//attributi
 	public $nome;
 	public $capacita;
-	public $posti = []; //array(Posto) da capire se ci si mettono solo quelli presi...
+	public $posti = []; //array(Posto) 
 
 	//metodi
         public function __construct($nome,$capacita) {
@@ -22,7 +22,7 @@ class EZona {
                 $fila++;
             }
         }
-        public function assegnaPosti(EOrdine $ordine, $num) { //deve controllare nel db i posti assegnati dentro la tabella bigl
+        public function assegnaPosti(EOrdine $ordine, $num) { 
             $db = USingleton::getInstance('FDBmanager');            
             if($num != 0) {
                 $result = $db->load($ordine,'posti');

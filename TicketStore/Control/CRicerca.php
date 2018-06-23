@@ -17,16 +17,10 @@ class CRicerca {
             $nome_evento = $_POST['nome_evento'];
             $eventi = $db->search($nome_evento,'nome');
         }
-        //var_dump($eventi);
-
         
-        
-        //print_r($_POST);
-        //print_r($eventi);
-        //*
         $sessione->imposta_valore('ricerca',$eventi);
         $vricerca = USingleton::getInstance('VRicerca');
         $vricerca->set_html();//*/
-        //$sessione->distruggiValore('ricerca');
+        
     }
 }

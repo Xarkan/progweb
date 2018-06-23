@@ -33,18 +33,6 @@ class EOrdine {
         array_splice($this->items,$p,1);
     }
     
-    public function creaBiglietti() {
-        if($this->pagato) {
-            $db = USingleton::getInstance('FDBmanager');
-            $db->update($this); //da vedere se così o $this->getUtente()
-            $num = count($this->items);
-            for ($i = 0; $i < $num; $i++) {
-                $biglietto = new EBiglietto();
-                //...
-            }
-        }
-    }
-    
     function getId() {
         return $this->id;
     }

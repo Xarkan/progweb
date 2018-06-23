@@ -107,6 +107,7 @@ function setTableEvento(){
     //inserimento
     if(y[x].index == 3 && j[i].index == 1){
         let html_command = '<legend>Inserimento di un evento specifico nel database</legend>'+
+                           '<legend>ATTENZIONE IL CODICE DA INSERIRE DEVE RIFERIRSI AD UN EVENTO GENERICO GIA PRESENTE NEL DB</legend>'+
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code" required></td>'+
@@ -204,23 +205,10 @@ function setTableEvento(){
                                     '<td>codice_evento<br><input type="text" name="code" required></td>'+
                                     '<td>data_evento<br><input type="date" name="data_es" required></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es" required></td>'+
-                                    '<td>Tipo<br><select name="tipo" required>'+
                                     
-                                             '<option></option>'+
-                                             '<option>Partita</option>'+
-                                             '<option>Spettacolo</option>'+
-                                             '<option>Concerto</option>'+
-
-                                         '</select>'+
-                                    '</td>'+
                             '</tr>'+
-                            '<tr>'+
-                                    '<td>Casa<br><input type="text" name="casa"></td>'+
-                                    '<td>Ospite<br><input type="text" name="ospite"></td>'+
-                                    '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
-                                    '<td>Artista<br><input type="text" name="artista"></td>'+
-                            '</tr>'+        
-                                '</tr>'+
+                                 
+                                
                                 '<tr>'+
                                     '<td>citta<br><input type="text" name="citta" required></td>'+
                                     '<td>struttura<br><input name="struttura" required></td>'+

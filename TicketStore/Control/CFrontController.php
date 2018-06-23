@@ -35,8 +35,7 @@ class CFrontController {
         if(!file_exists("Control/".$this->file)) {
             
             $view=Usingleton::getInstance('View');
-            //$aut = USingleton::getInstance('CAutenticazione');
-            //$aut->isLogged();
+           
             $view->avviaHome();
             exit;
             }
@@ -44,7 +43,7 @@ class CFrontController {
                 if ( method_exists($this->controller, $this->finalmethod ) ) {
                     $object = new $this->controller();
                 } else {                    
-                //header('HTTP/1.1 405 Method Not Allowed');   
+                  
                     $view=Usingleton::getInstance('View');
                     $view->operazioneInvalida(); //?????
                     exit;

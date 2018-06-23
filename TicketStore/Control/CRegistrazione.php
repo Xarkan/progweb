@@ -21,11 +21,7 @@ class CRegistrazione {
                 if($password == $conferma_psw){
                     $exist = $db->exist($utente);
                     if($exist){
-                     /*L'utente sta provando a registrarsi con una mail già usata per la registrazione
-                     Viene reindirizzato al login...l'ideale sarebbe comunicare all'utente che o si logga 
-                     o cambia mail per effettuare la registrazione
-                     header('HTTP/1.1 301 Moved Permanently');
-                     header('Location: login');*/
+                     
                         echo '<script type="text/javascript">
                             alert("La mail inserita è stata già registrata. Procedi al login")
                             window.location= "/TicketStore/login"
@@ -34,8 +30,7 @@ class CRegistrazione {
                     else{
                         $registrato = $db->store($utente);
                         if($registrato){
-                        //la registrazione è avvenuta con successo l'utente viene reinderizzato nella bellissima
-                        //pagina dove puo scegliere se andare alla home o procedere con l'ordine
+                        
                             $sessione->imposta_valore('logged',$registrato);
                             $sessione->imposta_valore('utente',$utente);
                             echo '<script type="text/javascript">
