@@ -51,12 +51,12 @@ class FBiglietto extends FDBmanager{
     }
     
     public function storeBiglietto(EBiglietto $biglietto) {
-        $indirizzo = $biglietto->getEvento()->getEventoSpecifico(0)->getLuogo()->getCitta().", ".$evento->getLuogo()->getStruttura();
+        $indirizzo = $biglietto->getEvento()->getEventoSingolo(0)->getLuogo()->getCitta().", ".$biglietto->getEvento()->getEventoSingolo(0)->getLuogo()->getStruttura();
         $sql = "INSERT INTO biglietto (code,evento,data_evento,zona,indirizzo)"
-                . "VALUES (".$this->connection->quote($code).","
+                . "VALUES (".$this->connection->quote($biglietto->getEvento()->getId()).","
                 .$this->connection->quote($biglietto->getEvento()->getNome()).","
                 . $this->connection->quote($biglietto->getEvento()->getEventoSingolo(0)->getData()).","
-                . $this->connection->quote($biglietto->getEvento()->getEventoSingolo(0)->selezionaPartecipazione(0)->getZona()).","
+                . $this->connection->quote($biglietto->getEvento()->getEventoSingolo(0)->selezionePartecipazione(0)->getZona()->getNome()).","
                 . $this->connection->quote($indirizzo).")";
         $result = $this->connection->exec($sql);
       

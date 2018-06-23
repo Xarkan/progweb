@@ -171,9 +171,9 @@ public function store($object) {
             $fevsp = USingleton::getInstance('FEventoSpecifico');
             if($fevsp->existEventoSpec($object->getEvento()->getEventoSingolo(0))) {
                 $fzona = USingleton::getInstance('FZona');
-                if ($fzona->existZona($object->getEvento()->getEventoSingolo(0)->selezionePartecipazione(0)->getZona()->getNome())) {
+                if ($fzona->existZona($object->getEvento()->getEventoSingolo(0)->getLuogo())) {
                     $fbigl = USingleton::getInstance('FBiglietto');
-                    $stored = $fbigl->storeBiglietto();
+                    $stored = $fbigl->storeBiglietto($object);
                 }
             }
         }

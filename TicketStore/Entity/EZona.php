@@ -14,7 +14,7 @@ class EZona {
             $k = 1;
             $fila = 1;
             while($k < $capacita) {
-                for ($i = 1; $i <= 5; $i++) {
+                for ($i = 1; $i <= 5 && $i<= $capacita; $i++) {
                     $posto = new EPosto($fila,$i);
                     $this->posti[] = $posto;
                     $k++;

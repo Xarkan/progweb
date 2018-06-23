@@ -281,7 +281,7 @@ function setTableEvento(){
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code" required></td>'+
-                                    '<td>data<br><input type="date" name="data" required></td>'+
+                                    '<td>data<br><input type="date" name="data_es" required></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es" required></td>'+
                                     '<td>citta<br><input type="text" name="citta" required></td>'+
                                     '<td>struttura<br><input type="text" name="struttura" required></td>'+
