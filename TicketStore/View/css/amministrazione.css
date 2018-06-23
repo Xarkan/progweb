@@ -47,3 +47,15 @@ legend{
     border: solid 1px black;
     background: whitesmoke;
 }
+#caricamentoimg{
+    text-align: end;
+    font-size: 2vw;
+}
+
+a{
+    color : white;
+}
+a:hover{
+    text-decoration: none;
+    color:white;
+}

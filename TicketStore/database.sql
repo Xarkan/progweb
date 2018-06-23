@@ -88,7 +88,8 @@ CREATE TABLE biglietto (
 
   PRIMARY KEY (codb, code, data_evento, zona, indirizzo),
   FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento) ON DELETE CASCADE,
-  FOREIGN KEY (zona, indirizzo) REFERENCES zona(nome, indirizzo) ON DELETE CASCADE
+  FOREIGN KEY (zona, indirizzo) REFERENCES zona(nome, indirizzo) ON DELETE CASCADE,
+  INDEX (fila,posto)
 
 );
 

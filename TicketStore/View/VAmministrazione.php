@@ -25,6 +25,7 @@ class VAmministrazione {
     echo '<h1 class="display-4"><a href="/TicketStore/logout" id="home-link">TicketStore</a></h1>';
     echo '</div>';
     echo '</div>';
+    echo '<div id="caricamentoimg"><a href="/TicketStore/Amministratoreimg">CARICARE IMMAGINI NEL DB</a></div>';
     echo '    <div>';
     echo '        <form method="post" action="Amministrazione">';
     echo '            <fieldset>';
@@ -36,7 +37,6 @@ class VAmministrazione {
                                    
     echo '                                 <option></option>';
     echo '                                 <option>inserimento</option>';
-    echo '                                 <option>modifica</option>';
     echo '                                 <option>cancellazione</option>';
                                      
     echo '                           </select>';
@@ -56,7 +56,6 @@ class VAmministrazione {
     echo '                              <option>utente_r</option>';
     echo '                              <option>evento_spec</option>';
     echo '                              <option>partecipazione</option>';
-    echo '                              <option>zona</option>';
     echo '                              <option>biglietti</option>';
                                   
     echo '                          </select>';
