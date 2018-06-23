@@ -6,7 +6,12 @@ class CZona {
         $sessione = USingleton::getInstance('USession');
         $db = USingleton::getInstance('FDBmanager');
         $ordine = $sessione->recupera_valore('ordine');
-
+        
+        if($ordine->getEvento() != null) {
+            $reset = USingleton::getInstance('CReset');
+            $reset->getReset();
+        }
+       
         $evento_sp = $db->load($id_e, $id_esp);
         $ordine->setEvento($evento_sp);
         $sessione->imposta_valore('ordine',$ordine);        

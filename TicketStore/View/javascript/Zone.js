@@ -61,7 +61,8 @@ function setTable(risposta, cod_e, cod_esp) {
             '</td>'+
         '</tr>'+
         '</form>';
-        table = table + html;      
+        table = table + html;   
+        selection = '';
     }
     
     document.getElementById("tr").innerHTML = table;

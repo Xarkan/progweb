@@ -7,6 +7,10 @@ class CEvento {
         $db = USingleton::getInstance('FDBmanager');
         $ordine = USingleton::getInstance('EOrdine');
         
+        if($sessione->is_set('ordine')) {
+            $sessione->distruggiValore('ordine');
+        }
+        
         $evento = $db->load($id);
         $ordine->setCode($id);
         $ordine->setNomeEvento($evento->getNome());

@@ -11,6 +11,15 @@ class USession {
         */
         session_start();
     }
+    
+    function is_set($string) {
+        if(isset($_SESSION[$string])) {
+            $bool = true;
+        }else{
+            $bool = false;
+        }
+        return $bool;
+    }
 
 // imposta valore sessione
     function imposta_valore($chiave,$valore) {

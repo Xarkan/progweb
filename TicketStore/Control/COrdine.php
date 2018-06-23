@@ -34,6 +34,10 @@ class COrdine {
         $evento_sp = $db->load($id_e, $id_esp);
         $part = $evento_sp->selezionePartecipazione($id_part);
         
+        if(isset($ordine->getItems()[0])) {
+            $ordine->setItems(array());
+        }
+        
         if($_POST['num_bigl'] == NULL) {
             $num = 0;
         }else{
