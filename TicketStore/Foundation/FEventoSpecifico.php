@@ -26,15 +26,6 @@ class FEventospecifico extends FDBmanager {
         return $rows[0];
     }
     
-    public function loadDataLuogoPrezzo(EEvento $evento){
-        $sql = "SELECT  *"
-          ." FROM evento_spec AS es "
-          ." WHERE es.cod_evento = ". $this->connection->quote($evento->getCodev());
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll();
-    
-        return $rows;
-    }
     
     public function loadEventoSp($cod_e,$data) {
         $sql = "SELECT * FROM evento_spec WHERE code=".$cod_e
@@ -125,12 +116,6 @@ class FEventospecifico extends FDBmanager {
     return $result;
     }
     
-    public function recuperanomeevento($code) {
-        $sql = "SELECT nome FROM evento WHERE code = ".$code;
-        $result = $this->connection->query($sql);
-        $rows = $result->fetchAll(PDO::FETCH_COLUMN,0);
-        return $rows[0];
-    }
     
     public function delete_EventoSpecifico(EEvento $evento,$i=0) {
     $sql = "DELETE FROM evento_spec WHERE code = ".$this->connection->quote($evento->getId())
@@ -150,23 +135,4 @@ class FEventospecifico extends FDBmanager {
     
     }
     
-    public function updateeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
-        $sql = "UPDATE evento_spec SET  indirizzo = ?,"
-                . " tipo = ?, casa = ?, ospite = ?, compagnia = ?, artista = ?"
-                . "WHERE code = ? AND data_evento = ?";
-        $statement = $this->connection->prepare($sql);
-        
-        $statement->bindparam(1,$luogo);
-        $statement->bindparam(2,$tipo);
-        $statement->bindparam(3,$casa);
-        $statement->bindparam(4,$ospite);
-        $statement->bindparam(5,$compagnia);
-        $statement->bindparam(6,$artista);
-        $statement->bindparam(7,$codes);
-        $statement->bindparam(8,$data);
-        $result = $statement->execute();
-        //echo $data;
-        return $result;
-        
-    }
 }

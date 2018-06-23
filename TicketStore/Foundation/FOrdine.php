@@ -18,7 +18,7 @@ class FOrdine extends FDBmanager{
         return $affected_rows > 0;
     }
     
-    public function storeord_part(EOrdine $object) { //tocca settare code dentro ordine (id)
+    public function storeord_part(EOrdine $object) { 
         $this->recuperoId($object);
         $part = $object->getItems();
         $evento = $object->getEvento();

@@ -64,15 +64,6 @@ class FBiglietto extends FDBmanager{
         
     }
     
-    public function generabiglietti($num, $nome_evento, $data, $zona, $code, $indirizzo) {
-        $stored = true;
-        for($i = 0;$i < $num && $stored;$i++){
-            $biglietto = new EBiglietto($nome_evento, $data, NULL, $zona, NULL);
-            $stored = $this->storebiglietto($biglietto,$code,$indirizzo);
-            
-        }
-        return $stored;
-    }
     
     public function recuperoId(EOrdine $ordine) {
         

@@ -47,14 +47,6 @@ class FUtente_Reg extends FDBmanager {
         return $result > 0 ;
     }
     
-    public function updateutente($object) {
-        $sql = "UPDATE utente_r SET psw = "
-                .$this->connection->quote($object->getPassword())." WHERE mail = "
-                .$this->connection->quote($object->getMail());
-       
-        $affected_rows = $this->connection->exec($sql);
-        return $affected_rows > 0;
-    }
 
     public function deleteutente(EUtente_Reg $object) {
         $sql = "DELETE FROM utente_r WHERE mail = "
