@@ -3,11 +3,11 @@
 $target_dir = "View/imgs/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 // Controlla se il file immagine è un'immagine reale o un'immagine falsa
-if(isset($_POST["submit"])) {
+if (isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
+    if ($check !== false) {
         $uploadOk = 1;
     } else {
         echo '<script type="text/javascript">
@@ -35,8 +35,7 @@ if ($_FILES["fileToUpload"]["size"] > 500000) {
     $uploadOk = 0;
 }
 // Consenti determinati formati di file
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
+if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
     echo '<script type="text/javascript">
                             alert("Spiacente, sono permessi solo i file  JPG, JPEG, PNG & GIF.")
                             window.location= "/TicketStore/Amministratoreimg"
@@ -57,12 +56,11 @@ if ($uploadOk == 0) {
                             window.location= "/TicketStore/validazione"
                           </script>';
     } else {
-       echo '<script type="text/javascript">
+        echo '<script type="text/javascript">
                             alert("Spiacente, c\'è stato un errore nel caricamento del file")
                             window.location= "/TicketStore/Amministratoreimg"
                           </script>';
     }
-    
 }
 
 

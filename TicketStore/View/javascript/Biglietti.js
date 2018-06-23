@@ -37,7 +37,6 @@ function setTable(risposta) {
       '        <div id="b-utente">'+
       '              <ul>'+
       '                  <li><h6>'+risposta[i].mail+'</h6></li>'+
-      '                  <li><h6>prezzo??</h6></li>'+
       '              </ul>'+
       '        </div>'+
       '        <div id="codice">'+risposta[i].codb+'</div>'+

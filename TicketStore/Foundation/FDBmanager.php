@@ -107,8 +107,7 @@ public function store($object) {
         $fzona = USingleton::getInstance('FZona');
         $fpart = USingleton::getInstance('FPartecipazione');
         $eventoSpecifico = $object->getEventoSingolo(0);
-        
-        $this->connection->beginTransaction();
+
         if(!$fevento->existEvento($object)) {
             $fevento->storeEvento($object);
         }
@@ -157,16 +156,9 @@ public function store($object) {
                 }
             }    
              
-            
-            /*$stored = $fpart->storePartecipazione($object);
-            var_dump($stored);*/
+
         }
-        if($stored) {
-            $this->connection->commit();
-        }else{
-            $this->connection->rollBack();
-        }
-        //return $stored;
+
     }
     
     if($object instanceof EUtente_Reg) {
@@ -322,7 +314,7 @@ public function search($string, $tipo) {
         return $eventi_spec;
     }
       
-    private function getLuogoZonaPart($array) { //cambiare boh
+    private function getLuogoZonaPart($array) { 
         $sql= "SELECT partecipazione.*, zona.capacita "
                 ."FROM partecipazione, luogo, zona WHERE code = "
                 .$this->connection->quote($array['code'])." AND partecipazione.indirizzo = "
@@ -348,7 +340,7 @@ public function search($string, $tipo) {
 
         $tipo = $array['tipo'];
         $classe = 'E'.$tipo;
-        //*
+        
             if($classe == 'EPartita') {
                 $evento= new EPartita($luogo,$array['data_evento'],$array_part,$array['casa'], $array['ospite']);
             }
@@ -358,8 +350,7 @@ public function search($string, $tipo) {
             if($classe == 'EConcerto') {
                 $evento= new EConcerto($luogo,$array['data_evento'],$array_part,$array['artista']);
             }
-        //*/    
-        //$evento = new $classe($luogo,$array['data_evento'],$array_part);
+        
         return $evento;
     }
     
