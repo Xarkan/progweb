@@ -83,7 +83,7 @@ class FEvento extends FDBmanager {
         
     }
     
-    public function deleteevento(EEvento $object) {
+    public function deleteEvento(EEvento $object) {
         $sql = "DELETE FROM evento WHERE code = "
                 .$this->connection->quote($object->getId());
        

@@ -217,7 +217,7 @@ public function delete($object) {
 
     if($object instanceof EEvento) {
         $evento = new FEvento();
-        $deleted = $evento->deleteevento($object);
+        $deleted = $evento->deleteEvento($object);
     }
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
