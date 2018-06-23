@@ -19,27 +19,20 @@ class CAmministrazione {
     public function postAmministrazione() {
         $db = USingleton::getInstance('FDBmanager');  
         
-        if($this->operazione == 'inserimento') { //evento con nuovi dati non presenti nel db
+        if($this->operazione == 'inserimento') { 
             $evento = $this->creaEvento();  //EEvento
-
-            $stored = $db->store($evento);
-            
-            if($stored) {
-                 echo '<script type="text/javascript">
-                            alert("inserimento avvenuto")
-                            window.location= "/TicketStore/validazione"
-                          </script>'; 
-            }else {
-                echo '<script type="text/javascript">
-                            alert("inserimento NON avvenuto")
-                            window.location= "/TicketStore/validazione"
-                          </script>';
-            }
+            $result = $db->store($evento);                        
         }
-        
+        if($this->operazione == 'cancellazione') {
+            $evento = $this->creaEvento();
+            $result = $db->delete($evento);            
+        }
+        $this->alert($result);
         
     }
     
+    //crea oggetto evento con i campi che dipendono da $_POST e dalle tipologie
+    //di inserimento
     private function creaEvento() {
         $fevento = USingleton::getInstance('FEvento');
         $dati = $this->dati;
@@ -51,15 +44,19 @@ class CAmministrazione {
             $classe = "E".$tipo;
             $id = $dati['code'];
         }
-            if($this->tabella == 'evento') {
-                $id = 1 + $fevento->loadultimoevento()[0];
+        if($this->tabella == 'evento' && $this->operazione == 'inserimento') {
+            $id = 1 + $fevento->loadultimoevento()[0];
+        }
+        if($this->tabella == 'evento_spec' || $this->operazione == 'cancellazione') {
+            $id = $dati['code'];
+            if($this->operazione == 'cancellazione') {
+                $feventosp = USingleton::getInstance('FEventoSPecifico');
+                $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
+                $classe = "E".$tipo;
             }
-            if($this->tabella == 'evento_spec') {
-                $id = $dati['code'];
         }
 
         
-            
             $zona = [new EZona($dati['zona'], $dati['capacita'])];
             $luogo = new ELuogo($dati['citta'], $dati['struttura'],$zona);
             $partecipazioni = [new EPartecipazione($zona[0], $dati['prezzo'])];
@@ -80,26 +77,62 @@ class CAmministrazione {
         
     }
     
+    private function alert($bool) {
+        if($bool) {
+                 echo '<script type="text/javascript">
+                            alert("'.$this->operazione.' avvenuto")
+                            window.location= "/TicketStore/validazione"
+                          </script>'; 
+            }else {
+                echo '<script type="text/javascript">
+                            alert("'.$this->operazione.' NON avvenuto")
+                            window.location= "/TicketStore/validazione"
+                          </script>';
+            }
+    }
     
-    public function assegnaDati() {
+    
+    private function assegnaDati() {
         //eventospecifico
-        $dati['code'] = $_POST['code'];
-        $dati['nome_evento'] = $_POST['nome_evento'];
-        $dati['immagine'] = $_POST['nome_immagine'];
-        $dati['data'] = $_POST['data_es']." ".$_POST['ora_es'];
-        $dati['tipo'] = $_POST['tipo'];
+        $keys[] = 'code';
+        $keys[] = 'nome_evento';
+        //$keys[] = 'nome_immagine';
+        //$keys[] = 'data_es';
+        //$keys[] = 'ora_es';
+        $keys[] = 'tipo';
         
-        $dati['casa'] = $_POST['casa'];
-        $dati['ospite'] = $_POST['ospite'];
-        $dati['compagnia'] = $_POST['compagnia'];
-        $dati['artista'] = $_POST['artista'];
+        $keys[] = 'casa';
+        $keys[] = 'ospite';
+        $keys[] = 'compagnia';
+        $keys[] = 'artista';
         
-        $dati['citta'] = $_POST['citta'];
-        $dati['struttura'] = $_POST['struttura'];
-
-        $dati['zona'] = $_POST['zona'];
-        $dati['capacita'] = $_POST['capacita'];
-        $dati['prezzo'] = $_POST['prezzo'];                
+        $keys[] = 'citta';
+        $keys[] = 'struttura';
+        
+        $keys[] = 'zona';
+        $keys[] = 'capacita';
+        $keys[] = 'prezzo';
+        
+        //controlla se $_POST ha determinate chiavi e imposta i valori con la
+        //stringa vuota se non 
+        for ($i = 0; $i < count($keys); $i++) {
+            if(!isset($_POST[$keys[$i]])) {
+                $dati[$keys[$i]] = '';
+            }else{
+                $dati[$keys[$i]] = $_POST[$keys[$i]];
+            }
+        }
+        
+        //crea la data col formato giusto
+        if(isset($_POST['data_es'])) {
+            $dati['data'] = $_POST['data_es']." ".$_POST['ora_es'];            
+        }
+        if(isset($_POST['nome_immagine'])) {
+            $dati['immagine'] = '.\\View\\imgs'."\\".$_POST['nome_immagine'];
+        }else{
+            $dati['immagine'] = '';
+        }
+                       
         
         return $dati;
     }
