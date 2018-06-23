@@ -10,13 +10,14 @@ class CZona {
         if($ordine->getEvento() != null) {
             $reset = USingleton::getInstance('CReset');
             $reset->getReset();
-        }
+        }else{
        
         $evento_sp = $db->load($id_e, $id_esp);
         $ordine->setEvento($evento_sp);
         $sessione->imposta_valore('ordine',$ordine);        
         $view = USingleton::getInstance('VZona');
         $view->set_html($id_e, $id_esp);
+        }
     }
     
 }

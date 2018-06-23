@@ -21,12 +21,20 @@ class CAmministrazione {
         
         if($this->operazione == 'inserimento') { 
             $evento = $this->creaEvento();  //EEvento
-            $result = $db->store($evento);                        
+            $result = $db->store($evento); 
+            if($this->tabella == 'biglietti') {
+                for ($i = 0; $i < $this->dati['capacita']; $i++) {
+                    $biglietto = new EBiglietto($evento);
+                    $result = $db->store($biglietto);
+                }
+                
+            }
         }
         if($this->operazione == 'cancellazione') {
             $evento = $this->creaEvento();
             $result = $db->delete($evento);            
         }
+
         $this->alert($result);
         
     }
@@ -44,8 +52,16 @@ class CAmministrazione {
             $classe = "E".$tipo;
             $id = $dati['code'];
         }
-        if($this->tabella == 'evento' && $this->operazione == 'inserimento') {
-            $id = 1 + $fevento->loadultimoevento()[0];
+        if($this->operazione == 'inserimento') {
+            if($this->tabella == 'evento') {
+                $id = 1 + $fevento->loadultimoevento()[0];
+            }
+            if($this->tabella = 'biglietti') {
+                $feventosp = USingleton::getInstance('FEventoSPecifico');
+                $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
+                $classe = "E".$tipo;
+                $id = $dati['code'];
+            }
         }
         if($this->tabella == 'evento_spec' || $this->operazione == 'cancellazione') {
             $id = $dati['code'];

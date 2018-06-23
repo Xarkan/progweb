@@ -5,39 +5,26 @@ class EBiglietto {
     
     //attributes
     private $codice = ''; //string
-    private $nomeEvento; //string
-    private $data; //DateTime
-    private $proprietario; //string
-    private $zona; //string
+    private $evento; //EEvento
+    private $proprietario = ''; //string
     private $posto; //Posto
 
     
     //methods
-    function __construct($nome, $data, $proprietario, $zona, $posto) {
-        $this->nomeEvento = $nome;
-        $this->data = $data;
-        $this->proprietario = $proprietario;
-        $this->zona = $zona;
-        $this->posto = $posto;
+    function __construct($evento) {
+        $this->evento = $evento;
+
     }
     function getCodice() {
         return $this->codice;
     }
 
-    function getNomeEvento() {
-        return $this->nomeEvento;
-    }
-
-    function getData() {
-        return $this->data;
+    function getEvento() {
+        return $this->evento;
     }
 
     function getProprietario() {
         return $this->proprietario;
-    }
-
-    function getZona() {
-        return $this->zona;
     }
 
     function getPosto() {
@@ -48,29 +35,17 @@ class EBiglietto {
         $this->codice = $codice;
     }
 
-    function setNomeEvento($nomeEvento) {
-        $this->nomeEvento = $nomeEvento;
-    }
-
-    function setData($data) {
-        $this->data = $data;
+    function setEvento($evento) {
+        $this->evento = $evento;
     }
 
     function setProprietario($proprietario) {
         $this->proprietario = $proprietario;
     }
 
-    function setZona($zona) {
-        $this->zona = $zona;
-    }
-
     function setPosto($posto) {
         $this->posto = $posto;
     }
-
-
-
-
 
 
 }

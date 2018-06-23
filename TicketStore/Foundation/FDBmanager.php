@@ -158,12 +158,25 @@ public function store($object) {
         }else{
             $this->connection->rollBack();
         }
-        return $stored;
+        //return $stored;
     }
     
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
         $stored = $utente->storeutente($object);
+    }
+    if($object instanceof EBiglietto) {
+        $fevento = USingleton::getInstance('FEvento');
+        if($fevento->existEvento($object->getEvento())) {
+            $fevsp = USingleton::getInstance('FEventoSpecifico');
+            if($fevsp->existEventoSpec($object->getEvento()->getEventoSingolo(0))) {
+                $fzona = USingleton::getInstance('FZona');
+                if ($fzona->existZona($object->getEvento()->getEventoSingolo(0)->selezionePartecipazione(0)->getZona()->getNome())) {
+                    $fbigl = USingleton::getInstance('FBiglietto');
+                    $stored = $fbigl->storeBiglietto();
+                }
+            }
+        }
     }
     if($object instanceof EOrdine) {
         $fordine = USingleton::getInstance('FOrdine');
