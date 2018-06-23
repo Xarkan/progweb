@@ -28,10 +28,10 @@ function setTableEvento(){
                                     '</td>'+
                             '</tr>'+
                             '<tr>'+
-                                    '<td>Casa<br><input type="text" name="casa" required></td>'+
-                                    '<td>Ospite<br><input type="text" name="ospite" required></td>'+
-                                    '<td>Compagnia<br><input type="text" name="compagnia" required></td>'+
-                                    '<td>Artista<br><input type="text" name="artista" required></td>'+
+                                    '<td>Casa<br><input type="text" name="casa" ></td>'+
+                                    '<td>Ospite<br><input type="text" name="ospite" ></td>'+
+                                    '<td>Compagnia<br><input type="text" name="compagnia" ></td>'+
+                                    '<td>Artista<br><input type="text" name="artista" ></td>'+
                             '</tr>'+        
                                 '</tr>'+
                                 '<tr>'+
@@ -83,7 +83,7 @@ function setTableEvento(){
     //inserimento
     if(y[x].index == 2 && j[i].index == 1){
         let html_command = '<legend>Spiacente, Non sei autorizzato a questo tipo di operazione</legend>'+
-                           '<input type="text" name="code" required>';
+                           '<input hidden="hidden" type="text" name="code" required>';
                                 
         document.getElementById('sezione').innerHTML = html_command;
         
@@ -124,10 +124,10 @@ function setTableEvento(){
                                     '</td>'+
                             '</tr>'+
                             '<tr>'+
-                                    '<td>Casa<br><input type="text" name="casa" required></td>'+
-                                    '<td>Ospite<br><input type="text" name="ospite" required></td>'+
-                                    '<td>Compagnia<br><input type="text" name="compagnia" required></td>'+
-                                    '<td>Artista<br><input type="text" name="artista" required></td>'+
+                                    '<td>Casa<br><input type="text" name="casa"></td>'+
+                                    '<td>Ospite<br><input type="text" name="ospite"></td>'+
+                                    '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
+                                    '<td>Artista<br><input type="text" name="artista"></td>'+
                             '</tr>'+        
                                 '</tr>'+
                                 '<tr>'+
@@ -215,10 +215,10 @@ function setTableEvento(){
                                     '</td>'+
                             '</tr>'+
                             '<tr>'+
-                                    '<td>Casa<br><input type="text" name="casa" required></td>'+
-                                    '<td>Ospite<br><input type="text" name="ospite" required></td>'+
-                                    '<td>Compagnia<br><input type="text" name="compagnia" required></td>'+
-                                    '<td>Artista<br><input type="text" name="artista" required></td>'+
+                                    '<td>Casa<br><input type="text" name="casa"></td>'+
+                                    '<td>Ospite<br><input type="text" name="ospite"></td>'+
+                                    '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
+                                    '<td>Artista<br><input type="text" name="artista"></td>'+
                             '</tr>'+        
                                 '</tr>'+
                                 '<tr>'+
@@ -296,7 +296,7 @@ function setTableEvento(){
     
     if(y[x].index == 5 && j[i].index == 2){
         let html_command = '<legend>Spiacente, Non sei autorizzato a questo tipo di operazione</legend>'+
-                            '<input type="text" name="code" required>';
+                            '<input hidden="hidden" type="text" name="code" required>';
                                 
         document.getElementById('sezione').innerHTML = html_command;
          

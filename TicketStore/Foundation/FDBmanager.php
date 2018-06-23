@@ -128,10 +128,18 @@ public function store($object) {
             } 
         }else{
             $exist_evsp = $fevsp->existEventoSpec($eventoSpecifico);
-            if(!$exist_evsp){        
+            if(!$exist_evsp){
+                if(!$fzona->existZona($eventoSpecifico->getLuogo())) {
                 $stored_zona = $fzona->storeZona($eventoSpecifico->getLuogo());
                 if($stored_zona) {
                         $stored_evsp = $fevsp->storeEventoSpec($object);
+                        $stored_mirror = $fevsp->storeEventoSpec_Mirror($object);                   
+                        if($stored_evsp && $stored_mirror) {                   
+                            $stored = $fpart->storePartecipazione($object);
+                        }
+                }
+                }else{
+                    $stored_evsp = $fevsp->storeEventoSpec($object);
                         $stored_mirror = $fevsp->storeEventoSpec_Mirror($object);                   
                         if($stored_evsp && $stored_mirror) {                   
                             $stored = $fpart->storePartecipazione($object);
