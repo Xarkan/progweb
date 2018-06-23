@@ -46,7 +46,7 @@ function setTableEvento(){
                             '</table>'+
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
-        document.getElementById('btn').setAttribute('hidden','');
+        
 }
 
     //modifica
@@ -83,7 +83,7 @@ function setTableEvento(){
     //inserimento
     if(y[x].index == 2 && j[i].index == 1){
         let html_command = '<legend>Spiacente, Non sei autorizzato a questo tipo di operazione</legend>'+
-                           '<input type="text" name="code" required hidden="hidden">';
+                           '<input type="text" name="code" required>';
                                 
         document.getElementById('sezione').innerHTML = html_command;
         
@@ -296,7 +296,7 @@ function setTableEvento(){
     
     if(y[x].index == 5 && j[i].index == 2){
         let html_command = '<legend>Spiacente, Non sei autorizzato a questo tipo di operazione</legend>'+
-                            '<input type="text" name="code" required hidden="hidden">';
+                            '<input type="text" name="code" required>';
                                 
         document.getElementById('sezione').innerHTML = html_command;
          
