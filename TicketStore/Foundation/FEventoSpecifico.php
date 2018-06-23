@@ -132,18 +132,23 @@ class FEventospecifico extends FDBmanager {
         return $rows[0];
     }
     
-    /*public function deleteeventospec($codes,$data) {
+    public function delete_EventoSpecifico(EEvento $evento,$i=0) {
+    $sql = "DELETE FROM evento_spec WHERE code = ".$this->connection->quote($evento->getId())
+          ."AND data_evento = ".$this->connection->quote($evento->getEventoSingolo($i)->getData());
+    $result = $this->connection->exec($sql);
+    
+    return $result > 0;
+    
+}
 
-        $sql = "DELETE FROM evento_spec WHERE code = ".$codes." AND data_evento = ".$data; 
-        $result = $this->connection->exec($sql);
-        return $result;
+    public function delete_EventoSpecificoMirror(EEvento $evento,$i=0) {
+    $sql = "DELETE FROM evento_spec_mirror WHERE code = ".$this->connection->quote($evento->getId())
+          ."AND data_evento = ".$this->connection->quote($evento->getEventoSingolo($i)->getData());
+    $result = $this->connection->exec($sql);
+    
+    return $result > 0;
+    
     }
-    public function deleteeventospecmirror($codes,$data) {
-
-        $sql = "DELETE FROM evento_spec_mirror WHERE code = ".$codes." AND data_evento = ".$data; 
-        $result = $this->connection->exec($sql);
-        return $result;
-    }*/
     
     public function updateeventospec($codes,$data,$luogo,$tipo,$casa,$ospite,$compagnia,$artista) {
         $sql = "UPDATE evento_spec SET  indirizzo = ?,"

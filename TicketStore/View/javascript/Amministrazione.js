@@ -11,7 +11,6 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td hidden="hidden">codice_evento<br><input type="text" name="code"></td>'+
                             '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
                             '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                             '</tr>'+
@@ -62,7 +61,7 @@ function setTableEvento(){
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
                            
-    }
+    }*/
     //cancellazione qui dobbiamo gestire la cancellazione delle foreign key
     if(y[x].index == 1 && j[i].index == 3){
         let html_command = '<legend>Cancellazione di un evento dal database</legend>'+
@@ -70,13 +69,11 @@ function setTableEvento(){
                             '<tr>'+
                             '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
                             '<td>nome<br><input type="text" readonly name="nome_evento"></td>'+
-                            '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
-                            '<td>nome_immagine<br><input type="text" readonly name="nome_immagine"></td>'+
                             '</tr>'+
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
                            
-    }*/
+    }
     
     
 //----------------------------------operazioni su utente_r--------------------------------------------------------------------------------------    
@@ -110,7 +107,6 @@ function setTableEvento(){
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
                                     '<td>nome_evento<br><input type="text" name="nome_evento"></td>'+
-                                    '<td hidden="hidden">nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                                     '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>Tipo<br><select name="tipo">'+
@@ -176,7 +172,7 @@ function setTableEvento(){
                 
         document.getElementById('sezione').innerHTML = html_command;        
                 
-    }
+    }*/
     
     //cancellazione
     if(y[x].index == 3 && j[i].index == 3){
@@ -187,17 +183,6 @@ function setTableEvento(){
                                     '<td>data_evento<input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<input type="text" readonly name="indirizzo"></td>'+
-                                    '<td>Tipo <select name="tipo" readonly>'+
-
-                                             '<option></option>'+
-
-                                         '</select>'+
-                                    '</td>'+
-                                    '<td>Casa<input type="text" readonly name="casa"></td>'+
-                                    '<td>Ospite<input type="text" readonly name="ospite"></td>'+
-                                    '<td>Compagnia<input type="text" readonly name="compagnia"></td>'+
-                                    '<td>Artista<input type="text" readonly name="artista"></td>'+
-                                '</tr>'+
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
@@ -212,12 +197,8 @@ function setTableEvento(){
                             '<table>'+
                                 '<tr>'+
                                     '<td>codice_evento<br><input type="text" name="code"></td>'+
-                                    '<td hidden="hidden">nome_evento<br><input type="text" name="nome_evento"></td>'+
-                                    '<td hidden="hidden">nome_immagine<br><input type="text" name="nome_immagine"></td>'+
                                     '<td>data_evento<br><input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
-                                    '<td hidden="hidden">Tipo<br><select name="tipo">'+
-
                                              '<option></option>'+
                                              '<option>Partita</option>'+
                                              '<option>Spettacolo</option>'+
@@ -226,7 +207,6 @@ function setTableEvento(){
                                          '</select>'+
                                     '</td>'+
                             '</tr>'+
-                            '<tr hidden="hidden">'+
                                     '<td>Casa<br><input type="text" name="casa"></td>'+
                                     '<td>Ospite<br><input type="text" name="ospite"></td>'+
                                     '<td>Compagnia<br><input type="text" name="compagnia"></td>'+
@@ -267,7 +247,7 @@ function setTableEvento(){
                             'BUON LAVORO!!</legend>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
-    }
+    }*/
     
     //cancellazione
     if(y[x].index == 4 && j[i].index == 3){
@@ -279,58 +259,11 @@ function setTableEvento(){
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>zona<br><input type="text" name="zona"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
-                                    '<td>prezzo<br><input name="prezzo"></td>'+
                                 '</tr>'+
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
     }
-//----------------------------------operazioni su zona--------------------------------------------------------------------------------------   
-//inserimento
-    if(y[x].index == 5 && j[i].index == 1){
-        let html_command = '<legend>Inserimento di una zona nel database</legend>'+
-                            '<table>'+
-                                '<tr>'+
-                                    '<td>nome<br><input type="text" name="zona"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
-                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
-                                '</tr>'+
-                            '</table>';
-                
-        document.getElementById('sezione').innerHTML = html_command;
-    } 
-
-//modifica
-    if(y[x].index == 5 && j[i].index == 2){
-        let html_command = '<legend>Modifica di una zona nel database</legend>'+
-                            '<table>'+
-                                '<tr>'+
-                                    '<td>nome<br><input type="text" name="zona"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
-                                    '<td>capacita<br><input type="text" name="capacita"></td>'+
-                                '</tr>'+
-                            '</table>'+
-                            '<legend>Per modificare correttamente una zona bisogna procedere seguendo queste regole<br>'+
-                            '<ul><li>INSERIRE IL NOME E L INDIRIZZO RELATIVI ALLA ZONA DA MODIFICARE</li>'+
-                            '<li>EFFETTUARE LE MODIFICHE PREVISTE</li>'+
-                            '<li>I CAMPI NON MODIFICATI DEVONO CONTENERE IL VALORE GIA PRESENTE NEL DATABASE</li></ul><br>'+
-                            'BUON LAVORO!!</legend>';
-                
-        document.getElementById('sezione').innerHTML = html_command;
-    }           
-    
-//cancellazione
-    if(y[x].index == 5 && j[i].index == 3){
-        let html_command = '<legend>Cancellazione di una zona nel database</legend>'+
-                            '<table>'+
-                                '<tr>'+
-                                    '<td>nome<br><input type="text" name="zona"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzoz"></td>'+
-                                '</tr>'+
-                            '</table>';
-                
-        document.getElementById('sezione').innerHTML = html_command;
-}
 
 //----------------------------------operazioni su biglietto--------------------------------------------------------------------------------------   
     //inserimento biglietti 

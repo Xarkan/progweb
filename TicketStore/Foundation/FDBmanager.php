@@ -216,8 +216,19 @@ return $updated;
 public function delete($object) {
 
     if($object instanceof EEvento) {
-        $evento = new FEvento();
-        $deleted = $evento->deleteEvento($object);
+        $evento = USingleton::getInstance('FEvento');
+        if($object->getEventoSingolo(0)->getData() == ""){
+            $deleted = $evento->deleteEvento($object);
+        }else{
+            $evento_evsp = USingleton::getInstance('FEventoSpecifico');
+            $deleted_evsp = $evento_evsp->delete_EventoSpecifico($object);
+            $deleted_evsp_mirror = $evento_evsp->delete_EventoSpecificoMirror($object);
+            $deleted = $deleted_evsp && $deleted_evsp_mirror;
+        }
+        if($object->getEventoSingolo(0)->selezionePartecipazione(0)->getZona() != ""){
+            $part = USingleton::getInstance('FPartecipazione');
+            $deleted = $part->deletePartecipazione($object);
+        }
     }
     if($object instanceof EUtente_Reg) {
         $utente = new FUtente_Reg();
