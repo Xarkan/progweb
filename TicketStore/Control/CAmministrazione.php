@@ -96,9 +96,6 @@ class CAmministrazione {
         //eventospecifico
         $keys[] = 'code';
         $keys[] = 'nome_evento';
-        //$keys[] = 'nome_immagine';
-        //$keys[] = 'data_es';
-        //$keys[] = 'ora_es';
         $keys[] = 'tipo';
         
         $keys[] = 'casa';
@@ -126,13 +123,15 @@ class CAmministrazione {
         //crea la data col formato giusto
         if(isset($_POST['data_es'])) {
             $dati['data'] = $_POST['data_es']." ".$_POST['ora_es'];            
+        }else{
+            $dati['data'] = '';
         }
         if(isset($_POST['nome_immagine'])) {
             $dati['immagine'] = '.\\View\\imgs'."\\".$_POST['nome_immagine'];
         }else{
             $dati['immagine'] = '';
         }
-                       
+
         
         return $dati;
     }

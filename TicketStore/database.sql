@@ -101,7 +101,7 @@ CREATE TABLE ord_part (
   prezzo        int             NOT NULL,
 
   PRIMARY KEY (codo, code, zona),
-  FOREIGN KEY (codo) REFERENCES ordine(codo),
+  FOREIGN KEY (codo) REFERENCES ordine(codo)
   
 );
 

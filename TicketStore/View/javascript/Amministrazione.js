@@ -53,7 +53,7 @@ function setTableEvento(){
         let html_command = '<legend>Modifica di un evento nel database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                            '<td>codice_evento<br><input type="text" name="code"></td>'+
                             '<td>nome<br><input type="text" name="nome_evento"></td>'+
                             '<td>path_immagine<br><input type="text" readonly name="path_immagine" value=".\\View\\imgs"></td>'+
                             '<td>nome_immagine<br><input type="text" name="nome_immagine"></td>'+
@@ -67,8 +67,8 @@ function setTableEvento(){
         let html_command = '<legend>Cancellazione di un evento dal database</legend>'+
                        '<table>'+
                             '<tr>'+
-                            '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
-                            '<td>nome<br><input type="text" readonly name="nome_evento"></td>'+
+                            '<td>codice_evento<br><input type="text" name="code"></td>'+
+                            '<td>nome<br><input type="text" name="nome_evento"></td>'+
                             '</tr>'+
                        '</table>';
         document.getElementById('sezione').innerHTML = html_command;
@@ -179,15 +179,16 @@ function setTableEvento(){
         let html_command = '<legend>Cancellazione di un evento specifico dal database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<input type="text" name="codes"></td>'+
+                                    '<td>codice_evento<input type="text" name="code"></td>'+
                                     '<td>data_evento<input type="date" name="data_es"></td>'+
                                     '<td>ora_evento<input type="time" name="ora_es"></td>'+
-                                    '<td>indirizzo<input type="text" readonly name="indirizzo"></td>'+
+                                    '<td>citta<input type="text" name="citta"></td>'+
+                                    '<td>struttura<input type="text" name="struttura"></td>'+
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;        
                 
-    }*/
+    }
     
     
 //----------------------------------operazioni su partecipazioni--------------------------------------------------------------------------------------        
@@ -254,11 +255,12 @@ function setTableEvento(){
         let html_command = '<legend>Cancellazione di una partecipazione nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<br><input type="text" name="codep"></td>'+
-                                    '<td>data_evento<br><input type="date" name="datap"></td>'+
-                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
+                                    '<td>codice_evento<br><input type="text" name="code"></td>'+
+                                    '<td>data_evento<br><input type="date" name="data_es"></td>'+
+                                    '<td>ora_evento<br><input type="time" name="ora_es"></td>'+                              
+                                    '<td>citta<br><input type="text" name="citta"></td>'+
+                                    '<td>struttura<br><input type="text" name="struttura"></td>'+
                                     '<td>zona<br><input type="text" name="zona"></td>'+
-                                    '<td>indirizzo<br><input type="text" name="indirizzop"></td>'+
                                 '</tr>'+
                             '</table>';
                 
@@ -271,7 +273,7 @@ function setTableEvento(){
         let html_command = '<legend>Inserimento di biglietti acquistabili nel database</legend>'+
                             '<table>'+
                                 '<tr>'+
-                                    '<td>codice_evento<br><input type="text" name="codice_evento"></td>'+
+                                    '<td>codice_evento<br><input type="text" name="code"></td>'+
                                     '<td>data<br><input type="date" name="data"></td>'+
                                     '<td>ora_evento<br><input type="time" name="ora_es"></td>'+
                                     '<td>indirizzo<br><input type="text" name="indirizzo"></td>'+
@@ -282,5 +284,5 @@ function setTableEvento(){
                             '</table>';
                 
         document.getElementById('sezione').innerHTML = html_command;
-}*/
+}
 }
