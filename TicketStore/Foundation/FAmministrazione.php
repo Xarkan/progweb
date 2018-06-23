@@ -6,20 +6,7 @@ class FAmministrazione extends FDBmanager {
     
 
 
-public function existzona($nome, $indirizzo) {
-    $sql = "SELECT nome FROM zona WHERE nome = ? AND indirizzo = ? ";
-    $statement = $this->connection->prepare($sql);
-    $statement->bindParam(1, $nome);
-    $statement->bindParam(2, $indirizzo);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    if(count($result) > 0){
-        return true;
-    }
-    else{
-        return false;
-    }   
-}
+
 public function exist_es($code,$data){
     $evento_spec = new FEventospecifico();
     $exist = $evento_spec->existeventospec($code, $data);

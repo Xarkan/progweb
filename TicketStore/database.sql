@@ -57,8 +57,9 @@ CREATE TABLE evento_spec (
   artista       varchar(20)     NULL,
 
   PRIMARY KEY (code, data_evento),
-  FOREIGN KEY (code) REFERENCES evento(code),
-  FOREIGN KEY (indirizzo) REFERENCES luogo(indirizzo)
+  FOREIGN KEY (code) REFERENCES evento(code) ON DELETE CASCADE,
+  FOREIGN KEY (indirizzo) REFERENCES luogo(indirizzo) ON DELETE CASCADE
+  
 );
 
 CREATE TABLE partecipazione (
@@ -69,8 +70,8 @@ CREATE TABLE partecipazione (
   prezzo        int             NOT NULL,
 
   PRIMARY KEY (code, data_evento, zona, indirizzo),
-  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
-  FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)
+  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento) ON DELETE CASCADE,
+  FOREIGN KEY (zona, indirizzo) REFERENCES  zona(nome, indirizzo)ON DELETE CASCADE
 );
 
 CREATE TABLE biglietto (
@@ -86,8 +87,8 @@ CREATE TABLE biglietto (
   posto         int             NULL,
 
   PRIMARY KEY (codb, code, data_evento, zona, indirizzo),
-  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento),
-  FOREIGN KEY (zona, indirizzo) REFERENCES zona(nome, indirizzo)
+  FOREIGN KEY (code, data_evento) REFERENCES evento_spec(code, data_evento) ON DELETE CASCADE,
+  FOREIGN KEY (zona, indirizzo) REFERENCES zona(nome, indirizzo) ON DELETE CASCADE
 
 );
 
@@ -101,7 +102,7 @@ CREATE TABLE ord_part (
 
   PRIMARY KEY (codo, code, zona),
   FOREIGN KEY (codo) REFERENCES ordine(codo),
-  FOREIGN KEY (code, data_evento, zona, indirizzo) REFERENCES partecipazione(code, data_evento, zona, indirizzo)
+  
 );
 
 CREATE TABLE evento_spec_mirror (
