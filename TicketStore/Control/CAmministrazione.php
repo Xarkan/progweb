@@ -30,9 +30,15 @@ class CAmministrazione {
                 
             }
         }
-        if($this->operazione == 'cancellazione') {
+        if($this->operazione == 'cancellazione' && $this->tabella != 'utente_r') {
             $evento = $this->creaEvento();
             $result = $db->delete($evento);            
+        }
+        if ($this->tabella == 'utente_r'){
+            $mail = $this->dati['mail'];
+            $utente = new EUtente_Reg('', '', $mail, '');
+            $result = $db->delete($utente);
+            
         }
 
         $this->alert($result);
@@ -65,7 +71,7 @@ class CAmministrazione {
         }
         if($this->tabella == 'evento_spec' || $this->operazione == 'cancellazione') {
             $id = $dati['code'];
-            if($this->operazione == 'cancellazione') {
+            if($this->operazione == 'cancellazione' && $this->tabella != 'utente_r') {
                 $feventosp = USingleton::getInstance('FEventoSPecifico');
                 $tipo = $feventosp->loadTipo($dati['code'])['tipo'];
                 $classe = "E".$tipo;
@@ -125,6 +131,8 @@ class CAmministrazione {
         $keys[] = 'zona';
         $keys[] = 'capacita';
         $keys[] = 'prezzo';
+        
+        $keys[] = 'mail';
         
         //controlla se $_POST ha determinate chiavi e imposta i valori con la
         //stringa vuota se non 
