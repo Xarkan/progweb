@@ -1,0 +1,60 @@
+<?php
+
+
+class CRegistrazione {
+    
+    public function postRegistrazione() {
+       
+        $db = USingleton::getInstance('FDBmanager');
+        $sessione = USingleton::getInstance('USession');
+        $nome = $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        $mail = $_POST['mail'];
+        $password = $_POST['psw'];
+        $conferma_psw = $_POST['conferma_psw'];
+        
+        $utente = new EUtente_Reg($nome, $cognome, $mail, $password);
+        
+        $dominio = explode('@', $mail);
+        if($dominio[1] != 'ticketstore.it') { 
+            if($mail != "" && $password != "" && $conferma_psw != ""){
+                if($password == $conferma_psw){
+                    $exist = $db->exist($utente);
+                    if($exist){
+                     
+                        echo '<script type="text/javascript">
+                            alert("La mail inserita è stata già registrata. Procedi al login")
+                            window.location= "/TicketStore/login"
+                          </script>'; 
+                    }
+                    else{
+                        $registrato = $db->store($utente);
+                        if($registrato){
+                        
+                            $sessione->imposta_valore('logged',$registrato);
+                            $sessione->imposta_valore('utente',$utente);
+                            echo '<script type="text/javascript">
+                                alert("La registrazione è avvenuta correttamente.")
+                                window.location= "/TicketStore/home"
+                              </script>';
+
+                        }
+                   }
+                
+                }
+                else{
+                    echo '<script type="text/javascript">
+                               alert("Le password inserite non coincidono.")
+                               window.location= "/TicketStore/signin"
+                             </script>';
+                }
+         }else{
+             echo '<script type="text/javascript">
+                        alert("Il formato della mail inserita non è valido.")
+                        window.location= "/TicketStore/signin"
+                      </script>';
+          }
+        }
+    }     
+}
+

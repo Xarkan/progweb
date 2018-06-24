@@ -1,0 +1,29 @@
+# # av:php5-engine
+AddHandler av-php7 .php
+
+# av:AntiHotlink
+RewriteEngine on
+RewriteBase/
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]*)ticketstore\.altervista\.org
+RewriteCond %{REQUEST_URI} !^\/_altervista_ht\/
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]+)google\.
+RewriteRule .*$ http://hl.altervista.org/split.php?http://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RewriteRule ^eventi/([a-z0-9]+) View/html/evento.html?id=$1 [NC]
+RewriteRule ^zone/([a-z0-9]+)/([0-9\-]+) View/html/zone.html?id=$1&uid=$2 [NC]
+RewriteRule ^signin$ View/html/signin.html [NC]
+RewriteRule ^login$ View/html/login.html [NC]
+RewriteRule ^Amministratoreimg$ View/html/Caricamentoimg.html [NC]
+RewriteRule ^metodo-di-pagamento$ View/html/formPagamento.html [NC]
+RewriteRule ^search$ View/html/ricerca.html [NC]
+RewriteRule ^home$ home.html [NC]
+
+RewriteRule ^carrello View/html/ordine.html [NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !.*\.{png|jpg|css|js|html}$
+RewriteRule ^(.*)$ index.php [NC,L]
+
+# AntiHotlink
