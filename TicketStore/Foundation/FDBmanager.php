@@ -100,7 +100,7 @@ return $result;
 public function store($object) {
 
     if($object instanceof EEvento) {
-        
+        echo "pipposo";
         $fevento = USingleton::getInstance('FEvento');
         $fevsp = USingleton::getInstance('FEventoSpecifico');
         $fluogo = USingleton::getInstance('FLuogo');

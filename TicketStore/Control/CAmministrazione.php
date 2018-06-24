@@ -21,8 +21,9 @@ class CAmministrazione {
 
         if ($this->operazione == 'inserimento') {
             $evento = $this->creaEvento();  //EEvento
-            $result = $db->store($evento);
-            if ($this->tabella == 'biglietti') {
+            if($this->tabella != 'biglietti') {                 
+                $result = $db->store($evento);
+            }else{
                 for ($i = 0; $i < $this->dati['capacita']; $i++) {
                     $biglietto = new EBiglietto($evento);
                     $result = $db->store($biglietto);
